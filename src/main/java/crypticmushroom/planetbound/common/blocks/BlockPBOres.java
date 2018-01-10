@@ -3,8 +3,7 @@ package crypticmushroom.planetbound.common.blocks;
 import java.util.Random;
 
 import crypticmushroom.planetbound.creativetabs.PBCreativeTabs;
-import crypticmushroom.planetbound.init.PBBlocks;
-
+import crypticmushroom.planetbound.registry.PBBlocks;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
