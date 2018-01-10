@@ -19,11 +19,11 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Mod(modid = PlanetBound.MODID, name = PlanetBound.MODNAME, version = PlanetBound.MODVERSION, dependencies = "required-after:forge@[14.23.1.2555,)", useMetadata = true)
 public class PlanetBound {
 	
-	public static final String MODID = "planetcraft";
-	public static final String MODNAME = "PlanetCraft";
+	public static final String MODID = "PlanetBound";
+	public static final String MODNAME = "PlanetBound";
 	public static final String MODVERSION = "0.0.1";
 	
-	@SidedProxy(clientSide = "com.factsandfantasy.planetcraft.proxy.ClientProxy", serverSide = "com.factsandfantasy.planetcraft.proxy.ServerProxy")
+	@SidedProxy(clientSide = "crypticmushroom.planetbound.proxy.ClientProxy", serverSide = "crypticmushroom.planetbound.proxy.ServerProxy")
 	public static CommonProxy proxy;
 	
 	@Mod.Instance
