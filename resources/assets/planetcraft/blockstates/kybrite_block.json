@@ -1,0 +1,7 @@
+{ 
+  "variants": { 
+    "normal": {
+      "model": "planetcraft:kybrite_block"
+    } 
+  } 
+}

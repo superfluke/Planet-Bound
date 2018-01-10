@@ -1,0 +1,7 @@
+{ 
+  "variants": { 
+    "normal": {
+      "model": "planetcraft:rendium_block"
+    } 
+  } 
+}
