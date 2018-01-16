@@ -3,7 +3,7 @@ package crypticmushroom.planetbound.common.blocks;
 import java.util.Random;
 
 import crypticmushroom.planetbound.creativetabs.PBCreativeTabs;
-import crypticmushroom.planetbound.registry.PBBlocks;
+import crypticmushroom.planetbound.init.PBBlocks;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -19,7 +19,7 @@ public class BlockPBOres extends PBBlocks {
     }
 
     public BlockPBOres(MapColor color) {
-    	super(Material.ROCK, color);
+    	super(); // ???
         this.setCreativeTab(PBCreativeTabs.PLANETCRAFT_BLOCKS);
 	}
 
@@ -31,7 +31,7 @@ public class BlockPBOres extends PBBlocks {
      * Get the Item that this Block should drop when harvested.
      */
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        if (this == Blocks.RENDIUM_ORE) {
+        if (this == hold on) {
         	return Items.RENDIUM_CHUNK;
         }
     }

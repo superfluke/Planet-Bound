@@ -6,6 +6,7 @@ import crypticmushroom.planetbound.proxy.CommonProxy;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
@@ -20,7 +21,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod(modid = PlanetBound.MODID, 
 		name = "PlanetBound", 
-		version = PlanetBound.VERSION)
+		version = PlanetBound.VERSION,
+        acceptedMinecraftVersions = PlanetBound.MC_VERSIONS,
+        updateJSON = PlanetBound.UPDATE_JSON)
 
 // I see potential in this mod, but you gotta make sure you iron out the basics before doing anything with dimensions.
 // Dimensions can get pretty complicated when it comes to modding this stuff. Take it from me and Bailey.
@@ -30,20 +33,25 @@ public class PlanetBound {
 	
 	public static final String MODID = "planetbound";
 	public static final String VERSION = "1.0";
+	public static final String MC_VERSIONS = "[1.12.2]";
+	public static final String UPDATE_JSON = "https://raw.githubusercontent.com/cipherzerox/Planet-Bound/master/update.json";
+
+    @SidedProxy(clientSide = "crypticmushroom.planetbound.proxy.ClientProxy", serverSide = "crypticmushroom.planetbound.proxy.ServerProxy")
+    public static CommonProxy proxy;
+
+    @Mod.Instance
+    public static PlanetBound instance;
 
 	public static final PBItems items = new PBItems();
 	public static final PBBlocks blocks = new PBBlocks();
 	public static final String ARMOR_DIR = "planetbound:textures/armor/";
-	
-	@SidedProxy(clientSide = "crypticmushroom.planetbound.proxy.ClientProxy", serverSide = "crypticmushroom.planetbound.proxy.ServerProxy")
-	public static CommonProxy proxy;
 	
 	public static DimensionType dimType;
 	public static int backupdimensionID = -290;
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		
+		// TODO: Add configs and developer mode
 	}
 	
 	@EventHandler
