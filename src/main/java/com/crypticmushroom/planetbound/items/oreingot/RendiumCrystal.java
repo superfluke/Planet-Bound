@@ -7,11 +7,11 @@ public class RendiumCrystal extends Item
 {
     CrystalType type;
 
-    public RendiumCrystal(CrystalType type)
+    public RendiumCrystal(CrystalType t)
     {
         String name = null;
 
-        switch(type)
+        switch(t)
         {
             case CHUNK:
                 name = "rendium_chunk";
@@ -20,6 +20,8 @@ public class RendiumCrystal extends Item
                 name = "rendium_crystal";
                 break;
         }
-
+        setUnlocalizedName(name);
+        setRegistryName(name);
+        type = t;
     }
 }

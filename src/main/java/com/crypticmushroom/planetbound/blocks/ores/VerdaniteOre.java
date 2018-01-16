@@ -1,4 +1,7 @@
 package com.crypticmushroom.planetbound.blocks.ores;
 
-public class VerdaniteOre {
+import net.minecraft.block.BlockOre;
+
+public class VerdaniteOre extends BlockOre
+{
 }

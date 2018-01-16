@@ -2,7 +2,6 @@ package com.crypticmushroom.planetbound.init;
 
 import com.crypticmushroom.planetbound.blocks.GauntletCore;
 import com.crypticmushroom.planetbound.blocks.GauntletCoreFrame;
-import com.crypticmushroom.planetbound.blocks.GauntletRift;
 import com.crypticmushroom.planetbound.blocks.GauntletShell;
 import com.crypticmushroom.planetbound.blocks.oreblock.KybriteOreBlock;
 import com.crypticmushroom.planetbound.blocks.oreblock.RendiumOreBlock;
@@ -23,7 +22,7 @@ public class ModBlocks
     public static GauntletCore gauntlet_core;
     public static GauntletCoreFrame gauntlet_core_frame;
     public static GauntletShell gauntlet_shell;
-    public static GauntletRift rift_gauntlet;
+
     public static void init()
     {
         kybrite_ore = new KybriteOre();
@@ -31,5 +30,9 @@ public class ModBlocks
         verdanite_ore = new VerdaniteOre();
         verdanite_block = new VerdaniteOreBlock();
         rendium_ore = new RendiumOre();
+        rendium_block = new RendiumOreBlock();
+        gauntlet_core = new GauntletCore();
+        gauntlet_core_frame = new GauntletCoreFrame();
+        gauntlet_shell = new GauntletShell();
     }
 }

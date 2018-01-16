@@ -2,6 +2,8 @@ package com.crypticmushroom.planetbound;
 
 import com.crypticmushroom.planetbound.config.ConfigHandler;
 
+import com.crypticmushroom.planetbound.init.ModBlocks;
+import com.crypticmushroom.planetbound.init.ModItems;
 import com.crypticmushroom.planetbound.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -25,6 +27,7 @@ public class PBCore
 	@SidedProxy(clientSide = "com.crypticmushroom.planetbound.proxy.ClientProxy", serverSide = "com.crypticmushroom.planetbound.proxy.ServerProxy")
 	public static CommonProxy proxy; //TODO not sure what's best here; static abuse?
                                      //yes actually
+	public static com.crypticmushroom.planetbound.handler.EventHandler eventHandler;
 
     //Logger is in PBLogger class now.
 	
@@ -34,6 +37,13 @@ public class PBCore
 		ConfigHandler.loadConfig(event);
 		ConfigHandler.autoDeveloperMode("dev"); //If version contains "dev", enable developer mode.
 		ConfigHandler.configWarnings();
+
+		//the fucking event handler is gay as shit
+		eventHandler = new com.crypticmushroom.planetbound.handler.EventHandler();
+		eventHandler.register();
+
+		ModBlocks.init();
+		ModItems.init();
 
 		proxy.preInit(event);
 
