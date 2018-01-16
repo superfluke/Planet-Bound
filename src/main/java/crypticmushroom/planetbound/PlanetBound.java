@@ -1,5 +1,7 @@
 package crypticmushroom.planetbound;
 
+import crypticmushroom.planetbound.init.PBBlocks;
+import crypticmushroom.planetbound.init.PBItems;
 import crypticmushroom.planetbound.proxy.CommonProxy;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -20,11 +22,15 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 		name = "PlanetBound", 
 		version = PlanetBound.VERSION)
 
+// I see potential in this mod, but you gotta make sure you iron out the basics before doing anything with dimensions.
+// Dimensions can get pretty complicated when it comes to modding this stuff. Take it from me and Bailey.
+// If you need help with anything in particular talk to me or Dennisz.
+// - Jonathan
 public class PlanetBound {
 	
-	public static final String MODID = "PlanetBound";
+	public static final String MODID = "planetbound";
 	public static final String VERSION = "1.0";
-	
+
 	public static final PBItems items = new PBItems();
 	public static final PBBlocks blocks = new PBBlocks();
 	public static final String ARMOR_DIR = "planetbound:textures/armor/";

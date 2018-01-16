@@ -15,6 +15,9 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 public class PBBlocks extends net.minecraftforge.registries.IForgeRegistryEntry.Impl<Block> {
 
+	// check this: idk why you need materal rock and mapcolor color here if you are initializing it from the main class.
+	// those two things are what is causing an error, because you aren't giving the class anything to work with.
+	// - Jonathan
 	public PBBlocks(Material rock, MapColor color) {
 	}
 

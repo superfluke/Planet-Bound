@@ -24,12 +24,12 @@ public class PBItems extends net.minecraftforge.registries.IForgeRegistryEntry.I
 		
 	}
 
+	// make sure your stuff works before committing it. that's my number 1 rule - Jonathan
 	public static void registerItemModel() {
 		
 	}
 
-    
-	    
+	    // you all got some broken stuff over here
 	    public static void registerItems() {
 	    	registerItemBlock(Blocks.VERDANITE_ORE);
 	    	registerItemBlock(Blocks.KYBRITE_ORE);
