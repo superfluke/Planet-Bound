@@ -1,5 +1,6 @@
 package com.crypticmushroom.planetbound;
 
+import com.crypticmushroom.planetbound.server.config.ConfigHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,39 +18,43 @@ public class PBCore
 {
 	public static final String MOD_ID = "planetbound";
 	public static final String NAME = "Planet Bound";
-	public static final String VERSION = "1.0";
+	public static final String VERSION = "1.0-dev";
 	
 	@Instance(MOD_ID)
 	private static PBCore instance;
 	
 	@SidedProxy(clientSide = "com.crypticmushroom.planetbound.client.ClientProxy", serverSide = "com.crypticmushroom.planetbound.server.ServerProxy")
 	public static CommonProxy proxy; //TODO not sure what's best here; static abuse?
-	
-	//Logging is nice. Please use logger.
-	private final Logger logger = LogManager.getLogger(MOD_ID);
+                                     //yes actually
+
+    //Logger is in PBLogger class now.
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		logger.info("Not a final pre-init message");
-		
+		ConfigHandler.loadConfig(event);
+		ConfigHandler.autoDeveloperMode("dev"); //If version contains "dev", enable developer mode.
+		ConfigHandler.configWarnings();
+
 		proxy.preInit(event);
+
+        PBLogger.printDevelop("Target acquired...");
 	}
 	
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		logger.info("Not a final init message");
-		
 		proxy.init(event);
+
+        PBLogger.printDevelop("Thomas the Dank Engine is here.");
 	}
 	
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
-		logger.info("Not a final post-init message");
-		
 		proxy.postInit(event);
+
+        PBLogger.printDevelop("Ready for combat.");
 	}
 	
 	public static PBCore instance()
