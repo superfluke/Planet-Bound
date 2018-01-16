@@ -1,6 +1,6 @@
 package com.crypticmushroom.planetbound;
 
-import com.crypticmushroom.planetbound.server.config.ConfigVariables;
+import com.crypticmushroom.planetbound.config.ConfigVariables;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

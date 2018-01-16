@@ -1,6 +1,4 @@
-package com.crypticmushroom.planetbound.client;
-
-import com.crypticmushroom.planetbound.CommonProxy;
+package com.crypticmushroom.planetbound.proxy;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;

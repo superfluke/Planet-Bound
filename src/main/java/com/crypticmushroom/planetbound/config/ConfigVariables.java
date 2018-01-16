@@ -1,4 +1,4 @@
-package com.crypticmushroom.planetbound.server.config;
+package com.crypticmushroom.planetbound.config;
 
 public class ConfigVariables
 {

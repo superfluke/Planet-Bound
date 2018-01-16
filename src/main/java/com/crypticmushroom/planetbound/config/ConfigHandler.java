@@ -1,4 +1,4 @@
-package com.crypticmushroom.planetbound.server.config;
+package com.crypticmushroom.planetbound.config;
 
 import com.crypticmushroom.planetbound.PBCore;
 import com.crypticmushroom.planetbound.PBLogger;

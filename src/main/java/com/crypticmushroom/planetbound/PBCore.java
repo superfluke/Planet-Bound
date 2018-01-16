@@ -1,9 +1,8 @@
 package com.crypticmushroom.planetbound;
 
-import com.crypticmushroom.planetbound.server.config.ConfigHandler;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import com.crypticmushroom.planetbound.config.ConfigHandler;
 
+import com.crypticmushroom.planetbound.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -23,7 +22,7 @@ public class PBCore
 	@Instance(MOD_ID)
 	private static PBCore instance;
 	
-	@SidedProxy(clientSide = "com.crypticmushroom.planetbound.client.ClientProxy", serverSide = "com.crypticmushroom.planetbound.server.ServerProxy")
+	@SidedProxy(clientSide = "com.crypticmushroom.planetbound.proxy.ClientProxy", serverSide = "com.crypticmushroom.planetbound.proxy.ServerProxy")
 	public static CommonProxy proxy; //TODO not sure what's best here; static abuse?
                                      //yes actually
 
