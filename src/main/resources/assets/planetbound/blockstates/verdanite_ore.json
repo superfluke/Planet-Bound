@@ -1,9 +1,0 @@
-{
-	"forge_marker": 1
-	"variants": {
-		"normal": {
-			"model": "planetcraft:verdanite_ore"
-		},
-		"inventory": {
-			"model": "planetcraft:verdanite_ore",
-			"transform": "forge:default-block"

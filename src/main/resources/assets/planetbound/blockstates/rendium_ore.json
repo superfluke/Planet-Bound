@@ -1,9 +1,0 @@
-{
-	"forge_marker": 1
-	"variants": {
-		"normal": {
-			"model": "planetcraft:rendium_ore"
-		},
-		"inventory": {
-			"model": "planetcraft:rendium_ore",
-			"transform": "forge:default-block"
