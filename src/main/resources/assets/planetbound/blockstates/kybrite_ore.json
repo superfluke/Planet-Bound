@@ -1,9 +1,0 @@
-{
-	"forge_marker": 1
-	"variants": {
-		"normal": {
-			"model": "planetcraft:kybrite_ore"
-		},
-		"inventory": {
-			"model": "planetcraft:kybrite_ore",
-			"transform": "forge:default-block"
