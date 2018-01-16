@@ -5,7 +5,6 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Sets;
 
-import crypticmushroom.planetbound.common.blocks.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -14,26 +13,11 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistry;
 
-public class PBBlocks
-{
+public class PBBlocks extends net.minecraftforge.registries.IForgeRegistryEntry.Impl<Block> {
 
-    public static BlockPBOres ores;
-    public static BlockPBRendium rendium;
-    // public static BlockPBRendiumOre rendium_ore;
-    public static BlockPBVerdanite verdanite;
-    public static PBKybriteBlock kybrite_block;
-    public static PBKybriteOre kybrite_ore;
-    public static PBRendiumBlock rendium_block;
-    public static PBRendiumOre rendium_ore;
-    public static PBVerdaniteBlock verdanite_block;
-    public static PBVerdaniteOre verdanite_ore;
-
-    public static void init()
-    {
-
-    }
-
-    /*
+	// check this: idk why you need materal rock and mapcolor color here if you are initializing it from the main class.
+	// those two things are what is causing an error, because you aren't giving the class anything to work with.
+	// - Jonathan
 	public PBBlocks(Material rock, MapColor color) {
 	}
 
@@ -56,7 +40,9 @@ public class PBBlocks
 	public static final Block RENDIUM_BLOCK;
 	public static final Block LIT_RENDIUM_BLOCK;
 	
-	// Returns the Block in the blockRegistry with the specified name.
+	 /**
+     * Returns the Block in the blockRegistry with the specified name.
+     */
     @Nullable
     private static Block getRegisteredBlock(String blockName)
     {
@@ -92,6 +78,5 @@ public class PBBlocks
 			CACHE.clear();
 		}
 	}
-	*/
 
 }
