@@ -3,6 +3,7 @@ package com.crypticmushroom.planetbound;
 import com.crypticmushroom.planetbound.config.ConfigHandler;
 import com.crypticmushroom.planetbound.init.PBBlocks;
 import com.crypticmushroom.planetbound.init.PBItems;
+import com.crypticmushroom.planetbound.init.PBSmelting;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -53,6 +54,8 @@ public class PBCore
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
+		PBSmelting.init();
+		
 		proxy.init(event);
 
         PBLogger.printNotice("Thomas the Dank Engine is here.");
