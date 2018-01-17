@@ -1,0 +1,14 @@
+#Item names
+item.kybrite_ingot.name=Kybrite Ingot
+item.verdanite_ingot.name=Verdanite Ingot
+
+#Block names
+tile.kybrite_ore.name=Kybrite Ore
+tile.kybrite_block.name=Kybrite Block
+tile.verdanite_ore.name=Verdanite Ore
+tile.verdanite_block.name=Verdanite Block
+tile.rendium_ore.name=Rendium Ore
+tile.rendium_block.name=Rendium Block
+tile.gauntlet_core.name=Gauntlet Core
+tile.gauntlet_core_frame.name=Gauntlet Core Frame
+tile.gauntlet_shell.name=Gauntlet Shell
