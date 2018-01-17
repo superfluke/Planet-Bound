@@ -11,6 +11,9 @@ public class KybriteOreBlock extends Block
     {
         super(Material.ROCK, MapColor.GRAY);
         
-        setSoundType(SoundType.STONE);
+		setHarvestLevel("pickaxe", 3);
+		setHardness(5);
+		setResistance(10);
+        setSoundType(SoundType.METAL);
     }
 }
