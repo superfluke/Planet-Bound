@@ -1,6 +1,7 @@
 #Item names
 item.kybrite_ingot.name=Kybrite Ingot
 item.verdanite_ingot.name=Verdanite Ingot
+item.rendium_chunk.name=Rendium Chunk
 
 #Block names
 tile.kybrite_ore.name=Kybrite Ore
