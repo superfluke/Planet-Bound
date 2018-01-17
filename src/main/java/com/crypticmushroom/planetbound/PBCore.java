@@ -27,7 +27,7 @@ public class PBCore
 	@Instance(MOD_ID)
 	private static PBCore instance;
 	
-	@SidedProxy(clientSide = "com.crypticmushroom.planetbound.proxy.ClientProxy", serverSide = "com.crypticmushroom.planetbound.proxy.ServerProxy")
+	@SidedProxy(clientSide = "com.crypticmushroom.planetbound.client.ClientProxy", serverSide = "com.crypticmushroom.planetbound.server.ServerProxy")
 	public static CommonProxy proxy;
 	
 	@EventHandler
