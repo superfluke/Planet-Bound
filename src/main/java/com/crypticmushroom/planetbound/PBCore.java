@@ -1,10 +1,13 @@
 package com.crypticmushroom.planetbound;
 
 import com.crypticmushroom.planetbound.config.ConfigHandler;
+import com.crypticmushroom.planetbound.init.PBBlocks;
+import com.crypticmushroom.planetbound.init.PBItems;
 
-import com.crypticmushroom.planetbound.init.ModBlocks;
-import com.crypticmushroom.planetbound.init.ModItems;
-import com.crypticmushroom.planetbound.proxy.CommonProxy;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -12,8 +15,8 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-//Heya, let's keep things tidy in here shall we? Use the proxy classes for your registry shit.
 @Mod(modid = PBCore.MOD_ID, name = PBCore.NAME, version = PBCore.VERSION, acceptedMinecraftVersions = "[1.12.2]")
 public class PBCore
 {
@@ -25,29 +28,26 @@ public class PBCore
 	private static PBCore instance;
 	
 	@SidedProxy(clientSide = "com.crypticmushroom.planetbound.proxy.ClientProxy", serverSide = "com.crypticmushroom.planetbound.proxy.ServerProxy")
-	public static CommonProxy proxy; //TODO not sure what's best here; static abuse?
-                                     //yes actually
-	public static com.crypticmushroom.planetbound.handler.EventHandler eventHandler;
-
-    //Logger is in PBLogger class now.
+	public static CommonProxy proxy;
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
+        PBLogger.printNotice("is this even being fucking called");
+        
 		ConfigHandler.loadConfig(event);
 		ConfigHandler.autoDeveloperMode("dev"); //If version contains "dev", enable developer mode.
 		ConfigHandler.configWarnings();
-
-		//the fucking event handler is gay as shit
-		eventHandler = new com.crypticmushroom.planetbound.handler.EventHandler();
-		eventHandler.register();
-
-		ModBlocks.init();
-		ModItems.init();
-
+		
+		MinecraftForge.EVENT_BUS.register(this);
+		//MinecraftForge.EVENT_BUS.register(new EventHandler()); //EventHandlers will be separate classes in the future
+		
+		PBItems.init();
+		PBBlocks.init();
+		
 		proxy.preInit(event);
 
-        PBLogger.printDevelop("Target acquired...");
+        PBLogger.printNotice("Target acquired...");
 	}
 	
 	@EventHandler
@@ -55,7 +55,7 @@ public class PBCore
 	{
 		proxy.init(event);
 
-        PBLogger.printDevelop("Thomas the Dank Engine is here.");
+        PBLogger.printNotice("Thomas the Dank Engine is here.");
 	}
 	
 	@EventHandler
@@ -63,7 +63,19 @@ public class PBCore
 	{
 		proxy.postInit(event);
 
-        PBLogger.printDevelop("Ready for combat.");
+        PBLogger.printNotice("Ready for combat.");
+	}
+	
+	@SubscribeEvent
+	public void registerBlocks(RegistryEvent.Register<Block> event)
+	{
+		event.getRegistry().registerAll(PBBlocks.getBlocks());
+	}
+
+	@SubscribeEvent
+	public void registerItems(RegistryEvent.Register<Item> event)
+	{
+		event.getRegistry().registerAll(PBItems.getItems());
 	}
 	
 	public static PBCore instance()

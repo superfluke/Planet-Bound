@@ -10,8 +10,7 @@ public class KybriteOreBlock extends Block
     public KybriteOreBlock()
     {
         super(Material.ROCK, MapColor.GRAY);
-        setUnlocalizedName("kybrite_block");
-        setRegistryName("kybrite_block");
+        
         setSoundType(SoundType.STONE);
     }
 }

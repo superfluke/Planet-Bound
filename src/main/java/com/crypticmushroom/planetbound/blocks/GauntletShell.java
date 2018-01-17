@@ -14,8 +14,7 @@ public class GauntletShell extends Block
     public GauntletShell()
     {
         super(Material.ROCK, MapColor.GRAY);
-        setUnlocalizedName("gauntlet_shell");
-        setRegistryName("gauntlet_shell_two");
+        
         setSoundType(SoundType.STONE);
     }
 }

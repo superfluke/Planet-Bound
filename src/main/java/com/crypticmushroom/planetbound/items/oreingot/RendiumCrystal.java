@@ -1,10 +1,16 @@
 package com.crypticmushroom.planetbound.items.oreingot;
 
-import com.crypticmushroom.planetbound.init.ModItems.CrystalType;
 import net.minecraft.item.Item;
 
+//What are you trying to do here??
 public class RendiumCrystal extends Item
 {
+    /*public static enum CrystalType
+    {
+        CHUNK,
+        CRYSTAL
+    }
+	
     CrystalType type;
 
     public RendiumCrystal(CrystalType t)
@@ -23,5 +29,5 @@ public class RendiumCrystal extends Item
         setUnlocalizedName(name);
         setRegistryName(name);
         type = t;
-    }
+    }*/
 }

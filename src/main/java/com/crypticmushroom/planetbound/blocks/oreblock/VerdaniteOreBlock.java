@@ -10,8 +10,7 @@ public class VerdaniteOreBlock extends Block
     public VerdaniteOreBlock()
     {
         super(Material.ROCK, MapColor.GRAY);
-        setUnlocalizedName("verdanite_block");
-        setRegistryName("verdanite_block");
+        
         setSoundType(SoundType.STONE);
     }
 }

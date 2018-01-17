@@ -10,8 +10,7 @@ public class GauntletCore extends Block
     public GauntletCore()
     {
         super(Material.ROCK, MapColor.GRAY);
-        setUnlocalizedName("gauntlet_core");
-        setRegistryName("gauntlet_core");
+        
         setSoundType(SoundType.STONE);
     }
 }

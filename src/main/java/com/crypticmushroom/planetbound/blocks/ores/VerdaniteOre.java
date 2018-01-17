@@ -4,4 +4,5 @@ import net.minecraft.block.BlockOre;
 
 public class VerdaniteOre extends BlockOre
 {
+	
 }

@@ -10,8 +10,7 @@ public class RendiumOreBlock extends Block
     public RendiumOreBlock()
     {
         super(Material.ROCK, MapColor.GRAY);
-        setUnlocalizedName("rendium_block");
-        setRegistryName("rendium_block");
+        
         setSoundType(SoundType.STONE);
     }
 }
