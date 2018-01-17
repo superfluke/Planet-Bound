@@ -1,5 +1,8 @@
 package com.crypticmushroom.planetbound.handler;
 
+import java.util.concurrent.ThreadLocalRandom;
+
+import com.crypticmushroom.planetbound.PBLogger;
 import com.crypticmushroom.planetbound.init.PBBlocks;
 import com.crypticmushroom.planetbound.init.PBItems;
 
@@ -14,7 +17,11 @@ public class BlockEvents
 	{
 		if(event.getState().getBlock().equals(PBBlocks.rendium_ore))
 		{
-			int drops = 3 + (int)(Math.random() * 4);
+			
+			float max = 5 + event.getFortuneLevel() * 1.5F;
+			int drops = ThreadLocalRandom.current().nextInt(3, (int)(max + 1));
+			
+			PBLogger.printNotice("drops: " + drops);
 			
 			event.getDrops().add(new ItemStack(PBItems.rendium_chunk, drops));
 		}
