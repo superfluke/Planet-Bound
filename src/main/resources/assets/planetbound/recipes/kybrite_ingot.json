@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "planetbound:kybrite_block"
+        }
+    ],
+    "result": {
+        "item": "planetbound:kybrite_ingot",
+        "count": 9
+    }
+}
