@@ -1,6 +1,8 @@
 package com.crypticmushroom.planetbound.client;
 
 import com.crypticmushroom.planetbound.CommonProxy;
+import com.crypticmushroom.planetbound.init.PBBlocks;
+import com.crypticmushroom.planetbound.init.PBItems;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -21,7 +23,8 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void init(FMLInitializationEvent event)
 	{
-		
+	    PBItems.registerModels();
+	    PBBlocks.registerModels();
 	}
 	
 	@Override

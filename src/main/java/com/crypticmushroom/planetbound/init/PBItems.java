@@ -7,12 +7,14 @@ import org.apache.commons.lang3.Validate;
 
 import com.crypticmushroom.planetbound.PBCore;
 import com.crypticmushroom.planetbound.items.oreingot.KybriteIngot;
-import com.crypticmushroom.planetbound.items.oreingot.RendiumCrystal;
 import com.crypticmushroom.planetbound.items.oreingot.VerdaniteIngot;
 
-import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PBItems
 {
@@ -44,6 +46,29 @@ public class PBItems
     	items.add(item);
     	
     	return item;
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public static void registerModels()
+    {
+    	for(Item item : items)
+    	{
+    		registerModel(item);
+    	}
+    }
+    
+    @SideOnly(Side.CLIENT)
+    private static void registerModel(Item item)
+    {
+    	registerModel(item, 0);
+    }
+    
+    @SideOnly(Side.CLIENT)
+    private static void registerModel(Item item, int metadata)
+    {
+    	Validate.notNull(item, "item cannot be null");
+    	
+    	Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, metadata, new ModelResourceLocation(item.getRegistryName(), "inventory"));
     }
     
     public static Item[] getItems()

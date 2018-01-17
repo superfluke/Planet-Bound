@@ -17,8 +17,13 @@ import com.crypticmushroom.planetbound.blocks.ores.RendiumOre;
 import com.crypticmushroom.planetbound.blocks.ores.VerdaniteOre;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PBBlocks
 {
@@ -62,6 +67,29 @@ public class PBBlocks
     	PBItems.registerItem(new ItemBlock(block), name);
     	
     	return block;
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public static void registerModels()
+    {
+    	for(Block block : blocks)
+    	{
+    		registerModel(block);
+    	}
+    }
+    
+    @SideOnly(Side.CLIENT)
+    private static void registerModel(Block block)
+    {
+    	registerModel(block, 0);
+    }
+    
+    @SideOnly(Side.CLIENT)
+    private static void registerModel(Block block, int metadata)
+    {
+    	Validate.notNull(block, "block cannot be null");
+    	
+    	Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), metadata, new ModelResourceLocation(block.getRegistryName(), "inventory"));
     }
     
     public static Block[] getBlocks()
