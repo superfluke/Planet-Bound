@@ -1,6 +1,7 @@
 package com.crypticmushroom.planetbound;
 
 import com.crypticmushroom.planetbound.config.ConfigHandler;
+import com.crypticmushroom.planetbound.handler.BlockEvents;
 import com.crypticmushroom.planetbound.init.PBBlocks;
 import com.crypticmushroom.planetbound.init.PBItems;
 import com.crypticmushroom.planetbound.init.PBSmelting;
@@ -41,7 +42,7 @@ public class PBCore
 		ConfigHandler.configWarnings();
 		
 		MinecraftForge.EVENT_BUS.register(this);
-		//MinecraftForge.EVENT_BUS.register(new EventHandler()); //EventHandlers will be separate classes in the future
+		MinecraftForge.EVENT_BUS.register(new BlockEvents());
 		
 		PBItems.init();
 		PBBlocks.init();
