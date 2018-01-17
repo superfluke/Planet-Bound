@@ -12,3 +12,6 @@ tile.rendium_block.name=Rendium Block
 tile.gauntlet_core.name=Gauntlet Core
 tile.gauntlet_core_frame.name=Gauntlet Core Frame
 tile.gauntlet_shell.name=Gauntlet Shell
+
+#Creative Tabs
+itemGroup.main=Planet Bound
