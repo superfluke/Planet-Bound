@@ -1,4 +1,4 @@
-package com.crypticmushroom.planetbound.items;
+package com.crypticmushroom.planetbound.client.models;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
