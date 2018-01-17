@@ -8,7 +8,7 @@ public class VerdaniteOre extends BlockOre
 	{
 		super();
 		
-		setHarvestLevel("pickaxe", 3);
+		setHarvestLevel("pickaxe", 2);
 		setHardness(3);
 		setResistance(5);
 	}

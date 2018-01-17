@@ -11,7 +11,7 @@ public class RendiumOreBlock extends Block
     {
         super(Material.ROCK, MapColor.GRAY);
         
-		setHarvestLevel("pickaxe", 3);
+		setHarvestLevel("pickaxe", 2);
 		setHardness(5);
 		setResistance(10);
         setSoundType(SoundType.METAL);
