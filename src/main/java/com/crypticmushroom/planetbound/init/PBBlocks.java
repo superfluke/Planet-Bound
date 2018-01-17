@@ -19,7 +19,6 @@ import com.crypticmushroom.planetbound.blocks.ores.VerdaniteOre;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.relauncher.Side;
@@ -57,7 +56,7 @@ public class PBBlocks
     	Validate.notNull(block, "block cannot be null");
     	Validate.notNull(name, "name cannot be null");
     	
-    	block.setCreativeTab(CreativeTabs.MISC); //TODO for testing purposes!
+    	block.setCreativeTab(PBCreativeTabs.TAB_MAIN); //TODO for testing purposes!
     	
     	block.setUnlocalizedName(name);
     	block.setRegistryName(PBCore.MOD_ID, name);

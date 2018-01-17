@@ -11,7 +11,6 @@ import com.crypticmushroom.planetbound.items.oreingot.VerdaniteIngot;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -38,7 +37,7 @@ public class PBItems
     	Validate.notNull(item, "item cannot be null");
     	Validate.notNull(name, "name cannot be null");
     	
-    	item.setCreativeTab(CreativeTabs.MISC); //TODO for testing purposes!
+    	item.setCreativeTab(PBCreativeTabs.TAB_MAIN); //TODO for testing purposes!
     	
     	item.setUnlocalizedName(name);
     	item.setRegistryName(PBCore.MOD_ID, name);
