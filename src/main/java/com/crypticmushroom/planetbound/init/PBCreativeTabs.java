@@ -11,7 +11,7 @@ public class PBCreativeTabs
 	    @Override 
 	    public ItemStack getTabIconItem()
 	    {
-	        return new ItemStack(PBItems.verdanite_ingot);
+	        return new ItemStack(PBBlocks.verdanite_block);
 	    }
 	};
 }
