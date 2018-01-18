@@ -4,12 +4,12 @@ import net.minecraft.block.BlockOre;
 
 public class KybriteOre extends BlockOre
 {
-	public KybriteOre()
-	{
-		super();
-		
-		setHarvestLevel("pickaxe", 2);
-		setHardness(3);
-		setResistance(5);
-	}
+    public KybriteOre()
+    {
+        super();
+        
+        setHarvestLevel("pickaxe", 2);
+        setHardness(3);
+        setResistance(5);
+    }
 }

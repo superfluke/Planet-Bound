@@ -4,4 +4,5 @@ import net.minecraft.item.Item;
 
 public class VerdaniteIngot extends Item
 {
+    
 }

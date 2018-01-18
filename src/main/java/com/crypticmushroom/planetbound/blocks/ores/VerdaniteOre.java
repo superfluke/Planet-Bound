@@ -4,12 +4,12 @@ import net.minecraft.block.BlockOre;
 
 public class VerdaniteOre extends BlockOre
 {
-	public VerdaniteOre()
-	{
-		super();
-		
-		setHarvestLevel("pickaxe", 2);
-		setHardness(3);
-		setResistance(5);
-	}
+    public VerdaniteOre()
+    {
+        super();
+        
+        setHarvestLevel("pickaxe", 2);
+        setHardness(3);
+        setResistance(5);
+    }
 }

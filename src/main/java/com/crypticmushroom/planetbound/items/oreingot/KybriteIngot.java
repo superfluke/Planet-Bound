@@ -4,5 +4,5 @@ import net.minecraft.item.Item;
 
 public class KybriteIngot extends Item
 {
-	
+    
 }
