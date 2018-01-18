@@ -22,77 +22,77 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(modid = PBCore.MOD_ID,
-		name = PBCore.NAME,
-		version = PBCore.VERSION,
-		acceptedMinecraftVersions = "[1.12.2]",
-		updateJSON = PBCore.UPDATE_JSON)
+        name = PBCore.NAME,
+        version = PBCore.VERSION,
+        acceptedMinecraftVersions = "[1.12.2]",
+        updateJSON = PBCore.UPDATE_JSON)
 public class PBCore
 {
-	public static final String MOD_ID = "planetbound";
-	public static final String NAME = "Planet Bound";
-	public static final String VERSION = "1.0-dev";
-	public static final String UPDATE_JSON = "https://raw.githubusercontent.com/cipherzerox/Planet-Bound/master/update.json";
-	
-	@Instance(MOD_ID)
-	private static PBCore instance;
-	
-	@SidedProxy(clientSide = "com.crypticmushroom.planetbound.client.ClientProxy", serverSide = "com.crypticmushroom.planetbound.server.ServerProxy")
-	public static CommonProxy proxy;
-	
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent event)
-	{
+    public static final String MOD_ID = "planetbound";
+    public static final String NAME = "Planet Bound";
+    public static final String VERSION = "1.0-dev";
+    public static final String UPDATE_JSON = "https://raw.githubusercontent.com/cipherzerox/Planet-Bound/master/update.json";
+    
+    @Instance(MOD_ID)
+    private static PBCore instance;
+    
+    @SidedProxy(clientSide = "com.crypticmushroom.planetbound.client.ClientProxy", serverSide = "com.crypticmushroom.planetbound.server.ServerProxy")
+    public static CommonProxy proxy;
+    
+    @EventHandler
+    public void preInit(FMLPreInitializationEvent event)
+    {
         PBLogger.printNotice("is this even being fucking called");
         
-		ConfigHandler.loadConfig(event);
-		ConfigHandler.autoDeveloperMode("dev"); //If version contains "dev", enable developer mode.
-		ConfigHandler.configWarnings();
-		
-		MinecraftForge.EVENT_BUS.register(this);
-		MinecraftForge.EVENT_BUS.register(new BlockEvents());
-		
-		PBItems.init();
-		PBBlocks.init();
-		
-		proxy.preInit(event);
+        ConfigHandler.loadConfig(event);
+        ConfigHandler.autoDeveloperMode("dev"); //If version contains "dev", enable developer mode.
+        ConfigHandler.configWarnings();
+        
+        MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(new BlockEvents());
+        
+        PBItems.init();
+        PBBlocks.init();
+        
+        proxy.preInit(event);
 
         PBLogger.printNotice("Target acquired...");
-	}
-	
-	@EventHandler
-	public void init(FMLInitializationEvent event)
-	{
-		PBSmelting.init();
-		
-		GameRegistry.registerWorldGenerator(new PBOreGenerator(), 0);
-		
-		proxy.init(event);
+    }
+    
+    @EventHandler
+    public void init(FMLInitializationEvent event)
+    {
+        PBSmelting.init();
+        
+        GameRegistry.registerWorldGenerator(new PBOreGenerator(), 0);
+        
+        proxy.init(event);
 
         PBLogger.printNotice("Thomas the Dank Engine is here.");
-	}
-	
-	@EventHandler
-	public void postInit(FMLPostInitializationEvent event)
-	{
-		proxy.postInit(event);
+    }
+    
+    @EventHandler
+    public void postInit(FMLPostInitializationEvent event)
+    {
+        proxy.postInit(event);
 
         PBLogger.printNotice("Ready for combat.");
-	}
-	
-	@SubscribeEvent
-	public void registerBlocks(RegistryEvent.Register<Block> event)
-	{
-		event.getRegistry().registerAll(PBBlocks.getBlocks());
-	}
+    }
+    
+    @SubscribeEvent
+    public void registerBlocks(RegistryEvent.Register<Block> event)
+    {
+        event.getRegistry().registerAll(PBBlocks.getBlocks());
+    }
 
-	@SubscribeEvent
-	public void registerItems(RegistryEvent.Register<Item> event)
-	{
-		event.getRegistry().registerAll(PBItems.getItems());
-	}
-	
-	public static PBCore instance()
-	{
-		return instance;
-	}
+    @SubscribeEvent
+    public void registerItems(RegistryEvent.Register<Item> event)
+    {
+        event.getRegistry().registerAll(PBItems.getItems());
+    }
+    
+    public static PBCore instance()
+    {
+        return instance;
+    }
 }

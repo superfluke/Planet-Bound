@@ -18,8 +18,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PBItems
 {
-	private static final List<Item> items = new ArrayList<>();
-	
+    private static final List<Item> items = new ArrayList<>();
+    
     public static Item kybrite_ingot;
     public static Item verdanite_ingot;
     public static Item rendium_chunk;
@@ -35,44 +35,44 @@ public class PBItems
     
     protected static Item registerItem(Item item, String name)
     {
-    	Validate.notNull(item, "item cannot be null");
-    	Validate.notNull(name, "name cannot be null");
-    	
-    	item.setCreativeTab(PBCreativeTabs.TAB_MAIN); //TODO for testing purposes!
-    	
-    	item.setUnlocalizedName(name);
-    	item.setRegistryName(PBCore.MOD_ID, name);
-    	
-    	items.add(item);
-    	
-    	return item;
+        Validate.notNull(item, "item cannot be null");
+        Validate.notNull(name, "name cannot be null");
+        
+        item.setCreativeTab(PBCreativeTabs.TAB_MAIN); //TODO for testing purposes!
+        
+        item.setUnlocalizedName(name);
+        item.setRegistryName(PBCore.MOD_ID, name);
+        
+        items.add(item);
+        
+        return item;
     }
     
     @SideOnly(Side.CLIENT)
     public static void registerModels()
     {
-    	for(Item item : items)
-    	{
-    		registerModel(item);
-    	}
+        for(Item item : items)
+        {
+            registerModel(item);
+        }
     }
     
     @SideOnly(Side.CLIENT)
     private static void registerModel(Item item)
     {
-    	registerModel(item, 0);
+        registerModel(item, 0);
     }
     
     @SideOnly(Side.CLIENT)
     private static void registerModel(Item item, int metadata)
     {
-    	Validate.notNull(item, "item cannot be null");
-    	
-    	Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, metadata, new ModelResourceLocation(item.getRegistryName(), "inventory"));
+        Validate.notNull(item, "item cannot be null");
+        
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, metadata, new ModelResourceLocation(item.getRegistryName(), "inventory"));
     }
     
     public static Item[] getItems()
     {
-    	return items.toArray(new Item[]{});
+        return items.toArray(new Item[]{});
     }
 }

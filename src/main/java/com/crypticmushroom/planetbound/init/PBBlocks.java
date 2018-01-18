@@ -26,8 +26,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PBBlocks
 {
-	private static final List<Block> blocks = new ArrayList<>();
-	
+    private static final List<Block> blocks = new ArrayList<>();
+    
     public static Block kybrite_ore;
     public static Block kybrite_block;
     public static Block verdanite_ore;
@@ -53,46 +53,46 @@ public class PBBlocks
     
     private static Block registerBlock(Block block, String name)
     {
-    	Validate.notNull(block, "block cannot be null");
-    	Validate.notNull(name, "name cannot be null");
-    	
-    	block.setCreativeTab(PBCreativeTabs.TAB_MAIN); //TODO for testing purposes!
-    	
-    	block.setUnlocalizedName(name);
-    	block.setRegistryName(PBCore.MOD_ID, name);
-    	
-    	blocks.add(block);
-    	
-    	PBItems.registerItem(new ItemBlock(block), name);
-    	
-    	return block;
+        Validate.notNull(block, "block cannot be null");
+        Validate.notNull(name, "name cannot be null");
+        
+        block.setCreativeTab(PBCreativeTabs.TAB_MAIN); //TODO for testing purposes!
+        
+        block.setUnlocalizedName(name);
+        block.setRegistryName(PBCore.MOD_ID, name);
+        
+        blocks.add(block);
+        
+        PBItems.registerItem(new ItemBlock(block), name);
+        
+        return block;
     }
     
     @SideOnly(Side.CLIENT)
     public static void registerModels()
     {
-    	for(Block block : blocks)
-    	{
-    		registerModel(block);
-    	}
+        for(Block block : blocks)
+        {
+            registerModel(block);
+        }
     }
     
     @SideOnly(Side.CLIENT)
     private static void registerModel(Block block)
     {
-    	registerModel(block, 0);
+        registerModel(block, 0);
     }
     
     @SideOnly(Side.CLIENT)
     private static void registerModel(Block block, int metadata)
     {
-    	Validate.notNull(block, "block cannot be null");
-    	
-    	Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), metadata, new ModelResourceLocation(block.getRegistryName(), "inventory"));
+        Validate.notNull(block, "block cannot be null");
+        
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), metadata, new ModelResourceLocation(block.getRegistryName(), "inventory"));
     }
     
     public static Block[] getBlocks()
     {
-    	return blocks.toArray(new Block[]{});
+        return blocks.toArray(new Block[]{});
     }
 }

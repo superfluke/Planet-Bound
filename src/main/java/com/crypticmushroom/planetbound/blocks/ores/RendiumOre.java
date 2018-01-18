@@ -8,16 +8,16 @@ import net.minecraft.item.Item;
 
 public class RendiumOre extends BlockOre
 {
-	public RendiumOre()
-	{
-		super();
-		
-		setHarvestLevel("pickaxe", 2);
-		setHardness(3);
-		setResistance(5);
-	}
-	
-	@Override
+    public RendiumOre()
+    {
+        super();
+        
+        setHarvestLevel("pickaxe", 2);
+        setHardness(3);
+        setResistance(5);
+    }
+    
+    @Override
     public Item getItemDropped(IBlockState state, Random random, int fortune)
     {
         return null;

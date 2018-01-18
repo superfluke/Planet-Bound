@@ -16,7 +16,6 @@ public class BlockEvents
     {
         if(event.getState().getBlock().equals(PBBlocks.rendium_ore))
         {
-            
             float max = 5 + event.getFortuneLevel() * 1.5F;
             int drops = ThreadLocalRandom.current().nextInt(3, (int)(max + 1));
             

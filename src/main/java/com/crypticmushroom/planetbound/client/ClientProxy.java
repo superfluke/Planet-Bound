@@ -14,22 +14,22 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 //Server side only stuff in CLIENT package.
 public class ClientProxy extends CommonProxy
 {
-	@Override
-	public void preInit(FMLPreInitializationEvent event)
-	{
-		
-	}
-	
-	@Override
-	public void init(FMLInitializationEvent event)
-	{
-	    PBItems.registerModels();
-	    PBBlocks.registerModels();
-	}
-	
-	@Override
-	public void postInit(FMLPostInitializationEvent event)
-	{
-		
-	}
+    @Override
+    public void preInit(FMLPreInitializationEvent event)
+    {
+        
+    }
+    
+    @Override
+    public void init(FMLInitializationEvent event)
+    {
+        PBItems.registerModels();
+        PBBlocks.registerModels();
+    }
+    
+    @Override
+    public void postInit(FMLPostInitializationEvent event)
+    {
+        
+    }
 }
