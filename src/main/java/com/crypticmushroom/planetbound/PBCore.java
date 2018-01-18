@@ -5,6 +5,7 @@ import com.crypticmushroom.planetbound.handler.BlockEvents;
 import com.crypticmushroom.planetbound.init.PBBlocks;
 import com.crypticmushroom.planetbound.init.PBItems;
 import com.crypticmushroom.planetbound.init.PBSmelting;
+import com.crypticmushroom.planetbound.world.gen.PBOreGenerator;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -18,6 +19,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(modid = PBCore.MOD_ID,
 		name = PBCore.NAME,
@@ -61,6 +63,8 @@ public class PBCore
 	public void init(FMLInitializationEvent event)
 	{
 		PBSmelting.init();
+		
+		GameRegistry.registerWorldGenerator(new PBOreGenerator(), 0);
 		
 		proxy.init(event);
 
