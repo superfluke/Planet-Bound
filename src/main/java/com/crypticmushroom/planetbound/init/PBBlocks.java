@@ -6,9 +6,6 @@ import java.util.List;
 import org.apache.commons.lang3.Validate;
 
 import com.crypticmushroom.planetbound.PBCore;
-import com.crypticmushroom.planetbound.blocks.GauntletCore;
-import com.crypticmushroom.planetbound.blocks.GauntletCoreFrame;
-import com.crypticmushroom.planetbound.blocks.GauntletShell;
 import com.crypticmushroom.planetbound.blocks.InventorsForge;
 import com.crypticmushroom.planetbound.blocks.oreblock.KybriteOreBlock;
 import com.crypticmushroom.planetbound.blocks.oreblock.RendiumOreBlock;
@@ -35,12 +32,9 @@ public class PBBlocks
     public static Block verdanite_block;
     public static Block rendium_ore;
     public static Block rendium_block;
-    public static Block gauntlet_core;
-    public static Block gauntlet_core_frame;
-    public static Block gauntlet_shell;
     public static Block inventors_forge;
     public static Block lit_inventors_forge;
-
+    
     public static void init()
     {
         kybrite_ore = registerBlock(new KybriteOre(), "kybrite_ore");
@@ -49,9 +43,6 @@ public class PBBlocks
         verdanite_block = registerBlock(new VerdaniteOreBlock(), "verdanite_block");
         rendium_ore = registerBlock(new RendiumOre(), "rendium_ore");
         rendium_block = registerBlock(new RendiumOreBlock(), "rendium_block");
-        gauntlet_core = registerBlock(new GauntletCore(), "gauntlet_core");
-        gauntlet_core_frame = registerBlock(new GauntletCoreFrame(), "gauntlet_core_frame");
-        gauntlet_shell = registerBlock(new GauntletShell(), "gauntlet_shell");
         inventors_forge = registerBlock(new InventorsForge(false), "inventors_forge");
         lit_inventors_forge = registerBlock(new InventorsForge(true), "lit_inventors_forge");
     }
