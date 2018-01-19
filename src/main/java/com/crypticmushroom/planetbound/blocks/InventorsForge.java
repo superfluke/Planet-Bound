@@ -10,6 +10,7 @@ import com.crypticmushroom.planetbound.tileentity.TileEntityInventorsForge;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
@@ -51,6 +52,9 @@ public class InventorsForge extends BlockContainer
         super(Material.ROCK);
         
         setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+        setHarvestLevel("pickaxe", 0);
+        setHardness(3.5F);
+        setSoundType(SoundType.STONE);
         
         this.isBurning = isBurning;
     }
