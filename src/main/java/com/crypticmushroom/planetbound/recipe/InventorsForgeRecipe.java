@@ -56,6 +56,11 @@ public class InventorsForgeRecipe
         return RecipeMatcher.findMatches(inputList, input) != null;
     }
     
+    public List<Ingredient> getIngredients()
+    {
+        return input;
+    }
+    
     public ItemStack getOutput()
     {
         return output;

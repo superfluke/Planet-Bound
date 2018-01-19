@@ -1,5 +1,6 @@
 package com.crypticmushroom.planetbound.container;
 
+import com.crypticmushroom.planetbound.init.InventorsForgeRecipes;
 import com.crypticmushroom.planetbound.tileentity.TileEntityInventorsForge;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,6 +12,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotFurnaceFuel;
 import net.minecraft.inventory.SlotFurnaceOutput;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -146,14 +148,14 @@ public class ContainerInventorsForge extends Container
             }
             else if(index > 4)
             {
-                /*if(!FurnaceRecipes.instance().getSmeltingResult(stack1).isEmpty())
+                if(InventorsForgeRecipes.isIngredient(stack1))
                 {
-                    if (!this.mergeItemStack(stack1, 0, 3, false))
+                    if(!this.mergeItemStack(stack1, INPUT_SLOT_1, INPUT_SLOT_3 + 1, false))
                     {
                         return ItemStack.EMPTY;
                     }
                 }
-                else*/ if(TileEntityFurnace.isItemFuel(stack1))
+                else if(TileEntityFurnace.isItemFuel(stack1))
                 {
                     if(!this.mergeItemStack(stack1, 3, 4, false))
                     {

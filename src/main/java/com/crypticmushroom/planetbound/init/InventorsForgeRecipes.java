@@ -55,6 +55,29 @@ public class InventorsForgeRecipes
         recipes.add(new InventorsForgeRecipe(ingredients, output));
     }
     
+    public static boolean isIngredient(ItemStack stack)
+    {
+        boolean result = false;
+        
+        for(InventorsForgeRecipe recipe : recipes)
+        {
+            for(Ingredient ingredient : recipe.getIngredients())
+            {
+                for(ItemStack stack1 : ingredient.getMatchingStacks())
+                {
+                    if(stack1.isItemEqual(stack))
+                    {
+                        result = true;
+                        
+                        break;
+                    }
+                }
+            }
+        }
+        
+        return result;
+    }
+    
     public static ItemStack getRecipeOutput(TileEntityInventorsForge inventory)
     {
         for(InventorsForgeRecipe recipe : recipes)
