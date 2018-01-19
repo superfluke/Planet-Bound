@@ -52,7 +52,7 @@ public class InventorsForgeRecipe
         {
             return false;
         }
-        System.out.println(output);
+        
         return RecipeMatcher.findMatches(inputList, input) != null;
     }
     
