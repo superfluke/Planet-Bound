@@ -10,5 +10,6 @@ public class PBSmelting
     {
         FurnaceRecipes.instance().addSmeltingRecipeForBlock(PBBlocks.kybrite_ore, new ItemStack(PBItems.kybrite_ingot), 0);
         FurnaceRecipes.instance().addSmeltingRecipeForBlock(PBBlocks.verdanite_ore, new ItemStack(PBItems.verdanite_ingot), 0);
+        FurnaceRecipes.instance().addSmeltingRecipeForBlock(PBBlocks.rendium_ore, new ItemStack(PBItems.rendium_chunk), 0);
     }
 }
