@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "AAA",
+        "AAA",
+        "AAA"
+    ],
+    "key": {
+        "A": {
+            "item": "planetbound:rendium_crystal"
+        }
+    },
+    "result": {
+        "item": "planetbound:rendium_block"
+    }
+}
