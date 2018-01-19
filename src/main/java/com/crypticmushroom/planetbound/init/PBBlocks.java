@@ -9,6 +9,7 @@ import com.crypticmushroom.planetbound.PBCore;
 import com.crypticmushroom.planetbound.blocks.GauntletCore;
 import com.crypticmushroom.planetbound.blocks.GauntletCoreFrame;
 import com.crypticmushroom.planetbound.blocks.GauntletShell;
+import com.crypticmushroom.planetbound.blocks.InventorsForge;
 import com.crypticmushroom.planetbound.blocks.oreblock.KybriteOreBlock;
 import com.crypticmushroom.planetbound.blocks.oreblock.RendiumOreBlock;
 import com.crypticmushroom.planetbound.blocks.oreblock.VerdaniteOreBlock;
@@ -37,6 +38,8 @@ public class PBBlocks
     public static Block gauntlet_core;
     public static Block gauntlet_core_frame;
     public static Block gauntlet_shell;
+    public static Block inventors_forge;
+    public static Block lit_inventors_forge;
 
     public static void init()
     {
@@ -49,6 +52,8 @@ public class PBBlocks
         gauntlet_core = registerBlock(new GauntletCore(), "gauntlet_core");
         gauntlet_core_frame = registerBlock(new GauntletCoreFrame(), "gauntlet_core_frame");
         gauntlet_shell = registerBlock(new GauntletShell(), "gauntlet_shell");
+        inventors_forge = registerBlock(new InventorsForge(false), "inventors_forge");
+        lit_inventors_forge = registerBlock(new InventorsForge(true), "lit_inventors_forge");
     }
     
     private static Block registerBlock(Block block, String name)

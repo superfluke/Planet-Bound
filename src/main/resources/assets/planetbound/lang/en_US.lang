@@ -2,6 +2,7 @@
 item.kybrite_ingot.name=Kybrite Ingot
 item.verdanite_ingot.name=Verdanite Ingot
 item.rendium_chunk.name=Rendium Chunk
+item.rendium_crystal.name=Rendium Crystal
 
 #Block names
 tile.kybrite_ore.name=Kybrite Ore
@@ -13,6 +14,11 @@ tile.rendium_block.name=Rendium Block
 tile.gauntlet_core.name=Gauntlet Core
 tile.gauntlet_core_frame.name=Gauntlet Core Frame
 tile.gauntlet_shell.name=Gauntlet Shell
+tile.inventors_forge.name=Inventor's Forge
+tile.lit_inventors_forge.name=Inventor's Forge
 
 #Creative Tabs
 itemGroup.main=Planet Bound
+
+#Containers
+container.inventors_forge=Inventor's Forge
