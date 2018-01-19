@@ -2,9 +2,12 @@ package com.crypticmushroom.planetbound;
 
 import com.crypticmushroom.planetbound.config.ConfigHandler;
 import com.crypticmushroom.planetbound.handler.BlockEvents;
+import com.crypticmushroom.planetbound.init.InventorsForgeRecipes;
 import com.crypticmushroom.planetbound.init.PBBlocks;
 import com.crypticmushroom.planetbound.init.PBItems;
 import com.crypticmushroom.planetbound.init.PBSmelting;
+import com.crypticmushroom.planetbound.init.PBTileEntities;
+import com.crypticmushroom.planetbound.networking.PBNetworkHandler;
 import com.crypticmushroom.planetbound.world.gen.PBOreGenerator;
 
 import net.minecraft.block.Block;
@@ -43,8 +46,6 @@ public class PBCore
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        //PBLogger.printNotice("is this even being fucking called");
-        
         ConfigHandler.loadConfig(event);
         ConfigHandler.autoDeveloperMode("dev"); //If version contains "dev", enable developer mode.
         ConfigHandler.configWarnings();
@@ -64,6 +65,10 @@ public class PBCore
     public void init(FMLInitializationEvent event)
     {
         PBSmelting.init();
+        PBTileEntities.init();
+        InventorsForgeRecipes.init();
+        
+        PBNetworkHandler.init();
         
         GameRegistry.registerWorldGenerator(new PBOreGenerator(), 0);
         
