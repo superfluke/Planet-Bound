@@ -46,26 +46,34 @@ public class PBCore
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
+        PBLogger.printNotice("Running pre-initialization");
+        
         ConfigHandler.loadConfig(event);
         ConfigHandler.autoDeveloperMode("dev"); //If version contains "dev", enable developer mode.
         ConfigHandler.configWarnings();
         
+        PBLogger.printNotice("Registering event handlers");
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new BlockEvents());
         
+        PBLogger.printNotice("Preparing items for registry");
         PBItems.init();
+        
+        PBLogger.printNotice("Preparing blocks for registry");
         PBBlocks.init();
         
         proxy.preInit(event);
-
-        PBLogger.printNotice("Target acquired...");
     }
     
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-        PBSmelting.init();
+        PBLogger.printNotice("Running initialization");
+        PBLogger.printNotice("Registering tile entities");
         PBTileEntities.init();
+        
+        PBLogger.printNotice("Registering recipes"); //Order is important here
+        PBSmelting.init();
         InventorsForgeRecipes.init();
         
         PBNetworkHandler.init();
@@ -73,27 +81,29 @@ public class PBCore
         GameRegistry.registerWorldGenerator(new PBOreGenerator(), 0);
         
         proxy.init(event);
-
-        PBLogger.printNotice("Thomas the Dank Engine is here.");
     }
     
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
+        PBLogger.printNotice("Running post-initialization");
+        
         proxy.postInit(event);
-
-        PBLogger.printNotice("Ready for combat.");
     }
     
     @SubscribeEvent
     public void registerBlocks(RegistryEvent.Register<Block> event)
     {
+        PBLogger.printNotice("Registering blocks");
+        
         event.getRegistry().registerAll(PBBlocks.getBlocks());
     }
 
     @SubscribeEvent
     public void registerItems(RegistryEvent.Register<Item> event)
     {
+        PBLogger.printNotice("Registering items");
+        
         event.getRegistry().registerAll(PBItems.getItems());
     }
     
