@@ -4,6 +4,7 @@ import com.crypticmushroom.planetbound.config.ConfigVariables;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+//TODO make a method to print to the player in-game
 public class PBLogger
 {
     public static final Logger log = LogManager.getLogger(PBCore.NAME);

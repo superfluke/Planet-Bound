@@ -19,6 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 /**
  * Pretty much a modified copy of {@link GuiFurnace}
  */
+//Looks good. I usually run off of Forge/Minecraft code to make what I need to make as well and it runs great.
 @SideOnly(Side.CLIENT)
 public class GuiInventorsForge extends GuiContainer
 {

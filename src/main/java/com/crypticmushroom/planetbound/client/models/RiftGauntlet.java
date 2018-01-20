@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
  * test - RetroGamerSP
  * Created using Tabula 7.0.0
  */
+//TODO create json model maybe? idk this looks good as is
 public class RiftGauntlet extends ModelBase {
     public ModelRenderer shape1;
     public ModelRenderer shape2;

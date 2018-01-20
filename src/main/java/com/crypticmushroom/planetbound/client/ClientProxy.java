@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-//Server side only stuff in CLIENT package.
+//Client side only stuff in CLIENT package.
 public class ClientProxy extends CommonProxy
 {
     @Override

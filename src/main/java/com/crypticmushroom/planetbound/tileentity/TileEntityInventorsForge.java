@@ -52,6 +52,7 @@ public class TileEntityInventorsForge extends TileEntityLockable implements ITic
     private int cookTime;
     private int totalCookTime;
     private int smeltMode; //0 = alloy mode, 1 = per slot mode
+    //are you going to make a json file or java class for the alloy recipies as well? sorry if you already did, I’m making these comments on my phone.
     
     public int getSizeInventory()
     {
