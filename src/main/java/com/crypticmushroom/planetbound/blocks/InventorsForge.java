@@ -56,6 +56,11 @@ public class InventorsForge extends BlockContainer
         setHardness(3.5F);
         setSoundType(SoundType.STONE);
         
+        if(isBurning)
+        {
+            setLightLevel(0.875F);
+        }
+        
         this.isBurning = isBurning;
     }
     
