@@ -5,7 +5,7 @@
   "description": "A planetary mod for Minecraft.",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "url": "https://github.com/cipherzerox/Planet-Bound",
+  "url": "https://minecraft.curseforge.com/projects/cryptic-mushroom-planetbound",
   "updateUrl": "",
   "authorList": ["Cipher Zerø X", "ItzDennisz", "RetroGamerSP", "Jonathing", "LostMyMarbles", "RollingThunder"],
   "credits": "Our contributors and planeteers of our community.",
