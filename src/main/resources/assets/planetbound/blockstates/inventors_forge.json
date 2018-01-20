@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "planetbound:inventors_forge" },
+        "facing=south": { "model": "planetbound:inventors_forge", "y": 180 },
+        "facing=west":  { "model": "planetbound:inventors_forge", "y": 270 },
+        "facing=east":  { "model": "planetbound:inventors_forge", "y": 90 }
+    }
+}
