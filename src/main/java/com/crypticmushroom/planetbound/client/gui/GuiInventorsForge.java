@@ -1,10 +1,15 @@
 package com.crypticmushroom.planetbound.client.gui;
 
 import com.crypticmushroom.planetbound.PBCore;
+import com.crypticmushroom.planetbound.client.gui.button.SmeltModeButton;
 import com.crypticmushroom.planetbound.container.ContainerInventorsForge;
+import com.crypticmushroom.planetbound.networking.PBNetworkHandler;
+import com.crypticmushroom.planetbound.networking.packet.PBPacketSmeltMode;
 import com.crypticmushroom.planetbound.tileentity.TileEntityInventorsForge;
 
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.gui.inventory.GuiFurnace;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -29,6 +34,14 @@ public class GuiInventorsForge extends GuiContainer
         
         this.inventory = inventory;
         this.tileEntity = tileEntity;
+    }
+    
+    @Override
+    public void initGui()
+    {
+        super.initGui();
+        
+        addButton(new SmeltModeButton(tileEntity, 0, guiLeft + 5, guiTop + 5));
     }
     
     @Override
@@ -74,6 +87,15 @@ public class GuiInventorsForge extends GuiContainer
         drawTexturedModalRect(i + 79, j + 34, 176, 14, l + 1, 16);
     }
     
+    @Override
+    protected void actionPerformed(GuiButton button)
+    {
+        if(button.id == 0)
+        {
+            PBNetworkHandler.sendToServer(new PBPacketSmeltMode(tileEntity));
+        }
+    }
+    
     private int getCookProgressScaled(int pixels)
     {
         int i = tileEntity.getField(2);
@@ -81,7 +103,7 @@ public class GuiInventorsForge extends GuiContainer
         
         return j != 0 && i != 0 ? i * pixels / j : 0;
     }
-
+    
     private int getBurnLeftScaled(int pixels)
     {
         int i = tileEntity.getField(1);
