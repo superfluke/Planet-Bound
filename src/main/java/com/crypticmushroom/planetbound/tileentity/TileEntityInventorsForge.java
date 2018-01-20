@@ -386,6 +386,8 @@ public class TileEntityInventorsForge extends TileEntityLockable implements ITic
                    }
                    
                    input.shrink(1);
+                   
+                   extractWaterFromSponge(input);
                 }
             }
         }
@@ -423,22 +425,21 @@ public class TileEntityInventorsForge extends TileEntityLockable implements ITic
                            stack.shrink(1);
                        }
                    }
+                   
+                   extractWaterFromSponge(contents.get(ContainerInventorsForge.INPUT_SLOT_1));
+                   extractWaterFromSponge(contents.get(ContainerInventorsForge.INPUT_SLOT_2));
+                   extractWaterFromSponge(contents.get(ContainerInventorsForge.INPUT_SLOT_3));
                 }
             }
         }
     }
     
-    public void smltItem()
+    private void extractWaterFromSponge(ItemStack sponge)
     {
-        
-            /*boolean sponge = (input1.getItem() == Item.getItemFromBlock(Blocks.SPONGE) && input1.getMetadata() == 1) || 
-                             (input2.getItem() == Item.getItemFromBlock(Blocks.SPONGE) && input2.getMetadata() == 1) ||
-                             (input3.getItem() == Item.getItemFromBlock(Blocks.SPONGE) && input3.getMetadata() == 1);
-            
-            if(sponge && !((ItemStack)this.contents.get(ContainerInventorsForge.FUEL_SLOT)).isEmpty() && ((ItemStack)this.contents.get(ContainerInventorsForge.FUEL_SLOT)).getItem() == Items.BUCKET)
-            {
-                this.contents.set(ContainerInventorsForge.FUEL_SLOT, new ItemStack(Items.WATER_BUCKET));
-            }*/
+        if(sponge.getItem() == Item.getItemFromBlock(Blocks.SPONGE) && sponge.getMetadata() == 1 && !((ItemStack)this.contents.get(ContainerInventorsForge.FUEL_SLOT)).isEmpty() && ((ItemStack)this.contents.get(ContainerInventorsForge.FUEL_SLOT)).getItem() == Items.BUCKET)
+        {
+            contents.set(ContainerInventorsForge.FUEL_SLOT, new ItemStack(Items.WATER_BUCKET));
+        }
     }
     
     public static int getItemBurnTime(ItemStack stack)
