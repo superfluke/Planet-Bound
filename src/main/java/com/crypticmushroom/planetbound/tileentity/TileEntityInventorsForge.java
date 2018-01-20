@@ -587,7 +587,7 @@ public class TileEntityInventorsForge extends TileEntityLockable implements ITic
         }
     }
     
-    @Override //TODO
+    @Override
     public int[] getSlotsForFace(EnumFacing side)
     {
         if(side == EnumFacing.DOWN)
