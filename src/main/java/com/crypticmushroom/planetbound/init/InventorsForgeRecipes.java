@@ -78,11 +78,24 @@ public class InventorsForgeRecipes
         return result;
     }
     
-    public static ItemStack getRecipeOutput(TileEntityInventorsForge inventory)
+    public static ItemStack getSmeltingResult(TileEntityInventorsForge inventory)
     {
         for(InventorsForgeRecipe recipe : recipes)
         {
             if(recipe.compare(inventory))
+            {
+                return recipe.getOutput();
+            }
+        }
+        
+        return ItemStack.EMPTY;
+    }
+    
+    public static ItemStack getSmeltingResult(ItemStack... input)
+    {
+        for(InventorsForgeRecipe recipe : recipes)
+        {
+            if(recipe.compare(input))
             {
                 return recipe.getOutput();
             }

@@ -23,6 +23,7 @@ import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.tileentity.TileEntityLockable;
@@ -41,15 +42,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  */
 public class TileEntityInventorsForge extends TileEntityLockable implements ITickable, ISidedInventory
 {
-    private static final int[] SLOTS_TOP = new int[] {0};
-    private static final int[] SLOTS_BOTTOM = new int[] {2, 1};
-    private static final int[] SLOTS_SIDES = new int[] {1};
+    private static final int[] SLOTS_TOP = new int[]{ContainerInventorsForge.INPUT_SLOT_1, ContainerInventorsForge.INPUT_SLOT_2, ContainerInventorsForge.INPUT_SLOT_3};
+    private static final int[] SLOTS_BOTTOM = new int[]{ContainerInventorsForge.OUTPUT_SLOT_1, ContainerInventorsForge.OUTPUT_SLOT_2, ContainerInventorsForge.OUTPUT_SLOT_3};
+    private static final int[] SLOTS_SIDES = new int[]{ContainerInventorsForge.FUEL_SLOT};
     
-    private NonNullList<ItemStack> contents = NonNullList.<ItemStack>withSize(5, ItemStack.EMPTY);
+    private NonNullList<ItemStack> contents = NonNullList.<ItemStack>withSize(7, ItemStack.EMPTY);
     private int furnaceBurnTime;
     private int currentItemBurnTime;
     private int cookTime;
     private int totalCookTime;
+    private int smeltMode; //0 = alloy mode, 1 = per slot mode
     
     public int getSizeInventory()
     {
@@ -102,10 +104,10 @@ public class TileEntityInventorsForge extends TileEntityLockable implements ITic
             stack.setCount(getInventoryStackLimit());
         }
 
-        if(index == 0 && !flag)
+        if((index == ContainerInventorsForge.INPUT_SLOT_1 || index == ContainerInventorsForge.INPUT_SLOT_2 || index == ContainerInventorsForge.INPUT_SLOT_3) && !flag)
         {
             totalCookTime = getCookTime(stack);
-            cookTime = 0;
+            //cookTime = 0; No longer reset cook time due to there being 3 input slots
             
             markDirty();
         }
@@ -141,6 +143,7 @@ public class TileEntityInventorsForge extends TileEntityLockable implements ITic
         cookTime = compound.getInteger("CookTime");
         totalCookTime = compound.getInteger("CookTimeTotal");
         currentItemBurnTime = getItemBurnTime(contents.get(ContainerInventorsForge.FUEL_SLOT));
+        smeltMode = compound.getInteger("SmeltMode");
     }
     
     @Override
@@ -152,6 +155,7 @@ public class TileEntityInventorsForge extends TileEntityLockable implements ITic
         compound.setInteger("CookTime", (short)cookTime);
         compound.setInteger("CookTimeTotal", (short)totalCookTime);
         ItemStackHelper.saveAllItems(compound, contents);
+        compound.setInteger("SmeltMode", smeltMode);
 
         return compound;
     }
@@ -167,7 +171,7 @@ public class TileEntityInventorsForge extends TileEntityLockable implements ITic
         return furnaceBurnTime > 0;
     }
     
-    public boolean hasInput()
+    private boolean hasInput()
     {
         ItemStack input1 = contents.get(ContainerInventorsForge.INPUT_SLOT_1);
         ItemStack input2 = contents.get(ContainerInventorsForge.INPUT_SLOT_2);
@@ -231,7 +235,16 @@ public class TileEntityInventorsForge extends TileEntityLockable implements ITic
                         cookTime = 0;
                         totalCookTime = getCookTime(contents.get(ContainerInventorsForge.INPUT_SLOT_1));
                         
-                        smeltItem();
+                        if(smeltMode == 0)
+                        {
+                            smeltItem();
+                        }
+                        else if(smeltMode == 1)
+                        {
+                            smeltItem(contents.get(ContainerInventorsForge.INPUT_SLOT_1));
+                            smeltItem(contents.get(ContainerInventorsForge.INPUT_SLOT_2));
+                            smeltItem(contents.get(ContainerInventorsForge.INPUT_SLOT_3));
+                        }
                         
                         flag1 = true;
                     }
@@ -273,79 +286,158 @@ public class TileEntityInventorsForge extends TileEntityLockable implements ITic
         }
         else
         {
-            ItemStack result = InventorsForgeRecipes.getRecipeOutput(this);
-            
-            if(result.isEmpty())
+            if(smeltMode == 0)
             {
-                return false;
-            }
-            else
-            {
-                ItemStack output = contents.get(ContainerInventorsForge.OUTPUT_SLOT);
-
-                if(output.isEmpty())
-                {
-                    return true;
-                }
-                else if(!output.isItemEqual(result))
+                ItemStack result = InventorsForgeRecipes.getSmeltingResult(this);
+                
+                if(result.isEmpty())
                 {
                     return false;
                 }
-                else if(output.getCount() + result.getCount() <= getInventoryStackLimit() && output.getCount() + result.getCount() <= output.getMaxStackSize())  // Forge fix: make furnace respect stack sizes in furnace recipes
+                else
                 {
-                    return true;
+                    return getFirstFreeOutput(result) != -1;
+                }
+            }
+            else if(smeltMode == 1)
+            {
+                ItemStack result1 = FurnaceRecipes.instance().getSmeltingResult(contents.get(ContainerInventorsForge.INPUT_SLOT_1));
+                ItemStack result2 = FurnaceRecipes.instance().getSmeltingResult(contents.get(ContainerInventorsForge.INPUT_SLOT_2));
+                ItemStack result3 = FurnaceRecipes.instance().getSmeltingResult(contents.get(ContainerInventorsForge.INPUT_SLOT_3));
+                
+                if(result1.isEmpty() && result2.isEmpty() && result3.isEmpty())
+                {
+                    return false;
                 }
                 else
                 {
-                    return output.getCount() + result.getCount() <= result.getMaxStackSize(); // Forge fix: make furnace respect stack sizes in furnace recipes
+                    return getFirstFreeOutput(result1) != -1 || getFirstFreeOutput(result2) != -1 || getFirstFreeOutput(result3) != -1;
+                }
+            }
+        }
+        
+        return false;
+    }
+    
+    private int getFirstFreeOutput(ItemStack result)
+    {
+        ItemStack output1 = contents.get(ContainerInventorsForge.OUTPUT_SLOT_1);
+        ItemStack output2 = contents.get(ContainerInventorsForge.OUTPUT_SLOT_2);
+        ItemStack output3 = contents.get(ContainerInventorsForge.OUTPUT_SLOT_3);
+
+        if(outputValid(output1, result))
+        {
+            return ContainerInventorsForge.OUTPUT_SLOT_1;
+        }
+        else if(outputValid(output2, result))
+        {
+            return ContainerInventorsForge.OUTPUT_SLOT_2;
+        }
+        else if(outputValid(output3, result))
+        {
+            return ContainerInventorsForge.OUTPUT_SLOT_3;
+        }
+        
+        return -1;
+    }
+    
+    private boolean outputValid(ItemStack output, ItemStack result)
+    {
+        if(output.isEmpty())
+        {
+            return true;
+        }
+        else if(!output.isItemEqual(result))
+        {
+            return false;
+        }
+        else if(output.getCount() + result.getCount() <= getInventoryStackLimit() && output.getCount() + result.getCount() <= output.getMaxStackSize())  // Forge fix: make furnace respect stack sizes in furnace recipes
+        {   
+            return true;
+        }
+        else
+        {
+            return output.getCount() + result.getCount() <= result.getMaxStackSize(); // Forge fix: make furnace respect stack sizes in furnace recipes
+        }
+    }
+    
+    public void smeltItem(ItemStack input) //smeltItem for per slot smelt mode!!
+    {
+        if(canSmelt())
+        {
+            ItemStack result = InventorsForgeRecipes.getSmeltingResult(input);
+            
+            if(!result.isEmpty())
+            {
+                int outputSlot = getFirstFreeOutput(result);
+                
+                if(outputSlot != -1)
+                {
+                   ItemStack output = contents.get(outputSlot);
+                   
+                   if(output.isEmpty())
+                   {
+                       contents.set(outputSlot, result.copy());
+                   }
+                   else if(output.getItem() == result.getItem())
+                   {
+                       output.grow(result.getCount());
+                   }
+                   
+                   input.shrink(1);
                 }
             }
         }
     }
     
-    public void smeltItem()
+    public void smeltItem() //smeltItem for alloy smelt mode!!
     {
         if(canSmelt())
         {
-            ItemStack input1 = contents.get(ContainerInventorsForge.INPUT_SLOT_1);
-            ItemStack input2 = contents.get(ContainerInventorsForge.INPUT_SLOT_2);
-            ItemStack input3 = contents.get(ContainerInventorsForge.INPUT_SLOT_3);            
-            ItemStack result = InventorsForgeRecipes.getRecipeOutput(this);
-            ItemStack output = contents.get(ContainerInventorsForge.OUTPUT_SLOT);
-
-            if(output.isEmpty())
-            {
-                this.contents.set(ContainerInventorsForge.OUTPUT_SLOT, result.copy());
-            }
-            else if(output.getItem() == result.getItem())
-            {
-                output.grow(result.getCount());
-            }
+            ItemStack result = InventorsForgeRecipes.getSmeltingResult(this);
             
-            boolean sponge = (input1.getItem() == Item.getItemFromBlock(Blocks.SPONGE) && input1.getMetadata() == 1) || 
+            if(!result.isEmpty())
+            {
+                int outputSlot = getFirstFreeOutput(result);
+                
+                if(outputSlot != -1)
+                {
+                   ItemStack output = contents.get(outputSlot);
+                   
+                   if(output.isEmpty())
+                   {
+                       contents.set(outputSlot, result.copy());
+                   }
+                   else if(output.getItem() == result.getItem())
+                   {
+                       output.grow(result.getCount());
+                   }
+                   
+                   for(int i = ContainerInventorsForge.INPUT_SLOT_1; i <= ContainerInventorsForge.INPUT_SLOT_3; i++)
+                   {
+                       ItemStack stack = contents.get(i);
+                       
+                       if(!stack.isEmpty())
+                       {
+                           stack.shrink(1);
+                       }
+                   }
+                }
+            }
+        }
+    }
+    
+    public void smltItem()
+    {
+        
+            /*boolean sponge = (input1.getItem() == Item.getItemFromBlock(Blocks.SPONGE) && input1.getMetadata() == 1) || 
                              (input2.getItem() == Item.getItemFromBlock(Blocks.SPONGE) && input2.getMetadata() == 1) ||
                              (input3.getItem() == Item.getItemFromBlock(Blocks.SPONGE) && input3.getMetadata() == 1);
             
             if(sponge && !((ItemStack)this.contents.get(ContainerInventorsForge.FUEL_SLOT)).isEmpty() && ((ItemStack)this.contents.get(ContainerInventorsForge.FUEL_SLOT)).getItem() == Items.BUCKET)
             {
                 this.contents.set(ContainerInventorsForge.FUEL_SLOT, new ItemStack(Items.WATER_BUCKET));
-            }
-            
-            if(!input1.isEmpty())
-            {
-                input1.shrink(1);
-            }
-            
-            if(!input2.isEmpty())
-            {
-                input2.shrink(1);
-            }
-            
-            if(!input3.isEmpty())
-            {
-                input3.shrink(1);
-            }
-        }
+            }*/
     }
     
     public static int getItemBurnTime(ItemStack stack)
@@ -477,7 +569,7 @@ public class TileEntityInventorsForge extends TileEntityLockable implements ITic
     @Override
     public boolean isItemValidForSlot(int index, ItemStack stack)
     {
-        if(index == ContainerInventorsForge.OUTPUT_SLOT)
+        if(index == ContainerInventorsForge.OUTPUT_SLOT_1)
         {
             return false;
         }
@@ -553,6 +645,8 @@ public class TileEntityInventorsForge extends TileEntityLockable implements ITic
                 return cookTime;
             case 3:
                 return totalCookTime;
+            case 4:
+                return smeltMode;
             default:
                 return 0;
         }
@@ -574,13 +668,16 @@ public class TileEntityInventorsForge extends TileEntityLockable implements ITic
                 break;
             case 3:
                 totalCookTime = value;
+                break;
+            case 4:
+                smeltMode = value;
         }
     }
     
     @Override
     public int getFieldCount()
     {
-        return 4;
+        return 5;
     }
     
     @Override

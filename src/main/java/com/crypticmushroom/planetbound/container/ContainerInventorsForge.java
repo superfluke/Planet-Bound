@@ -12,7 +12,6 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotFurnaceFuel;
 import net.minecraft.inventory.SlotFurnaceOutput;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -26,7 +25,9 @@ public class ContainerInventorsForge extends Container
     public static final int INPUT_SLOT_2 = 1;
     public static final int INPUT_SLOT_3 = 2;
     public static final int FUEL_SLOT = 3;
-    public static final int OUTPUT_SLOT = 4;
+    public static final int OUTPUT_SLOT_1 = 4;
+    public static final int OUTPUT_SLOT_2 = 5;
+    public static final int OUTPUT_SLOT_3 = 6;
     
     private TileEntityInventorsForge tileEntity;
     
@@ -34,6 +35,7 @@ public class ContainerInventorsForge extends Container
     private int totalCookTime;
     private int furnaceBurnTime;
     private int currentItemBurnTime;
+    private int smeltMode;
     
     public ContainerInventorsForge(InventoryPlayer inventory, TileEntityInventorsForge tileEntity)
     {
@@ -43,8 +45,10 @@ public class ContainerInventorsForge extends Container
         this.addSlotToContainer(new Slot(tileEntity, INPUT_SLOT_2, 56, 17));
         this.addSlotToContainer(new Slot(tileEntity, INPUT_SLOT_3, 74, 17));
         this.addSlotToContainer(new SlotFurnaceFuel(tileEntity, FUEL_SLOT, 56, 53));
-        this.addSlotToContainer(new SlotFurnaceOutput(inventory.player, tileEntity, OUTPUT_SLOT, 116, 35));
-
+        this.addSlotToContainer(new SlotFurnaceOutput(inventory.player, tileEntity, OUTPUT_SLOT_1, 110, 17));
+        this.addSlotToContainer(new SlotFurnaceOutput(inventory.player, tileEntity, OUTPUT_SLOT_2, 110, 35));
+        this.addSlotToContainer(new SlotFurnaceOutput(inventory.player, tileEntity, OUTPUT_SLOT_3, 110, 53));
+        
         for(int i = 0; i < 3; ++i)
         {
             for(int j = 0; j < 9; ++j)
@@ -71,11 +75,16 @@ public class ContainerInventorsForge extends Container
     public void detectAndSendChanges()
     {
         super.detectAndSendChanges();
-
+        
         for(int i = 0; i < this.listeners.size(); ++i)
         {
             IContainerListener icontainerlistener = this.listeners.get(i);
-
+            
+            if(this.smeltMode != tileEntity.getField(4))
+            {
+                icontainerlistener.sendWindowProperty(this, 4, tileEntity.getField(4));
+            }
+            
             if(this.cookTime != tileEntity.getField(2))
             {
                 icontainerlistener.sendWindowProperty(this, 2, tileEntity.getField(2));
@@ -95,17 +104,13 @@ public class ContainerInventorsForge extends Container
             {
                 icontainerlistener.sendWindowProperty(this, 3, tileEntity.getField(3));
             }
-            
-            if(this.totalCookTime != tileEntity.getField(3))
-            {
-                icontainerlistener.sendWindowProperty(this, 3, tileEntity.getField(3));
-            }
         }
-
+        
+        this.smeltMode = tileEntity.getField(4);
         this.cookTime = tileEntity.getField(2);
         this.furnaceBurnTime = tileEntity.getField(0);
         this.currentItemBurnTime = tileEntity.getField(1);
-        this.totalCookTime = tileEntity.getField(3);       
+        this.totalCookTime = tileEntity.getField(3);
     }
 
     @SideOnly(Side.CLIENT)
@@ -123,11 +128,6 @@ public class ContainerInventorsForge extends Container
     @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int index)
     {
-        //Slot 0-2 = input
-        //Slot 3 = fuel
-        //Slot 4 = output
-        //Slot 5-31 = player inventory
-        //Slot 32-40 = hotbar
         ItemStack stack = ItemStack.EMPTY;
         
         Slot slot = this.inventorySlots.get(index);
@@ -137,16 +137,16 @@ public class ContainerInventorsForge extends Container
             ItemStack stack1 = slot.getStack();
             stack = stack1.copy();
 
-            if(index == OUTPUT_SLOT)
+            if(index == OUTPUT_SLOT_1 || index == OUTPUT_SLOT_2 || index == OUTPUT_SLOT_3)
             {
-                if(!this.mergeItemStack(stack1, 5, 41, true))
+                if(!this.mergeItemStack(stack1, 7, 43, true))
                 {
                     return ItemStack.EMPTY;
                 }
 
                 slot.onSlotChange(stack1, stack);
             }
-            else if(index > 4)
+            else if(index > 6)
             {
                 if(InventorsForgeRecipes.isIngredient(stack1))
                 {
@@ -162,16 +162,16 @@ public class ContainerInventorsForge extends Container
                         return ItemStack.EMPTY;
                     }
                 }
-                else if(index >= 5 && index <= 31)
+                else if(index >= 7 && index <= 33)
                 {
-                    if(!this.mergeItemStack(stack1, 32, 40, false))
+                    if(!this.mergeItemStack(stack1, 34, 43, false))
                     {
                         return ItemStack.EMPTY;
                     }
                 }
-                else if(index >= 32 && index <= 40)
+                else if(index >= 34 && index <= 42)
                 {
-                    if(!this.mergeItemStack(stack1, 5, 31, false))
+                    if(!this.mergeItemStack(stack1, 7, 34, false))
                     {
                         return ItemStack.EMPTY;
                     }
@@ -179,7 +179,7 @@ public class ContainerInventorsForge extends Container
             }
             else
             {
-                if(!this.mergeItemStack(stack1, 5, 40, false))
+                if(!this.mergeItemStack(stack1, 7, 43, false))
                 {
                     return ItemStack.EMPTY;
                 }

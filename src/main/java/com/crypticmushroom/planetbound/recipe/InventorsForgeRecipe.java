@@ -56,6 +56,30 @@ public class InventorsForgeRecipe
         return RecipeMatcher.findMatches(inputList, input) != null;
     }
     
+    public boolean compare(ItemStack... input)
+    {
+        List<ItemStack> inputList = new ArrayList<>();
+        
+        int ingredientCount = 0;
+        
+        for(ItemStack stack : input)
+        {
+            if(!stack.isEmpty())
+            {
+                ingredientCount++;
+                
+                inputList.add(stack);
+            }
+        }
+
+        if(ingredientCount != this.input.size())
+        {
+            return false;
+        }
+        
+        return RecipeMatcher.findMatches(inputList, this.input) != null;
+    }
+    
     public List<Ingredient> getIngredients()
     {
         return input;
