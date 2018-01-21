@@ -47,4 +47,11 @@ public class PBLogger
     {
         log.info(messageInfo.toString());
     }
+
+    public static void printlol(String name, Object messageLol)
+    {
+        Logger lol = LogManager.getLogger(name);
+
+        lol.info(messageLol.toString());
+    }
 }

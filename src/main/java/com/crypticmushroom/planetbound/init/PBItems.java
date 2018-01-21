@@ -3,6 +3,7 @@ package com.crypticmushroom.planetbound.init;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.crypticmushroom.planetbound.items.RiftGauntlet;
 import org.apache.commons.lang3.Validate;
 
 import com.crypticmushroom.planetbound.PBCore;
@@ -29,6 +30,7 @@ public class PBItems
     public static Item rendium_crystal;
     public static Item core_frame;
     public static Item rendium_core;
+    public static Item rift_gauntlet;
     
     public static void init()
     {
@@ -38,6 +40,7 @@ public class PBItems
         rendium_crystal = registerItem(new RendiumCrystal(), "rendium_crystal");
         core_frame = registerItem(new CoreFrame(), "core_frame");
         rendium_core = registerItem(new RendiumCore(), "rendium_core");
+        rift_gauntlet = registerItem(new RiftGauntlet(), "rift_gauntlet");
     }
     
     protected static Item registerItem(Item item, String name)
