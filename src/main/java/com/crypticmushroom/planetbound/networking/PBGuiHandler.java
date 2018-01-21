@@ -1,7 +1,9 @@
 package com.crypticmushroom.planetbound.networking;
 
 import com.crypticmushroom.planetbound.client.gui.GuiInventorsForge;
+import com.crypticmushroom.planetbound.client.gui.GuiWorkbench;
 import com.crypticmushroom.planetbound.container.ContainerInventorsForge;
+import com.crypticmushroom.planetbound.container.ContainerWorkbench;
 import com.crypticmushroom.planetbound.tileentity.TileEntityInventorsForge;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,6 +16,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class PBGuiHandler implements IGuiHandler
 {
     public static final int INVENTORS_FORGE_ID = 20; //should be configurable in the future to avoid compatibility issues with other mods
+    public static final int WORKBENCH_ID = 21;
     
     @Override
     public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z)
@@ -21,6 +24,10 @@ public class PBGuiHandler implements IGuiHandler
         if(id == INVENTORS_FORGE_ID)
         {
             return new ContainerInventorsForge(player.inventory, (TileEntityInventorsForge)world.getTileEntity(new BlockPos(x, y, z)));
+        }
+        else if(id ==  WORKBENCH_ID)
+        {
+            return new ContainerWorkbench(player.inventory, world, new BlockPos(x, y, z));
         }
         
         return null;
@@ -33,6 +40,10 @@ public class PBGuiHandler implements IGuiHandler
         if(id == INVENTORS_FORGE_ID)
         {
             return new GuiInventorsForge(player.inventory, (TileEntityInventorsForge)world.getTileEntity(new BlockPos(x, y, z)));       
+        }
+        else if(id ==  WORKBENCH_ID)
+        {
+            return new GuiWorkbench(player.inventory, world, new BlockPos(x, y, z));
         }
     
         return null;

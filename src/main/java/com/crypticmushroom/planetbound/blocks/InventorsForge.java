@@ -159,11 +159,18 @@ public class InventorsForge extends BlockContainer
         else
         {
             TileEntity tileEntity = world.getTileEntity(pos);
-
+            
             if(tileEntity instanceof TileEntityInventorsForge)
             {
-                //player.displayGUIChest((TileEntityInventorsForge)tileEntity);
-                player.openGui(PBCore.instance(), PBGuiHandler.INVENTORS_FORGE_ID, world, pos.getX(), pos.getY(), pos.getZ());
+                switch(facing)
+                {
+                case UP:
+                    player.openGui(PBCore.instance(), PBGuiHandler.WORKBENCH_ID, world, pos.getX(), pos.getY(), pos.getZ());
+                    break;
+                default:     
+                    player.openGui(PBCore.instance(), PBGuiHandler.INVENTORS_FORGE_ID, world, pos.getX(), pos.getY(), pos.getZ());
+                    break;
+                }
             }
 
             return true;
