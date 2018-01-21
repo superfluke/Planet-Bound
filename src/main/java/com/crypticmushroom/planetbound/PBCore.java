@@ -81,6 +81,9 @@ public class PBCore
         GameRegistry.registerWorldGenerator(new PBOreGenerator(), 0);
         
         proxy.init(event);
+
+        PBLogger.printNotice("Motu Patlu?");
+        PBLogger.printlol("Motu Patlu", "Present!");
     }
     
     @EventHandler
@@ -89,6 +92,8 @@ public class PBCore
         PBLogger.printNotice("Running post-initialization");
         
         proxy.postInit(event);
+
+        PBLogger.printNotice("RUSH B!!!");
     }
     
     @SubscribeEvent

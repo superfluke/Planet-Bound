@@ -3,6 +3,7 @@ package com.crypticmushroom.planetbound.init;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.crypticmushroom.planetbound.items.RiftGauntlet;
 import org.apache.commons.lang3.Validate;
 
 import com.crypticmushroom.planetbound.PBCore;
