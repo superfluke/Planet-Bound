@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.commons.lang3.Validate;
 
 import com.crypticmushroom.planetbound.PBCore;
+import com.crypticmushroom.planetbound.items.CoreFrame;
+import com.crypticmushroom.planetbound.items.RendiumCore;
 import com.crypticmushroom.planetbound.items.oreingot.KybriteIngot;
 import com.crypticmushroom.planetbound.items.oreingot.RendiumChunk;
 import com.crypticmushroom.planetbound.items.oreingot.RendiumCrystal;
@@ -25,13 +27,17 @@ public class PBItems
     public static Item verdanite_ingot;
     public static Item rendium_chunk;
     public static Item rendium_crystal;
-
+    public static Item core_frame;
+    public static Item rendium_core;
+    
     public static void init()
     {
         kybrite_ingot = registerItem(new KybriteIngot(), "kybrite_ingot");
         verdanite_ingot = registerItem(new VerdaniteIngot(), "verdanite_ingot");
         rendium_chunk = registerItem(new RendiumChunk(), "rendium_chunk");
         rendium_crystal = registerItem(new RendiumCrystal(), "rendium_crystal");
+        core_frame = registerItem(new CoreFrame(), "core_frame");
+        rendium_core = registerItem(new RendiumCore(), "rendium_core");
     }
     
     protected static Item registerItem(Item item, String name)
