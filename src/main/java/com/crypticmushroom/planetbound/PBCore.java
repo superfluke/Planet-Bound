@@ -7,6 +7,7 @@ import com.crypticmushroom.planetbound.init.PBBlocks;
 import com.crypticmushroom.planetbound.init.PBItems;
 import com.crypticmushroom.planetbound.init.PBSmelting;
 import com.crypticmushroom.planetbound.init.PBTileEntities;
+import com.crypticmushroom.planetbound.logger.*;
 import com.crypticmushroom.planetbound.networking.PBNetworkHandler;
 import com.crypticmushroom.planetbound.world.gen.PBOreGenerator;
 
@@ -38,7 +39,7 @@ public class PBCore
     public static final String UPDATE_JSON = "https://raw.githubusercontent.com/cipherzerox/Planet-Bound/master/update.json";
     
     @Instance(MOD_ID)
-    private static PBCore instance;
+    private static PBCore instance; //So what's with the instance method at the bottom?
     
     @SidedProxy(clientSide = "com.crypticmushroom.planetbound.client.ClientProxy", serverSide = "com.crypticmushroom.planetbound.server.ServerProxy")
     public static CommonProxy proxy;
@@ -46,20 +47,21 @@ public class PBCore
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        PBLogger.printNotice("Running pre-initialization");
+        PBLogger.printInfo("Preparing to take over the Universe...");
+        PBLogDev.printInfo("Running Pre-Initialization...");
         
         ConfigHandler.loadConfig(event);
-        ConfigHandler.autoDeveloperMode("dev"); //If version contains "dev", enable developer mode.
+        //Auto developer mode is now handled by ConfigHandler
         ConfigHandler.configWarnings();
         
-        PBLogger.printNotice("Registering event handlers");
+        PBLogger.printInfo("Registering event handlers");
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new BlockEvents());
         
-        PBLogger.printNotice("Preparing items for registry");
+        PBLogger.printInfo("Preparing items for registry");
         PBItems.init();
         
-        PBLogger.printNotice("Preparing blocks for registry");
+        PBLogger.printInfo("Preparing blocks for registry");
         PBBlocks.init();
         
         proxy.preInit(event);
@@ -68,11 +70,11 @@ public class PBCore
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-        PBLogger.printNotice("Running initialization");
-        PBLogger.printNotice("Registering tile entities");
+        PBLogger.printInfo("Running initialization");
+        PBLogger.printInfo("Registering tile entities");
         PBTileEntities.init();
         
-        PBLogger.printNotice("Registering recipes"); //Order is important here
+        PBLogger.printInfo("Registering recipes"); //Order is important here
         PBSmelting.init();
         InventorsForgeRecipes.init();
         
@@ -82,34 +84,34 @@ public class PBCore
         
         proxy.init(event);
 
-        PBLogger.printNotice("Motu Patlu?");
+        /*
+        PBLogger.printInfo("Motu Patlu?");
         PBLogger.printlol("Motu Patlu", "Present!");
+        */
     }
     
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
-        PBLogger.printNotice("Running post-initialization");
+        PBLogDev.printInfo("Running Post-initialization");
         
         proxy.postInit(event);
 
-        PBLogger.printNotice("RUSH B!!!");
+        //PBLogger.printInfo("RUSH B!!!");
     }
     
     @SubscribeEvent
     public void registerBlocks(RegistryEvent.Register<Block> event)
     {
-        PBLogger.printNotice("Registering blocks");
-        
         event.getRegistry().registerAll(PBBlocks.getBlocks());
+        PBLogDev.printInfo("Registered PlanetBound blocks...");
     }
 
     @SubscribeEvent
     public void registerItems(RegistryEvent.Register<Item> event)
     {
-        PBLogger.printNotice("Registering items");
-        
         event.getRegistry().registerAll(PBItems.getItems());
+        PBLogDev.printInfo("Registered PlanetBound items...");
     }
     
     public static PBCore instance()
