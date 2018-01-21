@@ -5,6 +5,7 @@ item.rendium_chunk.name=Raw Rendium Chunk
 item.rendium_crystal.name=Refined Rendium Crystal
 item.core_frame.name=Core Frame
 item.rendium_core.name=Rendium Core
+item.rift_gauntlet.name=Rift Gauntlet
 
 #Block names
 tile.kybrite_ore.name=Kybrite Ore
