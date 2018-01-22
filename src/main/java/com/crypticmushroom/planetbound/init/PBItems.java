@@ -3,12 +3,13 @@ package com.crypticmushroom.planetbound.init;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.crypticmushroom.planetbound.items.RiftGauntlet;
 import org.apache.commons.lang3.Validate;
 
 import com.crypticmushroom.planetbound.PBCore;
 import com.crypticmushroom.planetbound.items.CoreFrame;
+import com.crypticmushroom.planetbound.items.GauntletShell;
 import com.crypticmushroom.planetbound.items.RendiumCore;
+import com.crypticmushroom.planetbound.items.RiftGauntlet;
 import com.crypticmushroom.planetbound.items.oreingot.KybriteIngot;
 import com.crypticmushroom.planetbound.items.oreingot.RendiumChunk;
 import com.crypticmushroom.planetbound.items.oreingot.RendiumCrystal;
@@ -31,6 +32,7 @@ public class PBItems
     public static Item core_frame;
     public static Item rendium_core;
     public static Item rift_gauntlet;
+    public static Item gauntlet_shell;
     
     public static void init()
     {
@@ -41,6 +43,7 @@ public class PBItems
         core_frame = registerItem(new CoreFrame(), "core_frame");
         rendium_core = registerItem(new RendiumCore(), "rendium_core");
         rift_gauntlet = registerItem(new RiftGauntlet(), "rift_gauntlet");
+        gauntlet_shell = registerItem(new GauntletShell(), "gauntlet_shell");
     }
     
     protected static Item registerItem(Item item, String name)

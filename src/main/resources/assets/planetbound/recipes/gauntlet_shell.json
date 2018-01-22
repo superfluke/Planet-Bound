@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "planetbound:verdanite_ingot"
+        },
+        {
+            "item": "planetbound:kybrite_ingot"
+        }
+    ],
+    "result": {
+        "item": "planetbound:gauntlet_shell",
+        "count": 1
+    }
+}
