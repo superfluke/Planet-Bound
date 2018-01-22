@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " A ",
+        "A A",
+        " A "
+    ],
+    "key": {
+        "A": {
+            "item": "planetbound:verdanite_ingot"
+        }
+    },
+    "result": {
+        "item": "planetbound:core_frame"
+    }
+}
