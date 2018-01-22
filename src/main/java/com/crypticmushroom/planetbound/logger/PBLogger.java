@@ -1,9 +1,9 @@
 package com.crypticmushroom.planetbound.logger;
 
-import com.crypticmushroom.planetbound.PBCore;
-import com.crypticmushroom.planetbound.config.ConfigVariables;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.crypticmushroom.planetbound.PBCore;
 
 //TODO make a method to print to the player in-game
 public class PBLogger
