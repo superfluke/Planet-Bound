@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "planetbound:rendium_core"
+        },
+        {
+            "item": "planetbound:gauntlet_shell"
+        }
+    ],
+    "result": {
+        "item": "planetbound:rift_gauntlet",
+        "count": 1
+    }
+}
