@@ -24,8 +24,8 @@ public class InventorsForgeRecipes
     {
         registerRecipe(new ItemStack[]
                 {
-                        new ItemStack(PBItems.verdanite_ingot),
-                        new ItemStack(PBItems.kybrite_ingot)
+                        new ItemStack(PBBlocks.verdanite_ore),
+                        new ItemStack(PBBlocks.kybrite_ore)
                 }
         , new ItemStack(PBItems.fortium_ingot, 1), 0.7F);
         
