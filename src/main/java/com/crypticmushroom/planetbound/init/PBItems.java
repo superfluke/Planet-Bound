@@ -10,6 +10,7 @@ import com.crypticmushroom.planetbound.items.CoreFrame;
 import com.crypticmushroom.planetbound.items.GauntletShell;
 import com.crypticmushroom.planetbound.items.RendiumCore;
 import com.crypticmushroom.planetbound.items.RiftGauntlet;
+import com.crypticmushroom.planetbound.items.oreingot.FortiumIngot;
 import com.crypticmushroom.planetbound.items.oreingot.KybriteIngot;
 import com.crypticmushroom.planetbound.items.oreingot.RendiumChunk;
 import com.crypticmushroom.planetbound.items.oreingot.RendiumCrystal;
@@ -33,6 +34,7 @@ public class PBItems
     public static Item rendium_core;
     public static Item rift_gauntlet;
     public static Item gauntlet_shell;
+    public static Item fortium_ingot;
     
     public static void init()
     {
@@ -44,6 +46,7 @@ public class PBItems
         rendium_core = registerItem(new RendiumCore(), "rendium_core");
         rift_gauntlet = registerItem(new RiftGauntlet(), "rift_gauntlet");
         gauntlet_shell = registerItem(new GauntletShell(), "gauntlet_shell");
+        fortium_ingot = registerItem(new FortiumIngot(), "fortium_ingot");
     }
     
     protected static Item registerItem(Item item, String name)
