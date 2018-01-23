@@ -7,6 +7,7 @@ import org.apache.commons.lang3.Validate;
 
 import com.crypticmushroom.planetbound.PBCore;
 import com.crypticmushroom.planetbound.blocks.InventorsForge;
+import com.crypticmushroom.planetbound.blocks.oreblock.FortiumOreBlock;
 import com.crypticmushroom.planetbound.blocks.oreblock.KybriteOreBlock;
 import com.crypticmushroom.planetbound.blocks.oreblock.RendiumOreBlock;
 import com.crypticmushroom.planetbound.blocks.oreblock.VerdaniteOreBlock;
@@ -34,6 +35,7 @@ public class PBBlocks
     public static Block rendium_block;
     public static Block inventors_forge;
     public static Block lit_inventors_forge;
+    public static Block fortium_block;
     
     public static void init()
     {
@@ -45,6 +47,7 @@ public class PBBlocks
         rendium_block = registerBlock(new RendiumOreBlock(), "rendium_block");
         inventors_forge = registerBlock(new InventorsForge(false), "inventors_forge");
         lit_inventors_forge = registerBlock(new InventorsForge(true), "lit_inventors_forge");
+        fortium_block = registerBlock(new FortiumOreBlock(), "fortium_block");
     }
     
     private static Block registerBlock(Block block, String name)
