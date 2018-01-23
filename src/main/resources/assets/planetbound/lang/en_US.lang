@@ -7,6 +7,7 @@ item.core_frame.name=Core Frame
 item.rendium_core.name=Rendium Core
 item.rift_gauntlet.name=Rift Gauntlet
 item.gauntlet_shell.name=Gauntlet Shell
+item.fortium_ingot.name=Fortium Ingot
 
 #Block names
 tile.kybrite_ore.name=Kybrite Ore
@@ -20,6 +21,7 @@ tile.gauntlet_core_frame.name=Gauntlet Core Frame
 tile.gauntlet_shell.name=Gauntlet Shell
 tile.inventors_forge.name=Inventor's Forge
 tile.lit_inventors_forge.name=Inventor's Forge
+tile.fortium_block.name=Fortium Block
 
 #Creative Tabs
 itemGroup.main=Planet Bound
