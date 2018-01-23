@@ -2,6 +2,7 @@ package com.crypticmushroom.planetbound.init;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.Validate;
@@ -13,6 +14,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 public class InventorsForgeRecipes
 {
@@ -23,17 +25,16 @@ public class InventorsForgeRecipes
         registerRecipe(new ItemStack[]
                 {
                         new ItemStack(PBItems.verdanite_ingot),
-                        new ItemStack(PBItems.kybrite_ingot),
-                        new ItemStack(PBItems.rendium_chunk),
+                        new ItemStack(PBItems.kybrite_ingot)
                 }
-        , new ItemStack(PBItems.rendium_crystal, 1));
+        , new ItemStack(PBItems.fortium_ingot, 1), 0.7F);
         
         registerRecipe(new ItemStack[]
                 {
                         new ItemStack(Items.APPLE),
                         new ItemStack(Items.GOLD_INGOT),
                 }
-        , new ItemStack(Items.GOLDEN_APPLE, 1));
+        , new ItemStack(Items.GOLDEN_APPLE, 1), 0);
         
         for(Entry<ItemStack, ItemStack> entry : FurnaceRecipes.instance().getSmeltingList().entrySet())
         {
@@ -44,6 +45,7 @@ public class InventorsForgeRecipes
     private static void registerRecipe(ItemStack[] input, ItemStack output)
     {
         Validate.notNull(input, "input cannot be null");
+        Validate.notNull(output, "output cannot be null");
         
         List<Ingredient> ingredients = new ArrayList<>();
         
@@ -53,6 +55,27 @@ public class InventorsForgeRecipes
         }
         
         recipes.add(new InventorsForgeRecipe(ingredients, output));
+    }
+    
+    private static void registerRecipe(ItemStack[] input, ItemStack output, float xp)
+    {
+        Validate.notNull(input, "input cannot be null");
+        Validate.notNull(output, "output cannot be null");
+        
+        List<Ingredient> ingredients = new ArrayList<>();
+        
+        for(ItemStack stack : input)
+        {
+            ingredients.add(Ingredient.fromStacks(stack));
+        }
+        
+        recipes.add(new InventorsForgeRecipe(ingredients, output));
+        
+        //hacking into furnace xp values is much easier than creating my own output slots
+        Map<ItemStack, Float> experienceList = ReflectionHelper.getPrivateValue(FurnaceRecipes.class, FurnaceRecipes.instance(), 2);
+        experienceList.put(output, xp);
+        
+        ReflectionHelper.setPrivateValue(FurnaceRecipes.class, FurnaceRecipes.instance(), experienceList, 2);
     }
     
     public static boolean isIngredient(ItemStack stack)
