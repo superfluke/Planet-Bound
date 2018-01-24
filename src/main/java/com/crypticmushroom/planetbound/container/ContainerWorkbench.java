@@ -24,6 +24,5 @@ public class ContainerWorkbench extends net.minecraft.inventory.ContainerWorkben
     public boolean canInteractWith(EntityPlayer player)
     {
         return player.getDistanceSq((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D) <= 64.0D;
-
     }
 }
