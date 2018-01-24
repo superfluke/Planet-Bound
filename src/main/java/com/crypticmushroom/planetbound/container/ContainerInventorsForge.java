@@ -12,6 +12,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotFurnaceFuel;
 import net.minecraft.inventory.SlotFurnaceOutput;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -148,7 +149,14 @@ public class ContainerInventorsForge extends Container
             }
             else if(index > 6)
             {
-                if(InventorsForgeManager.isIngredient(stack1))
+                if(!FurnaceRecipes.instance().getSmeltingResult(stack1).isEmpty())
+                {
+                    if(!this.mergeItemStack(stack1, INPUT_SLOT_1, INPUT_SLOT_3 + 1, false))
+                    {
+                        return ItemStack.EMPTY;
+                    }
+                }
+                else if(InventorsForgeManager.isIngredient(stack1))
                 {
                     if(!this.mergeItemStack(stack1, INPUT_SLOT_1, INPUT_SLOT_3 + 1, false))
                     {

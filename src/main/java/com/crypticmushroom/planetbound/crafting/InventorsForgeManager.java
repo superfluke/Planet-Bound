@@ -40,24 +40,8 @@ public class InventorsForgeManager
         
         for(Entry<ItemStack, ItemStack> entry : FurnaceRecipes.instance().getSmeltingList().entrySet())
         {
-            registerRecipe(new ItemStack[]{entry.getKey()}, entry.getValue()); //register default furnace recipes
+            registerRecipe(new ItemStack[]{entry.getKey()}, entry.getValue(), FurnaceRecipes.instance().getSmeltingExperience(entry.getValue())); //register default furnace recipes
         }
-    }
-    
-    public static void registerRecipe(ItemStack[] input, ItemStack output)
-    {
-        Validate.notNull(input, "input cannot be null");
-        Validate.notNull(output, "output cannot be null");
-        Validate.isTrue(input.length <= 3, "input length cannot be greater than 3");
-        
-        NonNullList<Ingredient> ingredients = NonNullList.<Ingredient>create();
-        
-        for(ItemStack stack : input)
-        {
-            ingredients.add(Ingredient.fromStacks(stack));
-        }
-        
-        recipes.add(new InventorsForgeRecipe(ingredients, output));
     }
     
     public static void registerRecipe(ItemStack[] input, ItemStack output, float xp)
