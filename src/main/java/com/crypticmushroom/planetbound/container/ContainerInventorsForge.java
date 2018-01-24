@@ -1,6 +1,6 @@
 package com.crypticmushroom.planetbound.container;
 
-import com.crypticmushroom.planetbound.init.InventorsForgeRecipes;
+import com.crypticmushroom.planetbound.crafting.InventorsForgeManager;
 import com.crypticmushroom.planetbound.tileentity.TileEntityInventorsForge;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -148,7 +148,7 @@ public class ContainerInventorsForge extends Container
             }
             else if(index > 6)
             {
-                if(InventorsForgeRecipes.isIngredient(stack1))
+                if(InventorsForgeManager.isIngredient(stack1))
                 {
                     if(!this.mergeItemStack(stack1, INPUT_SLOT_1, INPUT_SLOT_3 + 1, false))
                     {

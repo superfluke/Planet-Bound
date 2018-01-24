@@ -1,4 +1,4 @@
-package com.crypticmushroom.planetbound.init;
+package com.crypticmushroom.planetbound.crafting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,16 +7,18 @@ import java.util.Map.Entry;
 
 import org.apache.commons.lang3.Validate;
 
-import com.crypticmushroom.planetbound.recipe.InventorsForgeRecipe;
+import com.crypticmushroom.planetbound.init.PBBlocks;
+import com.crypticmushroom.planetbound.init.PBItems;
 import com.crypticmushroom.planetbound.tileentity.TileEntityInventorsForge;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
-public class InventorsForgeRecipes
+public class InventorsForgeManager
 {
     private static final List<InventorsForgeRecipe> recipes = new ArrayList<>();
     
@@ -42,12 +44,13 @@ public class InventorsForgeRecipes
         }
     }
     
-    private static void registerRecipe(ItemStack[] input, ItemStack output)
+    public static void registerRecipe(ItemStack[] input, ItemStack output)
     {
         Validate.notNull(input, "input cannot be null");
         Validate.notNull(output, "output cannot be null");
+        Validate.isTrue(input.length <= 3, "input length cannot be greater than 3");
         
-        List<Ingredient> ingredients = new ArrayList<>();
+        NonNullList<Ingredient> ingredients = NonNullList.<Ingredient>create();
         
         for(ItemStack stack : input)
         {
@@ -57,12 +60,13 @@ public class InventorsForgeRecipes
         recipes.add(new InventorsForgeRecipe(ingredients, output));
     }
     
-    private static void registerRecipe(ItemStack[] input, ItemStack output, float xp)
+    public static void registerRecipe(ItemStack[] input, ItemStack output, float xp)
     {
         Validate.notNull(input, "input cannot be null");
         Validate.notNull(output, "output cannot be null");
+        Validate.isTrue(input.length <= 3, "input length cannot be greater than 3");
         
-        List<Ingredient> ingredients = new ArrayList<>();
+        NonNullList<Ingredient> ingredients = NonNullList.<Ingredient>create();
         
         for(ItemStack stack : input)
         {
@@ -105,7 +109,7 @@ public class InventorsForgeRecipes
     {
         for(InventorsForgeRecipe recipe : recipes)
         {
-            if(recipe.compare(inventory))
+            if(recipe.matches(inventory))
             {
                 return recipe.getOutput();
             }
@@ -118,7 +122,7 @@ public class InventorsForgeRecipes
     {
         for(InventorsForgeRecipe recipe : recipes)
         {
-            if(recipe.compare(input))
+            if(recipe.matches(input))
             {
                 return recipe.getOutput();
             }

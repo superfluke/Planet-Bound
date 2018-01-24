@@ -1,13 +1,14 @@
 package com.crypticmushroom.planetbound;
 
 import com.crypticmushroom.planetbound.config.ConfigHandler;
+import com.crypticmushroom.planetbound.crafting.InventorsForgeManager;
 import com.crypticmushroom.planetbound.handler.BlockEvents;
-import com.crypticmushroom.planetbound.init.InventorsForgeRecipes;
 import com.crypticmushroom.planetbound.init.PBBlocks;
 import com.crypticmushroom.planetbound.init.PBItems;
 import com.crypticmushroom.planetbound.init.PBSmelting;
 import com.crypticmushroom.planetbound.init.PBTileEntities;
-import com.crypticmushroom.planetbound.logger.*;
+import com.crypticmushroom.planetbound.logger.PBLogDev;
+import com.crypticmushroom.planetbound.logger.PBLogger;
 import com.crypticmushroom.planetbound.networking.PBNetworkHandler;
 import com.crypticmushroom.planetbound.world.gen.PBOreGenerator;
 
@@ -76,7 +77,7 @@ public class PBCore
         
         PBLogger.printInfo("Registering recipes"); //Order is important here
         PBSmelting.init();
-        InventorsForgeRecipes.init();
+        InventorsForgeManager.init();
         
         PBNetworkHandler.init();
         

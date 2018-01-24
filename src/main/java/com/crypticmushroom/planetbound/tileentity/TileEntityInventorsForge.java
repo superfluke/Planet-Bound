@@ -3,7 +3,7 @@ package com.crypticmushroom.planetbound.tileentity;
 import com.crypticmushroom.planetbound.PBCore;
 import com.crypticmushroom.planetbound.blocks.InventorsForge;
 import com.crypticmushroom.planetbound.container.ContainerInventorsForge;
-import com.crypticmushroom.planetbound.init.InventorsForgeRecipes;
+import com.crypticmushroom.planetbound.crafting.InventorsForgeManager;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -290,7 +290,7 @@ public class TileEntityInventorsForge extends TileEntityLockable implements ITic
         {
             if(smeltMode == 0)
             {
-                ItemStack result = InventorsForgeRecipes.getSmeltingResult(this);
+                ItemStack result = InventorsForgeManager.getSmeltingResult(this);
                 
                 if(result.isEmpty())
                 {
@@ -367,7 +367,7 @@ public class TileEntityInventorsForge extends TileEntityLockable implements ITic
     {
         if(canSmelt())
         {
-            ItemStack result = InventorsForgeRecipes.getSmeltingResult(input);
+            ItemStack result = InventorsForgeManager.getSmeltingResult(input);
             
             if(!result.isEmpty())
             {
@@ -398,7 +398,7 @@ public class TileEntityInventorsForge extends TileEntityLockable implements ITic
     {
         if(canSmelt())
         {
-            ItemStack result = InventorsForgeRecipes.getSmeltingResult(this);
+            ItemStack result = InventorsForgeManager.getSmeltingResult(this);
             
             if(!result.isEmpty())
             {

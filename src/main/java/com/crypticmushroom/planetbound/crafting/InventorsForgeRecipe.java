@@ -1,4 +1,4 @@
-package com.crypticmushroom.planetbound.recipe;
+package com.crypticmushroom.planetbound.crafting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,29 +8,22 @@ import com.crypticmushroom.planetbound.tileentity.TileEntityInventorsForge;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.util.RecipeMatcher;
 
 public class InventorsForgeRecipe
 {
-    private final List<Ingredient> input;
+    private final NonNullList<Ingredient> input;
     
     private final ItemStack output;
     
-    public InventorsForgeRecipe(List<Ingredient> input, ItemStack output)
+    protected InventorsForgeRecipe(NonNullList<Ingredient> input, ItemStack output)
     {
-        if(input.size() > 3)
-        {
-            this.input = input.subList(0, 3);
-        }
-        else
-        {
-            this.input = input;
-        }
-        
+        this.input = input;
         this.output = output;
     }
     
-    public boolean compare(TileEntityInventorsForge inventory)
+    public boolean matches(TileEntityInventorsForge inventory)
     {
         List<ItemStack> inputList = new ArrayList<>();
         
@@ -56,7 +49,7 @@ public class InventorsForgeRecipe
         return RecipeMatcher.findMatches(inputList, input) != null;
     }
     
-    public boolean compare(ItemStack... input)
+    public boolean matches(ItemStack... input)
     {
         List<ItemStack> inputList = new ArrayList<>();
         
@@ -80,7 +73,7 @@ public class InventorsForgeRecipe
         return RecipeMatcher.findMatches(inputList, this.input) != null;
     }
     
-    public List<Ingredient> getIngredients()
+    public NonNullList<Ingredient> getIngredients()
     {
         return input;
     }
