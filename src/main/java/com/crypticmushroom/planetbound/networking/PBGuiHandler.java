@@ -15,7 +15,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PBGuiHandler implements IGuiHandler
 {
-    public static final int INVENTORS_FORGE_ID = 20; //should be configurable in the future to avoid compatibility issues with other mods
+    public static final int INVENTORS_FORGE_ID = 20;
     public static final int WORKBENCH_ID = 21;
     
     @Override
@@ -25,7 +25,7 @@ public class PBGuiHandler implements IGuiHandler
         {
             return new ContainerInventorsForge(player.inventory, (TileEntityInventorsForge)world.getTileEntity(new BlockPos(x, y, z)));
         }
-        else if(id ==  WORKBENCH_ID)
+        else if(id == WORKBENCH_ID)
         {
             return new ContainerWorkbench(player.inventory, world, new BlockPos(x, y, z));
         }
@@ -41,7 +41,7 @@ public class PBGuiHandler implements IGuiHandler
         {
             return new GuiInventorsForge(player.inventory, (TileEntityInventorsForge)world.getTileEntity(new BlockPos(x, y, z)));       
         }
-        else if(id ==  WORKBENCH_ID)
+        else if(id == WORKBENCH_ID)
         {
             return new GuiWorkbench(player.inventory, world, new BlockPos(x, y, z));
         }

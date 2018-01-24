@@ -19,7 +19,7 @@ public class PBPacketSmeltMode extends PBPacket<PBPacketSmeltMode>
     public PBPacketSmeltMode(TileEntityInventorsForge tileEntity)
     {
         BlockPos pos = tileEntity.getPos();
-       // System.out.println(tileEntity.getField(4));
+        
         mode = tileEntity.getField(4) == 0 ? 1 : 0;
         x = pos.getX();
         y = pos.getY();
