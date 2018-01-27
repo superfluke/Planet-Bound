@@ -10,6 +10,7 @@ import com.crypticmushroom.planetbound.init.PBTileEntities;
 import com.crypticmushroom.planetbound.logger.PBLogDev;
 import com.crypticmushroom.planetbound.logger.PBLogger;
 import com.crypticmushroom.planetbound.networking.PBNetworkHandler;
+import com.crypticmushroom.planetbound.player.PBPlayer;
 import com.crypticmushroom.planetbound.world.gen.PBOreGenerator;
 
 import net.minecraft.block.Block;
@@ -64,6 +65,9 @@ public class PBCore
         
         PBLogger.printInfo("Preparing blocks for registry");
         PBBlocks.init();
+        
+        
+        PBPlayer.init();
         
         proxy.preInit(event);
     }
