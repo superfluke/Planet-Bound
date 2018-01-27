@@ -1,6 +1,7 @@
 package com.crypticmushroom.planetbound.networking;
 
 import com.crypticmushroom.planetbound.PBCore;
+import com.crypticmushroom.planetbound.networking.packet.PBPacketOpenContainer;
 import com.crypticmushroom.planetbound.networking.packet.PBPacketSmeltMode;
 
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -21,6 +22,7 @@ public class PBNetworkHandler
         NetworkRegistry.INSTANCE.registerGuiHandler(PBCore.instance(), new PBGuiHandler());
         
         INSTANCE.registerMessage(PBPacketSmeltMode.class, PBPacketSmeltMode.class, packetId++, Side.SERVER);
+        INSTANCE.registerMessage(PBPacketOpenContainer.class, PBPacketOpenContainer.class, packetId++, Side.SERVER);
     }
     
     public static void sendToAll(IMessage message)
