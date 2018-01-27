@@ -5,6 +5,9 @@ import com.crypticmushroom.planetbound.networking.PBGuiHandler;
 import com.crypticmushroom.planetbound.networking.PBNetworkHandler;
 import com.crypticmushroom.planetbound.networking.packet.PBPacketOpenContainer;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.inventory.GuiContainerCreative;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -17,7 +20,16 @@ public class ClientEventHandler
     {
         if(PBKeyHandler.isInventoryPressed())
         {
-            PBNetworkHandler.sendToServer(new PBPacketOpenContainer(PBGuiHandler.PLAYER_ID));
+            EntityPlayer player = Minecraft.getMinecraft().player;
+            
+            if(player.isCreative())
+            {
+                Minecraft.getMinecraft().displayGuiScreen(new GuiContainerCreative(player));
+            }
+            else
+            {
+                PBNetworkHandler.sendToServer(new PBPacketOpenContainer(PBGuiHandler.PLAYER_ID));
+            }
         }
     }
     
