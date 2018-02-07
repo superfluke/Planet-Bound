@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome.SpawnListEntry;
@@ -25,6 +26,28 @@ public class ChunkGeneratorRonne implements IChunkGenerator
     {
         //TODO generate stuff
         ChunkPrimer primer = new ChunkPrimer();
+        
+        for(int xPos = 0; xPos < 16; xPos++)
+        {
+            for(int yPos = 0; yPos < 64; yPos++)
+            {
+                for(int zPos = 0; zPos < 16; zPos++)
+                {
+                    primer.setBlockState(xPos, yPos, zPos, Blocks.SAND.getStateFromMeta(1));
+                    
+                    if(yPos <= 60)
+                    {
+                        primer.setBlockState(xPos, yPos, zPos, Blocks.RED_SANDSTONE.getDefaultState());
+                    }
+                    
+                    if(yPos <= 58)
+                    {
+                        primer.setBlockState(xPos, yPos, zPos, Blocks.STONE.getDefaultState());
+                    }
+                }
+            }
+        }
+        
         Chunk chunk = new Chunk(world, primer, x, z);
         chunk.generateSkylightMap();
         
