@@ -6,6 +6,7 @@ import com.crypticmushroom.planetbound.init.PBBlocks;
 import com.crypticmushroom.planetbound.init.PBItems;
 import com.crypticmushroom.planetbound.init.PBSmelting;
 import com.crypticmushroom.planetbound.init.PBTileEntities;
+import com.crypticmushroom.planetbound.init.PBWorld;
 import com.crypticmushroom.planetbound.logger.PBLogDev;
 import com.crypticmushroom.planetbound.logger.PBLogger;
 import com.crypticmushroom.planetbound.networking.PBNetworkHandler;
@@ -75,7 +76,7 @@ public class PBCore
         
         PBNetworkHandler.init();
         
-        GameRegistry.registerWorldGenerator(new PBOreGenerator(), 0);
+        PBWorld.init();
         
         proxy.init(event);
 

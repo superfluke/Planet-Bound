@@ -1,10 +1,14 @@
 package com.crypticmushroom.planetbound.player;
 
+import com.crypticmushroom.planetbound.init.PBWorld;
 import com.crypticmushroom.planetbound.inventory.InventoryGauntlet;
+import com.crypticmushroom.planetbound.world.TeleporterRonne;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
@@ -12,6 +16,7 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class PBPlayer
 {
@@ -21,6 +26,10 @@ public class PBPlayer
     private EntityPlayer player;
     
     private InventoryGauntlet inventoryGauntlet;
+    
+    private int riftCooldown;
+    
+    private boolean inRift;
     
     public PBPlayer(){}
     
@@ -61,6 +70,28 @@ public class PBPlayer
     public InventoryGauntlet getInventoryGauntlet()
     {
         return inventoryGauntlet;
+    }
+    
+    public void setInRift()
+    {
+        if(riftCooldown > 0)
+        {
+            riftCooldown = player.getPortalCooldown();
+        }
+        else
+        {
+            inRift = true;
+        }
+    }
+    
+    public void transferToDimension(int dimension)
+    {
+        if(player instanceof EntityPlayerMP)
+        {
+            MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
+            
+            server.getPlayerList().transferPlayerToDimension((EntityPlayerMP)player, dimension, new TeleporterRonne(server.getWorld(dimension)));
+        }
     }
     
     public static class Storage implements IStorage<PBPlayer>
