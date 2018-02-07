@@ -15,13 +15,18 @@ import com.crypticmushroom.planetbound.items.oreingot.KybriteIngot;
 import com.crypticmushroom.planetbound.items.oreingot.RendiumChunk;
 import com.crypticmushroom.planetbound.items.oreingot.RendiumCrystal;
 import com.crypticmushroom.planetbound.items.oreingot.VerdaniteIngot;
+import com.crypticmushroom.planetbound.logger.PBLogDev;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+@EventBusSubscriber
 public class PBItems
 {
     private static final List<Item> items = new ArrayList<>();
@@ -47,6 +52,13 @@ public class PBItems
         rift_gauntlet = registerItem(new RiftGauntlet(), "rift_gauntlet");
         gauntlet_shell = registerItem(new GauntletShell(), "gauntlet_shell");
         fortium_ingot = registerItem(new FortiumIngot(), "fortium_ingot");
+    }
+    
+    @SubscribeEvent
+    public static void registerItems(RegistryEvent.Register<Item> event)
+    {
+        event.getRegistry().registerAll(PBItems.getItems());
+        PBLogDev.printInfo("Registered PlanetBound items...");
     }
     
     protected static Item registerItem(Item item, String name)

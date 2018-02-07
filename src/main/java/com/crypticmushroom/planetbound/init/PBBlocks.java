@@ -14,15 +14,20 @@ import com.crypticmushroom.planetbound.blocks.oreblock.VerdaniteOreBlock;
 import com.crypticmushroom.planetbound.blocks.ores.KybriteOre;
 import com.crypticmushroom.planetbound.blocks.ores.RendiumOre;
 import com.crypticmushroom.planetbound.blocks.ores.VerdaniteOre;
+import com.crypticmushroom.planetbound.logger.PBLogDev;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+@EventBusSubscriber
 public class PBBlocks
 {
     private static final List<Block> blocks = new ArrayList<>();
@@ -48,6 +53,13 @@ public class PBBlocks
         inventors_forge = registerBlock(new InventorsForge(false), "inventors_forge");
         lit_inventors_forge = registerBlock(new InventorsForge(true), "lit_inventors_forge");
         fortium_block = registerBlock(new FortiumOreBlock(), "fortium_block");
+    }
+    
+    @SubscribeEvent
+    public static void registerBlocks(RegistryEvent.Register<Block> event)
+    {
+        event.getRegistry().registerAll(PBBlocks.getBlocks());
+        PBLogDev.printInfo("Registered PlanetBound blocks...");
     }
     
     private static Block registerBlock(Block block, String name)

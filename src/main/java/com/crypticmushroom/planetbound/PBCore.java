@@ -2,7 +2,6 @@ package com.crypticmushroom.planetbound;
 
 import com.crypticmushroom.planetbound.config.ConfigHandler;
 import com.crypticmushroom.planetbound.crafting.InventorsForgeManager;
-import com.crypticmushroom.planetbound.handler.BlockEvents;
 import com.crypticmushroom.planetbound.init.PBBlocks;
 import com.crypticmushroom.planetbound.init.PBItems;
 import com.crypticmushroom.planetbound.init.PBSmelting;
@@ -13,10 +12,6 @@ import com.crypticmushroom.planetbound.networking.PBNetworkHandler;
 import com.crypticmushroom.planetbound.player.PBPlayer;
 import com.crypticmushroom.planetbound.world.gen.PBOreGenerator;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -24,7 +19,6 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(modid = PBCore.MOD_ID,
@@ -55,10 +49,6 @@ public class PBCore
         ConfigHandler.loadConfig(event);
         //Auto developer mode is now handled by ConfigHandler
         ConfigHandler.configWarnings();
-        
-        PBLogger.printInfo("Registering event handlers");
-        MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(new BlockEvents());
         
         PBLogger.printInfo("Preparing items for registry");
         PBItems.init();
@@ -103,20 +93,6 @@ public class PBCore
         proxy.postInit(event);
 
         //PBLogger.printInfo("RUSH B!!!");
-    }
-    
-    @SubscribeEvent
-    public void registerBlocks(RegistryEvent.Register<Block> event)
-    {
-        event.getRegistry().registerAll(PBBlocks.getBlocks());
-        PBLogDev.printInfo("Registered PlanetBound blocks...");
-    }
-
-    @SubscribeEvent
-    public void registerItems(RegistryEvent.Register<Item> event)
-    {
-        event.getRegistry().registerAll(PBItems.getItems());
-        PBLogDev.printInfo("Registered PlanetBound items...");
     }
     
     public static PBCore instance()

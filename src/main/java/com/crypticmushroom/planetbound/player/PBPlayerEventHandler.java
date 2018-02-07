@@ -8,14 +8,16 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.Clone;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+@EventBusSubscriber
 public class PBPlayerEventHandler
 {
     private static final ResourceLocation PLAYER_STORAGE = new ResourceLocation(PBCore.MOD_ID, "player_storage");
 
     @SubscribeEvent
-    public void PlayerConstructingEvent(AttachCapabilitiesEvent<Entity> event)
+    public static void PlayerConstructingEvent(AttachCapabilitiesEvent<Entity> event)
     {
         if((event.getObject() instanceof EntityPlayer))
         {
@@ -29,7 +31,7 @@ public class PBPlayerEventHandler
     }
 
     @SubscribeEvent
-    public void onPlayerCloned(Clone event)
+    public static void onPlayerCloned(Clone event)
     {
         PBPlayer original = PBPlayer.get(event.getOriginal());
         PBPlayer clone = PBPlayer.get(event.getEntityPlayer());        

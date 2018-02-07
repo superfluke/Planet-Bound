@@ -10,13 +10,15 @@ import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 
+@EventBusSubscriber
 public class ClientEventHandler
 {
     @SubscribeEvent
-    public void keyPressed(InputEvent.KeyInputEvent event)
+    public static void keyPressed(InputEvent.KeyInputEvent event)
     {
         if(PBKeyHandler.isInventoryPressed())
         {
@@ -34,7 +36,7 @@ public class ClientEventHandler
     }
     
     @SubscribeEvent
-    public void onTextureStitch(TextureStitchEvent.Pre event)
+    public static void onTextureStitch(TextureStitchEvent.Pre event)
     {
         event.getMap().registerSprite(new ResourceLocation(PBCore.MOD_ID + ":items/empty_gauntlet_slot"));
     }
