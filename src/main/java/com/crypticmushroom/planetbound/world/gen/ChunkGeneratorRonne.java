@@ -3,6 +3,8 @@ package com.crypticmushroom.planetbound.world.gen;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.crypticmushroom.planetbound.init.PBBlocks;
+
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -33,7 +35,7 @@ public class ChunkGeneratorRonne implements IChunkGenerator
             {
                 for(int zPos = 0; zPos < 16; zPos++)
                 {
-                    primer.setBlockState(xPos, yPos, zPos, Blocks.SAND.getStateFromMeta(1));
+                    primer.setBlockState(xPos, yPos, zPos, PBBlocks.scarlet_sand.getDefaultState());
                     
                     if(yPos <= 60)
                     {

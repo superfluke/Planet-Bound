@@ -22,6 +22,7 @@ tile.gauntlet_shell.name=Gauntlet Shell
 tile.inventors_forge.name=Inventor's Forge
 tile.lit_inventors_forge.name=Inventor's Forge
 tile.fortium_block.name=Fortium Block
+tile.scarlet_sand.name=Scarlet Sand
 
 #Creative Tabs
 itemGroup.main=Planet Bound
