@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class ConfigHandler
 {
-    private static boolean checkDevMode = getAudoDevMode(PBCore.VERSION);
+    private static boolean checkDevMode = getAutoDevMode(PBCore.VERSION);
 
     public static void loadConfig(FMLPreInitializationEvent event)
     {
@@ -30,7 +30,7 @@ public class ConfigHandler
         PBLogger.printInfo("Configuration file loaded.");
     }
 
-    public static boolean getAudoDevMode(String versionCode)
+    public static boolean getAutoDevMode(String versionCode)
     {
         if (versionCode.contains("dev"))
         {
