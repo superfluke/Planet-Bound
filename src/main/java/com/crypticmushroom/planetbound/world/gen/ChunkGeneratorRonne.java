@@ -3,8 +3,6 @@ package com.crypticmushroom.planetbound.world.gen;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.crypticmushroom.planetbound.init.PBBlocks;
-
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -14,10 +12,12 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.IChunkGenerator;
 
+import com.crypticmushroom.planetbound.init.PBBlocks;
+
 public class ChunkGeneratorRonne implements IChunkGenerator
 {
     private World world;
-    
+
     public ChunkGeneratorRonne(World world)
     {
         this.world = world;
@@ -96,4 +96,5 @@ public class ChunkGeneratorRonne implements IChunkGenerator
         //TODO Auto-generated method stub
         return false;
     }
+
 }
