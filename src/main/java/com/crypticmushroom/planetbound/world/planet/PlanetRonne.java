@@ -12,7 +12,7 @@ public class PlanetRonne extends Planet
 
 	public PlanetRonne() 
 	{
-		super(0.0F, 0.0F);
+		super(0.01F, 0.01F);
 	}
 
 	@Override
