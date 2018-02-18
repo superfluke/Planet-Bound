@@ -1,0 +1,8 @@
+{
+    "parent": "block/cube_bottom_top",
+    "textures": {
+        "bottom": "planetbound:blocks/ronnian_sandstone_bottom",
+        "top": "planetbound:blocks/ronnian_sandstone_top",
+        "side": "planetbound:blocks/ronnian_sandstone"
+    }
+}

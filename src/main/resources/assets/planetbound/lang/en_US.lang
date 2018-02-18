@@ -23,6 +23,8 @@ tile.inventors_forge.name=Inventor's Forge
 tile.lit_inventors_forge.name=Inventor's Forge
 tile.fortium_block.name=Fortium Block
 tile.scarlet_sand.name=Scarlet Sand
+tile.ronnian_stone.name=Ronnian Stone
+tile.ronnian_sandstone.name=Ronnian Sandstone
 
 #Creative Tabs
 itemGroup.main=Planet Bound

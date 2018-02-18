@@ -30,13 +30,13 @@ public class PlanetRonne extends Planet
 	@Override
 	public IBlockState getBottomBlock() 
 	{
-		return Blocks.RED_SANDSTONE.getDefaultState();
+		return PBBlocks.ronnian_sandstone.getDefaultState();
 	}
 
 	@Override
 	public IBlockState getFillerBlock() 
 	{
-		return Blocks.STONE.getDefaultState();
+		return PBBlocks.ronnian_stone.getDefaultState();
 	}
 
 }

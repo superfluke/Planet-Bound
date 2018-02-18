@@ -3,6 +3,8 @@ package com.crypticmushroom.planetbound.init;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.crypticmushroom.planetbound.blocks.RonnianSandstone;
+import com.crypticmushroom.planetbound.blocks.RonnianStone;
 import org.apache.commons.lang3.Validate;
 
 import com.crypticmushroom.planetbound.PBCore;
@@ -43,7 +45,9 @@ public class PBBlocks
     public static Block lit_inventors_forge;
     public static Block fortium_block;
     public static Block scarlet_sand;
-    
+    public static Block ronnian_sandstone;
+    public static Block ronnian_stone;
+
     public static void init()
     {
         kybrite_ore = registerBlock(new KybriteOre(), "kybrite_ore");
@@ -56,6 +60,8 @@ public class PBBlocks
         lit_inventors_forge = registerBlock(new InventorsForge(true), "lit_inventors_forge");
         fortium_block = registerBlock(new FortiumOreBlock(), "fortium_block");
         scarlet_sand = registerBlock(new ScarletSand(), "scarlet_sand");
+        ronnian_sandstone = registerBlock(new RonnianSandstone(), "ronnian_sandstone");
+        ronnian_stone = registerBlock(new RonnianStone(), "ronnian_stone");
     }
     
     @SubscribeEvent
