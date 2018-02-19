@@ -11,7 +11,6 @@ import com.crypticmushroom.planetbound.logger.PBLogDev;
 import com.crypticmushroom.planetbound.logger.PBLogger;
 import com.crypticmushroom.planetbound.networking.PBNetworkHandler;
 import com.crypticmushroom.planetbound.player.PBPlayer;
-import com.crypticmushroom.planetbound.world.gen.PBOreGenerator;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -20,7 +19,6 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(modid = PBCore.MOD_ID,
         name = PBCore.NAME,
@@ -79,11 +77,6 @@ public class PBCore
         PBWorld.init();
         
         proxy.init(event);
-
-        /*
-        PBLogger.printInfo("Motu Patlu?");
-        PBLogger.printlol("Motu Patlu", "Present!");
-        */
     }
     
     @EventHandler
@@ -92,8 +85,6 @@ public class PBCore
         PBLogDev.printInfo("Running Post-initialization");
         
         proxy.postInit(event);
-
-        //PBLogger.printInfo("RUSH B!!!");
     }
     
     public static PBCore instance()
