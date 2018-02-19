@@ -3,13 +3,11 @@ package com.crypticmushroom.planetbound.world.planet;
 import com.crypticmushroom.planetbound.init.PBBlocks;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 
 public class PlanetRonne extends Planet
 {
-
 	public PlanetRonne() 
 	{
 		super(0.01F, 0.01F);
@@ -24,7 +22,7 @@ public class PlanetRonne extends Planet
 	@Override
 	public IBlockState getTopBlock() 
 	{
-		return PBBlocks.scarlet_sand.getDefaultState();
+		return PBBlocks.ronnian_sand.getDefaultState();
 	}
 
 	@Override
