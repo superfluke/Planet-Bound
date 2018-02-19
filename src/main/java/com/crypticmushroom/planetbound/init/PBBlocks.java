@@ -7,6 +7,7 @@ import org.apache.commons.lang3.Validate;
 
 import com.crypticmushroom.planetbound.PBCore;
 import com.crypticmushroom.planetbound.blocks.InventorsForge;
+import com.crypticmushroom.planetbound.blocks.Rift;
 import com.crypticmushroom.planetbound.blocks.RonnianSand;
 import com.crypticmushroom.planetbound.blocks.RonnianSandstone;
 import com.crypticmushroom.planetbound.blocks.RonnianStone;
@@ -47,6 +48,7 @@ public class PBBlocks
     public static Block ronnian_sand;
     public static Block ronnian_sandstone;
     public static Block ronnian_stone;
+    public static Block rift;
 
     public static void init()
     {
@@ -62,6 +64,7 @@ public class PBBlocks
         ronnian_sand = registerBlock(new RonnianSand(), "scarlet_sand");
         ronnian_sandstone = registerBlock(new RonnianSandstone(), "ronnian_sandstone");
         ronnian_stone = registerBlock(new RonnianStone(), "ronnian_stone");
+        rift = registerBlock(new Rift(), "rift");
     }
     
     @SubscribeEvent
