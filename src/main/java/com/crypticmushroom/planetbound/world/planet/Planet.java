@@ -6,7 +6,6 @@ import net.minecraft.world.biome.Biome;
 
 public abstract class Planet
 {
-
 	private float minHeight;
 
 	private float maxHeight;
