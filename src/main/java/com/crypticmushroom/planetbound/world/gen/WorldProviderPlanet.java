@@ -7,7 +7,6 @@ import com.crypticmushroom.planetbound.world.planet.Planet;
 
 public abstract class WorldProviderPlanet extends WorldProvider
 {
-
 	public abstract Planet getPlanet();
 
     @Override
