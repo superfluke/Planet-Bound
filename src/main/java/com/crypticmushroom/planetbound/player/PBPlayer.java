@@ -1,6 +1,5 @@
 package com.crypticmushroom.planetbound.player;
 
-import com.crypticmushroom.planetbound.init.PBWorld;
 import com.crypticmushroom.planetbound.inventory.InventoryGauntlet;
 import com.crypticmushroom.planetbound.world.TeleporterRonne;
 
@@ -28,6 +27,7 @@ public class PBPlayer
     private InventoryGauntlet inventoryGauntlet;
     
     private int riftCooldown;
+    private int gauntletUseCooldown;
     
     private boolean inRift;
     
@@ -54,12 +54,16 @@ public class PBPlayer
     {
         inventoryGauntlet.writeToNBT(compound);
         
+        compound.setInteger("gauntletUseCooldown", gauntletUseCooldown);
+        
         return compound;
     }
     
     public void readFromNBT(NBTTagCompound compound)
     {
         inventoryGauntlet.readFromNBT(compound);
+        
+        gauntletUseCooldown = compound.getInteger("gauntletUseCooldown");
     }
     
     public EntityPlayer getPlayer()
@@ -82,6 +86,33 @@ public class PBPlayer
         {
             inRift = true;
         }
+    }
+    
+    public void setGauntletUseCooldown(int ticks)
+    {
+        gauntletUseCooldown = ticks;
+        
+        if(gauntletUseCooldown < 0)
+        {
+            gauntletUseCooldown = 0;
+        }
+    }
+    
+    public void decreaseGauntletUseCooldown(int amount)
+    {
+        if(gauntletUseCooldown > 0)
+        {
+            gauntletUseCooldown -= amount;
+        }
+        else
+        {
+            gauntletUseCooldown = 0;
+        }
+    }
+    
+    public int getGauntletUseCooldown()
+    {
+        return gauntletUseCooldown;
     }
     
     public void transferToDimension(int dimension)

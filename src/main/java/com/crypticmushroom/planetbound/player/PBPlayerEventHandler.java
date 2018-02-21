@@ -10,6 +10,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.Clone;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 @EventBusSubscriber
 public class PBPlayerEventHandler
@@ -46,6 +47,17 @@ public class PBPlayerEventHandler
             {
                 clone.readFromNBT(compound);
             }
+        }
+    }
+    
+    @SubscribeEvent
+    public static void onPlayerUpdate(TickEvent.PlayerTickEvent event)
+    {
+        PBPlayer player = PBPlayer.get(event.player);
+        
+        if(player != null && !player.getPlayer().world.isRemote)
+        {
+            player.decreaseGauntletUseCooldown(1);
         }
     }
 }

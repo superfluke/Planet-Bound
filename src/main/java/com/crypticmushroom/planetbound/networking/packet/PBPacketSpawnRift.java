@@ -1,12 +1,14 @@
 package com.crypticmushroom.planetbound.networking.packet;
 
 import com.crypticmushroom.planetbound.init.PBBlocks;
+import com.crypticmushroom.planetbound.player.PBPlayer;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 public class PBPacketSpawnRift extends PBPacket<PBPacketSpawnRift>
@@ -50,21 +52,34 @@ public class PBPacketSpawnRift extends PBPacket<PBPacketSpawnRift>
     @Override
     public void handleServer(PBPacketSpawnRift message, EntityPlayer player)
     {
-        BlockPos pos = message.pos;
-        BlockPos up = pos.up();
+        PBPlayer pbPlayer = PBPlayer.get(player);
         
-        World world = player.world;
+        int cooldown = pbPlayer.getGauntletUseCooldown();
         
-        Block block = world.getBlockState(pos).getBlock();
-        
-        if(!block.equals(Blocks.AIR) && world.getBlockState(up).getBlock().equals(Blocks.AIR))
+        if(cooldown <= 0)
         {
-            world.setBlockState(up, PBBlocks.rift.getDefaultState());
-            world.setBlockState(up.west(), PBBlocks.rift.getDefaultState());
-            world.setBlockState(up.up(), PBBlocks.rift.getDefaultState());
-            world.setBlockState(up.up().west(), PBBlocks.rift.getDefaultState());
-            world.setBlockState(up.up().up(), PBBlocks.rift.getDefaultState());
-            world.setBlockState(up.up().up().west(), PBBlocks.rift.getDefaultState());
+            BlockPos pos = message.pos;
+            BlockPos up = pos.up();
+            
+            World world = player.world;
+            
+            Block block = world.getBlockState(pos).getBlock();
+            
+            if(!block.equals(Blocks.AIR) && world.getBlockState(up).getBlock().equals(Blocks.AIR))
+            {
+                world.setBlockState(up, PBBlocks.rift.getDefaultState());
+                world.setBlockState(up.west(), PBBlocks.rift.getDefaultState());
+                world.setBlockState(up.up(), PBBlocks.rift.getDefaultState());
+                world.setBlockState(up.up().west(), PBBlocks.rift.getDefaultState());
+                world.setBlockState(up.up().up(), PBBlocks.rift.getDefaultState());
+                world.setBlockState(up.up().up().west(), PBBlocks.rift.getDefaultState());
+                
+                pbPlayer.setGauntletUseCooldown(200);
+            }
+        }
+        else
+        {
+            //player.sendMessage(new TextComponentString(String.format("Please wait (%s)", cooldown)));
         }
     }
 }
