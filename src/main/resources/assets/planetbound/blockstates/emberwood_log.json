@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "axis=y":  { "model": "planetbound:emberwood_log" },
+        "axis=z":   { "model": "planetbound:emberwood_log", "x": 90 },
+        "axis=x":   { "model": "planetbound:emberwood_log", "x": 90, "y": 90 },
+        "axis=none": { "model": "planetbound:emberwood_bark" }
+    }
+}
