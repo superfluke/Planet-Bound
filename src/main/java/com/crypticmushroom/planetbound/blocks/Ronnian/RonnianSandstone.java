@@ -1,4 +1,4 @@
-package com.crypticmushroom.planetbound.blocks;
+package com.crypticmushroom.planetbound.blocks.Ronnian;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -9,7 +9,7 @@ public class RonnianSandstone extends Block
     public RonnianSandstone()
     {
         super(Material.ROCK);
-        
+        this.setHardness(2);
         setSoundType(SoundType.STONE);
     }
 }
