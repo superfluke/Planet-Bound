@@ -1,12 +1,13 @@
-package com.crypticmushroom.planetbound.blocks.Ronnian;
+package com.crypticmushroom.planetbound.blocks.ronnian;
 
-import jdk.nashorn.internal.ir.Statement;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
-public class RonnianSandstoneChiseled extends Block {
-    public RonnianSandstoneChiseled() {
+public class RonnianSandstone extends Block
+{
+    public RonnianSandstone()
+    {
         super(Material.ROCK);
         this.setHardness(2);
         setSoundType(SoundType.STONE);

@@ -1,4 +1,4 @@
-package com.crypticmushroom.planetbound.blocks.Ronnian;
+package com.crypticmushroom.planetbound.blocks.ronnian;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
