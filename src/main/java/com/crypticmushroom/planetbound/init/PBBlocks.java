@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.crypticmushroom.planetbound.blocks.*;
-import com.crypticmushroom.planetbound.blocks.Ronnian.*;
+import com.crypticmushroom.planetbound.blocks.ronnian.*;
 import org.apache.commons.lang3.Validate;
 
 import com.crypticmushroom.planetbound.PBCore;
@@ -101,6 +101,7 @@ public class PBBlocks
         Validate.notNull(name, "name cannot be null");
         
         block.setCreativeTab(PBCreativeTabs.TAB_MAIN); //TODO for testing purposes!
+                                                       //Yeah so we should probably remove the things that shouldn't be in the tab after we're done with testing purposes.
         
         block.setUnlocalizedName(name);
         block.setRegistryName(PBCore.MOD_ID, name);
