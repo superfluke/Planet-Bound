@@ -1,4 +1,4 @@
-package com.crypticmushroom.planetbound.blocks;
+package com.crypticmushroom.planetbound.blocks.ronnian;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

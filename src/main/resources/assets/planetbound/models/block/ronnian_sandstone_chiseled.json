@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "planetbound:blocks/smooth_ronnian_sandstone_top",
+        "side": "planetbound:blocks/ronnian_sandstone_chiseled"
+    }
+}
