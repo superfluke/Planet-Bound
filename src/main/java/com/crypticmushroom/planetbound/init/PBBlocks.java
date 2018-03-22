@@ -63,30 +63,30 @@ public class PBBlocks
     public static void init()
     {
         //Kybirte
-        kybrite_ore = registerBlock(new KybriteOre(), "kybrite_ore", PBCreativeTabs.TAB_MAIN);
-        kybrite_block = registerBlock(new KybriteOreBlock(), "kybrite_block", PBCreativeTabs.TAB_MAIN);
+        kybrite_ore = registerBlock(new KybriteOre(), "kybrite_ore", PBCreativeTabs.TAB_BLOCKS);
+        kybrite_block = registerBlock(new KybriteOreBlock(), "kybrite_block", PBCreativeTabs.TAB_BLOCKS);
         //Verdanite
-        verdanite_ore = registerBlock(new VerdaniteOre(), "verdanite_ore", PBCreativeTabs.TAB_MAIN);
-        verdanite_block = registerBlock(new VerdaniteOreBlock(), "verdanite_block", PBCreativeTabs.TAB_MAIN);
+        verdanite_ore = registerBlock(new VerdaniteOre(), "verdanite_ore", PBCreativeTabs.TAB_BLOCKS);
+        verdanite_block = registerBlock(new VerdaniteOreBlock(), "verdanite_block", PBCreativeTabs.TAB_BLOCKS);
         //Rendium
-        rendium_ore = registerBlock(new RendiumOre(), "rendium_ore", PBCreativeTabs.TAB_MAIN);
-        rendium_block = registerBlock(new RendiumOreBlock(), "rendium_block", PBCreativeTabs.TAB_MAIN);
+        rendium_ore = registerBlock(new RendiumOre(), "rendium_ore", PBCreativeTabs.TAB_BLOCKS);
+        rendium_block = registerBlock(new RendiumOreBlock(), "rendium_block", PBCreativeTabs.TAB_BLOCKS);
         //Other
-        inventors_forge = registerBlock(new InventorsForge(false), "inventors_forge", PBCreativeTabs.TAB_MAIN);
+        inventors_forge = registerBlock(new InventorsForge(false), "inventors_forge", PBCreativeTabs.TAB_BLOCKS);
         lit_inventors_forge = registerBlock(new InventorsForge(true), "lit_inventors_forge", null);
-        fortium_block = registerBlock(new FortiumOreBlock(), "fortium_block", PBCreativeTabs.TAB_MAIN);
+        fortium_block = registerBlock(new FortiumOreBlock(), "fortium_block", PBCreativeTabs.TAB_BLOCKS);
         rift = registerBlock(new Rift(), "rift", null);
         //Ronian Blocks
-        ronnian_sand = registerBlock(new RonnianSand(), "scarlet_sand", PBCreativeTabs.TAB_MAIN);
-        ronnian_sandstone = registerBlock(new RonnianSandstone(), "ronnian_sandstone", PBCreativeTabs.TAB_MAIN);
-        ronnian_stone = registerBlock(new RonnianStone(), "ronnian_stone", PBCreativeTabs.TAB_MAIN);
-        ronnian_stone_polished = registerBlock(new RonnianStonePolished(), "ronnian_stone_polished", PBCreativeTabs.TAB_MAIN);
-        ronnian_sandstone_chiseled = registerBlock(new RonnianSandstoneChiseled(), "ronnian_sandstone_chiseled", PBCreativeTabs.TAB_MAIN);
-        ronnian_sandstone_smooth = registerBlock(new RonnianSandstoneSmooth(), "ronnian_sandstone_smooth", PBCreativeTabs.TAB_MAIN);
+        ronnian_sand = registerBlock(new RonnianSand(), "scarlet_sand", PBCreativeTabs.TAB_BLOCKS);
+        ronnian_sandstone = registerBlock(new RonnianSandstone(), "ronnian_sandstone", PBCreativeTabs.TAB_BLOCKS);
+        ronnian_stone = registerBlock(new RonnianStone(), "ronnian_stone", PBCreativeTabs.TAB_BLOCKS);
+        ronnian_stone_polished = registerBlock(new RonnianStonePolished(), "ronnian_stone_polished", PBCreativeTabs.TAB_BLOCKS);
+        ronnian_sandstone_chiseled = registerBlock(new RonnianSandstoneChiseled(), "ronnian_sandstone_chiseled", PBCreativeTabs.TAB_BLOCKS);
+        ronnian_sandstone_smooth = registerBlock(new RonnianSandstoneSmooth(), "ronnian_sandstone_smooth", PBCreativeTabs.TAB_BLOCKS);
         //Emberwood
-        emberwood_leaves = registerBlock(new EmberwoodLeaves(), "emberwood_leaves", PBCreativeTabs.TAB_MAIN);
-        emberwood_planks = registerBlock(new EmberwoodPlanks(), "emberwood_planks", PBCreativeTabs.TAB_MAIN);
-        emberwood = registerBlock(new EmberwoodLog(), "emberwood_log", PBCreativeTabs.TAB_MAIN);
+        emberwood_leaves = registerBlock(new EmberwoodLeaves(), "emberwood_leaves", PBCreativeTabs.TAB_BLOCKS);
+        emberwood_planks = registerBlock(new EmberwoodPlanks(), "emberwood_planks", PBCreativeTabs.TAB_BLOCKS);
+        emberwood = registerBlock(new EmberwoodLog(), "emberwood_log", PBCreativeTabs.TAB_BLOCKS);
     }
     
     @SubscribeEvent
@@ -111,7 +111,7 @@ public class PBBlocks
         
         blocks.add(block);
         
-        PBItems.registerItem(new ItemBlock(block), name);
+        PBItems.registerBlockAsItem(new ItemBlock(block), name);
         
         return block;
     }

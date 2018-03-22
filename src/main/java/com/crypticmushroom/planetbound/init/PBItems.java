@@ -3,6 +3,7 @@ package com.crypticmushroom.planetbound.init;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.creativetab.CreativeTabs;
 import org.apache.commons.lang3.Validate;
 
 import com.crypticmushroom.planetbound.PBCore;
@@ -43,15 +44,15 @@ public class PBItems
     
     public static void init()
     {
-        kybrite_ingot = registerItem(new KybriteIngot(), "kybrite_ingot");
-        verdanite_ingot = registerItem(new VerdaniteIngot(), "verdanite_ingot");
-        rendium_chunk = registerItem(new RendiumChunk(), "rendium_chunk");
-        rendium_crystal = registerItem(new RendiumCrystal(), "rendium_crystal");
-        core_frame = registerItem(new CoreFrame(), "core_frame");
-        rendium_core = registerItem(new RendiumCore(), "rendium_core");
-        rift_gauntlet = registerItem(new RiftGauntlet(), "rift_gauntlet");
-        gauntlet_shell = registerItem(new GauntletShell(), "gauntlet_shell");
-        fortium_ingot = registerItem(new FortiumIngot(), "fortium_ingot");
+        kybrite_ingot = registerItem(new KybriteIngot(), "kybrite_ingot", PBCreativeTabs.TAB_ITEMS);
+        verdanite_ingot = registerItem(new VerdaniteIngot(), "verdanite_ingot", PBCreativeTabs.TAB_ITEMS);
+        rendium_chunk = registerItem(new RendiumChunk(), "rendium_chunk", PBCreativeTabs.TAB_ITEMS);
+        rendium_crystal = registerItem(new RendiumCrystal(), "rendium_crystal", PBCreativeTabs.TAB_ITEMS);
+        core_frame = registerItem(new CoreFrame(), "core_frame", PBCreativeTabs.TAB_ITEMS);
+        rendium_core = registerItem(new RendiumCore(), "rendium_core", PBCreativeTabs.TAB_ITEMS);
+        rift_gauntlet = registerItem(new RiftGauntlet(), "rift_gauntlet", PBCreativeTabs.TAB_ITEMS);
+        gauntlet_shell = registerItem(new GauntletShell(), "gauntlet_shell", PBCreativeTabs.TAB_ITEMS);
+        fortium_ingot = registerItem(new FortiumIngot(), "fortium_ingot", PBCreativeTabs.TAB_ITEMS);
     }
     
     @SubscribeEvent
@@ -61,12 +62,15 @@ public class PBItems
         PBLogDev.printInfo("Registered PlanetBound items...");
     }
     
-    protected static Item registerItem(Item item, String name)
+    protected static Item registerItem(Item item, String name, CreativeTabs tab)
     {
         Validate.notNull(item, "item cannot be null");
         Validate.notNull(name, "name cannot be null");
         
-        item.setCreativeTab(PBCreativeTabs.TAB_MAIN); //TODO for testing purposes!
+        if (tab != null)
+        {
+            item.setCreativeTab(tab);
+        }
         
         item.setUnlocalizedName(name);
         item.setRegistryName(PBCore.MOD_ID, name);
@@ -75,7 +79,20 @@ public class PBItems
         
         return item;
     }
-    
+
+    protected static Item registerBlockAsItem(Item item, String name)
+    {
+        Validate.notNull(item, "item cannot be null");
+        Validate.notNull(name, "name cannot be null");
+
+        item.setUnlocalizedName(name);
+        item.setRegistryName(PBCore.MOD_ID, name);
+
+        items.add(item);
+
+        return item;
+    }
+
     @SideOnly(Side.CLIENT)
     public static void registerModels()
     {

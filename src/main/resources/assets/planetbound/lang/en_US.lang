@@ -34,7 +34,9 @@ tile.emberwood_planks.name=Emberwood Planks
 tile.emberwood_log.name=Emberwood Log
 
 #Creative Tabs
-itemGroup.main=Planet Bound
+#itemGroup.main=Planet Bound
+itemGroup.pb_blocks=Planet Bound Blocks
+itemGroup.pb_items=Planet Bound Items
 
 #Containers
 container.inventors_forge=Inventor's Forge
