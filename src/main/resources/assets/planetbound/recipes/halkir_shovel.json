@@ -1,8 +1,8 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "## ",
-    "#X ",
+    " # ",
+    " X ",
     " X "
 
   ],
@@ -17,6 +17,6 @@
     }
   },
   "result": {
-    "item": "planetbound: halkir_axe"
+    "item": "planetbound: halkir_shovel"
   }
 }
