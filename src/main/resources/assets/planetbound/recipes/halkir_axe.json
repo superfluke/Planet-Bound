@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "#X ",
+    " X "
+
+  ],
+  "key": {
+    "#": {
+      "item": "planetbound:halkir_ingot"
+    }
+  },
+  "key": {
+    "X": {
+      "item": "planetbound:emberwood_stick"
+    }
+  },
+  "result": {
+    "item": "planetbound: halkir_axe"
+  }
+}
