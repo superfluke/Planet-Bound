@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "planetbound:items/rendium_crystal"
+        "layer0": "planetbound:items/materials/rendium_crystal"
     }
 }
