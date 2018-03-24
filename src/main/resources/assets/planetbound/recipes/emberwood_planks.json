@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "planetbound:emberwood_log"
+    }
+  ],
+  "result": {
+    "item": "planetbound:emberwood_planks",
+    "count": 4
+  }
+}
