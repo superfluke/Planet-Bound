@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    " # "
+
+  ],
+  "key": {
+    "#": {
+      "item": "planetbound: halkir_ingot"
+    }
+
+  },
+  "result": {
+    "item": "planetbound: halkir_bucket"
+  }
+}

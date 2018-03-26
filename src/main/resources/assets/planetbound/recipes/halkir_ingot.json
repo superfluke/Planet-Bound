@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "planetbound:halkir_block"
+    }
+  ],
+  "result": {
+    "item": "planetbound:halkir_ingot",
+    "count": 9
+  }
+}
