@@ -1,5 +1,8 @@
 package com.crypticmushroom.planetbound.networking.packet;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.crypticmushroom.planetbound.init.PBBlocks;
 import com.crypticmushroom.planetbound.player.PBPlayer;
 
@@ -7,6 +10,8 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
@@ -49,6 +54,7 @@ public class PBPacketSpawnRift extends PBPacket<PBPacketSpawnRift>
         
     }
 
+    @SuppressWarnings("incomplete-switch")
     @Override
     public void handleServer(PBPacketSpawnRift message, EntityPlayer player)
     {
@@ -65,21 +71,95 @@ public class PBPacketSpawnRift extends PBPacket<PBPacketSpawnRift>
             
             Block block = world.getBlockState(pos).getBlock();
             
-            if(!block.equals(Blocks.AIR) && world.getBlockState(up).getBlock().equals(Blocks.AIR))
-            {
-                world.setBlockState(up, PBBlocks.rift.getDefaultState());
-                world.setBlockState(up.west(), PBBlocks.rift.getDefaultState());
-                world.setBlockState(up.up(), PBBlocks.rift.getDefaultState());
-                world.setBlockState(up.up().west(), PBBlocks.rift.getDefaultState());
-                world.setBlockState(up.up().up(), PBBlocks.rift.getDefaultState());
-                world.setBlockState(up.up().up().west(), PBBlocks.rift.getDefaultState());
+            EnumFacing facing = player.getHorizontalFacing();
+            
+            if(!block.equals(Blocks.AIR) && canSpawnPortal(world, up, facing))
+            {   
+                switch(facing)
+                {
+                case NORTH:
+                case SOUTH:
+                    world.setBlockState(up, PBBlocks.rift.getDefaultState());
+                    world.setBlockState(up.west(), PBBlocks.rift.getDefaultState());
+                    world.setBlockState(up.up(), PBBlocks.rift.getDefaultState());
+                    world.setBlockState(up.up().west(), PBBlocks.rift.getDefaultState());
+                    world.setBlockState(up.up().up(), PBBlocks.rift.getDefaultState());
+                    world.setBlockState(up.up().up().west(), PBBlocks.rift.getDefaultState());
+                    break;
+                case EAST:
+                case WEST:
+                    world.setBlockState(up, PBBlocks.rift.getDefaultState().withRotation(Rotation.CLOCKWISE_90));
+                    world.setBlockState(up.north(), PBBlocks.rift.getDefaultState().withRotation(Rotation.CLOCKWISE_90));
+                    world.setBlockState(up.up(), PBBlocks.rift.getDefaultState().withRotation(Rotation.CLOCKWISE_90));
+                    world.setBlockState(up.up().north(), PBBlocks.rift.getDefaultState().withRotation(Rotation.CLOCKWISE_90));
+                    world.setBlockState(up.up().up(), PBBlocks.rift.getDefaultState().withRotation(Rotation.CLOCKWISE_90));
+                    world.setBlockState(up.up().up().north(), PBBlocks.rift.getDefaultState().withRotation(Rotation.CLOCKWISE_90));
+                    break;
+                }
                 
                 pbPlayer.setGauntletUseCooldown(200);
             }
         }
         else
         {
-            //player.sendMessage(new TextComponentString(String.format("Please wait (%s)", cooldown)));
+            //player.sendMessage(new TextComponentString(String.format("Please wait (%s)", cooldown / 40)));
         }
+    }
+    
+    @SuppressWarnings("incomplete-switch")
+    private List<BlockPos> freeBlocks(BlockPos pos, EnumFacing facing)
+    {
+        List<BlockPos> positions = new ArrayList<BlockPos>();
+        
+        switch(facing)
+        {
+        case NORTH:
+            positions.add(pos.up());
+            positions.add(pos.up().up());
+            positions.add(pos.up().up().up());
+            positions.add(pos.up().west());
+            positions.add(pos.up().up().west());
+            positions.add(pos.up().up().up().west());
+            break;
+        case EAST:
+            positions.add(pos.up());
+            positions.add(pos.up().up());
+            positions.add(pos.up().up().up());
+            positions.add(pos.up().north());
+            positions.add(pos.up().up().north());
+            positions.add(pos.up().up().up().north());
+            break;
+        case SOUTH:
+            positions.add(pos.up());
+            positions.add(pos.up().up());
+            positions.add(pos.up().up().up());
+            positions.add(pos.up().west());
+            positions.add(pos.up().up().west());
+            positions.add(pos.up().up().up().west());
+            break;
+        case WEST:
+            positions.add(pos.up());
+            positions.add(pos.up().up());
+            positions.add(pos.up().up().up());
+            positions.add(pos.up().north());
+            positions.add(pos.up().up().north());
+            positions.add(pos.up().up().up().north());
+            break;
+        }
+        
+        return positions;
+    }
+    
+    private boolean canSpawnPortal(World world, BlockPos pos, EnumFacing facing)
+    {
+        for(BlockPos position : freeBlocks(pos, facing))
+        {
+            if(!world.getBlockState(position).getBlock().equals(Blocks.AIR))
+            {
+                return false;
+            }
+        }
+        
+        return true;
     }
 }
