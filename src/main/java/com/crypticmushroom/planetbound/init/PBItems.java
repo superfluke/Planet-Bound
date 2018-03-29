@@ -62,7 +62,7 @@ public class PBItems
         PBLogDev.printInfo("Registered PlanetBound items...");
     }
     
-    protected static Item registerItem(Item item, String name, CreativeTabs tab)
+    protected static <T extends Item> T registerItem(T item, String name, CreativeTabs tab)
     {
         Validate.notNull(item, "item cannot be null");
         Validate.notNull(name, "name cannot be null");
