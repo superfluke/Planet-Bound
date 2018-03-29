@@ -1,6 +1,7 @@
 package com.crypticmushroom.planetbound.client;
 
 import com.crypticmushroom.planetbound.PBCore;
+import com.crypticmushroom.planetbound.init.PBBlocks;
 import com.crypticmushroom.planetbound.networking.PBGuiHandler;
 import com.crypticmushroom.planetbound.networking.PBNetworkHandler;
 import com.crypticmushroom.planetbound.networking.packet.PBPacketOpenContainer;
@@ -13,10 +14,20 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+@SideOnly(Side.CLIENT)
 @EventBusSubscriber
 public class ClientEventHandler
 {
+    @SubscribeEvent
+    public static void onTick(TickEvent event)
+    {
+        PBBlocks.emberwood_leaves.setGraphicsLevel(Minecraft.getMinecraft().gameSettings.fancyGraphics);
+    }
+    
     @SubscribeEvent
     public static void keyPressed(InputEvent.KeyInputEvent event)
     {

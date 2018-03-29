@@ -56,7 +56,7 @@ public class PBBlocks
     public static Block ronnian_sandstone_chiseled;
     public static Block ronnian_sandstone_smooth;
     //Emberwood
-    public static Block emberwood_leaves;
+    public static EmberwoodLeaves emberwood_leaves;
     public static Block emberwood_planks;
     public static Block emberwood;
 
@@ -96,7 +96,7 @@ public class PBBlocks
         PBLogDev.printInfo("Registered PlanetBound blocks...");
     }
     
-    private static Block registerBlock(Block block, String name, CreativeTabs tab)
+    private static <T extends Block> T registerBlock(T block, String name, CreativeTabs tab)
     {
         Validate.notNull(block, "block cannot be null");
         Validate.notNull(name, "name cannot be null");
