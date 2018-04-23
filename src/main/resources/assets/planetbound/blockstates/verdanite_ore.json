@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "planetbound:verdanite_ore" }
+  "variants": {
+    "normal": {
+      "model": "planetbound:verdanite_ore"
     }
+  }
 }

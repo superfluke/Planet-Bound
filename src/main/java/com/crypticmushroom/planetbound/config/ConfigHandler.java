@@ -1,7 +1,8 @@
 package com.crypticmushroom.planetbound.config;
 
 import com.crypticmushroom.planetbound.PBCore;
-import com.crypticmushroom.planetbound.logger.*;
+import com.crypticmushroom.planetbound.logger.PBLogDev;
+import com.crypticmushroom.planetbound.logger.PBLogger;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
@@ -9,12 +10,10 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
  * Config Handler by Jonathan
  */
 
-public class ConfigHandler
-{
+public class ConfigHandler {
     private static boolean checkDevMode = getAutoDevMode(PBCore.VERSION);
 
-    public static void loadConfig(FMLPreInitializationEvent event)
-    {
+    public static void loadConfig(FMLPreInitializationEvent event) {
         //Call config
         Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 
@@ -30,14 +29,10 @@ public class ConfigHandler
         PBLogger.printInfo("Configuration file loaded.");
     }
 
-    public static boolean getAutoDevMode(String versionCode)
-    {
-        if (versionCode.contains("dev"))
-        {
+    public static boolean getAutoDevMode(String versionCode) {
+        if (versionCode.contains("dev")) {
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
 
@@ -50,28 +45,18 @@ public class ConfigHandler
         */
     }
 
-    public static void configWarnings()
-    {
+    public static void configWarnings() {
         // Developer Mode logging
-        if(ConfigVariables.developerMode)
-        {
-            if (checkDevMode)
-            {
+        if (ConfigVariables.developerMode) {
+            if (checkDevMode) {
                 PBLogDev.printWarn("Developer Mode has automatically been enabled since you are running a development version of Planet Bound. You may turn this off in the configuration file.");
-            }
-            else
-            {
+            } else {
                 PBLogDev.printInfo("Developer Mode is enabled. Development logging will occur at the [INFO] level. Generation of rocks and sticks will always occur at [DEBUG] level.");
             }
-        }
-        else
-        {
-            if (checkDevMode)
-            {
+        } else {
+            if (checkDevMode) {
                 PBLogger.printWarn("Developer Mode has been manually disabled. You may turn it back on in the configuration settings.");
-            }
-            else
-            {
+            } else {
                 PBLogDev.printInfo("Developer Mode logging will continue at the DEBUG level.");
             }
         }

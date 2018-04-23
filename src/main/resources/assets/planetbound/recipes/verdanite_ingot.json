@@ -1,12 +1,12 @@
 {
-    "type": "minecraft:crafting_shapeless",
-    "ingredients": [
-        {
-            "item": "planetbound:verdanite_block"
-        }
-    ],
-    "result": {
-        "item": "planetbound:verdanite_ingot",
-        "count": 9
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "planetbound:verdanite_block"
     }
+  ],
+  "result": {
+    "item": "planetbound:verdanite_ingot",
+    "count": 9
+  }
 }

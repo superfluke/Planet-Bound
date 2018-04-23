@@ -1,12 +1,12 @@
 {
-    "type": "minecraft:crafting_shapeless",
-    "ingredients": [
-        {
-            "item": "planetbound:fortium_block"
-        }
-    ],
-    "result": {
-        "item": "planetbound:fortium_ingot",
-        "count": 9
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "planetbound:fortium_block"
     }
+  ],
+  "result": {
+    "item": "planetbound:fortium_ingot",
+    "count": 9
+  }
 }

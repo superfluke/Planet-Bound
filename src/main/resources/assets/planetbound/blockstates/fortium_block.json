@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "planetbound:fortium_block" }
+  "variants": {
+    "normal": {
+      "model": "planetbound:fortium_block"
     }
+  }
 }

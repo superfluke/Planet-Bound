@@ -3,13 +3,11 @@
   "pattern": [
     "# #",
     " # "
-
   ],
   "key": {
     "#": {
       "item": "planetbound:emberwood_planks"
     }
-
   },
   "result": {
     "item": "planetbound: emberwood_bucket"

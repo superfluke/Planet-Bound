@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "planetbound:rendium_block" }
+  "variants": {
+    "normal": {
+      "model": "planetbound:rendium_block"
     }
+  }
 }
