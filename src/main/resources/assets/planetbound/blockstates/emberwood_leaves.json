@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "planetbound:emberwood_leaves" }
+  "variants": {
+    "normal": {
+      "model": "planetbound:emberwood_leaves"
     }
+  }
 }

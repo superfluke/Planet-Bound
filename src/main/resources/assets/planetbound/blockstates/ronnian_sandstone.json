@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "planetbound:ronnian_sandstone" }
+  "variants": {
+    "normal": {
+      "model": "planetbound:ronnian_sandstone"
     }
+  }
 }

@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "planetbound:kybrite_ore" }
+  "variants": {
+    "normal": {
+      "model": "planetbound:kybrite_ore"
     }
+  }
 }

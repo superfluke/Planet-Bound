@@ -1,12 +1,12 @@
 {
-    "type": "minecraft:crafting_shapeless",
-    "ingredients": [
-        {
-            "item": "planetbound:rendium_block"
-        }
-    ],
-    "result": {
-        "item": "planetbound:rendium_crystal",
-        "count": 9
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "planetbound:rendium_block"
     }
+  ],
+  "result": {
+    "item": "planetbound:rendium_crystal",
+    "count": 9
+  }
 }
