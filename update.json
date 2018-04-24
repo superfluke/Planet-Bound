@@ -1,12 +1,10 @@
 {
-  "1.12.2":
-  {
+  "1.12.2": {
     "1.0-dev": "Development began.",
     "1.0": "Initial release."
   },
   "homepage": "https://minecraft.curseforge.com/projects/cryptic-mushroom-planetbound",
-  "promos":
-  {
+  "promos": {
     "1.12.2-recommended": "1.0",
     "1.12.2-latest": "1.0"
   }

@@ -1,7 +1,5 @@
 package com.crypticmushroom.planetbound.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

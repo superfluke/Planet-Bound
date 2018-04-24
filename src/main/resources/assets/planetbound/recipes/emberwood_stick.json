@@ -3,13 +3,11 @@
   "pattern": [
     " X ",
     " X "
-
   ],
   "key": {
     "X": {
       "item": "planetbound:emberwood_planks"
     }
-
   },
   "result": {
     "item": "planetbound:emberwood_stick"

@@ -5,7 +5,6 @@ import com.crypticmushroom.planetbound.init.PBBlocks;
 import com.crypticmushroom.planetbound.networking.PBGuiHandler;
 import com.crypticmushroom.planetbound.networking.PBNetworkHandler;
 import com.crypticmushroom.planetbound.networking.packet.PBPacketOpenContainer;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,35 +19,27 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 @EventBusSubscriber
-public class ClientEventHandler
-{
+public class ClientEventHandler {
     @SubscribeEvent
-    public static void onTick(TickEvent event)
-    {
+    public static void onTick(TickEvent event) {
         PBBlocks.emberwood_leaves.setGraphicsLevel(Minecraft.getMinecraft().gameSettings.fancyGraphics);
     }
-    
+
     @SubscribeEvent
-    public static void keyPressed(InputEvent.KeyInputEvent event)
-    {
-        if(PBKeyHandler.isInventoryPressed())
-        {
+    public static void keyPressed(InputEvent.KeyInputEvent event) {
+        if (PBKeyHandler.isInventoryPressed()) {
             EntityPlayer player = Minecraft.getMinecraft().player;
-            
-            if(player.isCreative())
-            {
+
+            if (player.isCreative()) {
                 Minecraft.getMinecraft().displayGuiScreen(new GuiContainerCreative(player));
-            }
-            else
-            {
+            } else {
                 PBNetworkHandler.sendToServer(new PBPacketOpenContainer(PBGuiHandler.PLAYER_ID));
             }
         }
     }
-    
+
     @SubscribeEvent
-    public static void onTextureStitch(TextureStitchEvent.Pre event)
-    {
+    public static void onTextureStitch(TextureStitchEvent.Pre event) {
         event.getMap().registerSprite(new ResourceLocation(PBCore.MOD_ID + ":items/empty_gauntlet_slot"));
     }
 }

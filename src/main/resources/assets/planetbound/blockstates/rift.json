@@ -1,6 +1,10 @@
 {
-    "variants": {
-        "axis=z": { "model": "planetbound:rift_ew" },
-        "axis=x": { "model": "planetbound:rift_ns" }
+  "variants": {
+    "axis=z": {
+      "model": "planetbound:rift_ew"
+    },
+    "axis=x": {
+      "model": "planetbound:rift_ns"
     }
+  }
 }

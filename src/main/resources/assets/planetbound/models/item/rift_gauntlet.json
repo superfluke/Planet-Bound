@@ -1,6 +1,6 @@
 {
-	"parent": "item/generated",
-	"textures": {
-		"layer0": "planetbound:items/tools/rift_gauntlet"
-	}
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "planetbound:items/tools/rift_gauntlet"
+  }
 }

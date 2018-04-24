@@ -1,14 +1,7 @@
 package com.crypticmushroom.planetbound.init;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.crypticmushroom.planetbound.blocks.*;
-import com.crypticmushroom.planetbound.blocks.ronnian.*;
-import net.minecraft.creativetab.CreativeTabs;
-import org.apache.commons.lang3.Validate;
-
 import com.crypticmushroom.planetbound.PBCore;
+import com.crypticmushroom.planetbound.blocks.*;
 import com.crypticmushroom.planetbound.blocks.oreblock.FortiumOreBlock;
 import com.crypticmushroom.planetbound.blocks.oreblock.KybriteOreBlock;
 import com.crypticmushroom.planetbound.blocks.oreblock.RendiumOreBlock;
@@ -16,11 +9,12 @@ import com.crypticmushroom.planetbound.blocks.oreblock.VerdaniteOreBlock;
 import com.crypticmushroom.planetbound.blocks.ores.KybriteOre;
 import com.crypticmushroom.planetbound.blocks.ores.RendiumOre;
 import com.crypticmushroom.planetbound.blocks.ores.VerdaniteOre;
+import com.crypticmushroom.planetbound.blocks.ronnian.*;
 import com.crypticmushroom.planetbound.logger.PBLogDev;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.event.RegistryEvent;
@@ -28,10 +22,13 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.commons.lang3.Validate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @EventBusSubscriber
-public class PBBlocks
-{
+public class PBBlocks {
     private static final List<Block> blocks = new ArrayList<>();
 
     //Kybrite
@@ -60,8 +57,7 @@ public class PBBlocks
     public static Block emberwood_planks;
     public static Block emberwood;
 
-    public static void init()
-    {
+    public static void init() {
         //Kybirte
         kybrite_ore = registerBlock(new KybriteOre(), "kybrite_ore", PBCreativeTabs.TAB_BLOCKS);
         kybrite_block = registerBlock(new KybriteOreBlock(), "kybrite_block", PBCreativeTabs.TAB_BLOCKS);
@@ -88,59 +84,51 @@ public class PBBlocks
         emberwood_planks = registerBlock(new EmberwoodPlanks(), "emberwood_planks", PBCreativeTabs.TAB_BLOCKS);
         emberwood = registerBlock(new EmberwoodLog(), "emberwood_log", PBCreativeTabs.TAB_BLOCKS);
     }
-    
+
     @SubscribeEvent
-    public static void registerBlocks(RegistryEvent.Register<Block> event)
-    {
+    public static void registerBlocks(RegistryEvent.Register<Block> event) {
         event.getRegistry().registerAll(PBBlocks.getBlocks());
         PBLogDev.printInfo("Registered PlanetBound blocks...");
     }
-    
-    private static <T extends Block> T registerBlock(T block, String name, CreativeTabs tab)
-    {
+
+    private static <T extends Block> T registerBlock(T block, String name, CreativeTabs tab) {
         Validate.notNull(block, "block cannot be null");
         Validate.notNull(name, "name cannot be null");
 
-        if (tab != null)
-        {
+        if (tab != null) {
             block.setCreativeTab(tab);
         }
-        
+
         block.setUnlocalizedName(name);
         block.setRegistryName(PBCore.MOD_ID, name);
-        
+
         blocks.add(block);
-        
+
         PBItems.registerBlockAsItem(new ItemBlock(block), name);
-        
+
         return block;
     }
-    
+
     @SideOnly(Side.CLIENT)
-    public static void registerModels()
-    {
-        for(Block block : blocks)
-        {
+    public static void registerModels() {
+        for (Block block : blocks) {
             registerModel(block);
         }
     }
-    
+
     @SideOnly(Side.CLIENT)
-    private static void registerModel(Block block)
-    {
+    private static void registerModel(Block block) {
         registerModel(block, 0);
     }
-    
+
     @SideOnly(Side.CLIENT)
-    private static void registerModel(Block block, int metadata)
-    {
+    private static void registerModel(Block block, int metadata) {
         Validate.notNull(block, "block cannot be null");
-        
+
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), metadata, new ModelResourceLocation(block.getRegistryName(), "inventory"));
     }
-    
-    public static Block[] getBlocks()
-    {
+
+    public static Block[] getBlocks() {
         return blocks.toArray(new Block[]{});
     }
 }
