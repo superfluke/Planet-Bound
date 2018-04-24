@@ -21,6 +21,12 @@ import net.minecraft.world.gen.NoiseGeneratorPerlin;
 
 import com.crypticmushroom.planetbound.world.planet.Planet;
 
+/* If you were to ask me, I think it would be more effective if this was split up, so that
+ * each planet can be more customizable than a single class. I'll keep this for now, but
+ * if the other planets are implemented, this one should be just for Ronne
+ *
+ * @Androsa
+ */
 public class ChunkGeneratorPlanet implements IChunkGenerator
 {
 
@@ -43,9 +49,9 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
     double[] depthRegion;
 
     private Planet planetInstance;
+    private final PBGenCavesRonne caveGen = new PBGenCavesRonne();
 
-    public ChunkGeneratorPlanet(World world, long seed, Planet planet)
-    {
+    public ChunkGeneratorPlanet(World world, long seed, Planet planet) {
         this.heightMap = new double[planet.getXSize() * planet.getYSize() * planet.getZSize()];
 
         this.planetInstance = planet;
@@ -61,12 +67,12 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
     }
 
 	@Override
-	public Chunk generateChunk(int x, int z)
-	{
+	public Chunk generateChunk(int x, int z) {
         ChunkPrimer primer = new ChunkPrimer();
 
         this.setBlocksInChunk(x, z, primer);
         this.generateTerrainBlocks(x, z, primer);
+        caveGen.generate(world, x, z, primer);
 
         Chunk chunk = new Chunk(this.world, primer, x, z);
         chunk.generateSkylightMap();
@@ -75,8 +81,7 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
 	}
 
 	@Override
-	public void populate(int x, int z)
-	{
+	public void populate(int x, int z) {
         BlockFalling.fallInstantly = true;
         int i = x * 16;
         int j = z * 16;
@@ -99,53 +104,44 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
 	}
 
 	@Override
-	public boolean generateStructures(Chunk chunkIn, int x, int z)
-	{
+	public boolean generateStructures(Chunk chunkIn, int x, int z) {
 		return false;
 	}
 
 	@Override
-	public List<SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos)
-	{
+	public List<SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
 		return null;
 	}
 
 	@Override
-	public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position, boolean findUnexplored)
-	{
+	public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position, boolean findUnexplored) {
 		return null;
 	}
 
 	@Override
-	public void recreateStructures(Chunk chunkIn, int x, int z) 
-	{
+	public void recreateStructures(Chunk chunkIn, int x, int z) {
 
 	}
 
 	@Override
-	public boolean isInsideStructure(World worldIn, String structureName, BlockPos pos)
-	{
+	public boolean isInsideStructure(World worldIn, String structureName, BlockPos pos) {
 		return false;
 	}
 
-    public void setBlocksInChunk(int x, int z, ChunkPrimer primer)
-    {
+    public void setBlocksInChunk(int x, int z, ChunkPrimer primer) {
         this.generateHeightmap(x * 4, z * 4);
 
-        for (int i = 0; i < 4; ++i)
-        {
+        for (int i = 0; i < 4; ++i) {
             int j = i * 5;
             int k = (i + 1) * 5;
 
-            for (int l = 0; l < 4; ++l)
-            {
+            for (int l = 0; l < 4; ++l) {
                 int i1 = (j + l) * 33;
                 int j1 = (j + l + 1) * 33;
                 int k1 = (k + l) * 33;
                 int l1 = (k + l + 1) * 33;
 
-                for (int i2 = 0; i2 < 32; ++i2)
-                {
+                for (int i2 = 0; i2 < 32; ++i2) {
                     double d1 = this.heightMap[i1 + i2];
                     double d2 = this.heightMap[j1 + i2];
                     double d3 = this.heightMap[k1 + i2];
@@ -155,22 +151,18 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
                     double d7 = (this.heightMap[k1 + i2 + 1] - d3) * 0.125D;
                     double d8 = (this.heightMap[l1 + i2 + 1] - d4) * 0.125D;
 
-                    for (int j2 = 0; j2 < 8; ++j2)
-                    {
+                    for (int j2 = 0; j2 < 8; ++j2) {
                         double d10 = d1;
                         double d11 = d2;
                         double d12 = (d3 - d1) * 0.25D;
                         double d13 = (d4 - d2) * 0.25D;
 
-                        for (int k2 = 0; k2 < 4; ++k2)
-                        {
+                        for (int k2 = 0; k2 < 4; ++k2) {
                             double d16 = (d11 - d10) * 0.25D;
                             double lvt_45_1_ = d10 - d16;
 
-                            for (int l2 = 0; l2 < 4; ++l2)
-                            {
-                                if ((lvt_45_1_ += d16) > 0.0D)
-                                {
+                            for (int l2 = 0; l2 < 4; ++l2) {
+                                if ((lvt_45_1_ += d16) > 0.0D) {
                                     primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, this.planetInstance.getFillerBlock());
                                 }
                             }
@@ -189,57 +181,40 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
         }
     }
 
-    public void generateTerrainBlocks(int chunkX, int chunkZ, ChunkPrimer primer)
-    {
+    public void generateTerrainBlocks(int chunkX, int chunkZ, ChunkPrimer primer) {
         this.depthBuffer = this.surfaceNoise.getRegion(this.depthBuffer, (double)(chunkX * 16), (double)(chunkZ * 16), 16, 16, 0.0625D, 0.0625D, 1.0D);
 
-        for (int x = 0; x < 16; ++x)
-        {
-        	for (int z = 0; z < 16; ++z)
-        	{
+        for (int x = 0; x < 16; ++x) {
+        	for (int z = 0; z < 16; ++z) {
         		int chance = -1;
         		int randomizedNumber = (int)(this.depthBuffer[z + x * 16] / 3.0D + 3.0D + this.random.nextDouble() * 0.25D);
 
                 IBlockState topState = this.planetInstance.getTopBlock();
                 IBlockState bottomState = this.planetInstance.getBottomBlock();
 
-        		for (int y = 255; y >= 0; --y)
-        		{
-        			if (y <= this.random.nextInt(5))
-        			{
+        		for (int y = 255; y >= 0; --y) {
+        			if (y <= this.random.nextInt(5)) {
         				primer.setBlockState(x, y, z, Blocks.BEDROCK.getDefaultState());
-        			}
-        			else
-        			{
+        			} else {
         				IBlockState state = primer.getBlockState(x, y, z);
 
-        				if (state.getMaterial() == Material.AIR)
-        				{
+        				if (state.getMaterial() == Material.AIR) {
         					chance = -1;
-        				}
-        				else if (state.getBlock() == this.planetInstance.getFillerBlock().getBlock())
-        				{
-                            if (chance == -1)
-                            {
-                                if (randomizedNumber <= 0)
-                                {
+        				} else if (state.getBlock() == this.planetInstance.getFillerBlock().getBlock()) {
+                            if (chance == -1) {
+                                if (randomizedNumber <= 0) {
                                 	topState = Blocks.AIR.getDefaultState();
                                 	bottomState = this.planetInstance.getFillerBlock();
                                 }
 
                                 chance = randomizedNumber;
 
-                                if (y >= 0)
-                                {
+                                if (y >= 0) {
                                 	primer.setBlockState(x, y, z, topState);
-                                }
-                                else
-                                {
+                                } else {
                                 	primer.setBlockState(x, y, z, bottomState);
                                 }
-                            }
-                            else if (chance > 0)
-                            {
+                            } else if (chance > 0) {
                                 --chance;
                                 primer.setBlockState(x, y, z, bottomState);
                             }
@@ -250,13 +225,11 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
         }
     }
 
-    public void generateHeightmap(int chunkX, int chunkZ)
-    {
+    public void generateHeightmap(int chunkX, int chunkZ) {
     	this.generateHeightmap(chunkX, 0, chunkZ);
     }
 
-    private void generateHeightmap(int chunkX, int yOffset, int chunkZ)
-    {
+    private void generateHeightmap(int chunkX, int yOffset, int chunkZ) {
         this.depthRegion = this.depthNoise.generateNoiseOctaves(this.depthRegion, chunkX, chunkZ, this.planetInstance.getXSize(), this.planetInstance.getZSize(), 80.0D, 80.0D, 0.0D);
         float f = 684.412F;
         float f1 = 684.412F;
@@ -266,18 +239,14 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
         int i = 0;
         int j = 0;
 
-        for (int k = 0; k < 5; ++k)
-        {
-            for (int l = 0; l < 5; ++l)
-            {
+        for (int k = 0; k < 5; ++k) {
+            for (int l = 0; l < 5; ++l) {
                 float f2 = 0.0F;
                 float f3 = 0.0F;
                 float f4 = 0.0F;
  
-                for (int j1 = -2; j1 <= 2; ++j1)
-                {
-                    for (int k1 = -2; k1 <= 2; ++k1)
-                    {
+                for (int j1 = -2; j1 <= 2; ++j1) {
+                    for (int k1 = -2; k1 <= 2; ++k1) {
                         float f5 = this.planetInstance.getMinHeight();
                         float f6 = this.planetInstance.getMaxHeight();
 
@@ -293,27 +262,22 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
                 f3 = (f3 * 4.0F - 1.0F) / 8.0F;
                 double d7 = this.depthRegion[j] / 8000.0D;
 
-                if (d7 < 0.0D)
-                {
+                if (d7 < 0.0D) {
                     d7 = -d7 * 0.3D;
                 }
 
                 d7 = d7 * 3.0D - 2.0D;
 
-                if (d7 < 0.0D)
-                {
+                if (d7 < 0.0D) {
                     d7 = d7 / 2.0D;
 
-                    if (d7 < -1.0D)
-                    {
+                    if (d7 < -1.0D) {
                         d7 = -1.0D;
                     }
 
                     d7 = d7 / 1.4D;
                     d7 = d7 / 2.0D;
-                }
-                else
-                {
+                } else {
                     if (d7 > 1.0D)
                     {
                         d7 = 1.0D;
@@ -329,12 +293,10 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
                 d8 = d8 * (double)8.5F / 8.0D;
                 double d0 = (double)8.5F + d8 * 4.0D;
 
-                for (int l1 = 0; l1 < 33; ++l1)
-                {
+                for (int l1 = 0; l1 < 33; ++l1) {
                     double d1 = ((double)l1 - d0) * (double)12.0F * 128.0D / 256.0D / d9;
 
-                    if (d1 < 0.0D)
-                    {
+                    if (d1 < 0.0D) {
                         d1 *= 4.0D;
                     }
 
@@ -343,8 +305,7 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
                     double d4 = (this.mainNoiseRegion[i] / 10.0D + 1.0D) / 2.0D;
                     double d5 = MathHelper.clampedLerp(d2, d3, d4) - d1;
 
-                    if (l1 > 29)
-                    {
+                    if (l1 > 29) {
                         double d6 = (double)((float)(l1 - 29) / 3.0F);
                         d5 = d5 * (1.0D - d6) + -10.0D * d6;
                     }
@@ -355,5 +316,4 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
             }
         }
     }
-
 }
