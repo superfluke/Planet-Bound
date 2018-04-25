@@ -1,6 +1,8 @@
 package com.crypticmushroom.planetbound.world.gen;
 
-import com.crypticmushroom.planetbound.world.planet.Planet;
+import java.util.List;
+import java.util.Random;
+
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -17,26 +19,37 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 
-import java.util.List;
-import java.util.Random;
+import com.crypticmushroom.planetbound.world.planet.Planet;
 
-public class ChunkGeneratorPlanet implements IChunkGenerator {
+/* If you were to ask me, I think it would be more effective if this was split up, so that
+ * each planet can be more customizable than a single class. I'll keep this for now, but
+ * if the other planets are implemented, this one should be just for Ronne
+ *
+ * @Androsa
+ */
+public class ChunkGeneratorPlanet implements IChunkGenerator
+{
 
-    private final Random random;
-    private final double[] heightMap;
-    public NoiseGeneratorOctaves scaleNoise;
-    public NoiseGeneratorOctaves depthNoise;
-    double[] mainNoiseRegion;
-    double[] minLimitRegion;
-    double[] maxLimitRegion;
-    double[] depthRegion;
     private World world;
+    private final Random random;
+
     private NoiseGeneratorOctaves minLimitPerlinNoise;
     private NoiseGeneratorOctaves maxLimitPerlinNoise;
     private NoiseGeneratorOctaves mainPerlinNoise;
     private NoiseGeneratorPerlin surfaceNoise;
+    public NoiseGeneratorOctaves scaleNoise;
+    public NoiseGeneratorOctaves depthNoise;
+
     private double[] depthBuffer = new double[256];
+    private final double[] heightMap;
+
+    double[] mainNoiseRegion;
+    double[] minLimitRegion;
+    double[] maxLimitRegion;
+    double[] depthRegion;
+
     private Planet planetInstance;
+    private final PBGenCavesRonne caveGen = new PBGenCavesRonne();
 
     public ChunkGeneratorPlanet(World world, long seed, Planet planet) {
         this.heightMap = new double[planet.getXSize() * planet.getYSize() * planet.getZSize()];
@@ -53,21 +66,22 @@ public class ChunkGeneratorPlanet implements IChunkGenerator {
         this.depthNoise = new NoiseGeneratorOctaves(this.random, 16);
     }
 
-    @Override
-    public Chunk generateChunk(int x, int z) {
+	@Override
+	public Chunk generateChunk(int x, int z) {
         ChunkPrimer primer = new ChunkPrimer();
 
         this.setBlocksInChunk(x, z, primer);
         this.generateTerrainBlocks(x, z, primer);
+        caveGen.generate(world, x, z, primer);
 
         Chunk chunk = new Chunk(this.world, primer, x, z);
         chunk.generateSkylightMap();
 
         return chunk;
-    }
+	}
 
-    @Override
-    public void populate(int x, int z) {
+	@Override
+	public void populate(int x, int z) {
         BlockFalling.fallInstantly = true;
         int i = x * 16;
         int j = z * 16;
@@ -76,7 +90,7 @@ public class ChunkGeneratorPlanet implements IChunkGenerator {
         this.random.setSeed(this.world.getSeed());
         long k = this.random.nextLong() / 2L * 2L + 1L;
         long l = this.random.nextLong() / 2L * 2L + 1L;
-        this.random.setSeed((long) x * k + (long) z * l ^ this.world.getSeed());
+        this.random.setSeed((long)x * k + (long)z * l ^ this.world.getSeed());
 
         net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(true, this, this.world, this.random, x, z, false);
 
@@ -87,32 +101,32 @@ public class ChunkGeneratorPlanet implements IChunkGenerator {
         net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(false, this, this.world, this.random, x, z, false);
 
         BlockFalling.fallInstantly = false;
-    }
+	}
 
-    @Override
-    public boolean generateStructures(Chunk chunkIn, int x, int z) {
-        return false;
-    }
+	@Override
+	public boolean generateStructures(Chunk chunkIn, int x, int z) {
+		return false;
+	}
 
-    @Override
-    public List<SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
-        return null;
-    }
+	@Override
+	public List<SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
+		return null;
+	}
 
-    @Override
-    public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position, boolean findUnexplored) {
-        return null;
-    }
+	@Override
+	public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position, boolean findUnexplored) {
+		return null;
+	}
 
-    @Override
-    public void recreateStructures(Chunk chunkIn, int x, int z) {
+	@Override
+	public void recreateStructures(Chunk chunkIn, int x, int z) {
 
-    }
+	}
 
-    @Override
-    public boolean isInsideStructure(World worldIn, String structureName, BlockPos pos) {
-        return false;
-    }
+	@Override
+	public boolean isInsideStructure(World worldIn, String structureName, BlockPos pos) {
+		return false;
+	}
 
     public void setBlocksInChunk(int x, int z, ChunkPrimer primer) {
         this.generateHeightmap(x * 4, z * 4);
@@ -168,60 +182,60 @@ public class ChunkGeneratorPlanet implements IChunkGenerator {
     }
 
     public void generateTerrainBlocks(int chunkX, int chunkZ, ChunkPrimer primer) {
-        this.depthBuffer = this.surfaceNoise.getRegion(this.depthBuffer, (double) (chunkX * 16), (double) (chunkZ * 16), 16, 16, 0.0625D, 0.0625D, 1.0D);
+        this.depthBuffer = this.surfaceNoise.getRegion(this.depthBuffer, (double)(chunkX * 16), (double)(chunkZ * 16), 16, 16, 0.0625D, 0.0625D, 1.0D);
 
         for (int x = 0; x < 16; ++x) {
-            for (int z = 0; z < 16; ++z) {
-                int chance = -1;
-                int randomizedNumber = (int) (this.depthBuffer[z + x * 16] / 3.0D + 3.0D + this.random.nextDouble() * 0.25D);
+        	for (int z = 0; z < 16; ++z) {
+        		int chance = -1;
+        		int randomizedNumber = (int)(this.depthBuffer[z + x * 16] / 3.0D + 3.0D + this.random.nextDouble() * 0.25D);
 
                 IBlockState topState = this.planetInstance.getTopBlock();
                 IBlockState bottomState = this.planetInstance.getBottomBlock();
 
-                for (int y = 255; y >= 0; --y) {
-                    if (y <= this.random.nextInt(5)) {
-                        primer.setBlockState(x, y, z, Blocks.BEDROCK.getDefaultState());
-                    } else {
-                        IBlockState state = primer.getBlockState(x, y, z);
+        		for (int y = 255; y >= 0; --y) {
+        			if (y <= this.random.nextInt(5)) {
+        				primer.setBlockState(x, y, z, Blocks.BEDROCK.getDefaultState());
+        			} else {
+        				IBlockState state = primer.getBlockState(x, y, z);
 
-                        if (state.getMaterial() == Material.AIR) {
-                            chance = -1;
-                        } else if (state.getBlock() == this.planetInstance.getFillerBlock().getBlock()) {
+        				if (state.getMaterial() == Material.AIR) {
+        					chance = -1;
+        				} else if (state.getBlock() == this.planetInstance.getFillerBlock().getBlock()) {
                             if (chance == -1) {
                                 if (randomizedNumber <= 0) {
-                                    topState = Blocks.AIR.getDefaultState();
-                                    bottomState = this.planetInstance.getFillerBlock();
+                                	topState = Blocks.AIR.getDefaultState();
+                                	bottomState = this.planetInstance.getFillerBlock();
                                 }
 
                                 chance = randomizedNumber;
 
                                 if (y >= 0) {
-                                    primer.setBlockState(x, y, z, topState);
+                                	primer.setBlockState(x, y, z, topState);
                                 } else {
-                                    primer.setBlockState(x, y, z, bottomState);
+                                	primer.setBlockState(x, y, z, bottomState);
                                 }
                             } else if (chance > 0) {
                                 --chance;
                                 primer.setBlockState(x, y, z, bottomState);
                             }
-                        }
-                    }
-                }
-            }
+        				}
+        			}
+        		}
+        	}
         }
     }
 
     public void generateHeightmap(int chunkX, int chunkZ) {
-        this.generateHeightmap(chunkX, 0, chunkZ);
+    	this.generateHeightmap(chunkX, 0, chunkZ);
     }
 
     private void generateHeightmap(int chunkX, int yOffset, int chunkZ) {
         this.depthRegion = this.depthNoise.generateNoiseOctaves(this.depthRegion, chunkX, chunkZ, this.planetInstance.getXSize(), this.planetInstance.getZSize(), 80.0D, 80.0D, 0.0D);
         float f = 684.412F;
         float f1 = 684.412F;
-        this.mainNoiseRegion = this.mainPerlinNoise.generateNoiseOctaves(this.mainNoiseRegion, chunkX, yOffset, chunkZ, this.planetInstance.getXSize(), this.planetInstance.getYSize(), this.planetInstance.getZSize(), (double) (f / 80.0D), (double) (f1 / 160.0D), (double) (f / 80.0D));
-        this.minLimitRegion = this.minLimitPerlinNoise.generateNoiseOctaves(this.minLimitRegion, chunkX, yOffset, chunkZ, this.planetInstance.getXSize(), this.planetInstance.getYSize(), this.planetInstance.getZSize(), (double) f, (double) f1, (double) f);
-        this.maxLimitRegion = this.maxLimitPerlinNoise.generateNoiseOctaves(this.maxLimitRegion, chunkX, yOffset, chunkZ, this.planetInstance.getXSize(), this.planetInstance.getYSize(), this.planetInstance.getZSize(), (double) f, (double) f1, (double) f);
+        this.mainNoiseRegion = this.mainPerlinNoise.generateNoiseOctaves(this.mainNoiseRegion, chunkX, yOffset, chunkZ, this.planetInstance.getXSize(), this.planetInstance.getYSize(), this.planetInstance.getZSize(), (double)(f / 80.0D), (double)(f1 / 160.0D), (double)(f / 80.0D));
+        this.minLimitRegion = this.minLimitPerlinNoise.generateNoiseOctaves(this.minLimitRegion, chunkX, yOffset, chunkZ, this.planetInstance.getXSize(), this.planetInstance.getYSize(), this.planetInstance.getZSize(), (double)f, (double)f1, (double)f);
+        this.maxLimitRegion = this.maxLimitPerlinNoise.generateNoiseOctaves(this.maxLimitRegion, chunkX, yOffset, chunkZ, this.planetInstance.getXSize(), this.planetInstance.getYSize(), this.planetInstance.getZSize(), (double)f, (double)f1, (double)f);
         int i = 0;
         int j = 0;
 
@@ -230,7 +244,7 @@ public class ChunkGeneratorPlanet implements IChunkGenerator {
                 float f2 = 0.0F;
                 float f3 = 0.0F;
                 float f4 = 0.0F;
-
+ 
                 for (int j1 = -2; j1 <= 2; ++j1) {
                     for (int k1 = -2; k1 <= 2; ++k1) {
                         float f5 = this.planetInstance.getMinHeight();
@@ -264,7 +278,8 @@ public class ChunkGeneratorPlanet implements IChunkGenerator {
                     d7 = d7 / 1.4D;
                     d7 = d7 / 2.0D;
                 } else {
-                    if (d7 > 1.0D) {
+                    if (d7 > 1.0D)
+                    {
                         d7 = 1.0D;
                     }
 
@@ -272,26 +287,26 @@ public class ChunkGeneratorPlanet implements IChunkGenerator {
                 }
 
                 ++j;
-                double d8 = (double) f3;
-                double d9 = (double) f2;
+                double d8 = (double)f3;
+                double d9 = (double)f2;
                 d8 = d8 + d7 * 0.2D;
-                d8 = d8 * (double) 8.5F / 8.0D;
-                double d0 = (double) 8.5F + d8 * 4.0D;
+                d8 = d8 * (double)8.5F / 8.0D;
+                double d0 = (double)8.5F + d8 * 4.0D;
 
                 for (int l1 = 0; l1 < 33; ++l1) {
-                    double d1 = ((double) l1 - d0) * (double) 12.0F * 128.0D / 256.0D / d9;
+                    double d1 = ((double)l1 - d0) * (double)12.0F * 128.0D / 256.0D / d9;
 
                     if (d1 < 0.0D) {
                         d1 *= 4.0D;
                     }
 
-                    double d2 = this.minLimitRegion[i] / (double) 512.0F;
-                    double d3 = this.maxLimitRegion[i] / (double) 512.0F;
+                    double d2 = this.minLimitRegion[i] / (double)512.0F;
+                    double d3 = this.maxLimitRegion[i] / (double)512.0F;
                     double d4 = (this.mainNoiseRegion[i] / 10.0D + 1.0D) / 2.0D;
                     double d5 = MathHelper.clampedLerp(d2, d3, d4) - d1;
 
                     if (l1 > 29) {
-                        double d6 = (double) ((float) (l1 - 29) / 3.0F);
+                        double d6 = (double)((float)(l1 - 29) / 3.0F);
                         d5 = d5 * (1.0D - d6) + -10.0D * d6;
                     }
 
@@ -301,5 +316,4 @@ public class ChunkGeneratorPlanet implements IChunkGenerator {
             }
         }
     }
-
 }
