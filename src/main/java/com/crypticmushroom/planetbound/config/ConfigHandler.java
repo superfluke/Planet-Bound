@@ -3,14 +3,19 @@ package com.crypticmushroom.planetbound.config;
 import com.crypticmushroom.planetbound.PBCore;
 import com.crypticmushroom.planetbound.logger.PBLogDev;
 import com.crypticmushroom.planetbound.logger.PBLogger;
+import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 /*
  * Config Handler by Jonathan
  */
 
+@Config(modid = PBCore.MOD_ID)
+@Mod.EventBusSubscriber(modid = PBCore.MOD_ID)
 public class ConfigHandler {
+    private static final String configKey = PBCore.MOD_ID + ".config.";
     private static boolean checkDevMode = getAutoDevMode(PBCore.VERSION);
 
     public static void loadConfig(FMLPreInitializationEvent event) {
@@ -60,5 +65,14 @@ public class ConfigHandler {
                 PBLogDev.printInfo("Developer Mode logging will continue at the DEBUG level.");
             }
         }
+    }
+
+    public static Dimension dimension = new Dimension();
+
+    public static class Dimension {
+        @Config.LangKey(configKey + "dimension_id_ronne")
+        @Config.RequiresMcRestart
+        @Config.Comment("Set the Dimension ID for Ronne. Will require a restart for effects to take place.")
+        public int dimensionIDRonne = 4;
     }
 }
