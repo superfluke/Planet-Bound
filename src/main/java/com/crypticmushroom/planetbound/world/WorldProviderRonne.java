@@ -26,4 +26,9 @@ public class WorldProviderRonne extends WorldProviderPlanet {
         return new PlanetRonne();
     }
 
+    @Override
+    public boolean isSurfaceWorld() {
+        return true;
+    }
+
 }
