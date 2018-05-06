@@ -26,7 +26,6 @@ public class PBGenCavesRonne extends MapGenCaves {
         float var23 = 0.0F;
         float var24 = 0.0F;
         Random caveRNG = new Random(caveSeed);
-        Random clusterRNG = new Random(caveSeed);
 
         if (loopEnd <= 0) {
             int rangeInBlocks = this.range * 16 - 16;

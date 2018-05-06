@@ -30,13 +30,13 @@ public abstract class Planet {
     }
 
     public abstract void generate(BlockPos chunkPos, Biome biome);
-
+/*
     public abstract IBlockState getTopBlock();
 
     public abstract IBlockState getBottomBlock();
 
     public abstract IBlockState getFillerBlock();
-
+    */
     public float getMinHeight() {
         return this.minHeight;
     }

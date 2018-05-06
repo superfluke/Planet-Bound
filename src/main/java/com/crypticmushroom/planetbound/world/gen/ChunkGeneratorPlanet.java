@@ -3,6 +3,7 @@ package com.crypticmushroom.planetbound.world.gen;
 import java.util.List;
 import java.util.Random;
 
+import com.crypticmushroom.planetbound.init.PBBlocks;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -40,6 +41,7 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
     public NoiseGeneratorOctaves scaleNoise;
     public NoiseGeneratorOctaves depthNoise;
 
+    private Biome biomesForGenerationRonne[];
     private double[] depthBuffer = new double[256];
     private final double[] heightMap;
 
@@ -68,13 +70,21 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
 
 	@Override
 	public Chunk generateChunk(int x, int z) {
+        random.setSeed(x * 0x4f9939f508L + z * 0x1ef1565bd5L);
         ChunkPrimer primer = new ChunkPrimer();
+        setBlocksInChunk(x, z, primer);
 
-        this.setBlocksInChunk(x, z, primer);
-        this.generateTerrainBlocks(x, z, primer);
+        this.biomesForGenerationRonne = world.getBiomeProvider().getBiomes(biomesForGenerationRonne, x * 16, z * 16, 16, 16);
+        replaceBiomeBlocks(x, z, primer, biomesForGenerationRonne);
         caveGen.generate(world, x, z, primer);
 
-        Chunk chunk = new Chunk(this.world, primer, x, z);
+        Chunk chunk = new Chunk(world, primer, x, z);
+
+        byte[] chunkBiomes = chunk.getBiomeArray();
+        for (int i = 0; i < chunkBiomes.length; ++i) {
+            chunkBiomes[i] = (byte) Biome.getIdForBiome(this.biomesForGenerationRonne[i]);
+        }
+
         chunk.generateSkylightMap();
 
         return chunk;
@@ -129,6 +139,8 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
 	}
 
     public void setBlocksInChunk(int x, int z, ChunkPrimer primer) {
+        byte seaLevel = 63;
+        this.biomesForGenerationRonne = this.world.getBiomeProvider().getBiomesForGeneration(this.biomesForGenerationRonne, x * 4 - 2, z * 4 - 2, 10, 10);
         this.generateHeightmap(x * 4, z * 4);
 
         for (int i = 0; i < 4; ++i) {
@@ -142,28 +154,31 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
                 int l1 = (k + l + 1) * 33;
 
                 for (int i2 = 0; i2 < 32; ++i2) {
+                    double d0 = 0.125D;
                     double d1 = this.heightMap[i1 + i2];
                     double d2 = this.heightMap[j1 + i2];
                     double d3 = this.heightMap[k1 + i2];
                     double d4 = this.heightMap[l1 + i2];
-                    double d5 = (this.heightMap[i1 + i2 + 1] - d1) * 0.125D;
-                    double d6 = (this.heightMap[j1 + i2 + 1] - d2) * 0.125D;
-                    double d7 = (this.heightMap[k1 + i2 + 1] - d3) * 0.125D;
-                    double d8 = (this.heightMap[l1 + i2 + 1] - d4) * 0.125D;
+                    double d5 = (this.heightMap[i1 + i2 + 1] - d1) * d0;
+                    double d6 = (this.heightMap[j1 + i2 + 1] - d2) * d0;
+                    double d7 = (this.heightMap[k1 + i2 + 1] - d3) * d0;
+                    double d8 = (this.heightMap[l1 + i2 + 1] - d4) * d0;
 
                     for (int j2 = 0; j2 < 8; ++j2) {
+                        double d9 = 0.25D;
                         double d10 = d1;
                         double d11 = d2;
-                        double d12 = (d3 - d1) * 0.25D;
-                        double d13 = (d4 - d2) * 0.25D;
+                        double d12 = (d3 - d1) * d9;
+                        double d13 = (d4 - d2) * d9;
 
                         for (int k2 = 0; k2 < 4; ++k2) {
-                            double d16 = (d11 - d10) * 0.25D;
-                            double lvt_45_1_ = d10 - d16;
+                            double d14 = 0.25D;
+                            double d16 = (d11 - d10) * d14;
+                            double d15 = d10 - d16;
 
                             for (int l2 = 0; l2 < 4; ++l2) {
-                                if ((lvt_45_1_ += d16) > 0.0D) {
-                                    primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, this.planetInstance.getFillerBlock());
+                                if ((d15 += d16) > 0.0D) {
+                                    primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, PBBlocks.ronnian_stone.getDefaultState());
                                 }
                             }
 
@@ -178,50 +193,6 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
                     }
                 }
             }
-        }
-    }
-
-    public void generateTerrainBlocks(int chunkX, int chunkZ, ChunkPrimer primer) {
-        this.depthBuffer = this.surfaceNoise.getRegion(this.depthBuffer, (double)(chunkX * 16), (double)(chunkZ * 16), 16, 16, 0.0625D, 0.0625D, 1.0D);
-
-        for (int x = 0; x < 16; ++x) {
-        	for (int z = 0; z < 16; ++z) {
-        		int chance = -1;
-        		int randomizedNumber = (int)(this.depthBuffer[z + x * 16] / 3.0D + 3.0D + this.random.nextDouble() * 0.25D);
-
-                IBlockState topState = this.planetInstance.getTopBlock();
-                IBlockState bottomState = this.planetInstance.getBottomBlock();
-
-        		for (int y = 255; y >= 0; --y) {
-        			if (y <= this.random.nextInt(5)) {
-        				primer.setBlockState(x, y, z, Blocks.BEDROCK.getDefaultState());
-        			} else {
-        				IBlockState state = primer.getBlockState(x, y, z);
-
-        				if (state.getMaterial() == Material.AIR) {
-        					chance = -1;
-        				} else if (state.getBlock() == this.planetInstance.getFillerBlock().getBlock()) {
-                            if (chance == -1) {
-                                if (randomizedNumber <= 0) {
-                                	topState = Blocks.AIR.getDefaultState();
-                                	bottomState = this.planetInstance.getFillerBlock();
-                                }
-
-                                chance = randomizedNumber;
-
-                                if (y >= 0) {
-                                	primer.setBlockState(x, y, z, topState);
-                                } else {
-                                	primer.setBlockState(x, y, z, bottomState);
-                                }
-                            } else if (chance > 0) {
-                                --chance;
-                                primer.setBlockState(x, y, z, bottomState);
-                            }
-        				}
-        			}
-        		}
-        	}
         }
     }
 
@@ -244,9 +215,11 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
                 float f2 = 0.0F;
                 float f3 = 0.0F;
                 float f4 = 0.0F;
+                Biome biomegenbase = this.biomesForGenerationRonne[k + 2 + (l + 2) * 10];
  
                 for (int j1 = -2; j1 <= 2; ++j1) {
                     for (int k1 = -2; k1 <= 2; ++k1) {
+                        Biome biomegenbase1 = this.biomesForGenerationRonne[k + j1 + 2 + (l + k1 + 2) * 10];
                         float f5 = this.planetInstance.getMinHeight();
                         float f6 = this.planetInstance.getMaxHeight();
 
@@ -313,6 +286,19 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
                     this.heightMap[i] = d5;
                     ++i;
                 }
+            }
+        }
+    }
+
+    public void replaceBiomeBlocks(int x, int z, ChunkPrimer primer, Biome[] biomesIn) {
+        if (!net.minecraftforge.event.ForgeEventFactory.onReplaceBiomeBlocks(this, x, z, primer, this.world)) return;
+        double d0 = 0.03125D;
+        this.depthBuffer = this.surfaceNoise.getRegion(this.depthBuffer, (double)(x * 16), (double)(z * 16), 16, 16, 0.0625D, 0.0625D, 1.0D);
+
+        for (int i = 0; i < 16; ++i) {
+            for (int j = 0; j < 16; ++j) {
+                Biome biome = biomesIn[j + i * 16];
+                biome.genTerrainBlocks(this.world, this.random, primer, x * 16 + i, z * 16 + j, this.depthBuffer[j + i * 16]);
             }
         }
     }

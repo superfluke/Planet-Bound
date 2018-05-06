@@ -14,7 +14,7 @@ public class PlanetRonne extends Planet {
     public void generate(BlockPos chunkPos, Biome biome) {
 
     }
-
+/*
     @Override
     public IBlockState getTopBlock() {
         return PBBlocks.ronnian_sand.getDefaultState();
@@ -29,5 +29,5 @@ public class PlanetRonne extends Planet {
     public IBlockState getFillerBlock() {
         return PBBlocks.ronnian_stone.getDefaultState();
     }
-
+    */
 }
