@@ -13,28 +13,33 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-//Client side only stuff in CLIENT package.
-public class ClientProxy extends CommonProxy {
+// Client side only stuff in CLIENT package.
+public class ClientProxy extends CommonProxy
+{
     @Override
-    public void preInit(FMLPreInitializationEvent event) {
+    public void preInit(FMLPreInitializationEvent event)
+    {
         MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
 
         PBKeyHandler.registerKeyBindings();
     }
 
     @Override
-    public void init(FMLInitializationEvent event) {
+    public void init(FMLInitializationEvent event)
+    {
         PBItems.registerModels();
         PBBlocks.registerModels();
     }
 
     @Override
-    public void postInit(FMLPostInitializationEvent event) {
+    public void postInit(FMLPostInitializationEvent event)
+    {
 
     }
 
     @Override
-    public EntityPlayer thePlayer() {
+    public EntityPlayer thePlayer()
+    {
         return Minecraft.getMinecraft().player;
     }
 }

@@ -16,20 +16,24 @@ import java.util.Arrays;
 
 //ugli code. dennis sad.
 @SideOnly(Side.CLIENT)
-public class SmeltModeButton extends GuiButton {
+public class SmeltModeButton extends GuiButton
+{
     private static final ResourceLocation FURNACE_GUI_TEXTURES = new ResourceLocation(PBCore.MOD_ID + ":textures/gui/container/inventors_forge.png");
 
     private TileEntityInventorsForge listener;
 
-    public SmeltModeButton(TileEntityInventorsForge listener, int id, int x, int y) {
+    public SmeltModeButton(TileEntityInventorsForge listener, int id, int x, int y)
+    {
         super(id, x, y, 9, 10, "");
 
         this.listener = listener;
     }
 
     @Override
-    public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
-        if (this.visible) {
+    public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks)
+    {
+        if(this.visible)
+        {
             FontRenderer fontrenderer = mc.fontRenderer;
             mc.getTextureManager().bindTexture(FURNACE_GUI_TEXTURES);
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -40,15 +44,19 @@ public class SmeltModeButton extends GuiButton {
 
             this.drawTexturedModalRect(this.x, this.y, 176, 31, 9, 10);
 
-            if (hovered) {
+            if(hovered)
+            {
                 this.drawTexturedModalRect(this.x, this.y, 176, 41, 9, 10);
             }
 
             this.mouseDragged(mc, mouseX, mouseY);
 
-            if (hovered) {
+            if(hovered)
+            {
                 GuiUtils.drawHoveringText(Arrays.asList("Smelt Mode: " + (listener.getField(4) == 0 ? "Alloys" : "Per slot")), mouseX - 100, mouseY - 2, Display.getWidth(), Display.getHeight(), -1, fontrenderer);
-            } else {
+            }
+            else
+            {
                 displayString = "";
             }
         }

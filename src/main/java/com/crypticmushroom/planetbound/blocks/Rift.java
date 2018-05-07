@@ -11,8 +11,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class Rift extends BlockPortal {
-    public Rift() {
+public class Rift extends BlockPortal
+{
+    public Rift()
+    {
         super();
 
         setHardness(-1.0F);
@@ -21,23 +23,25 @@ public class Rift extends BlockPortal {
     }
 
     @Override
-    public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity) {
-        if (entity instanceof EntityPlayer) {
+    public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity)
+    {
+        if(entity instanceof EntityPlayer)
+        {
             EntityPlayer player = (EntityPlayer) entity;
 
             PBPlayer.get(player).transferToDimension(player.dimension == PBWorld.RONNE_ID ? 0 : PBWorld.RONNE_ID);
         }
     }
 
-    //
-
     @Override
-    public boolean trySpawnPortal(World worldIn, BlockPos pos) {
+    public boolean trySpawnPortal(World worldIn, BlockPos pos)
+    {
         return true;
     }
 
     @Override
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+    {
 
     }
 }

@@ -18,16 +18,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 /**
  * Pretty much a modified copy of {@link GuiFurnace}
  */
-//Looks good. I usually run off of Forge/Minecraft code to make what I need to make as well and it runs great.
+// Looks good. I usually run off of Forge/Minecraft code to make what I need to
+// make as well and it runs great.
 @SideOnly(Side.CLIENT)
-public class GuiInventorsForge extends GuiContainer {
+public class GuiInventorsForge extends GuiContainer
+{
     private static final ResourceLocation FURNACE_GUI_TEXTURES = new ResourceLocation(PBCore.MOD_ID + ":textures/gui/container/inventors_forge.png");
 
     private final InventoryPlayer inventory;
 
     private final TileEntityInventorsForge tileEntity;
 
-    public GuiInventorsForge(InventoryPlayer inventory, TileEntityInventorsForge tileEntity) {
+    public GuiInventorsForge(InventoryPlayer inventory, TileEntityInventorsForge tileEntity)
+    {
         super(new ContainerInventorsForge(inventory, tileEntity));
 
         this.inventory = inventory;
@@ -35,14 +38,16 @@ public class GuiInventorsForge extends GuiContainer {
     }
 
     @Override
-    public void initGui() {
+    public void initGui()
+    {
         super.initGui();
 
         addButton(new SmeltModeButton(tileEntity, 0, guiLeft + 5, guiTop + 5));
     }
 
     @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+    public void drawScreen(int mouseX, int mouseY, float partialTicks)
+    {
         drawDefaultBackground();
 
         super.drawScreen(mouseX, mouseY, partialTicks);
@@ -51,7 +56,8 @@ public class GuiInventorsForge extends GuiContainer {
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
+    {
         String displayName = tileEntity.getDisplayName().getUnformattedText();
 
         fontRenderer.drawString(displayName, xSize / 2 - fontRenderer.getStringWidth(displayName) / 2, 6, 4210752);
@@ -59,7 +65,8 @@ public class GuiInventorsForge extends GuiContainer {
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
+    {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
         mc.getTextureManager().bindTexture(FURNACE_GUI_TEXTURES);
@@ -69,7 +76,8 @@ public class GuiInventorsForge extends GuiContainer {
 
         drawTexturedModalRect(i, j, 0, 0, xSize, ySize);
 
-        if (TileEntityInventorsForge.isBurning(tileEntity)) {
+        if(TileEntityInventorsForge.isBurning(tileEntity))
+        {
             int k = getBurnLeftScaled(13);
 
             drawTexturedModalRect(i + 56, j + 36 + 12 - k, 176, 12 - k, 14, k + 1);
@@ -81,23 +89,28 @@ public class GuiInventorsForge extends GuiContainer {
     }
 
     @Override
-    protected void actionPerformed(GuiButton button) {
-        if (button.id == 0) {
+    protected void actionPerformed(GuiButton button)
+    {
+        if(button.id == 0)
+        {
             PBNetworkHandler.sendToServer(new PBPacketSmeltMode(tileEntity));
         }
     }
 
-    private int getCookProgressScaled(int pixels) {
+    private int getCookProgressScaled(int pixels)
+    {
         int i = tileEntity.getField(2);
         int j = tileEntity.getField(3);
 
         return j != 0 && i != 0 ? i * pixels / j : 0;
     }
 
-    private int getBurnLeftScaled(int pixels) {
+    private int getBurnLeftScaled(int pixels)
+    {
         int i = tileEntity.getField(1);
 
-        if (i == 0) {
+        if(i == 0)
+        {
             i = 200;
         }
 

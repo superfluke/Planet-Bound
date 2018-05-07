@@ -9,12 +9,14 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 
 @SuppressWarnings("all")
 @ObjectHolder(PBCore.MOD_ID)
-public class PBBiomes {
+public class PBBiomes
+{
     @ObjectHolder("red_desert")
     public static final Biome redDesert;
 
-    //This *needs* to be done, or it will error
-    static {
+    // This *needs* to be done, or it will error
+    static
+    {
         redDesert = null;
     }
 }

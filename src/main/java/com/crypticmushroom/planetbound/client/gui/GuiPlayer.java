@@ -7,17 +7,20 @@ import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiPlayer extends GuiInventory {
+public class GuiPlayer extends GuiInventory
+{
     private static final ResourceLocation INVENTORY_BACKGROUND = new ResourceLocation(PBCore.MOD_ID + ":textures/gui/container/inventory.png");
 
-    public GuiPlayer(PBPlayer player) {
+    public GuiPlayer(PBPlayer player)
+    {
         super(player.getPlayer());
 
         inventorySlots = new ContainerPlayer(player);
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
+    {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(INVENTORY_BACKGROUND);
         int i = this.guiLeft;

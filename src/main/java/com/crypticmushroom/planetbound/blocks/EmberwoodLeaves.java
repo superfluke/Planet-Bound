@@ -12,23 +12,28 @@ import scala.actors.threadpool.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class EmberwoodLeaves extends BlockLeaves {
-    public EmberwoodLeaves() {
+public class EmberwoodLeaves extends BlockLeaves
+{
+    public EmberwoodLeaves()
+    {
         super();
     }
 
     @Override
-    public BlockPlanks.EnumType getWoodType(int meta) {
+    public BlockPlanks.EnumType getWoodType(int meta)
+    {
         return null;
     }
 
     @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune)
+    {
         return null;
     }
 
     @Override
-    public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
+    public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
+    {
         return Arrays.asList(new ItemStack[]{new ItemStack(this)});
     }
 }

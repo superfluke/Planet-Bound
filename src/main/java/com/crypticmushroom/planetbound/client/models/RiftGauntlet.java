@@ -5,11 +5,11 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 /**
- * test - RetroGamerSP
- * Created using Tabula 7.0.0
+ * test - RetroGamerSP Created using Tabula 7.0.0
  */
-//TODO create json model maybe? idk this looks good as is
-public class RiftGauntlet extends ModelBase {
+// TODO create json model maybe? idk this looks good as is
+public class RiftGauntlet extends ModelBase
+{
     public ModelRenderer shape1;
     public ModelRenderer shape2;
     public ModelRenderer shape3;
@@ -23,7 +23,8 @@ public class RiftGauntlet extends ModelBase {
     public ModelRenderer shape3_1;
     public ModelRenderer shape3_2;
 
-    public RiftGauntlet() {
+    public RiftGauntlet()
+    {
         this.textureWidth = 64;
         this.textureHeight = 32;
         this.shape4_5 = new ModelRenderer(this, 0, 0);
@@ -75,7 +76,8 @@ public class RiftGauntlet extends ModelBase {
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+    {
         this.shape4_5.render(f5);
         this.shape3_1.render(f5);
         this.shape4.render(f5);
@@ -93,7 +95,8 @@ public class RiftGauntlet extends ModelBase {
     /**
      * This is a helper function from Tabula to set the rotation of model parts
      */
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
+    {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;
