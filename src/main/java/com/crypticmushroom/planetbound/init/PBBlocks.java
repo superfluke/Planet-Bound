@@ -12,11 +12,13 @@ import com.crypticmushroom.planetbound.blocks.ores.VerdaniteOre;
 import com.crypticmushroom.planetbound.blocks.ronnian.*;
 import com.crypticmushroom.planetbound.logger.PBLogDev;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -27,7 +29,7 @@ import org.apache.commons.lang3.Validate;
 import java.util.ArrayList;
 import java.util.List;
 
-@EventBusSubscriber
+@EventBusSubscriber(modid = PBCore.MOD_ID)
 public class PBBlocks
 {
     private static final List<Block> blocks = new ArrayList<>();
@@ -115,12 +117,14 @@ public class PBBlocks
     }
 
     @SideOnly(Side.CLIENT)
-    public static void registerModels()
+    @SubscribeEvent
+    public static void registerModels(ModelRegistryEvent event)
     {
         for(Block block : blocks)
         {
             registerModel(block);
         }
+        ModelLoader.setCustomStateMapper(emberwood_leaves, new StateMap.Builder().ignore(EmberwoodLeaves.CHECK_DECAY, EmberwoodLeaves.DECAYABLE).build());
     }
 
     @SideOnly(Side.CLIENT)
@@ -134,7 +138,7 @@ public class PBBlocks
     {
         Validate.notNull(block, "block cannot be null");
 
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), metadata, new ModelResourceLocation(block.getRegistryName(), "inventory"));
+       ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), metadata, new ModelResourceLocation(block.getRegistryName(), "inventory"));
     }
 
     public static Block[] getBlocks()

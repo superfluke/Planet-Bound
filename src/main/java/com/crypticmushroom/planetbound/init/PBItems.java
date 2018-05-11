@@ -7,10 +7,11 @@ import com.crypticmushroom.planetbound.items.RendiumCore;
 import com.crypticmushroom.planetbound.items.RiftGauntlet;
 import com.crypticmushroom.planetbound.items.oreingot.*;
 import com.crypticmushroom.planetbound.logger.PBLogDev;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -21,7 +22,7 @@ import org.apache.commons.lang3.Validate;
 import java.util.ArrayList;
 import java.util.List;
 
-@EventBusSubscriber
+@EventBusSubscriber(modid = PBCore.MOD_ID)
 public class PBItems
 {
     private static final List<Item> items = new ArrayList<>();
@@ -88,7 +89,8 @@ public class PBItems
     }
 
     @SideOnly(Side.CLIENT)
-    public static void registerModels()
+    @SubscribeEvent
+    public static void registerModels(ModelRegistryEvent event)
     {
         for(Item item : items)
         {
@@ -106,8 +108,7 @@ public class PBItems
     private static void registerModel(Item item, int metadata)
     {
         Validate.notNull(item, "item cannot be null");
-
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, metadata, new ModelResourceLocation(item.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(item, metadata, new ModelResourceLocation(item.getRegistryName(), "inventory"));
     }
 
     public static Item[] getItems()
