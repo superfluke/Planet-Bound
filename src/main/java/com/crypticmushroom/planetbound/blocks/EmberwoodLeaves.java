@@ -1,5 +1,6 @@
 package com.crypticmushroom.planetbound.blocks;
 
+import com.google.common.collect.Lists;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.state.BlockStateContainer;
@@ -8,7 +9,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import scala.actors.threadpool.Arrays;
 
 import java.util.List;
 import java.util.Random;
@@ -35,7 +35,7 @@ public class EmberwoodLeaves extends BlockLeaves
     @Override
     public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
     {
-        return Arrays.asList(new ItemStack[]{new ItemStack(this)});
+        return Lists.newArrayList(new ItemStack(this));
     }
 
     @Override
