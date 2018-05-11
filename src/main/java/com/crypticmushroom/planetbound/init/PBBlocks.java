@@ -27,7 +27,7 @@ import org.apache.commons.lang3.Validate;
 import java.util.ArrayList;
 import java.util.List;
 
-@EventBusSubscriber
+@EventBusSubscriber(modid = PBCore.MOD_ID)
 public class PBBlocks
 {
     private static final List<Block> blocks = new ArrayList<>();

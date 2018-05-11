@@ -5,7 +5,6 @@ import com.crypticmushroom.planetbound.init.PBBlocks;
 import com.crypticmushroom.planetbound.init.PBItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -19,8 +18,6 @@ public class ClientProxy extends CommonProxy
     @Override
     public void preInit(FMLPreInitializationEvent event)
     {
-        MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
-
         PBKeyHandler.registerKeyBindings();
     }
 

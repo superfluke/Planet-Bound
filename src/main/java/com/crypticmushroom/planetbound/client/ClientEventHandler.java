@@ -18,7 +18,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-@EventBusSubscriber
+@EventBusSubscriber(modid = PBCore.MOD_ID, value = Side.CLIENT)
 public class ClientEventHandler
 {
     @SubscribeEvent

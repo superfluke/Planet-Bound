@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
-@EventBusSubscriber
+@EventBusSubscriber(modid = PBCore.MOD_ID)
 public class PBPlayerEventHandler
 {
     private static final ResourceLocation PLAYER_STORAGE = new ResourceLocation(PBCore.MOD_ID, "player_storage");
