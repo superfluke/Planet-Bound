@@ -13,6 +13,7 @@ import com.crypticmushroom.planetbound.blocks.ronnian.*;
 import com.crypticmushroom.planetbound.logger.PBLogDev;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -123,6 +124,7 @@ public class PBBlocks
         {
             registerModel(block);
         }
+        ModelLoader.setCustomStateMapper(emberwood_leaves, new StateMap.Builder().ignore(EmberwoodLeaves.CHECK_DECAY, EmberwoodLeaves.DECAYABLE).build());
     }
 
     @SideOnly(Side.CLIENT)
