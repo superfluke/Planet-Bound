@@ -10,6 +10,7 @@ import com.crypticmushroom.planetbound.logger.PBLogDev;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -88,7 +89,8 @@ public class PBItems
     }
 
     @SideOnly(Side.CLIENT)
-    public static void registerModels()
+    @SubscribeEvent
+    public static void registerModels(ModelRegistryEvent event)
     {
         for(Item item : items)
         {
