@@ -7,10 +7,10 @@ import com.crypticmushroom.planetbound.items.RendiumCore;
 import com.crypticmushroom.planetbound.items.RiftGauntlet;
 import com.crypticmushroom.planetbound.items.oreingot.*;
 import com.crypticmushroom.planetbound.logger.PBLogDev;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -106,8 +106,7 @@ public class PBItems
     private static void registerModel(Item item, int metadata)
     {
         Validate.notNull(item, "item cannot be null");
-
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, metadata, new ModelResourceLocation(item.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(item, metadata, new ModelResourceLocation(item.getRegistryName(), "inventory"));
     }
 
     public static Item[] getItems()

@@ -19,13 +19,14 @@ public class ClientProxy extends CommonProxy
     public void preInit(FMLPreInitializationEvent event)
     {
         PBKeyHandler.registerKeyBindings();
+        PBItems.registerModels();
+        PBBlocks.registerModels();
     }
 
     @Override
     public void init(FMLInitializationEvent event)
     {
-        PBItems.registerModels();
-        PBBlocks.registerModels();
+
     }
 
     @Override
