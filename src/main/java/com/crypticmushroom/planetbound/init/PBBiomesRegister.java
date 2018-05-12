@@ -1,6 +1,7 @@
 package com.crypticmushroom.planetbound.init;
 
 import com.crypticmushroom.planetbound.PBCore;
+import com.crypticmushroom.planetbound.world.biome.BiomeEmberwoodForest;
 import com.crypticmushroom.planetbound.world.biome.BiomeRedDesert;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.BiomeProperties;
@@ -19,7 +20,25 @@ public final class PBBiomesRegister
     {
         final BiomeRegistry biomes = new BiomeRegistry(event.getRegistry());
 
-        biomes.register("red_desert", new BiomeRedDesert(new BiomeProperties("Red Desert").setRainDisabled().setRainfall(0).setTemperature(0.7F)), Type.DRY, Type.WASTELAND);
+        biomes.register(
+                "red_desert",
+                new BiomeRedDesert(new BiomeProperties("Red Desert")
+                        .setRainDisabled()
+                        .setRainfall(0)
+                        .setTemperature(0.7F)
+                ),
+                Type.DRY, Type.WASTELAND
+        );
+
+        biomes.register(
+                "emberwood_forest",
+                new BiomeEmberwoodForest(new BiomeProperties("Emberwood Forest")
+                        .setRainDisabled()
+                        .setRainfall(0)
+                        .setTemperature(0.7F)
+                ),
+                Type.FOREST, Type.HOT
+        );
     }
 
     private static class BiomeRegistry

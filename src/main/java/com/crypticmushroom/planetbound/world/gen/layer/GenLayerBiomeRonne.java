@@ -7,7 +7,10 @@ import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerBiomeRonne extends GenLayer
 {
-    protected Biome[] allowedBiomes = {PBBiomes.redDesert};
+    protected Biome[] allowedBiomes = {
+            PBBiomes.redDesert,
+            PBBiomes.emberwoodForest
+    };
 
     public GenLayerBiomeRonne(long seed, GenLayer genlayer)
     {

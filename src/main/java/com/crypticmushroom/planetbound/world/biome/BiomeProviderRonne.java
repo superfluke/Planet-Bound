@@ -30,6 +30,7 @@ public class BiomeProviderRonne extends BiomeProvider
         biomeCache = new BiomeCache(this);
         biomesToSpawnIn = new ArrayList<Biome>();
         biomesToSpawnIn.add(PBBiomes.redDesert);
+        biomesToSpawnIn.add(PBBiomes.emberwoodForest);
     }
 
     public BiomeProviderRonne(long par1, WorldType worldType)

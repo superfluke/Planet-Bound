@@ -13,10 +13,13 @@ public class PBBiomes
 {
     @ObjectHolder("red_desert")
     public static final Biome redDesert;
+    @ObjectHolder("emberwood_forest")
+    public static final Biome emberwoodForest;
 
     // This *needs* to be done, or it will error
     static
     {
         redDesert = null;
+        emberwoodForest = null;
     }
 }
