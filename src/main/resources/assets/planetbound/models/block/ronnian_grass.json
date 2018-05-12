@@ -1,0 +1,10 @@
+{
+  "parent": "block/grass",
+  "textures": {
+    "particle": "planetbound:blocks/ronnian_dirt",
+    "bottom":   "planetbound:blocks/ronnian_dirt",
+    "top":      "planetbound:blocks/ronnian_grass_top",
+    "side":     "planetbound:blocks/ronnian_grass",
+    "overlay":  "planetbound:blocks/ronnian_grass_overlay"
+  }
+}

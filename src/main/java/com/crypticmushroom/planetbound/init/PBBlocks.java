@@ -55,6 +55,10 @@ public class PBBlocks
     public static Block ronnian_stone_polished;
     public static Block ronnian_sandstone_chiseled;
     public static Block ronnian_sandstone_smooth;
+    public static Block ronnian_dirt;
+    public static Block ronnian_coarse_dirt;
+    public static Block ronnian_grass;
+    public static Block ronnian_tallgrass;
     // Emberwood
     public static EmberwoodLeaves emberwood_leaves;
     public static Block emberwood_planks;
@@ -83,6 +87,10 @@ public class PBBlocks
         ronnian_stone_polished = registerBlock(new RonnianStonePolished(), "ronnian_stone_polished", PBCreativeTabs.TAB_BLOCKS);
         ronnian_sandstone_chiseled = registerBlock(new RonnianSandstoneChiseled(), "ronnian_sandstone_chiseled", PBCreativeTabs.TAB_BLOCKS);
         ronnian_sandstone_smooth = registerBlock(new RonnianSandstoneSmooth(), "ronnian_sandstone_smooth", PBCreativeTabs.TAB_BLOCKS);
+        ronnian_dirt = registerBlock(new RonnianDirt(), "ronnian_dirt", PBCreativeTabs.TAB_BLOCKS);
+        ronnian_coarse_dirt = registerBlock(new RonnianCoarseDirt(), "ronnian_coarse_dirt", PBCreativeTabs.TAB_BLOCKS);
+        ronnian_grass = registerBlock(new RonnianGrass(), "ronnian_grass", PBCreativeTabs.TAB_BLOCKS);
+        ronnian_tallgrass = registerBlock(new RonnianTallgrass(), "ronnian_tallgrass", PBCreativeTabs.TAB_BLOCKS);
         // Emberwood
         emberwood_leaves = registerBlock(new EmberwoodLeaves(), "emberwood_leaves", PBCreativeTabs.TAB_BLOCKS);
         emberwood_planks = registerBlock(new EmberwoodPlanks(), "emberwood_planks", PBCreativeTabs.TAB_BLOCKS);
