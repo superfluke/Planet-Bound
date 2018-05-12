@@ -17,7 +17,7 @@ public class EmberwoodLeaves extends BlockLeaves
 {
     public EmberwoodLeaves()
     {
-        super();
+        this.setDefaultState(blockState.getBaseState().withProperty(CHECK_DECAY, true).withProperty(DECAYABLE, true));
     }
 
     @Override
@@ -47,15 +47,22 @@ public class EmberwoodLeaves extends BlockLeaves
     @Override
     public int getMetaFromState(IBlockState state)
     {
-        int meta = state.getValue(CHECK_DECAY) ? 1 : 0;
-        if(state.getValue(DECAYABLE)) meta |= 0b10;
-        return meta;
+        int i = 0;
+
+        if (!state.getValue(DECAYABLE)) {
+            i |= 4;
+        }
+
+        if (state.getValue(CHECK_DECAY)) {
+            i |= 8;
+        }
+        return i;
     }
 
     @Deprecated
     @Override
     public IBlockState getStateFromMeta(int meta)
     {
-        return this.getDefaultState().withProperty(CHECK_DECAY, ((meta & 0b1) == 1)).withProperty(DECAYABLE, (meta & 0b10) == 1);
+        return this.getDefaultState().withProperty(DECAYABLE, (meta & 4) == 0).withProperty(CHECK_DECAY, (meta & 8) > 0);
     }
 }
