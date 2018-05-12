@@ -1,5 +1,6 @@
 package com.crypticmushroom.planetbound.world.gen;
 
+import com.crypticmushroom.planetbound.blocks.ronnian.RonnianGrass;
 import com.crypticmushroom.planetbound.blocks.ronnian.RonnianSand;
 import com.crypticmushroom.planetbound.init.PBBlocks;
 import net.minecraft.block.Block;
@@ -177,12 +178,12 @@ public class PBGenCavesRonne extends MapGenCaves
                                         {
                                             final IBlockState blockStateAt = blockStorage.getBlockState(genX, caveY, genZ);
                                             Block blockAt = blockStateAt.getBlock();
-                                            if(blockAt instanceof RonnianSand)
+                                            if(blockAt instanceof RonnianSand || blockAt instanceof RonnianGrass)
                                             {
                                                 hitGrass = true;
                                             }
 
-                                            if(blockAt != null && (blockAt == PBBlocks.ronnian_stone || blockAt == PBBlocks.ronnian_sandstone || blockAt == PBBlocks.ronnian_sand || blockStateAt.getMaterial() == Material.GROUND || blockStateAt.getMaterial() == Material.GRASS))
+                                            if(blockAt != null && (blockAt == PBBlocks.ronnian_stone || blockStateAt.getMaterial() == Material.GROUND || blockStateAt.getMaterial() == Material.GRASS))
                                             {
                                                 if(var59 * var59 + var51 * var51 + var46 * var46 < 0.85D)
                                                 {
@@ -190,7 +191,7 @@ public class PBGenCavesRonne extends MapGenCaves
                                                     blockStorage.setBlockState(genX, caveY, genZ, state);
                                                 }
 
-                                                if(hitGrass && blockStorage.getBlockState(genX, caveY - 1, genZ).getBlock() == PBBlocks.ronnian_sandstone)
+                                                if(hitGrass && blockStorage.getBlockState(genX, caveY - 1, genZ).getBlock() == PBBlocks.ronnian_dirt)
                                                 {
                                                     IBlockState blockState = this.world.getBiome(new BlockPos(genX + centerX * 16, 0, genZ + centerZ * 16)).topBlock;
                                                     blockStorage.setBlockState(genX, caveY - 1, genZ, blockState);
