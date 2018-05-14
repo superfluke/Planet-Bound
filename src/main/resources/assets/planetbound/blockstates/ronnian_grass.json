@@ -1,0 +1,11 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "normal": [
+      { "model": "planetbound:ronnian_grass" },
+      { "model": "planetbound:ronnian_grass", "y": 90 },
+      { "model": "planetbound:ronnian_grass", "y": 180 },
+      { "model": "planetbound:ronnian_grass", "y": 270 }
+    ]
+  }
+}

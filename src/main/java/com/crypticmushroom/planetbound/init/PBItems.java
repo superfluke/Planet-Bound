@@ -7,10 +7,11 @@ import com.crypticmushroom.planetbound.items.RendiumCore;
 import com.crypticmushroom.planetbound.items.RiftGauntlet;
 import com.crypticmushroom.planetbound.items.oreingot.*;
 import com.crypticmushroom.planetbound.logger.PBLogDev;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -21,8 +22,9 @@ import org.apache.commons.lang3.Validate;
 import java.util.ArrayList;
 import java.util.List;
 
-@EventBusSubscriber
-public class PBItems {
+@EventBusSubscriber(modid = PBCore.MOD_ID)
+public class PBItems
+{
     private static final List<Item> items = new ArrayList<>();
 
     public static Item kybrite_ingot;
@@ -35,7 +37,8 @@ public class PBItems {
     public static Item gauntlet_shell;
     public static Item fortium_ingot;
 
-    public static void init() {
+    public static void init()
+    {
         kybrite_ingot = registerItem(new KybriteIngot(), "kybrite_ingot", PBCreativeTabs.TAB_ITEMS);
         verdanite_ingot = registerItem(new VerdaniteIngot(), "verdanite_ingot", PBCreativeTabs.TAB_ITEMS);
         rendium_chunk = registerItem(new RendiumChunk(), "rendium_chunk", PBCreativeTabs.TAB_ITEMS);
@@ -48,16 +51,19 @@ public class PBItems {
     }
 
     @SubscribeEvent
-    public static void registerItems(RegistryEvent.Register<Item> event) {
+    public static void registerItems(RegistryEvent.Register<Item> event)
+    {
         event.getRegistry().registerAll(PBItems.getItems());
         PBLogDev.printInfo("Registered PlanetBound items...");
     }
 
-    protected static <T extends Item> T registerItem(T item, String name, CreativeTabs tab) {
+    protected static <T extends Item> T registerItem(T item, String name, CreativeTabs tab)
+    {
         Validate.notNull(item, "item cannot be null");
         Validate.notNull(name, "name cannot be null");
 
-        if (tab != null) {
+        if(tab != null)
+        {
             item.setCreativeTab(tab);
         }
 
@@ -69,7 +75,8 @@ public class PBItems {
         return item;
     }
 
-    protected static Item registerBlockAsItem(Item item, String name) {
+    protected static Item registerBlockAsItem(Item item, String name)
+    {
         Validate.notNull(item, "item cannot be null");
         Validate.notNull(name, "name cannot be null");
 
@@ -82,25 +89,30 @@ public class PBItems {
     }
 
     @SideOnly(Side.CLIENT)
-    public static void registerModels() {
-        for (Item item : items) {
+    @SubscribeEvent
+    public static void registerModels(ModelRegistryEvent event)
+    {
+        for(Item item : items)
+        {
             registerModel(item);
         }
     }
 
     @SideOnly(Side.CLIENT)
-    private static void registerModel(Item item) {
+    private static void registerModel(Item item)
+    {
         registerModel(item, 0);
     }
 
     @SideOnly(Side.CLIENT)
-    private static void registerModel(Item item, int metadata) {
+    private static void registerModel(Item item, int metadata)
+    {
         Validate.notNull(item, "item cannot be null");
-
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, metadata, new ModelResourceLocation(item.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(item, metadata, new ModelResourceLocation(item.getRegistryName(), "inventory"));
     }
 
-    public static Item[] getItems() {
+    public static Item[] getItems()
+    {
         return items.toArray(new Item[]{});
     }
 }

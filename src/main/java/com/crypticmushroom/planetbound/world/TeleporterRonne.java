@@ -4,13 +4,16 @@ import net.minecraft.entity.Entity;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 
-public class TeleporterRonne extends Teleporter {
-    public TeleporterRonne(WorldServer world) {
+public class TeleporterRonne extends Teleporter
+{
+    public TeleporterRonne(WorldServer world)
+    {
         super(world);
     }
 
     @Override
-    public boolean makePortal(Entity entity) {
+    public boolean makePortal(Entity entity)
+    {
         return true;
     }
 }

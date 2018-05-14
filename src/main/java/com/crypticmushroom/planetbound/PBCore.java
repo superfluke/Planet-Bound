@@ -20,23 +20,27 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
         version = PBCore.VERSION,
         acceptedMinecraftVersions = PBCore.MC_VERSIONS,
         updateJSON = PBCore.UPDATE_JSON)
-public class PBCore {
+public class PBCore
+{
     public static final String MOD_ID = "planetbound";
     public static final String NAME = "Planet Bound";
     public static final String VERSION = "1.0-dev";
     public static final String MC_VERSIONS = "[1.12.2]";
     public static final String UPDATE_JSON = "https://raw.githubusercontent.com/cipherzerox/Planet-Bound/master/update.json";
+    
     @SidedProxy(clientSide = "com.crypticmushroom.planetbound.client.ClientProxy", serverSide = "com.crypticmushroom.planetbound.server.ServerProxy")
     public static CommonProxy proxy;
     @Instance(MOD_ID)
-    private static PBCore instance; //So what's with the instance method at the bottom?
+    private static PBCore instance;
 
-    public static PBCore instance() {
+    public static PBCore instance()
+    {
         return instance;
     }
 
     @EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
+    public void preInit(FMLPreInitializationEvent event)
+    {
         PBLogger.printInfo("Preparing to take over the Universe...");
         PBLogDev.printInfo("Running Pre-Initialization...");
 
@@ -57,7 +61,8 @@ public class PBCore {
     }
 
     @EventHandler
-    public void init(FMLInitializationEvent event) {
+    public void init(FMLInitializationEvent event)
+    {
         PBLogger.printInfo("Running initialization");
         PBLogger.printInfo("Registering tile entities");
         PBTileEntities.init();
@@ -74,7 +79,8 @@ public class PBCore {
     }
 
     @EventHandler
-    public void postInit(FMLPostInitializationEvent event) {
+    public void postInit(FMLPostInitializationEvent event)
+    {
         PBLogDev.printInfo("Running Post-initialization");
 
         proxy.postInit(event);

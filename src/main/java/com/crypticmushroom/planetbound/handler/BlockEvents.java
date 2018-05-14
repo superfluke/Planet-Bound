@@ -1,5 +1,6 @@
 package com.crypticmushroom.planetbound.handler;
 
-public class BlockEvents {
+public class BlockEvents
+{
 
 }
