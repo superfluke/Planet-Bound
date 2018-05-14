@@ -1,14 +1,11 @@
 {
   "forge_marker": 1,
-  "defaults": {
-    "model": "cube_all"
-  },
   "variants": {
     "normal": [
-      { "model": "cube_all", "textures": { "all": "planetbound:blocks/ronnian_dirt" }},
-      { "model": "cube_all", "textures": { "all": "planetbound:blocks/ronnian_dirt" }, "x": 90, "y": 90 },
-      { "model": "cube_all", "textures": { "all": "planetbound:blocks/ronnian_dirt" }, "x": 180, "y": 180 },
-      { "model": "cube_all", "textures": { "all": "planetbound:blocks/ronnian_dirt" }, "x": 270, "y": 270 }
+      { "model": "planetbound:ronnian_dirt" },
+      { "model": "planetbound:ronnian_dirt", "y": 90 },
+      { "model": "planetbound:ronnian_dirt", "y": 180 },
+      { "model": "planetbound:ronnian_dirt", "y": 270 }
     ]
   }
 }
