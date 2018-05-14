@@ -1,0 +1,11 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "normal": [
+      { "model": "planetbound:ronnian_coarse_dirt" },
+      { "model": "planetbound:ronnian_coarse_dirt", "y": 90 },
+      { "model": "planetbound:ronnian_coarse_dirt", "y": 180 },
+      { "model": "planetbound:ronnian_coarse_dirt", "y": 270 }
+    ]
+  }
+}
