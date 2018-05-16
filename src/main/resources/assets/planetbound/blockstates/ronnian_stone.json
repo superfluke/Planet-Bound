@@ -1,7 +1,8 @@
-{
-  "variants": {
-    "normal": {
-      "model": "planetbound:ronnian_stone"
+"variants": {
+        "normal": [
+            { "model": "ronnian_stone" },
+            { "model": "ronnian_stone_mirrored" },
+            { "model": "ronnian_stone", "y": 180 },
+            { "model": "ronnian_stone_mirrored", "y": 180 }
+        ]
     }
-  }
-}
