@@ -1,11 +1,7 @@
 {
-  "forge_marker": 1,
   "variants": {
-    "normal": [
-      { "model": "planetbound:ronnian_stone" },
-      { "model": "planetbound:ronnian_stone", "y": 90 },
-      { "model": "planetbound:ronnian_stone", "y": 180 },
-      { "model": "planetbound:ronnian_stone", "y": 270 }
-    ]
+    "normal": {
+      "model": "planetbound:ronnian_stone"
+    }
   }
 }
