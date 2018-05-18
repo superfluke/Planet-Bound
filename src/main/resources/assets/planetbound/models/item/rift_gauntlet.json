@@ -122,8 +122,8 @@
 			}
 		},
 		{
-			"from": [10, 6, 6],
-			"to": [11, 7, 7.5],
+			"from": [5, 6, 6],
+			"to": [6, 7, 7.5],
 			"faces": {
 				"north": {"uv": [0, 0, 1, 1], "texture": "#missing"},
 				"east": {"uv": [0, 0, 1.5, 1], "texture": "#missing"},
@@ -170,8 +170,8 @@
 			}
 		},
 		{
-			"from": [10, 5.5, 1],
-			"to": [11, 6.5, 6],
+			"from": [5, 5.5, 1],
+			"to": [6, 6.5, 6],
 			"faces": {
 				"north": {"uv": [0, 0, 1, 1], "texture": "#missing"},
 				"east": {"uv": [0, 0, 5, 1], "texture": "#missing"},
@@ -221,7 +221,7 @@
 	"groups": [
 		{
 			"name": "Body",
-			"isOpen": false,
+			"isOpen": true,
 			"shade": true,
 			"display": {
 				"visibility": true,
