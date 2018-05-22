@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "planetbound:blocks/amberwood_top",
+    "side": "planetbound:blocks/amberwood_side"
+  }
+}
