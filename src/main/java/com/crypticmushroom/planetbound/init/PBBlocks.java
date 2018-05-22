@@ -111,11 +111,11 @@ public class PBBlocks
         lit_inventors_forge = registerBlock(new InventorsForge(true), "lit_inventors_forge", null);
         fortium_block = registerBlock(new FortiumOreBlock(), "fortium_block", PBCreativeTabs.TAB_BLOCKS);
         rift = registerBlock(new Rift(), "rift", null);
-        // Ronian Blocks
+        // Ronnian Blocks
         ronnian_sand = registerBlock(new RonnianSand(), "scarlet_sand", PBCreativeTabs.TAB_BLOCKS);
         ronnian_sandstone = registerBlock(new RonnianSandstone(), "ronnian_sandstone", PBCreativeTabs.TAB_BLOCKS);
         ronnian_stone = registerBlock(new RonnianStone(), "ronnian_stone", PBCreativeTabs.TAB_BLOCKS);
-        ronnian_stone_polished = registerBlock(new RonnianStonePolished(), "ronnian_stone_polished", PBCreativeTabs.TAB_BLOCKS);
+        ronnian_stone_smooth = registerBlock(new RonnianStoneSmooth(), "ronnian_stone_smooth", PBCreativeTabs.TAB_BLOCKS);
         ronnian_stone_chiseled = registerBlock(new RonnianStoneChiseled(), "ronnian_stone_chiseled", PBCreativeTabs.TAB_BLOCKS);
         ronnian_sandstone_chiseled = registerBlock(new RonnianSandstoneChiseled(), "ronnian_sandstone_chiseled", PBCreativeTabs.TAB_BLOCKS);
         ronnian_sandstone_smooth = registerBlock(new RonnianSandstoneSmooth(), "ronnian_sandstone_smooth", PBCreativeTabs.TAB_BLOCKS);
