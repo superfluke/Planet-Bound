@@ -17,23 +17,23 @@
       ],
       "faces": {
         "east": {
-          "uv": [
-            0,
-            0,
-            16,
-            16
-          ],
+          "uv": [ 0, 0, 16, 16 ],
           "texture": "#rift"
         },
         "west": {
-          "uv": [
-            0,
-            0,
-            16,
-            16
-          ],
+           "uv": [ 0, 0, 16, 16 ],
           "texture": "#rift"
-        }
+        },
+		"north": {
+			"uv": [ 6, 0, 10, 16 ],
+			"texture": "#rift",
+			"cullface": "north"
+		},
+		"south": {
+			"uv": [ 6, 0, 10, 16 ],
+			"texture": "#rift",
+			"cullface": "south"
+		}
       }
     }
   ]
