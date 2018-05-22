@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "planetbound:blocks/ronnian_stone_polished"
+    "all": "planetbound:blocks/ronnian_stone_smooth"
   }
 }

@@ -1,7 +1,7 @@
 {
   "variants": {
     "normal": {
-      "model": "planetbound:ronnian_stone_polished"
+      "model": "planetbound:ronnian_stone_smooth"
     }
   }
 }
