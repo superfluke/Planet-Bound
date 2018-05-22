@@ -42,11 +42,39 @@ public class WorldProviderRonne extends WorldProviderPlanet {
 		return world.getSkyColorBody(cameraEntity, partialTicks);
 	}
 
-	// we may want to change the cloud color later
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Vec3d getCloudColor(float partialTicks) {
-		return world.getCloudColorBody(partialTicks);
+		float f = world.getCelestialAngle(partialTicks);
+		float f1 = MathHelper.cos(f * ((float) Math.PI * 2F)) * 2.0F + 0.5F;
+		f1 = MathHelper.clamp(f1, 0.0F, 1.0F);
+		float f2 = 0.4F;
+		float f3 = 0.4F;
+		float f4 = 0.4F;
+		float f5 = world.getRainStrength(partialTicks);
+
+		if (f5 > 0.0F) {
+			float f6 = (f2 * 0.3F + f3 * 0.59F + f4 * 0.11F) * 0.6F;
+			float f7 = 1.0F - f5 * 0.95F;
+			f2 = f2 * f7 + f6 * (1.0F - f7);
+			f3 = f3 * f7 + f6 * (1.0F - f7);
+			f4 = f4 * f7 + f6 * (1.0F - f7);
+		}
+
+		f2 = f2 * (f1 * 0.9F + 0.1F);
+		f3 = f3 * (f1 * 0.9F + 0.1F);
+		f4 = f4 * (f1 * 0.85F + 0.15F);
+		float f9 = world.getThunderStrength(partialTicks);
+
+		if (f9 > 0.0F) {
+			float f10 = (f2 * 0.3F + f3 * 0.59F + f4 * 0.11F) * 0.2F;
+			float f8 = 1.0F - f9 * 0.95F;
+			f2 = f2 * f8 + f10 * (1.0F - f8);
+			f3 = f3 * f8 + f10 * (1.0F - f8);
+			f4 = f4 * f8 + f10 * (1.0F - f8);
+		}
+
+		return new Vec3d(f2, f3, f4);
 	}
 
 	/**
