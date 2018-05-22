@@ -2,9 +2,9 @@ package com.crypticmushroom.planetbound.blocks.ores;
 
 import net.minecraft.block.BlockOre;
 
-public class HalkirOre extends BlockOre
+public class BloodstoneOre extends BlockOre
 {
-    public HalkirOre()
+    public BloodstoneOre()
     {
         super();
 
