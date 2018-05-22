@@ -134,6 +134,21 @@ public class PBBlocks
 		emberwood = registerBlock(new EmberwoodLog(), "emberwood_log", PBCreativeTabs.TAB_BLOCKS);
 	}
 
+	public static void setupColors() {
+		/*BlockColors bc = Minecraft.getMinecraft().getBlockColors();
+		//to be used one day if we want grass to have custom
+		//tinting per biome
+		bc.registerBlockColorHandler(new IBlockColor() {
+		
+			@Override
+			public int colorMultiplier(IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) {
+				// TODO Auto-generated method stub
+				return -1;
+			}
+
+		}, emberwood_leaves);*/
+	}
+
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> event)
 	{
