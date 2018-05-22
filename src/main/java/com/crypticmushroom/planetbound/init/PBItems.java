@@ -36,6 +36,8 @@ public class PBItems
     public static Item rift_gauntlet;
     public static Item gauntlet_shell;
     public static Item fortium_ingot;
+    public static Item halkir_ingot;
+    public static Item bloodstone_shard;
 
     public static void init()
     {
@@ -48,6 +50,8 @@ public class PBItems
         rift_gauntlet = registerItem(new RiftGauntlet(), "rift_gauntlet", PBCreativeTabs.TAB_ITEMS);
         gauntlet_shell = registerItem(new GauntletShell(), "gauntlet_shell", PBCreativeTabs.TAB_ITEMS);
         fortium_ingot = registerItem(new FortiumIngot(), "fortium_ingot", PBCreativeTabs.TAB_ITEMS);
+        halkir_ingot = registerItem(new HalkirIngot(), "halkir_ingot", PBCreativeTabs.TAB_ITEMS);
+        bloodstone_shard = registerItem(new BloodstoneShard(), "bloodstone_shard", PBCreativeTabs.TAB_ITEMS);
     }
 
     @SubscribeEvent

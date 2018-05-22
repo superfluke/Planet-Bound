@@ -36,12 +36,15 @@ public class PBBlocks
 
     // Kybrite
     public static Block kybrite_ore;
+    public static Block kybrite_ore_ronnian;
     public static Block kybrite_block;
     // Verdanite
     public static Block verdanite_ore;
+    public static Block verdanite_ore_ronnian;
     public static Block verdanite_block;
     // Rendium
     public static Block rendium_ore;
+    public static Block rendium_ore_ronnian;
     public static Block rendium_block;
     // Other
     public static Block inventors_forge;
@@ -53,12 +56,19 @@ public class PBBlocks
     public static Block ronnian_sandstone;
     public static Block ronnian_stone;
     public static Block ronnian_stone_polished;
+    public static Block ronnian_stone_chiseled;
     public static Block ronnian_sandstone_chiseled;
     public static Block ronnian_sandstone_smooth;
     public static Block ronnian_dirt;
     public static Block ronnian_coarse_dirt;
     public static Block ronnian_grass;
     public static Block ronnian_tallgrass;
+    // Halkir
+    public static Block halkir_ore;
+    public static Block halkir_block;
+    //Bloodstone
+    public static Block bloodstone_ore;
+    public static Block bloodstone_block;
     // Emberwood
     public static EmberwoodLeaves emberwood_leaves;
     public static Block emberwood_planks;
@@ -66,7 +76,7 @@ public class PBBlocks
 
     public static void init()
     {
-        // Kybirte
+        // Kybrite
         kybrite_ore = registerBlock(new KybriteOre(), "kybrite_ore", PBCreativeTabs.TAB_BLOCKS);
         kybrite_block = registerBlock(new KybriteOreBlock(), "kybrite_block", PBCreativeTabs.TAB_BLOCKS);
         // Verdanite
@@ -85,12 +95,18 @@ public class PBBlocks
         ronnian_sandstone = registerBlock(new RonnianSandstone(), "ronnian_sandstone", PBCreativeTabs.TAB_BLOCKS);
         ronnian_stone = registerBlock(new RonnianStone(), "ronnian_stone", PBCreativeTabs.TAB_BLOCKS);
         ronnian_stone_polished = registerBlock(new RonnianStonePolished(), "ronnian_stone_polished", PBCreativeTabs.TAB_BLOCKS);
+        ronnian_stone_chiseled = registerBlock(new RonnianStoneChiseled(), "ronnian_stone_chiseled", PBCreativeTabs.TAB_BLOCKS);
         ronnian_sandstone_chiseled = registerBlock(new RonnianSandstoneChiseled(), "ronnian_sandstone_chiseled", PBCreativeTabs.TAB_BLOCKS);
         ronnian_sandstone_smooth = registerBlock(new RonnianSandstoneSmooth(), "ronnian_sandstone_smooth", PBCreativeTabs.TAB_BLOCKS);
         ronnian_dirt = registerBlock(new RonnianDirt(), "ronnian_dirt", PBCreativeTabs.TAB_BLOCKS);
         ronnian_coarse_dirt = registerBlock(new RonnianCoarseDirt(), "ronnian_coarse_dirt", PBCreativeTabs.TAB_BLOCKS);
         ronnian_grass = registerBlock(new RonnianGrass(), "ronnian_grass", PBCreativeTabs.TAB_BLOCKS);
         ronnian_tallgrass = registerBlock(new RonnianTallgrass(), "ronnian_tallgrass", PBCreativeTabs.TAB_BLOCKS);
+        halkir_ore = registerBlock(new HalkirOre(), "halkir_ore", PBCreativeTabs.TAB_BLOCKS);
+        bloodstone_ore = registerBlock(new HalkirOre(), "bloodstone_ore", PBCreativeTabs.TAB_BLOCKS);
+        ronnian_verdanite_ore = registerBlock(new HalkirOre(), "ronnian_verdanite_ore", PBCreativeTabs.TAB_BLOCKS);
+        ronnian_kybrite_ore = registerBlock(new HalkirOre(), "ronnian_kybrite_ore", PBCreativeTabs.TAB_BLOCKS);
+        ronnian_rendium_ore = registerBlock(new HalkirOre(), "ronnian_rendium_ore", PBCreativeTabs.TAB_BLOCKS);
         // Emberwood
         emberwood_leaves = registerBlock(new EmberwoodLeaves(), "emberwood_leaves", PBCreativeTabs.TAB_BLOCKS);
         emberwood_planks = registerBlock(new EmberwoodPlanks(), "emberwood_planks", PBCreativeTabs.TAB_BLOCKS);
