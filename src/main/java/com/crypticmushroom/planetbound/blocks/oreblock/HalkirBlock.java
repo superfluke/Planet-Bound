@@ -5,9 +5,9 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 
-public class BloodstoneOreBlock extends Block
+public class HalkirBlock extends Block
 {
-    public BloodstoneOreBlock()
+    public HalkirBlock()
     {
         super(Material.ROCK, MapColor.GRAY);
 

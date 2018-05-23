@@ -13,18 +13,18 @@ import com.crypticmushroom.planetbound.blocks.EmberwoodLog;
 import com.crypticmushroom.planetbound.blocks.EmberwoodPlanks;
 import com.crypticmushroom.planetbound.blocks.InventorsForge;
 import com.crypticmushroom.planetbound.blocks.Rift;
-import com.crypticmushroom.planetbound.blocks.oreblock.FortiumOreBlock;
-import com.crypticmushroom.planetbound.blocks.oreblock.KybriteOreBlock;
-import com.crypticmushroom.planetbound.blocks.oreblock.RendiumOreBlock;
-import com.crypticmushroom.planetbound.blocks.oreblock.VerdaniteOreBlock;
+import com.crypticmushroom.planetbound.blocks.oreblock.BloodstoneBlock;
+import com.crypticmushroom.planetbound.blocks.oreblock.FortiumBlock;
+import com.crypticmushroom.planetbound.blocks.oreblock.HalkirBlock;
+import com.crypticmushroom.planetbound.blocks.oreblock.KybriteBlock;
+import com.crypticmushroom.planetbound.blocks.oreblock.RendiumBlock;
+import com.crypticmushroom.planetbound.blocks.oreblock.VerdaniteBlock;
 import com.crypticmushroom.planetbound.blocks.ores.BloodstoneOre;
 import com.crypticmushroom.planetbound.blocks.ores.HalkirOre;
 import com.crypticmushroom.planetbound.blocks.ores.KybriteOre;
 import com.crypticmushroom.planetbound.blocks.ores.KybriteOreRonnian;
 import com.crypticmushroom.planetbound.blocks.ores.RendiumOre;
-import com.crypticmushroom.planetbound.blocks.ores.RendiumOreRonnian;
 import com.crypticmushroom.planetbound.blocks.ores.VerdaniteOre;
-import com.crypticmushroom.planetbound.blocks.ores.VerdaniteOreRonnian;
 import com.crypticmushroom.planetbound.blocks.ronnian.RonnianCoarseDirt;
 import com.crypticmushroom.planetbound.blocks.ronnian.RonnianDirt;
 import com.crypticmushroom.planetbound.blocks.ronnian.RonnianGrass;
@@ -113,17 +113,17 @@ public class PBBlocks
 	{
 		// Kybrite
 		kybrite_ore = registerBlock(new KybriteOre(), "kybrite_ore", PBCreativeTabs.TAB_BLOCKS);
-		kybrite_block = registerBlock(new KybriteOreBlock(), "kybrite_block", PBCreativeTabs.TAB_BLOCKS);
+		kybrite_block = registerBlock(new KybriteBlock(), "kybrite_block", PBCreativeTabs.TAB_BLOCKS);
 		// Verdanite
 		verdanite_ore = registerBlock(new VerdaniteOre(), "verdanite_ore", PBCreativeTabs.TAB_BLOCKS);
-		verdanite_block = registerBlock(new VerdaniteOreBlock(), "verdanite_block", PBCreativeTabs.TAB_BLOCKS);
+		verdanite_block = registerBlock(new VerdaniteBlock(), "verdanite_block", PBCreativeTabs.TAB_BLOCKS);
 		// Rendium
 		rendium_ore = registerBlock(new RendiumOre(), "rendium_ore", PBCreativeTabs.TAB_BLOCKS);
-		rendium_block = registerBlock(new RendiumOreBlock(), "rendium_block", PBCreativeTabs.TAB_BLOCKS);
+		rendium_block = registerBlock(new RendiumBlock(), "rendium_block", PBCreativeTabs.TAB_BLOCKS);
 		// Other
 		inventors_forge = registerBlock(new InventorsForge(false), "inventors_forge", PBCreativeTabs.TAB_BLOCKS);
 		lit_inventors_forge = registerBlock(new InventorsForge(true), "lit_inventors_forge", null);
-		fortium_block = registerBlock(new FortiumOreBlock(), "fortium_block", PBCreativeTabs.TAB_BLOCKS);
+		fortium_block = registerBlock(new FortiumBlock(), "fortium_block", PBCreativeTabs.TAB_BLOCKS);
 		rift = registerBlock(new Rift(), "rift", null);
 		// Ronnian Blocks
 		ronnian_sand = registerBlock(new RonnianSand(), "scarlet_sand", PBCreativeTabs.TAB_BLOCKS);
@@ -138,10 +138,12 @@ public class PBBlocks
 		ronnian_grass = registerBlock(new RonnianGrass(), "ronnian_grass", PBCreativeTabs.TAB_BLOCKS);
 		ronnian_tallgrass = registerBlock(new RonnianTallgrass(), "ronnian_tallgrass", PBCreativeTabs.TAB_BLOCKS);
 		halkir_ore = registerBlock(new HalkirOre(), "halkir_ore", PBCreativeTabs.TAB_BLOCKS);
+		halkir_block = registerBlock(new HalkirBlock(), "halkir_block", PBCreativeTabs.TAB_BLOCKS);
 		bloodstone_ore = registerBlock(new BloodstoneOre(), "bloodstone_ore", PBCreativeTabs.TAB_BLOCKS);
-		verdanite_ore_ronnian = registerBlock(new VerdaniteOreRonnian(), "verdanite_ore_ronnian", PBCreativeTabs.TAB_BLOCKS);
+		bloodstone_block = registerBlock(new BloodstoneBlock(), "bloodstone_block", PBCreativeTabs.TAB_BLOCKS);
+		verdanite_ore_ronnian = registerBlock(new VerdaniteOre(), "verdanite_ore_ronnian", PBCreativeTabs.TAB_BLOCKS);
 		kybrite_ore_ronnian = registerBlock(new KybriteOreRonnian(), "kybrite_ore_ronnian", PBCreativeTabs.TAB_BLOCKS);
-		rendium_ore_ronnian = registerBlock(new RendiumOreRonnian(), "rendium_ore_ronnian", PBCreativeTabs.TAB_BLOCKS);
+		rendium_ore_ronnian = registerBlock(new RendiumOre(), "rendium_ore_ronnian", PBCreativeTabs.TAB_BLOCKS);
 		// Emberwood
 		emberwood_leaves = registerBlock(new EmberwoodLeaves(), "emberwood_leaves", PBCreativeTabs.TAB_BLOCKS);
 		emberwood_planks = registerBlock(new EmberwoodPlanks(), "emberwood_planks", PBCreativeTabs.TAB_BLOCKS);
