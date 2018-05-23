@@ -11,6 +11,7 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraft.world.chunk.Chunk;
@@ -27,35 +28,40 @@ import net.minecraft.world.gen.NoiseGeneratorPerlin;
  */
 public class ChunkGeneratorPlanet implements IChunkGenerator
 {
-    private World world;
     private final Random random;
 
     private NoiseGeneratorOctaves minLimitPerlinNoise;
     private NoiseGeneratorOctaves maxLimitPerlinNoise;
     private NoiseGeneratorOctaves mainPerlinNoise;
+
     private NoiseGeneratorPerlin surfaceNoise;
-    public NoiseGeneratorOctaves scaleNoise;
-    public NoiseGeneratorOctaves depthNoise;
+    private NoiseGeneratorOctaves scaleNoise;
+    private NoiseGeneratorOctaves depthNoise;
 
-    private Biome biomesForGenerationRonne[];
-    private double[] depthBuffer = new double[256];
+    private final World world;
+    private WorldType terrainType;
     private final double[] heightMap;
+    private final float[] biomeWeights;
+    private double[] depthBuffer = new double[256];
+    private Biome biomesForGenerationRonne[];
 
-    double[] mainNoiseRegion;
-    double[] minLimitRegion;
-    double[] maxLimitRegion;
-    double[] depthRegion;
+    private double[] mainNoiseRegion;
+    private double[] minLimitRegion;
+    private double[] maxLimitRegion;
+    private double[] depthRegion;
 
     private Planet planetInstance;
+
     private final PBGenCavesRonne caveGen = new PBGenCavesRonne();
 
     public ChunkGeneratorPlanet(World world, long seed, Planet planet)
     {
-        this.heightMap = new double[planet.getXSize() * planet.getYSize() * planet.getZSize()];
+        this.heightMap = new double[825];
 
         this.planetInstance = planet;
 
         this.world = world;
+        this.terrainType = world.getWorldInfo().getTerrainType();
         this.random = new Random(seed);
         this.minLimitPerlinNoise = new NoiseGeneratorOctaves(this.random, 16);
         this.maxLimitPerlinNoise = new NoiseGeneratorOctaves(this.random, 16);
@@ -63,6 +69,14 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
         this.surfaceNoise = new NoiseGeneratorPerlin(this.random, 4);
         this.scaleNoise = new NoiseGeneratorOctaves(this.random, 10);
         this.depthNoise = new NoiseGeneratorOctaves(this.random, 16);
+        this.biomeWeights = new float[25];
+
+        for (int j = -2; j <= 2; ++j) {
+            for (int k = -2; k<= 2; ++k) {
+                float f = 10.0F / MathHelper.sqrt((float) (j * j + k * k) + 0.2F);
+                this.biomeWeights[j + 2 + (k + 2) * 5] = f;
+            }
+        }
     }
 
     @Override
@@ -147,7 +161,7 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
     {
         byte seaLevel = 63;
         this.biomesForGenerationRonne = this.world.getBiomeProvider().getBiomesForGeneration(this.biomesForGenerationRonne, x * 4 - 2, z * 4 - 2, 10, 10);
-        this.generateHeightmap(x * 4, z * 4);
+        this.generateHeightmap(x * 4, 0, z * 4);
 
         for(int i = 0; i < 4; ++i)
         {
@@ -209,109 +223,101 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
         }
     }
 
-    public void generateHeightmap(int chunkX, int chunkZ)
+    public void generateHeightmap(int chunkX, int zero, int chunkZ)
     {
-        this.generateHeightmap(chunkX, 0, chunkZ);
-    }
+        this.depthRegion = this.depthNoise.generateNoiseOctaves(this.depthRegion, chunkX, chunkZ, 5, 5, 200.0D, 200.0D, 0.5D);
+        this.mainNoiseRegion = this.mainPerlinNoise.generateNoiseOctaves(this.mainNoiseRegion, chunkX, zero, chunkZ, 5, 33, 5, 8.555150000000001D, 4.277575000000001D, 8.555150000000001D);
+        this.minLimitRegion = this.minLimitPerlinNoise.generateNoiseOctaves(this.minLimitRegion, chunkX, zero, chunkZ, 5, 33, 5, 684.412D, 684.412D, 684.412D);
+        this.maxLimitRegion = this.maxLimitPerlinNoise.generateNoiseOctaves(this.maxLimitRegion, chunkX, zero, chunkZ, 5, 33, 5, 684.412D, 684.412D, 684.412D);
+        int terrainIndex = 0;
+        int noiseIndex = 0;
 
-    private void generateHeightmap(int chunkX, int yOffset, int chunkZ)
-    {
-        this.depthRegion = this.depthNoise.generateNoiseOctaves(this.depthRegion, chunkX, chunkZ, this.planetInstance.getXSize(), this.planetInstance.getZSize(), 80.0D, 80.0D, 0.0D);
-        float f = 684.412F;
-        float f1 = 684.412F;
-        this.mainNoiseRegion = this.mainPerlinNoise.generateNoiseOctaves(this.mainNoiseRegion, chunkX, yOffset, chunkZ, this.planetInstance.getXSize(), this.planetInstance.getYSize(), this.planetInstance.getZSize(), (double) (f / 80.0D), (double) (f1 / 160.0D), (double) (f / 80.0D));
-        this.minLimitRegion = this.minLimitPerlinNoise.generateNoiseOctaves(this.minLimitRegion, chunkX, yOffset, chunkZ, this.planetInstance.getXSize(), this.planetInstance.getYSize(), this.planetInstance.getZSize(), (double) f, (double) f1, (double) f);
-        this.maxLimitRegion = this.maxLimitPerlinNoise.generateNoiseOctaves(this.maxLimitRegion, chunkX, yOffset, chunkZ, this.planetInstance.getXSize(), this.planetInstance.getYSize(), this.planetInstance.getZSize(), (double) f, (double) f1, (double) f);
-        int i = 0;
-        int j = 0;
+        for (int ax = 0; ax < 5; ++ax) {
+            for (int az = 0; az < 5; ++az) {
+                float totalVariation = 0.0F;
+                float totalHeight = 0.0F;
+                float totalFactor = 0.0F;
+                byte two = 2;
+                Biome biomegenbase = this.biomesForGenerationRonne[ax + 2 + (az + 2) * 10];
 
-        for(int k = 0; k < 5; ++k)
-        {
-            for(int l = 0; l < 5; ++l)
-            {
-                float f2 = 0.0F;
-                float f3 = 0.0F;
-                float f4 = 0.0F;
-                Biome biomegenbase = this.biomesForGenerationRonne[k + 2 + (l + 2) * 10];
+                for (int ox = -two; ox <= two; ++ox) {
+                    for (int oz = -two; oz <= two; ++oz) {
+                        Biome biomegenbase1 = this.biomesForGenerationRonne[ax + ox + 2 + (az + oz + 2) * 10];
+                        float rootHeight = biomegenbase1.getBaseHeight();
+                        float heightVariation = biomegenbase1.getHeightVariation();
 
-                for(int j1 = -2; j1 <= 2; ++j1)
-                {
-                    for(int k1 = -2; k1 <= 2; ++k1)
-                    {
-                        Biome biomegenbase1 = this.biomesForGenerationRonne[k + j1 + 2 + (l + k1 + 2) * 10];
-                        float f5 = this.planetInstance.getMinHeight();
-                        float f6 = this.planetInstance.getMaxHeight();
+                        if (this.terrainType == WorldType.AMPLIFIED && rootHeight > 0.0F) {
+                            rootHeight = 1.0F + rootHeight * 2.0F;
+                            heightVariation = 1.0F + heightVariation * 4.0F;
+                        }
 
-                        f2 += f6;
-                        f3 += f5;
-                        f4 += 1.0F;
+                        float heightFactor = this.biomeWeights[ox + 2 + (oz + 2) * 5] / (rootHeight + 2.0F);
+
+                        if (biomegenbase1.getBaseHeight() > biomegenbase.getBaseHeight()) {
+                            heightFactor /= 2.0F;
+                        }
+
+                        totalVariation += heightVariation * heightFactor;
+                        totalHeight += rootHeight * heightFactor;
+                        totalFactor += heightFactor;
                     }
                 }
 
-                f2 = f2 / f4;
-                f3 = f3 / f4;
-                f2 = f2 * 0.9F + 0.1F;
-                f3 = (f3 * 4.0F - 1.0F) / 8.0F;
-                double d7 = this.depthRegion[j] / 8000.0D;
+                totalVariation /= totalFactor;
+                totalHeight /= totalFactor;
+                totalVariation = totalVariation * 0.9F + 0.1F;
+                totalHeight = (totalHeight * 4.0F - 1.0F) / 8.0F;
+                double terrainNoise = this.depthRegion[noiseIndex] / 8000.0D;
 
-                if(d7 < 0.0D)
-                {
-                    d7 = -d7 * 0.3D;
+                if (terrainNoise < 0.0D) {
+                    terrainNoise = -terrainNoise * 0.3D;
                 }
 
-                d7 = d7 * 3.0D - 2.0D;
+                terrainNoise = terrainNoise * 3.0D - 2.0D;
 
-                if(d7 < 0.0D)
-                {
-                    d7 = d7 / 2.0D;
+                if (terrainNoise < 0.0D) {
+                    terrainNoise /= 2.0D;
 
-                    if(d7 < -1.0D)
-                    {
-                        d7 = -1.0D;
+                    if (terrainNoise < -1.0D) {
+                        terrainNoise = -1.0D;
                     }
 
-                    d7 = d7 / 1.4D;
-                    d7 = d7 / 2.0D;
-                }
-                else
-                {
-                    if(d7 > 1.0D)
-                    {
-                        d7 = 1.0D;
+                    terrainNoise /= 1.4D;
+                    terrainNoise /= 2.0D;
+                } else {
+                    if (terrainNoise > 1.0D) {
+                        terrainNoise = 1.0D;
                     }
 
-                    d7 = d7 / 8.0D;
+                    terrainNoise /= 8.0D;
                 }
 
-                ++j;
-                double d8 = (double) f3;
-                double d9 = (double) f2;
-                d8 = d8 + d7 * 0.2D;
-                d8 = d8 * (double) 8.5F / 8.0D;
-                double d0 = (double) 8.5F + d8 * 4.0D;
+                ++noiseIndex;
+                double heightCalc = (double) totalHeight;
+                double variationCalc = (double) totalVariation;
+                heightCalc += terrainNoise * 0.2D;
+                heightCalc = heightCalc * 8.5D / 8.0D;
+                double d5 = 8.5D + heightCalc * 4.0D;
 
-                for(int l1 = 0; l1 < 33; ++l1)
-                {
-                    double d1 = ((double) l1 - d0) * (double) 12.0F * 128.0D / 256.0D / d9;
+                for (int ay = 0; ay < 33; ++ay) {
+                    double d6 = ((double) ay - d5) * 12.0D * 128.0D / 256.0D / variationCalc;
 
-                    if(d1 < 0.0D)
-                    {
-                        d1 *= 4.0D;
+                    if (d6 < 0.0D) {
+                        d6 *= 4.0D;
                     }
 
-                    double d2 = this.minLimitRegion[i] / (double) 512.0F;
-                    double d3 = this.maxLimitRegion[i] / (double) 512.0F;
-                    double d4 = (this.mainNoiseRegion[i] / 10.0D + 1.0D) / 2.0D;
-                    double d5 = MathHelper.clampedLerp(d2, d3, d4) - d1;
+                    double d7 = this.minLimitRegion[terrainIndex] / 512.0D;
+                    double d8 = this.maxLimitRegion[terrainIndex] / 512.0D;
+                    double d9 = (this.mainNoiseRegion[terrainIndex] / 10.0D + 1.0D) / 2.0D;
+                    double terrainCalc = MathHelper.clampedLerp(d7, d8, d9) - d6;
 
-                    if(l1 > 29)
-                    {
-                        double d6 = (double) ((float) (l1 - 29) / 3.0F);
-                        d5 = d5 * (1.0D - d6) + -10.0D * d6;
+                    if (ay > 29) {
+                        double d11 = (double) ((float) (ay - 29) / 3.0F);
+                        terrainCalc = terrainCalc * (1.0D - d11) + -10.0D * d11;
                     }
 
-                    this.heightMap[i] = d5;
-                    ++i;
+                    this.heightMap[terrainIndex] = terrainCalc;
+                    ++terrainIndex;
                 }
             }
         }
