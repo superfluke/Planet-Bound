@@ -6,11 +6,14 @@ import com.crypticmushroom.planetbound.init.PBBlocks;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
+import net.minecraft.world.gen.ChunkGeneratorSettings;
+import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -38,8 +41,32 @@ public class PBBiomeRonne extends Biome
 	@Override
 	public void decorate(World worldIn, Random rand, BlockPos pos)
 	{
-		this.decorator.decorate(worldIn, rand, this, pos);
-	}
+		super.decorate(worldIn, rand, pos);
+
+        for (int i = 0; i < 8; i++) {
+            int Xcoord = pos.getX() + rand.nextInt(16);
+            int Zcoord = pos.getZ() + rand.nextInt(16);
+            int Ycoord = rand.nextInt(100);
+
+            new WorldGenMinable(PBBlocks.halkir_ore.getDefaultState(), 9, input -> input == PBBlocks.ronnian_stone.getDefaultState()).generate(worldIn, rand, new BlockPos(Xcoord, Ycoord, Zcoord));
+        }
+        for (int i = 0; i < 8; i++) {
+            int Xcoord = pos.getX() + rand.nextInt(16);
+            int Zcoord = pos.getZ() + rand.nextInt(16);
+            int Ycoord = rand.nextInt(100);
+            new WorldGenMinable(PBBlocks.bloodstone_ore.getDefaultState(), 9, input -> input == PBBlocks.ronnian_stone.getDefaultState()).generate(worldIn, rand, new BlockPos(Xcoord, Ycoord, Zcoord));
+        }
+
+        /*
+         * //Cremsine Ore Gen for (int i = 0; i < 8; i++) { int Xcoord = pos.getX() +
+         * rand.nextInt(16); int Zcoord = pos.getZ() + rand.nextInt(16); int Ycoord =
+         * rand.nextInt(100); new
+         * WorldGenMinable(PBBlocks.cremsine_ore.getDefaultState(),
+         * chunkProviderSettings.ironSize, input -> input ==
+         * PBBlocks.ronnian_stone.getDefaultState()).generate(world, rand, new
+         * BlockPos(Xcoord, Ycoord, Zcoord)); } }
+         */
+    }
 
 	@Override
 	public void genTerrainBlocks(World world, Random rand, ChunkPrimer primer, int x, int z, double noiseVal)
@@ -131,6 +158,7 @@ public class PBBiomeRonne extends Biome
 			}
 		}
 	}
+
 
 	/**
 	 * takes temperature, returns color
