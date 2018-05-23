@@ -3,6 +3,8 @@ package com.crypticmushroom.planetbound.init;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import org.apache.commons.lang3.Validate;
 
 import com.crypticmushroom.planetbound.PBCore;
@@ -35,13 +37,25 @@ import com.crypticmushroom.planetbound.blocks.ronnian.RonnianStoneChiseled;
 import com.crypticmushroom.planetbound.blocks.ronnian.RonnianStoneSmooth;
 import com.crypticmushroom.planetbound.blocks.ronnian.RonnianTallgrass;
 import com.crypticmushroom.planetbound.logger.PBLogDev;
+import com.crypticmushroom.planetbound.world.ColorizerRonnianFoliage;
+import com.crypticmushroom.planetbound.world.ColorizerRonnianGrass;
+import com.crypticmushroom.planetbound.world.biome.PBBiomeColorHelper;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
+import net.minecraft.client.renderer.color.BlockColors;
+import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
@@ -135,18 +149,39 @@ public class PBBlocks
 	}
 
 	public static void setupColors() {
-		/*BlockColors bc = Minecraft.getMinecraft().getBlockColors();
+		final BlockColors bc = Minecraft.getMinecraft().getBlockColors();
+		final ItemColors ic = Minecraft.getMinecraft().getItemColors();
 		//to be used one day if we want grass to have custom
 		//tinting per biome
+		//blocks
 		bc.registerBlockColorHandler(new IBlockColor() {
-		
+
 			@Override
 			public int colorMultiplier(IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) {
-				// TODO Auto-generated method stub
-				return -1;
+				return worldIn != null && pos != null ? PBBiomeColorHelper.getPBGrassColorAtPos(worldIn, pos) : ColorizerRonnianGrass.getGrassColor(0.7D, 0.0D);
 			}
 
-		}, emberwood_leaves);*/
+		}, ronnian_grass, ronnian_tallgrass);
+		bc.registerBlockColorHandler(new IBlockColor()
+		{
+			@Override
+			public int colorMultiplier(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex)
+			{
+				return worldIn != null && pos != null ? PBBiomeColorHelper.getPBFoliageColorAtPos(worldIn, pos) : ColorizerRonnianFoliage.getFoliageColor(0.7D, 0.0D);
+			}
+
+		}, emberwood_leaves);
+
+		//items of blocks
+		ic.registerItemColorHandler(new IItemColor() {
+
+			@Override
+			public int colorMultiplier(ItemStack stack, int tintIndex) {
+				IBlockState iblockstate = ((ItemBlock)stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata());
+				return bc.colorMultiplier(iblockstate, (IBlockAccess)null, (BlockPos)null, tintIndex);
+			}
+
+		}, ronnian_grass, ronnian_tallgrass, emberwood_leaves);
 	}
 
 	@SubscribeEvent

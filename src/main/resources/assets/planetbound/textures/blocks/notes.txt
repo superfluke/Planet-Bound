@@ -1,0 +1,17 @@
+Note: I used paint.NET to get these numbers
+
+To Get the Grayscale version of Grass:
+1. Started with colored version
+2. Applied grayscale filter
+3. Applied Brightness+70% filter
+
+Note: color multiplier at 0.7f temperature and 0.0f rainfall = 0xFF5C2D
+
+To Get the Grayscale version of Emberwood Leaves:
+1. Start with colored version
+2. Applied grayscale filter
+3. Applied Brightness+80%
+
+Note: color multiplier at 0.7f temperature and 0.0f rainfall = 0xFF382D
+
+Note: color multiplier at 0.7f temperature and 0.0f rainfall pixel is at (76, 255) in colormap

@@ -3,21 +3,20 @@ package com.crypticmushroom.planetbound.world.biome;
 import java.util.Random;
 
 import com.crypticmushroom.planetbound.init.PBBlocks;
+import com.crypticmushroom.planetbound.world.ColorizerRonnianFoliage;
+import com.crypticmushroom.planetbound.world.ColorizerRonnianGrass;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.gen.ChunkGeneratorSettings;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class PBBiomeRonne extends Biome
+public class PBBiomeRonne extends PBBiome
 {
 	/*
 	 * This class should be used for any biomes used in Ronne Use this class by
@@ -43,30 +42,30 @@ public class PBBiomeRonne extends Biome
 	{
 		super.decorate(worldIn, rand, pos);
 
-        for (int i = 0; i < 8; i++) {
-            int Xcoord = pos.getX() + rand.nextInt(16);
-            int Zcoord = pos.getZ() + rand.nextInt(16);
-            int Ycoord = rand.nextInt(100);
+		for (int i = 0; i < 8; i++) {
+			int Xcoord = pos.getX() + rand.nextInt(16);
+			int Zcoord = pos.getZ() + rand.nextInt(16);
+			int Ycoord = rand.nextInt(100);
 
-            new WorldGenMinable(PBBlocks.halkir_ore.getDefaultState(), 9, input -> input == PBBlocks.ronnian_stone.getDefaultState()).generate(worldIn, rand, new BlockPos(Xcoord, Ycoord, Zcoord));
-        }
-        for (int i = 0; i < 8; i++) {
-            int Xcoord = pos.getX() + rand.nextInt(16);
-            int Zcoord = pos.getZ() + rand.nextInt(16);
-            int Ycoord = rand.nextInt(100);
-            new WorldGenMinable(PBBlocks.bloodstone_ore.getDefaultState(), 9, input -> input == PBBlocks.ronnian_stone.getDefaultState()).generate(worldIn, rand, new BlockPos(Xcoord, Ycoord, Zcoord));
-        }
+			new WorldGenMinable(PBBlocks.halkir_ore.getDefaultState(), 9, input -> input == PBBlocks.ronnian_stone.getDefaultState()).generate(worldIn, rand, new BlockPos(Xcoord, Ycoord, Zcoord));
+		}
+		for (int i = 0; i < 8; i++) {
+			int Xcoord = pos.getX() + rand.nextInt(16);
+			int Zcoord = pos.getZ() + rand.nextInt(16);
+			int Ycoord = rand.nextInt(100);
+			new WorldGenMinable(PBBlocks.bloodstone_ore.getDefaultState(), 9, input -> input == PBBlocks.ronnian_stone.getDefaultState()).generate(worldIn, rand, new BlockPos(Xcoord, Ycoord, Zcoord));
+		}
 
-        /*
-         * //Cremsine Ore Gen for (int i = 0; i < 8; i++) { int Xcoord = pos.getX() +
-         * rand.nextInt(16); int Zcoord = pos.getZ() + rand.nextInt(16); int Ycoord =
-         * rand.nextInt(100); new
-         * WorldGenMinable(PBBlocks.cremsine_ore.getDefaultState(),
-         * chunkProviderSettings.ironSize, input -> input ==
-         * PBBlocks.ronnian_stone.getDefaultState()).generate(world, rand, new
-         * BlockPos(Xcoord, Ycoord, Zcoord)); } }
-         */
-    }
+		/*
+		 * //Cremsine Ore Gen for (int i = 0; i < 8; i++) { int Xcoord = pos.getX() +
+		 * rand.nextInt(16); int Zcoord = pos.getZ() + rand.nextInt(16); int Ycoord =
+		 * rand.nextInt(100); new
+		 * WorldGenMinable(PBBlocks.cremsine_ore.getDefaultState(),
+		 * chunkProviderSettings.ironSize, input -> input ==
+		 * PBBlocks.ronnian_stone.getDefaultState()).generate(world, rand, new
+		 * BlockPos(Xcoord, Ycoord, Zcoord)); } }
+		 */
+	}
 
 	@Override
 	public void genTerrainBlocks(World world, Random rand, ChunkPrimer primer, int x, int z, double noiseVal)
@@ -172,5 +171,19 @@ public class PBBiomeRonne extends Biome
 		currentTemperature = MathHelper.clamp(currentTemperature, -1.0F, 1.0F);
 		return MathHelper.hsvToRGB(0.651061F - currentTemperature * 0.05F, 0.594644F + currentTemperature * 0.1F,
 				0.349020F);
+	}
+
+	@Override
+	public int getPBGrassColorAtPos(BlockPos pos) {
+		double d0 = MathHelper.clamp(this.getTemperature(pos), 0.0F, 1.0F);
+		double d1 = MathHelper.clamp(this.getRainfall(), 0.0F, 1.0F);
+		return getModdedBiomeGrassColor(ColorizerRonnianGrass.getGrassColor(d0, d1));
+	}
+
+	@Override
+	public int getPBFoliageColorAtPos(BlockPos pos) {
+		double d0 = MathHelper.clamp(this.getTemperature(pos), 0.0F, 1.0F);
+		double d1 = MathHelper.clamp(this.getRainfall(), 0.0F, 1.0F);
+		return getModdedBiomeFoliageColor(ColorizerRonnianFoliage.getFoliageColor(d0, d1));
 	}
 }

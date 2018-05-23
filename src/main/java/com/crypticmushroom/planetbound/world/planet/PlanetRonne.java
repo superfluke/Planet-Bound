@@ -1,28 +1,39 @@
 package com.crypticmushroom.planetbound.world.planet;
 
+import com.crypticmushroom.planetbound.client.ColorReloader;
+import com.crypticmushroom.planetbound.world.ColorizerRonnianFoliage;
+import com.crypticmushroom.planetbound.world.ColorizerRonnianGrass;
+
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 
 public class PlanetRonne extends Planet
 {
-    public PlanetRonne()
-    {
-        super(0.01F, 0.01F);
-    }
+	public PlanetRonne()
+	{
+		super(0.01F, 0.01F,
+				new ColorReloader(ColorizerRonnianGrass::setGrassBiomeColorizer, "ronne_grass.png"),
+				new ColorReloader(ColorizerRonnianFoliage::setFoliageBiomeColorizer, "ronne_foliage.png"));
+	}
 
-    @Override
-    public void generate(BlockPos chunkPos, Biome biome)
-    {
+	@Override
+	public String getName() {
+		return "Ronne";
+	}
 
-    }
-    /*
-     * @Override public IBlockState getTopBlock() { return
-     * PBBlocks.ronnian_sand.getDefaultState(); }
-     * 
-     * @Override public IBlockState getBottomBlock() { return
-     * PBBlocks.ronnian_sandstone.getDefaultState(); }
-     * 
-     * @Override public IBlockState getFillerBlock() { return
-     * PBBlocks.ronnian_stone.getDefaultState(); }
-     */
+	@Override
+	public void generate(BlockPos chunkPos, Biome biome)
+	{
+
+	}
+	/*
+	 * @Override public IBlockState getTopBlock() { return
+	 * PBBlocks.ronnian_sand.getDefaultState(); }
+	 * 
+	 * @Override public IBlockState getBottomBlock() { return
+	 * PBBlocks.ronnian_sandstone.getDefaultState(); }
+	 * 
+	 * @Override public IBlockState getFillerBlock() { return
+	 * PBBlocks.ronnian_stone.getDefaultState(); }
+	 */
 }

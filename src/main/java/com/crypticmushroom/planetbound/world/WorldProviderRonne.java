@@ -1,10 +1,10 @@
 package com.crypticmushroom.planetbound.world;
 
+import com.crypticmushroom.planetbound.init.PBPlanets;
 import com.crypticmushroom.planetbound.init.PBWorld;
 import com.crypticmushroom.planetbound.world.biome.BiomeProviderRonne;
 import com.crypticmushroom.planetbound.world.gen.WorldProviderPlanet;
 import com.crypticmushroom.planetbound.world.planet.Planet;
-import com.crypticmushroom.planetbound.world.planet.PlanetRonne;
 
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -27,7 +27,7 @@ public class WorldProviderRonne extends WorldProviderPlanet {
 
 	@Override
 	public Planet getPlanet() {
-		return new PlanetRonne();
+		return PBPlanets.RONNE;
 	}
 
 	@Override

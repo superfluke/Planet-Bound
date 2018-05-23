@@ -4,6 +4,7 @@ import com.crypticmushroom.planetbound.config.ConfigHandler;
 import com.crypticmushroom.planetbound.crafting.InventorsForgeManager;
 import com.crypticmushroom.planetbound.init.PBBlocks;
 import com.crypticmushroom.planetbound.init.PBItems;
+import com.crypticmushroom.planetbound.init.PBPlanets;
 import com.crypticmushroom.planetbound.init.PBSmelting;
 import com.crypticmushroom.planetbound.init.PBTileEntities;
 import com.crypticmushroom.planetbound.init.PBWorld;
@@ -53,12 +54,15 @@ public class PBCore
 		//Auto developer mode is now handled by ConfigHandler
 		ConfigHandler.configWarnings();
 
+
+
 		PBLogger.printInfo("Preparing items for registry");
 		PBItems.init();
 
 		PBLogger.printInfo("Preparing blocks for registry");
 		PBBlocks.init();
 
+		PBPlanets.init();
 
 		PBPlayer.init();
 

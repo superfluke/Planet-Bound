@@ -1,66 +1,90 @@
 package com.crypticmushroom.planetbound.world.planet;
 
+import org.apache.commons.lang3.Validate;
+
+import com.crypticmushroom.planetbound.client.ColorReloader;
+
+import net.minecraft.client.resources.IResourceManager;
+import net.minecraft.client.resources.IResourceManagerReloadListener;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class Planet
+public abstract class Planet implements IResourceManagerReloadListener
 {
-    private float minHeight;
+	private final float minHeight;
 
-    private float maxHeight;
+	private final float maxHeight;
 
-    private int xSize, ySize, zSize;
+	private final int xSize, ySize, zSize;
 
-    public Planet(float minHeight, float maxHeight)
-    {
-        this(5, 33, 5, minHeight, maxHeight);
-    }
+	private final ColorReloader[] colorReloaders;
 
-    /*
-     * Use this if you know how to use it. I'm leaving this open just in case. ~Kino
-     */
-    public Planet(int xSize, int ySize, int zSize, float minHeight, float maxHeight)
-    {
-        this.xSize = xSize;
-        this.ySize = ySize;
-        this.zSize = zSize;
+	public Planet(float minHeight, float maxHeight, ColorReloader... reloaders)
+	{
+		this(5, 33, 5, minHeight, maxHeight, reloaders);
+	}
 
-        this.minHeight = minHeight;
-        this.maxHeight = maxHeight;
-    }
+	/*
+	 * Use this if you know how to use it. I'm leaving this open just in case. ~Kino
+	 */
+	public Planet(int xSize, int ySize, int zSize, float minHeight, float maxHeight, ColorReloader... reloaders)
+	{
+		this.xSize = xSize;
+		this.ySize = ySize;
+		this.zSize = zSize;
 
-    public abstract void generate(BlockPos chunkPos, Biome biome);
+		this.minHeight = minHeight;
+		this.maxHeight = maxHeight;
 
-    /*
-     * public abstract IBlockState getTopBlock();
-     * 
-     * public abstract IBlockState getBottomBlock();
-     * 
-     * public abstract IBlockState getFillerBlock();
-     */
-    public float getMinHeight()
-    {
-        return this.minHeight;
-    }
+		Validate.noNullElements(reloaders);
 
-    public float getMaxHeight()
-    {
-        return this.maxHeight;
-    }
+		this.colorReloaders = reloaders;
+	}
 
-    public int getXSize()
-    {
-        return this.xSize;
-    }
+	public abstract void generate(BlockPos chunkPos, Biome biome);
 
-    public int getYSize()
-    {
-        return this.ySize;
-    }
+	public abstract String getName();
 
-    public int getZSize()
-    {
-        return this.zSize;
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public final void onResourceManagerReload(IResourceManager resourceManager) {
+		for(ColorReloader reloader : this.colorReloaders) {
+			reloader.reload(resourceManager);
+		}
+	}
+
+	/*
+	 * public abstract IBlockState getTopBlock();
+	 * 
+	 * public abstract IBlockState getBottomBlock();
+	 * 
+	 * public abstract IBlockState getFillerBlock();
+	 */
+	public float getMinHeight()
+	{
+		return this.minHeight;
+	}
+
+	public float getMaxHeight()
+	{
+		return this.maxHeight;
+	}
+
+	public int getXSize()
+	{
+		return this.xSize;
+	}
+
+	public int getYSize()
+	{
+		return this.ySize;
+	}
+
+	public int getZSize()
+	{
+		return this.zSize;
+	}
 
 }
