@@ -31,6 +31,7 @@ public class BiomeProviderRonne extends BiomeProvider
         biomesToSpawnIn = new ArrayList<Biome>();
         biomesToSpawnIn.add(PBBiomes.redDesert);
         biomesToSpawnIn.add(PBBiomes.emberwoodForest);
+        biomesToSpawnIn.add(PBBiomes.ronneMountains);
     }
 
     public BiomeProviderRonne(long par1, WorldType worldType)

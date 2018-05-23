@@ -29,6 +29,12 @@ public final class PBBiomesRegister
 				PBBiomes.emberwoodForest,
 				Type.FOREST, Type.HOT
 				);
+
+		biomes.register(
+		        "ronne_mountains",
+                PBBiomes.ronneMountains,
+                Type.SPARSE, Type.MOUNTAIN
+                );
 	}
 
 	private static class BiomeRegistry
