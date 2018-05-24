@@ -32,8 +32,8 @@ public class PBBiomeRonne extends PBBiome
 
 		decorator.flowersPerChunk = -1; // This disables Poppies and Dandelions
 		decorator.reedsPerChunk = -1; // For some reason, reeds cannot be disabled, but this looks better
-		decorator.treesPerChunk = -1; // Disables default trees. Another method can be used to gen trees
-		decorator.grassPerChunk = -1; // Again, another method can be used to gen Grass
+		decorator.treesPerChunk = -1; // Disabled by default. Tweaking this number alongside the tree generator makes it more decorated
+		decorator.grassPerChunk = -1; // Disabled by default. Tweaking this number alongside the grass generator makes it more decorated
 	}
 
 	// Starts the Decorator
@@ -139,7 +139,7 @@ public class PBBiomeRonne extends PBBiome
 						}
 						else
 						{
-							chunkPrimerIn.setBlockState(i1, j1, l, iblockstate1);
+							chunkPrimerIn.setBlockState(i1, j1, l, iblockstate);
 						}
 					}
 					else if(j > 0)
