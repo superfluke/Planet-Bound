@@ -135,7 +135,7 @@ public class PBBiomeRonne extends PBBiome
 						{
 							iblockstate = AIR;
 							iblockstate1 = PBBlocks.ronnian_stone.getDefaultState();
-							chunkPrimerIn.setBlockState(i1, j1, l, PBBlocks.ronnian_sand.getDefaultState());
+							chunkPrimerIn.setBlockState(i1, j1, l, PBBlocks.ronnian_stone.getDefaultState());
 						}
 						else
 						{
