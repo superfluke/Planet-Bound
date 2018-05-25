@@ -3,23 +3,19 @@ package com.crypticmushroom.planetbound.blocks.ores;
 import java.util.Random;
 
 import com.crypticmushroom.planetbound.init.PBItems;
+import com.crypticmushroom.planetbound.world.planet.Planet;
 
-import net.minecraft.block.BlockOre;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class BloodstoneOre extends BlockOre
+public class BloodstoneOre extends PBOre
 {
-	public BloodstoneOre()
-	{
-		super();
 
-		setHarvestLevel("pickaxe", 2);
-		setHardness(3);
-		setResistance(5);
+	public BloodstoneOre(Planet... planets) {
+		super(planets);
 	}
 
 	@Override

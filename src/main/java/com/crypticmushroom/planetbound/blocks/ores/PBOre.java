@@ -1,7 +1,8 @@
-package com.crypticmushroom.planetbound.blocks;
+package com.crypticmushroom.planetbound.blocks.ores;
 
 import java.util.Arrays;
 
+import com.crypticmushroom.planetbound.blocks.PBBlock;
 import com.crypticmushroom.planetbound.world.planet.Planet;
 
 import net.minecraft.block.BlockOre;

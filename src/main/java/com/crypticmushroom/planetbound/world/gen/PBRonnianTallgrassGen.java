@@ -1,6 +1,6 @@
 package com.crypticmushroom.planetbound.world.gen;
 
-import com.crypticmushroom.planetbound.blocks.ronnian.RonnianTallgrass;
+import com.crypticmushroom.planetbound.blocks.PBTallgrass;
 import com.crypticmushroom.planetbound.init.PBBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -14,9 +14,9 @@ public class PBRonnianTallgrassGen extends WorldGenerator
 {
     private final IBlockState tallGrassState;
 
-    public PBRonnianTallgrassGen(RonnianTallgrass.TallgrassVariant var1)
+    public PBRonnianTallgrassGen(PBTallgrass.TallgrassVariant var1)
     {
-        this.tallGrassState = PBBlocks.ronnian_tallgrass.getDefaultState().withProperty(RonnianTallgrass.VARIANT, var1);
+        this.tallGrassState = PBBlocks.ronnian_tallgrass.getDefaultState().withProperty(PBTallgrass.VARIANT, var1);
     }
 
     @Override

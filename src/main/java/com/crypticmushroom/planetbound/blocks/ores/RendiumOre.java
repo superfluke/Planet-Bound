@@ -3,7 +3,6 @@ package com.crypticmushroom.planetbound.blocks.ores;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-import com.crypticmushroom.planetbound.blocks.PBOre;
 import com.crypticmushroom.planetbound.init.PBItems;
 import com.crypticmushroom.planetbound.world.planet.Planet;
 
