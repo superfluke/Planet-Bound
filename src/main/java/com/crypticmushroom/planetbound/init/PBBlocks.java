@@ -67,24 +67,24 @@ public class PBBlocks
 	private static final List<Block> blocks = new ArrayList<>();
 
 	// Kybrite
-	public static Block kybrite_ore;
-	public static Block kybrite_ore_ronnian;
-	public static Block kybrite_block;
+	public static PBOre kybrite_ore;
+	public static PBOre kybrite_ore_ronnian;
+	public static PBStorageBlock kybrite_block;
 	// Verdanite
-	public static Block verdanite_ore;
-	public static Block verdanite_ore_ronnian;
-	public static Block verdanite_block;
+	public static PBOre verdanite_ore;
+	public static PBOre verdanite_ore_ronnian;
+	public static PBStorageBlock verdanite_block;
 	// Rendium
-	public static Block rendium_ore;
-	public static Block rendium_ore_ronnian;
-	public static Block rendium_block;
+	public static PBOre rendium_ore;
+	public static PBOre rendium_ore_ronnian;
+	public static PBStorageBlock rendium_block;
 	// Other
 	public static Block inventors_forge;
 	public static Block lit_inventors_forge;
-	public static Block fortium_block;
+	public static PBStorageBlock fortium_block;
 	public static Block rift;
 	// Ronnian Blocks
-	public static Block ronnian_sand;
+	public static PBSand ronnian_sand;
 	public static Block ronnian_sandstone;
 	public static Block ronnian_stone;
 	public static Block ronnian_stone_smooth;
@@ -94,13 +94,13 @@ public class PBBlocks
 	public static PBDirt ronnian_dirt;
 	public static PBDirt ronnian_coarse_dirt;
 	public static PBGrass ronnian_grass;
-	public static Block ronnian_tallgrass;
+	public static PBTallgrass ronnian_tallgrass;
 	// Halkir
-	public static Block halkir_ore;
-	public static Block halkir_block;
+	public static PBOre halkir_ore;
+	public static PBStorageBlock halkir_block;
 	//Bloodstone
-	public static Block bloodstone_ore;
-	public static Block bloodstone_block;
+	public static PBOre bloodstone_ore;
+	public static PBStorageBlock bloodstone_block;
 	// Emberwood
 	public static EmberwoodLeaves emberwood_leaves;
 	public static Block emberwood_planks;
@@ -125,7 +125,7 @@ public class PBBlocks
 		fortium_block = registerBlock(new PBStorageBlock(MapColor.GREEN_STAINED_HARDENED_CLAY), "fortium_block");
 		rift = registerBlock(new Rift(), "rift", (CreativeTabs)null);
 		// Ronnian Blocks
-		ronnian_sand = registerBlock(new PBSand(MapColor.RED_STAINED_HARDENED_CLAY, PBPlanets.RONNE).setHardness(0.5f), "scarlet_sand");
+		ronnian_sand = (PBSand)registerBlock(new PBSand(MapColor.RED_STAINED_HARDENED_CLAY, PBPlanets.RONNE).setHardness(0.5f), "scarlet_sand");
 		ronnian_sandstone = registerBlock(new PBBlockBasic(Material.ROCK, PBPlanets.RONNE).setHardness(2.0f), "ronnian_sandstone");
 		ronnian_stone = registerBlock(new PBBlockBasic(Material.ROCK, PBPlanets.RONNE).setHardness(2.0f), "ronnian_stone");
 		ronnian_stone_smooth = registerBlock(new PBBlockBasic(Material.ROCK, PBPlanets.RONNE).setHardness(2.0f), "ronnian_stone_smooth");
