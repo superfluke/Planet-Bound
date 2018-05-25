@@ -1,12 +1,14 @@
-package com.crypticmushroom.planetbound.blocks.ronnian;
+package com.crypticmushroom.planetbound.blocks;
 
 import java.util.Random;
 
+import org.apache.commons.lang3.Validate;
+
 import com.crypticmushroom.planetbound.init.PBBlocks;
+import com.crypticmushroom.planetbound.world.planet.Planet;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -20,29 +22,48 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class RonnianGrass extends Block
-{
-	public RonnianGrass() {
-		super(Material.GRASS, MapColor.RED);
+/**
+ * Base class for all planet's grass blocks
+ */
+public class PBGrass extends Block implements PBBlock {
+
+	protected PBDirt dirtBlock;
+
+	public PBGrass(PBDirt dirtBlock) {
+		this(dirtBlock, Material.GRASS);
+	}
+
+	public PBGrass(PBDirt dirtBlock, Material materialIn) {
+		super(materialIn);
 		this.setSoundType(SoundType.PLANT);
 		this.setHardness(0.9F);
 		this.setTickRandomly(true);
+
+		Validate.notNull(dirtBlock);
+		this.dirtBlock = dirtBlock;
+	}
+
+	@Override
+	public Planet[] getPlanets() {
+		return dirtBlock.getPlanets();
 	}
 
 	@Override
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
 		if (!world.isRemote)
-			if (world.getLightFromNeighbors(pos.up()) < 4 && world.getBlockState(pos.up()).getBlock().getLightOpacity(world.getBlockState(pos.up()), world, pos.up()) > 2)
-				world.setBlockState(pos, PBBlocks.ronnian_dirt.getDefaultState());
+			if (world.getLightFromNeighbors(pos.up()) < 4 && world.getBlockState(pos.up()).getBlock()
+					.getLightOpacity(world.getBlockState(pos.up()), world, pos.up()) > 2)
+				world.setBlockState(pos, this.dirtBlock.getDefaultState());
 			else if (world.getLightFromNeighbors(pos.up()) >= 9)
-				for (int i = 0; i < 4; ++i)
-				{
+				for (int i = 0; i < 4; ++i) {
 					BlockPos blockpos = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
 					Block block = world.getBlockState(blockpos.up()).getBlock();
 					IBlockState iblockstate = world.getBlockState(blockpos);
 
-					if (iblockstate.getBlock() == PBBlocks.ronnian_dirt && world.getLightFromNeighbors(blockpos.up()) >= 4 && block.getLightOpacity(world.getBlockState(blockpos.up()), world, blockpos.up()) <= 2)
-						world.setBlockState(blockpos, PBBlocks.ronnian_grass.getDefaultState());
+					if (iblockstate.getBlock() == this.dirtBlock
+							&& world.getLightFromNeighbors(blockpos.up()) >= 4
+							&& block.getLightOpacity(world.getBlockState(blockpos.up()), world, blockpos.up()) <= 2)
+						world.setBlockState(blockpos, this.dirtBlock.getDefaultState());
 				}
 	}
 
@@ -52,7 +73,8 @@ public class RonnianGrass extends Block
 	}
 
 	@Override
-	public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable) {
+	public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction,
+			IPlantable plantable) {
 		boolean hasWater = world.getBlockState(pos.east()).getMaterial() == Material.WATER ||
 				world.getBlockState(pos.west()).getMaterial() == Material.WATER ||
 				world.getBlockState(pos.north()).getMaterial() == Material.WATER ||

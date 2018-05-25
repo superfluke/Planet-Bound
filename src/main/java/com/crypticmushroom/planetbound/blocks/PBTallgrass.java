@@ -1,10 +1,12 @@
-package com.crypticmushroom.planetbound.blocks.ronnian;
+package com.crypticmushroom.planetbound.blocks;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
 import com.crypticmushroom.planetbound.init.PBBlocks;
+import com.crypticmushroom.planetbound.world.planet.Planet;
 
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
@@ -29,19 +31,26 @@ import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class RonnianTallgrass extends BlockBush implements IShearable
+public class PBTallgrass extends BlockBush implements IShearable
 {
 	public static final PropertyEnum<TallgrassVariant> VARIANT = PropertyEnum.create("variant", TallgrassVariant.class);
 
 	protected static final AxisAlignedBB PLANT_AABB = new AxisAlignedBB(0.09999999403953552D, 0.0D, 0.09999999403953552D, 0.8999999761581421D, 0.800000011920929D, 0.8999999761581421D);
 
-	public RonnianTallgrass()
+	private final Planet[] planets_found_on;
+
+	public PBTallgrass(Planet... planets)
 	{
 		super(Material.PLANTS);
 
 		this.setTickRandomly(true);
 		this.setSoundType(SoundType.PLANT);
 		this.getDefaultState().withProperty(VARIANT, TallgrassVariant.NORMAL);
+		this.planets_found_on = planets;
+	}
+
+	public Planet[] getPlanets() {
+		return Arrays.copyOf(planets_found_on, planets_found_on.length);
 	}
 
 	@Override

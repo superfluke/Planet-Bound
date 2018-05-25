@@ -4,22 +4,18 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.crypticmushroom.planetbound.init.PBItems;
+import com.crypticmushroom.planetbound.world.planet.Planet;
 
-import net.minecraft.block.BlockOre;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class RendiumOre extends BlockOre
+public class RendiumOre extends PBOre
 {
-	public RendiumOre()
+	public RendiumOre(Planet... planets)
 	{
-		super();
-
-		setHarvestLevel("pickaxe", 2);
-		setHardness(3);
-		setResistance(5);
+		super(planets);
 	}
 
 	@Override

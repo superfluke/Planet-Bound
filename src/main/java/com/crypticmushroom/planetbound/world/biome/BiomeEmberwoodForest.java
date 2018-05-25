@@ -1,6 +1,6 @@
 package com.crypticmushroom.planetbound.world.biome;
 
-import com.crypticmushroom.planetbound.blocks.ronnian.RonnianTallgrass;
+import com.crypticmushroom.planetbound.blocks.PBTallgrass;
 import com.crypticmushroom.planetbound.init.PBBlocks;
 import com.crypticmushroom.planetbound.world.gen.PBEmberwoodTreeGen;
 import com.crypticmushroom.planetbound.world.gen.PBNoTreeGen;
@@ -37,6 +37,6 @@ public class BiomeEmberwoodForest extends PBBiomeRonne
     @Override
     public WorldGenerator getRandomWorldGenForGrass(Random rand)
     {
-        return new PBRonnianTallgrassGen(RonnianTallgrass.TallgrassVariant.NORMAL);
+        return new PBRonnianTallgrassGen(PBTallgrass.TallgrassVariant.NORMAL);
     }
 }

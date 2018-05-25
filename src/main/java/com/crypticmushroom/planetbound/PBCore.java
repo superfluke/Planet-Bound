@@ -54,7 +54,7 @@ public class PBCore
 		//Auto developer mode is now handled by ConfigHandler
 		ConfigHandler.configWarnings();
 
-
+		PBPlanets.init();
 
 		PBLogger.printInfo("Preparing items for registry");
 		PBItems.init();
@@ -62,7 +62,7 @@ public class PBCore
 		PBLogger.printInfo("Preparing blocks for registry");
 		PBBlocks.init();
 
-		PBPlanets.init();
+
 
 		PBPlayer.init();
 
