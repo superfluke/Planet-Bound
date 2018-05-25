@@ -1,5 +1,7 @@
 package com.crypticmushroom.planetbound.init;
 
+import static com.crypticmushroom.planetbound.init.PBCreativeTabs.TAB_BLOCKS;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +14,7 @@ import com.crypticmushroom.planetbound.blocks.EmberwoodLeaves;
 import com.crypticmushroom.planetbound.blocks.EmberwoodLog;
 import com.crypticmushroom.planetbound.blocks.EmberwoodPlanks;
 import com.crypticmushroom.planetbound.blocks.InventorsForge;
+import com.crypticmushroom.planetbound.blocks.Puffball;
 import com.crypticmushroom.planetbound.blocks.Rift;
 import com.crypticmushroom.planetbound.blocks.oreblock.BloodstoneBlock;
 import com.crypticmushroom.planetbound.blocks.oreblock.FortiumBlock;
@@ -42,6 +45,9 @@ import com.crypticmushroom.planetbound.world.ColorizerRonnianGrass;
 import com.crypticmushroom.planetbound.world.biome.PBBiomeColorHelper;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -108,46 +114,50 @@ public class PBBlocks
 	public static EmberwoodLeaves emberwood_leaves;
 	public static Block emberwood_planks;
 	public static Block emberwood;
+	// Misc
+	public static Block puffball_block;
 
 	public static void init()
 	{
 		// Kybrite
-		kybrite_ore = registerBlock(new KybriteOre(), "kybrite_ore", PBCreativeTabs.TAB_BLOCKS);
-		kybrite_block = registerBlock(new KybriteBlock(), "kybrite_block", PBCreativeTabs.TAB_BLOCKS);
+		kybrite_ore = registerBlock(new KybriteOre(), "kybrite_ore");
+		kybrite_block = registerBlock(new KybriteBlock(), "kybrite_block");
 		// Verdanite
-		verdanite_ore = registerBlock(new VerdaniteOre(), "verdanite_ore", PBCreativeTabs.TAB_BLOCKS);
-		verdanite_block = registerBlock(new VerdaniteBlock(), "verdanite_block", PBCreativeTabs.TAB_BLOCKS);
+		verdanite_ore = registerBlock(new VerdaniteOre(), "verdanite_ore");
+		verdanite_block = registerBlock(new VerdaniteBlock(), "verdanite_block");
 		// Rendium
-		rendium_ore = registerBlock(new RendiumOre(), "rendium_ore", PBCreativeTabs.TAB_BLOCKS);
-		rendium_block = registerBlock(new RendiumBlock(), "rendium_block", PBCreativeTabs.TAB_BLOCKS);
+		rendium_ore = registerBlock(new RendiumOre(), "rendium_ore");
+		rendium_block = registerBlock(new RendiumBlock(), "rendium_block");
 		// Other
-		inventors_forge = registerBlock(new InventorsForge(false), "inventors_forge", PBCreativeTabs.TAB_BLOCKS);
-		lit_inventors_forge = registerBlock(new InventorsForge(true), "lit_inventors_forge", null);
-		fortium_block = registerBlock(new FortiumBlock(), "fortium_block", PBCreativeTabs.TAB_BLOCKS);
+		inventors_forge = registerBlock(new InventorsForge(false), "inventors_forge");
+		lit_inventors_forge = registerBlock(new InventorsForge(true), "lit_inventors_forge", (CreativeTabs)null);
+		fortium_block = registerBlock(new FortiumBlock(), "fortium_block");
 		rift = registerBlock(new Rift(), "rift", null);
 		// Ronnian Blocks
-		ronnian_sand = registerBlock(new RonnianSand(), "scarlet_sand", PBCreativeTabs.TAB_BLOCKS);
-		ronnian_sandstone = registerBlock(new RonnianSandstone(), "ronnian_sandstone", PBCreativeTabs.TAB_BLOCKS);
-		ronnian_stone = registerBlock(new RonnianStone(), "ronnian_stone", PBCreativeTabs.TAB_BLOCKS);
-		ronnian_stone_smooth = registerBlock(new RonnianStoneSmooth(), "ronnian_stone_smooth", PBCreativeTabs.TAB_BLOCKS);
-		ronnian_stone_chiseled = registerBlock(new RonnianStoneChiseled(), "ronnian_stone_chiseled", PBCreativeTabs.TAB_BLOCKS);
-		ronnian_sandstone_chiseled = registerBlock(new RonnianSandstoneChiseled(), "ronnian_sandstone_chiseled", PBCreativeTabs.TAB_BLOCKS);
-		ronnian_sandstone_smooth = registerBlock(new RonnianSandstoneSmooth(), "ronnian_sandstone_smooth", PBCreativeTabs.TAB_BLOCKS);
-		ronnian_dirt = registerBlock(new RonnianDirt(), "ronnian_dirt", PBCreativeTabs.TAB_BLOCKS);
-		ronnian_coarse_dirt = registerBlock(new RonnianCoarseDirt(), "ronnian_coarse_dirt", PBCreativeTabs.TAB_BLOCKS);
-		ronnian_grass = registerBlock(new RonnianGrass(), "ronnian_grass", PBCreativeTabs.TAB_BLOCKS);
-		ronnian_tallgrass = registerBlock(new RonnianTallgrass(), "ronnian_tallgrass", PBCreativeTabs.TAB_BLOCKS);
-		halkir_ore = registerBlock(new HalkirOre(), "halkir_ore", PBCreativeTabs.TAB_BLOCKS);
-		halkir_block = registerBlock(new HalkirBlock(), "halkir_block", PBCreativeTabs.TAB_BLOCKS);
-		bloodstone_ore = registerBlock(new BloodstoneOre(), "bloodstone_ore", PBCreativeTabs.TAB_BLOCKS);
-		bloodstone_block = registerBlock(new BloodstoneBlock(), "bloodstone_block", PBCreativeTabs.TAB_BLOCKS);
-		verdanite_ore_ronnian = registerBlock(new VerdaniteOre(), "verdanite_ore_ronnian", PBCreativeTabs.TAB_BLOCKS);
-		kybrite_ore_ronnian = registerBlock(new KybriteOreRonnian(), "kybrite_ore_ronnian", PBCreativeTabs.TAB_BLOCKS);
-		rendium_ore_ronnian = registerBlock(new RendiumOre(), "rendium_ore_ronnian", PBCreativeTabs.TAB_BLOCKS);
+		ronnian_sand = registerBlock(new RonnianSand(), "scarlet_sand");
+		ronnian_sandstone = registerBlock(new RonnianSandstone(), "ronnian_sandstone");
+		ronnian_stone = registerBlock(new RonnianStone(), "ronnian_stone");
+		ronnian_stone_smooth = registerBlock(new RonnianStoneSmooth(), "ronnian_stone_smooth");
+		ronnian_stone_chiseled = registerBlock(new RonnianStoneChiseled(), "ronnian_stone_chiseled");
+		ronnian_sandstone_chiseled = registerBlock(new RonnianSandstoneChiseled(), "ronnian_sandstone_chiseled");
+		ronnian_sandstone_smooth = registerBlock(new RonnianSandstoneSmooth(), "ronnian_sandstone_smooth");
+		ronnian_dirt = registerBlock(new RonnianDirt(), "ronnian_dirt");
+		ronnian_coarse_dirt = registerBlock(new RonnianCoarseDirt(), "ronnian_coarse_dirt");
+		ronnian_grass = registerBlock(new RonnianGrass(), "ronnian_grass");
+		ronnian_tallgrass = registerBlock(new RonnianTallgrass(), "ronnian_tallgrass");
+		halkir_ore = registerBlock(new HalkirOre(), "halkir_ore");
+		halkir_block = registerBlock(new HalkirBlock(), "halkir_block");
+		bloodstone_ore = registerBlock(new BloodstoneOre(), "bloodstone_ore");
+		bloodstone_block = registerBlock(new BloodstoneBlock(), "bloodstone_block");
+		verdanite_ore_ronnian = registerBlock(new VerdaniteOre(), "verdanite_ore_ronnian");
+		kybrite_ore_ronnian = registerBlock(new KybriteOreRonnian(), "kybrite_ore_ronnian");
+		rendium_ore_ronnian = registerBlock(new RendiumOre(), "rendium_ore_ronnian");
 		// Emberwood
-		emberwood_leaves = registerBlock(new EmberwoodLeaves(), "emberwood_leaves", PBCreativeTabs.TAB_BLOCKS);
-		emberwood_planks = registerBlock(new EmberwoodPlanks(), "emberwood_planks", PBCreativeTabs.TAB_BLOCKS);
-		emberwood = registerBlock(new EmberwoodLog(), "emberwood_log", PBCreativeTabs.TAB_BLOCKS);
+		emberwood_leaves = registerBlock(new EmberwoodLeaves(), "emberwood_leaves");
+		emberwood_planks = registerBlock(new EmberwoodPlanks(), "emberwood_planks");
+		emberwood = registerBlock(new EmberwoodLog(), "emberwood_log");
+		// Misc
+		puffball_block = registerBlock(new Puffball(Material.WOOD, MapColor.BLUE, /* TODO add small puffball */ null, SoundType.WOOD).setHardness(0.2F), "blue_puffball_block").setUnlocalizedName("puffball");
 	}
 
 	public static void setupColors() {
@@ -191,6 +201,10 @@ public class PBBlocks
 	{
 		event.getRegistry().registerAll(PBBlocks.getBlocks());
 		PBLogDev.printInfo("Registered PlanetBound blocks...");
+	}
+
+	private static <T extends Block> T registerBlock(T block, String name) {
+		return registerBlock(block, name, TAB_BLOCKS);
 	}
 
 	private static <T extends Block> T registerBlock(T block, String name, CreativeTabs tab)
