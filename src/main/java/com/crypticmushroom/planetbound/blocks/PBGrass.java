@@ -2,7 +2,10 @@ package com.crypticmushroom.planetbound.blocks;
 
 import java.util.Random;
 
+import org.apache.commons.lang3.Validate;
+
 import com.crypticmushroom.planetbound.init.PBBlocks;
+import com.crypticmushroom.planetbound.world.planet.Planet;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -22,7 +25,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 /**
  * Base class for all planet's grass blocks
  */
-public class PBGrass extends Block {
+public class PBGrass extends Block implements PBBlock {
 
 	protected PBDirt dirtBlock;
 
@@ -35,7 +38,14 @@ public class PBGrass extends Block {
 		this.setSoundType(SoundType.PLANT);
 		this.setHardness(0.9F);
 		this.setTickRandomly(true);
+
+		Validate.notNull(dirtBlock);
 		this.dirtBlock = dirtBlock;
+	}
+
+	@Override
+	public Planet[] getPlanets() {
+		return dirtBlock.getPlanets();
 	}
 
 	@Override

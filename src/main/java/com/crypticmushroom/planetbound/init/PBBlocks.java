@@ -2,12 +2,16 @@ package com.crypticmushroom.planetbound.init;
 
 import static com.crypticmushroom.planetbound.init.PBCreativeTabs.TAB_BLOCKS;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nullable;
 
 import org.apache.commons.lang3.Validate;
+import org.apache.logging.log4j.Level;
 
 import com.crypticmushroom.planetbound.PBCore;
 import com.crypticmushroom.planetbound.blocks.EmberwoodLeaves;
@@ -16,16 +20,16 @@ import com.crypticmushroom.planetbound.blocks.EmberwoodPlanks;
 import com.crypticmushroom.planetbound.blocks.InventorsForge;
 import com.crypticmushroom.planetbound.blocks.PBDirt;
 import com.crypticmushroom.planetbound.blocks.PBGrass;
+import com.crypticmushroom.planetbound.blocks.PBOre;
+import com.crypticmushroom.planetbound.blocks.PBSand;
 import com.crypticmushroom.planetbound.blocks.PBStorageBlock;
 import com.crypticmushroom.planetbound.blocks.Puffball;
 import com.crypticmushroom.planetbound.blocks.Rift;
 import com.crypticmushroom.planetbound.blocks.ores.BloodstoneOre;
 import com.crypticmushroom.planetbound.blocks.ores.HalkirOre;
-import com.crypticmushroom.planetbound.blocks.ores.KybriteOre;
 import com.crypticmushroom.planetbound.blocks.ores.KybriteOreRonnian;
 import com.crypticmushroom.planetbound.blocks.ores.RendiumOre;
 import com.crypticmushroom.planetbound.blocks.ores.VerdaniteOre;
-import com.crypticmushroom.planetbound.blocks.ronnian.RonnianSand;
 import com.crypticmushroom.planetbound.blocks.ronnian.RonnianSandstone;
 import com.crypticmushroom.planetbound.blocks.ronnian.RonnianSandstoneChiseled;
 import com.crypticmushroom.planetbound.blocks.ronnian.RonnianSandstoneSmooth;
@@ -34,6 +38,7 @@ import com.crypticmushroom.planetbound.blocks.ronnian.RonnianStoneChiseled;
 import com.crypticmushroom.planetbound.blocks.ronnian.RonnianStoneSmooth;
 import com.crypticmushroom.planetbound.blocks.ronnian.RonnianTallgrass;
 import com.crypticmushroom.planetbound.logger.PBLogDev;
+import com.crypticmushroom.planetbound.logger.PBLogger;
 import com.crypticmushroom.planetbound.world.ColorizerRonnianFoliage;
 import com.crypticmushroom.planetbound.world.ColorizerRonnianGrass;
 import com.crypticmushroom.planetbound.world.biome.PBBiomeColorHelper;
@@ -114,10 +119,10 @@ public class PBBlocks
 	public static void init()
 	{
 		// Kybrite
-		kybrite_ore = registerBlock(new KybriteOre(), "kybrite_ore");
+		kybrite_ore = registerBlock(new PBOre(), "kybrite_ore");
 		kybrite_block = registerBlock(new PBStorageBlock(MapColor.BLACK), "kybrite_block");
 		// Verdanite
-		verdanite_ore = registerBlock(new VerdaniteOre(), "verdanite_ore");
+		verdanite_ore = registerBlock(new PBOre(), "verdanite_ore");
 		verdanite_block = registerBlock(new PBStorageBlock(/* TODO maybe add custom map color for this block */MapColor.LIME), "verdanite_block");
 		// Rendium
 		rendium_ore = registerBlock(new RendiumOre(), "rendium_ore");
@@ -128,7 +133,7 @@ public class PBBlocks
 		fortium_block = registerBlock(new PBStorageBlock(MapColor.GREEN_STAINED_HARDENED_CLAY), "fortium_block");
 		rift = registerBlock(new Rift(), "rift", (CreativeTabs)null);
 		// Ronnian Blocks
-		ronnian_sand = registerBlock(new RonnianSand(), "scarlet_sand");
+		ronnian_sand = registerBlock(new PBSand(MapColor.RED_STAINED_HARDENED_CLAY, PBPlanets.RONNE).setHardness(0.5f), "scarlet_sand");
 		ronnian_sandstone = registerBlock(new RonnianSandstone(), "ronnian_sandstone");
 		ronnian_stone = registerBlock(new RonnianStone(), "ronnian_stone");
 		ronnian_stone_smooth = registerBlock(new RonnianStoneSmooth(), "ronnian_stone_smooth");
@@ -152,6 +157,34 @@ public class PBBlocks
 		emberwood = registerBlock(new EmberwoodLog(), "emberwood_log");
 		// Misc
 		puffball_block = registerBlock(new Puffball(Material.WOOD, MapColor.BLUE, /* TODO add small puffball */ null, SoundType.WOOD).setHardness(0.2F), "blue_puffball_block").setUnlocalizedName("puffball");
+	}
+
+	private static final Method method_setSoundType;
+	static {
+		Method setSoundType = null;
+		for(Method method : Block.class.getDeclaredMethods()) {
+			int mods = method.getModifiers();
+			if(!Modifier.isStatic(mods) && Modifier.isProtected(mods)) {
+				if(method.getReturnType() == Block.class) {
+					Class<?>[] params = method.getParameterTypes();
+					if(params.length == 1 && params[0] == SoundType.class) {
+						setSoundType = method;
+						break;
+					}
+				}
+			}
+		}
+
+		method_setSoundType = setSoundType;
+		method_setSoundType.setAccessible(true);
+	}
+	private static <T extends Block> T setSoundType(T block, SoundType soundType) {
+		try {
+			method_setSoundType.invoke(block, soundType);
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			PBLogger.log.log(Level.ERROR, "Failed to set sound type for " + block);
+		}
+		return block;
 	}
 
 	public static void setupColors() {

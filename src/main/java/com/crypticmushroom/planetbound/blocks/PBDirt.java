@@ -1,5 +1,9 @@
 package com.crypticmushroom.planetbound.blocks;
 
+import java.util.Arrays;
+
+import com.crypticmushroom.planetbound.world.planet.Planet;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -14,32 +18,40 @@ import net.minecraftforge.common.IPlantable;
 /**
  * Base class for all planet's dirt blocks
  */
-public class PBDirt extends Block {
-	public PBDirt() {
-		this(Material.GROUND);
+public class PBDirt extends Block implements PBBlock {
+	private final Planet[] planets_found_on;
+
+	public PBDirt(Planet... planets) {
+		this(Material.GROUND, planets);
 	}
 
-	public PBDirt(SoundType soundTypeIn) {
-		this(Material.GROUND, Material.GROUND.getMaterialMapColor(), soundTypeIn);
+	public PBDirt(SoundType soundTypeIn, Planet... planets) {
+		this(Material.GROUND, Material.GROUND.getMaterialMapColor(), soundTypeIn, planets);
 	}
 
-	public PBDirt(MapColor mapColorIn) {
-		this(Material.GROUND, mapColorIn);
+	public PBDirt(MapColor mapColorIn, Planet... planets) {
+		this(Material.GROUND, mapColorIn, planets);
 	}
 
-	public PBDirt(Material materialIn) {
-		this(materialIn, materialIn.getMaterialMapColor());
+	public PBDirt(Material materialIn, Planet... planets) {
+		this(materialIn, materialIn.getMaterialMapColor(), planets);
 	}
 
-	public PBDirt(Material materialIn, MapColor mapColorIn) {
-		this(materialIn, mapColorIn, SoundType.GROUND);
+	public PBDirt(Material materialIn, MapColor mapColorIn, Planet... planets) {
+		this(materialIn, mapColorIn, SoundType.GROUND, planets);
 	}
 
-	public PBDirt(Material materialIn, MapColor mapColorIn, SoundType soundTypeIn) {
+	public PBDirt(Material materialIn, MapColor mapColorIn, SoundType soundTypeIn, Planet... planets) {
 		super(materialIn, mapColorIn);
 
 		this.setSoundType(soundTypeIn);
 		this.setHardness(0.9F);
+		this.planets_found_on = planets;
+	}
+
+	@Override
+	public Planet[] getPlanets() {
+		return Arrays.copyOf(planets_found_on, planets_found_on.length);
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import java.util.Random;
 
 import com.crypticmushroom.planetbound.init.PBWorld;
 import com.crypticmushroom.planetbound.player.PBPlayer;
+import com.crypticmushroom.planetbound.world.planet.Planet;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPortal;
@@ -15,7 +16,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class Rift extends BlockPortal
+public class Rift extends BlockPortal implements PBBlock
 {
 	public Rift()
 	{
@@ -25,6 +26,11 @@ public class Rift extends BlockPortal
 		setSoundType(SoundType.GLASS);
 		setLightLevel(0.75F);
 		this.setTickRandomly(true);
+	}
+
+	@Override
+	public Planet[] getPlanets() {
+		return new Planet[0];
 	}
 
 	@Override

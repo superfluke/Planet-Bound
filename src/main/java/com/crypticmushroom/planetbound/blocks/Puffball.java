@@ -3,6 +3,8 @@ package com.crypticmushroom.planetbound.blocks;
 import java.util.Arrays;
 import java.util.Random;
 
+import com.crypticmushroom.planetbound.world.planet.Planet;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -22,16 +24,23 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class Puffball extends Block {
+public class Puffball extends Block implements PBBlock {
 	public static final PropertyEnum<Puffball.EnumType> VARIANT = PropertyEnum.<Puffball.EnumType>create("variant",
 			Puffball.EnumType.class);
 	private final Block smallBlock;
+	private final Planet[] planets_found_on;
 
-	public Puffball(Material materialIn, MapColor color, Block smallBlockIn, SoundType soundTypeIn) {
+	public Puffball(Material materialIn, MapColor color, Block smallBlockIn, SoundType soundTypeIn, Planet... planets) {
 		super(materialIn, color);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, Puffball.EnumType.ALL_OUTSIDE));
 		this.smallBlock = smallBlockIn;
 		this.setSoundType(soundTypeIn);
+		this.planets_found_on = planets;
+	}
+
+	@Override
+	public Planet[] getPlanets() {
+		return Arrays.copyOf(planets_found_on, planets_found_on.length);
 	}
 
 	/**
