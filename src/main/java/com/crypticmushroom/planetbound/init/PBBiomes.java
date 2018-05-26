@@ -41,7 +41,7 @@ public class PBBiomes
                 .setRainDisabled()
                 .setRainfall(0)
                 .setTemperature(0.55F)
-                .setHeightVariation(0.7F)
-                .setBaseHeight(0.1F));
+                .setHeightVariation(1.3F)
+                .setBaseHeight(1.05F));
 	}
 }
