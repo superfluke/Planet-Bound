@@ -6,33 +6,40 @@ import java.util.Random;
 import com.crypticmushroom.planetbound.world.planet.Planet;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockHugeMushroom;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class Puffball extends Block implements PBBlock {
 	public static final PropertyEnum<Puffball.EnumType> VARIANT = PropertyEnum.<Puffball.EnumType>create("variant",
 			Puffball.EnumType.class);
-	private final Block smallBlock;
+	public static final PropertyBool DOWN = PropertyBool.create("down");
+	private final Item smallBlock;
 	private final Planet[] planets_found_on;
 
-	public Puffball(Material materialIn, MapColor color, Block smallBlockIn, SoundType soundTypeIn, Planet... planets) {
+	public Puffball(Material materialIn, MapColor color, Item smallBlockIn, SoundType soundTypeIn, Planet... planets) {
 		super(materialIn, color);
-		this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, Puffball.EnumType.ALL_OUTSIDE));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, Puffball.EnumType.ALL_OUTSIDE).withProperty(DOWN, Boolean.TRUE));
 		this.smallBlock = smallBlockIn;
 		this.setSoundType(soundTypeIn);
 		this.planets_found_on = planets;
@@ -41,6 +48,36 @@ public class Puffball extends Block implements PBBlock {
 	@Override
 	public Planet[] getPlanets() {
 		return Arrays.copyOf(planets_found_on, planets_found_on.length);
+	}
+
+
+	private static final double PI_2 = 2.0 * Math.PI;
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+		if(stateIn.getValue(VARIANT) == EnumType.ALL_INSIDE)
+			return;
+
+		if(rand.nextInt(10) > 0) return;
+
+		int count = rand.nextInt(3);
+
+		for(int i = 0; i < count; i++) {
+			double theta = rand.nextDouble() * PI_2;
+			double epsilon = rand.nextDouble() * PI_2;
+
+			double sinTheta = Math.sin(theta);
+
+			double radius = rand.nextDouble() * 0.25;
+
+			double xSpeed = radius * sinTheta * Math.cos(epsilon);
+			double ySpeed = radius * sinTheta * Math.sin(epsilon);
+			if(ySpeed > 0)
+				ySpeed *= 1.25;
+			double zSpeed = radius * Math.cos(epsilon);
+
+			worldIn.spawnParticle(EnumParticleTypes.END_ROD, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, xSpeed, ySpeed, zSpeed, Block.getStateId(Blocks.BROWN_MUSHROOM_BLOCK.getDefaultState().withProperty(BlockHugeMushroom.VARIANT, BlockHugeMushroom.EnumType.ALL_INSIDE)));
+		}
 	}
 
 	/**
@@ -69,7 +106,7 @@ public class Puffball extends Block implements PBBlock {
 	 */
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return Item.getItemFromBlock(this.smallBlock);
+		return this.smallBlock;
 	}
 
 	@Override
@@ -241,8 +278,23 @@ public class Puffball extends Block implements PBBlock {
 	}
 
 	@Override
+	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+		BlockPos pos2 = pos.down();
+		IBlockState state2 = worldIn.getBlockState(pos2);
+		if(state2.getBlock() != this) {
+			boolean b = false;
+			for(EnumFacing facing : EnumFacing.Plane.HORIZONTAL) {
+				b |= worldIn.getBlockState(pos.offset(facing)).getBlock() != this;
+			}
+			return state.withProperty(DOWN, b);
+		}
+		return state.withProperty(DOWN, Boolean.FALSE);
+	}
+
+	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] { VARIANT });
+
+		return new BlockStateContainer(this, new IProperty[] { VARIANT, DOWN });
 	}
 
 	@Override

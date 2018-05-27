@@ -1,15 +1,90 @@
 {
-    "variants": {
-        "variant=north_west": { "model": "planetbound:blue_puffball_block_nw" },
-        "variant=north": { "model": "planetbound:blue_puffball_block_n" },
-        "variant=north_east": { "model": "planetbound:blue_puffball_block_ne" },
-        "variant=west": { "model": "planetbound:blue_puffball_block_w" },
-        "variant=center": { "model": "planetbound:blue_puffball_block_c" },
-        "variant=east": { "model": "planetbound:blue_puffball_block_e" },
-        "variant=south_west": { "model": "planetbound:blue_puffball_block_sw" },
-        "variant=south": { "model": "planetbound:blue_puffball_block_s" },
-        "variant=south_east": { "model": "planetbound:blue_puffball_block_se" },
-        "variant=all_outside": { "model": "planetbound:blue_puffball_block_cap_all" },
-        "variant=all_inside": { "model": "planetbound:blue_puffball_block_inside_all" }
-    }
+	"multipart": [
+		{
+			"when": { "variant": "all_outside" },
+			"apply": { "model": "planetbound:blue_puffball_block_cap_all" }
+		},
+		{
+			"when": { "variant": "north_west", "down": "false" },
+			"apply": { "model": "planetbound:blue_puffball_block_nw" }
+		},
+		{
+			"when": { "variant": "north", "down": "false" },
+			"apply": { "model": "planetbound:blue_puffball_block_n" }
+		},
+		{
+			"when": { "variant": "north_east", "down": "false" },
+			"apply": { "model": "planetbound:blue_puffball_block_ne" }
+		},
+		{
+			"when": { "variant": "west", "down": "false" },
+			"apply": { "model": "planetbound:blue_puffball_block_w" }
+		},
+		{
+			"when": { "variant": "center", "down": "false" },
+			"apply": { "model": "planetbound:blue_puffball_block_c" }
+		},
+		{
+			"when": { "variant": "east", "down": "false" },
+			"apply": { "model": "planetbound:blue_puffball_block_e" }
+		},
+		{
+			"when": { "variant": "south_west", "down": "false" },
+			"apply": { "model": "planetbound:blue_puffball_block_sw" }
+		},
+		{
+			"when": { "variant": "south", "down": "false" },
+			"apply": { "model": "planetbound:blue_puffball_block_s" }
+		},
+		{
+			"when": { "variant": "south_east", "down": "false" },
+			"apply": { "model": "planetbound:blue_puffball_block_se" }
+		},
+		{
+			"when": { "variant": "all_inside", "down": "false" },
+			"apply": { "model": "planetbound:blue_puffball_block_inside_all" }
+		},
+		
+		
+		{
+			"when": { "variant": "north_west", "down": "true" },
+			"apply": { "model": "planetbound:blue_puffball_block_nw_dn" }
+		},
+		{
+			"when": { "variant": "north", "down": "true" },
+			"apply": { "model": "planetbound:blue_puffball_block_n_dn" }
+		},
+		{
+			"when": { "variant": "north_east", "down": "true" },
+			"apply": { "model": "planetbound:blue_puffball_block_ne_dn" }
+		},
+		{
+			"when": { "variant": "west", "down": "true" },
+			"apply": { "model": "planetbound:blue_puffball_block_w_dn" }
+		},
+		{
+			"when": { "variant": "center", "down": "true" },
+			"apply": { "model": "planetbound:blue_puffball_block_c_dn" }
+		},
+		{
+			"when": { "variant": "east", "down": "true" },
+			"apply": { "model": "planetbound:blue_puffball_block_e_dn" }
+		},
+		{
+			"when": { "variant": "south_west", "down": "true" },
+			"apply": { "model": "planetbound:blue_puffball_block_sw_dn" }
+		},
+		{
+			"when": { "variant": "south", "down": "true" },
+			"apply": { "model": "planetbound:blue_puffball_block_s_dn" }
+		},
+		{
+			"when": { "variant": "south_east", "down": "true" },
+			"apply": { "model": "planetbound:blue_puffball_block_se_dn" }
+		},
+		{
+			"when": { "variant": "all_inside", "down": "true" },
+			"apply": { "model": "planetbound:blue_puffball_block_dn" }
+		}
+	]
 }

@@ -48,6 +48,7 @@ import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -106,7 +107,7 @@ public class PBBlocks
 	public static Block emberwood_planks;
 	public static Block emberwood;
 	// Misc
-	public static Block puffball_block;
+	public static Puffball puffball_block;
 
 	public static void init()
 	{
@@ -148,7 +149,7 @@ public class PBBlocks
 		emberwood_planks = registerBlock(new EmberwoodPlanks(), "emberwood_planks");
 		emberwood = registerBlock(new EmberwoodLog(), "emberwood_log");
 		// Misc
-		puffball_block = registerBlock(new Puffball(Material.WOOD, MapColor.BLUE, /* TODO add small puffball */ null, SoundType.WOOD).setHardness(0.2F), "blue_puffball_block").setUnlocalizedName("puffball");
+		puffball_block = (Puffball)registerBlock(new Puffball(Material.WOOD, MapColor.BLUE, /* TODO add small puffball */ Item.getItemFromBlock(Blocks.BROWN_MUSHROOM), SoundType.WOOD).setHardness(0.2F), "blue_puffball_block").setUnlocalizedName("puffball");
 	}
 
 	private static final Method method_setSoundType;
@@ -255,6 +256,7 @@ public class PBBlocks
 			registerModel(block);
 		}
 		ModelLoader.setCustomStateMapper(emberwood_leaves, new StateMap.Builder().ignore(EmberwoodLeaves.CHECK_DECAY, EmberwoodLeaves.DECAYABLE).build());
+		//ModelLoader.setCustomStateMapper(puffball_block, new StateMap.Builder().ignore(Puffball.DOWN).build());
 	}
 
 	@SideOnly(Side.CLIENT)
