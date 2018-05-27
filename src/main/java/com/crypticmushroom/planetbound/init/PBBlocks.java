@@ -24,6 +24,7 @@ import com.crypticmushroom.planetbound.blocks.PBGrass;
 import com.crypticmushroom.planetbound.blocks.PBSand;
 import com.crypticmushroom.planetbound.blocks.PBStorageBlock;
 import com.crypticmushroom.planetbound.blocks.PBTallgrass;
+import com.crypticmushroom.planetbound.blocks.PBWorkbench;
 import com.crypticmushroom.planetbound.blocks.Puffball;
 import com.crypticmushroom.planetbound.blocks.Rift;
 import com.crypticmushroom.planetbound.blocks.ores.BloodstoneOre;
@@ -106,6 +107,7 @@ public class PBBlocks
 	public static EmberwoodLeaves emberwood_leaves;
 	public static Block emberwood_planks;
 	public static Block emberwood;
+	public static Block emberwood_crafting_table;
 	// Misc
 	public static Puffball puffball_block;
 
@@ -148,8 +150,10 @@ public class PBBlocks
 		emberwood_leaves = registerBlock(new EmberwoodLeaves(), "emberwood_leaves");
 		emberwood_planks = registerBlock(new EmberwoodPlanks(), "emberwood_planks");
 		emberwood = registerBlock(new EmberwoodLog(), "emberwood_log");
+		emberwood_crafting_table = registerBlock(new PBWorkbench(PBPlanets.RONNE), "emberwood_crafting_table");
 		// Misc
 		puffball_block = (Puffball)registerBlock(new Puffball(Material.WOOD, MapColor.BLUE, /* TODO add small puffball */ Item.getItemFromBlock(Blocks.BROWN_MUSHROOM), SoundType.WOOD).setHardness(0.2F), "blue_puffball_block").setUnlocalizedName("puffball");
+
 	}
 
 	private static final Method method_setSoundType;
