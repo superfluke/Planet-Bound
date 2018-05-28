@@ -330,6 +330,6 @@ public class PBBlocks {
 	}
 
 	public static Block[] getBlocks() {
-		return blocks.toArray(new Block[] {});
+		return blocks.toArray(new Block[blocks.size()]);
 	}
 }
