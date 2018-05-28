@@ -16,9 +16,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-public class EmberwoodLeaves extends BlockLeaves implements PBBlock
+public class RonnianLeaves extends BlockLeaves implements PBBlock
 {
-	public EmberwoodLeaves()
+	public RonnianLeaves()
 	{
 		this.setDefaultState(blockState.getBaseState().withProperty(CHECK_DECAY, true).withProperty(DECAYABLE, true));
 
