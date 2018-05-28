@@ -126,7 +126,7 @@ public class PBBlocks
 		inventors_forge = registerBlock(new InventorsForge(false), "inventors_forge");
 		lit_inventors_forge = registerBlock(new InventorsForge(true), "lit_inventors_forge", (CreativeTabs)null);
 		fortium_block = registerBlock(new PBStorageBlock(MapColor.GREEN_STAINED_HARDENED_CLAY), "fortium_block");
-		rift = registerBlock(new Rift(), "rift", (CreativeTabs)null);
+		rift = registerBlock(new Rift(Blocks.IRON_BLOCK), "rift", (CreativeTabs)null);
 		// Ronnian Blocks
 		ronnian_sand = (PBSand)registerBlock(new PBSand(MapColor.RED_STAINED_HARDENED_CLAY, PBPlanets.RONNE).setHardness(0.5f), "scarlet_sand");
 		ronnian_sandstone = registerBlock(new PBBlockBasic(Material.ROCK, PBPlanets.RONNE).setHardness(2.0f), "ronnian_sandstone");
