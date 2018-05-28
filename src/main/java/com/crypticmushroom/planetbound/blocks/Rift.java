@@ -113,11 +113,11 @@ public class Rift extends BlockPortal implements PBBlock {
 		up = worldIn.getBlockState(posUp);
 		down = worldIn.getBlockState(posDown);
 
-		boolean doLeft = left.getBlock() != this || left.getValue(AXIS) != axis;
-		boolean doRight = right.getBlock() != this || right.getValue(AXIS) != axis;
-		boolean doUp = up.getBlock() != this || up.getValue(AXIS) != axis;
-		boolean doDown = down.getBlock() != this || down.getValue(AXIS) != axis;
-
+		boolean doLeft = left.getMaterial() == Material.AIR || left.getBlock() == this && left.getValue(AXIS) != axis;
+		boolean doRight = right.getMaterial() == Material.AIR || right.getBlock() == this && right.getValue(AXIS) != axis;
+		boolean doUp = up.getMaterial() == Material.AIR || up.getBlock() == this && up.getValue(AXIS) != axis;
+		boolean doDown = down.getMaterial() == Material.AIR || down.getBlock() == this && down.getValue(AXIS) != axis;
+		boolean portalUp = up.getBlock() != this;
 		double increment = 0.1;
 
 		for (double y = pos.getY(); y < pos.getY() + 1; y += increment) {
@@ -127,25 +127,25 @@ public class Rift extends BlockPortal implements PBBlock {
 				worldIn.spawnParticle(PARTICLE, xRight, y, zRight, 0, 0, 0, PARAMS);
 		}
 
-		if (doUp || doDown) {
+		if (doUp || doDown || portalUp) {
 			double yUp = pos.getY() + 1;
 			switch (axis) {
 			case X:
 				for (double x = xRight; x < xLeft; x += increment) {
-					if (doUp) {
+					if (doUp) 
 						worldIn.spawnParticle(PARTICLE, x, yUp, zLeft, 0, 0, 0, PARAMS);
+					if (portalUp)
 						worldIn.spawnParticle(EnumParticleTypes.SNOW_SHOVEL, x, yUp, zLeft, 0, 0, 0, PARAMS);
-					}
 					if (doDown)
 						worldIn.spawnParticle(PARTICLE, x, pos.getY(), zLeft, 0, 0, 0, PARAMS);
 				}
 				break;
 			case Z:
 				for (double z = zLeft; z < zRight; z += increment) {
-					if (doUp) {
+					if (doUp)
 						worldIn.spawnParticle(PARTICLE, xLeft, yUp, z, 0, 0, 0, PARAMS);
+					if (portalUp)
 						worldIn.spawnParticle(EnumParticleTypes.SNOW_SHOVEL, xLeft, yUp, z, 0, 0, 0, PARAMS);
-					}
 					if (doDown)
 						worldIn.spawnParticle(PARTICLE, xLeft, pos.getY(), z, 0, 0, 0, PARAMS);
 				}
