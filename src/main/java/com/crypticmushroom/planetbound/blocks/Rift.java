@@ -65,8 +65,16 @@ public class Rift extends BlockPortal implements PBBlock {
 
 	/**
 	 * This has possibly the greatest particle effect of almost any block
-	 * in any mod; certainly the best one ive ever created :)
-	 * - Raptor
+	 * in any mod; certainly the best one ive ever created :) <br>
+	 * - Raptor												<br><br>
+	 * 
+	 * What it does:					<br>
+	 * - Spawns 'end rod' particles around the edges of the portal
+	 * 		IF the portal is not in a frame					<br>
+	 * - Spawns 'snow shovel' particles at the top of the portal, 
+	 * 		which fall down									<br>
+	 * - Spawns 'end rod' particles randomly in the interior of the
+	 * 		rift
 	 */
 	@Override
 	@SideOnly(Side.CLIENT)

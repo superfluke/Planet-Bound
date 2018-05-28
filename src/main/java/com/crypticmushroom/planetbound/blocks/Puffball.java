@@ -37,17 +37,18 @@ public class Puffball extends Block implements PBBlock {
 	private final Item smallBlock;
 	private final Planet[] planets_found_on;
 
-	public Puffball(Material materialIn, MapColor color, Item smallBlockIn, SoundType soundTypeIn, Planet... planets) {
+	public Puffball(Material materialIn, MapColor color, Item smallBlockIn, Planet... planets) {
 		super(materialIn, color);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, Puffball.EnumType.ALL_OUTSIDE).withProperty(DOWN, Boolean.TRUE));
 		this.smallBlock = smallBlockIn;
-		this.setSoundType(soundTypeIn);
+		this.setSoundType(SoundType.WOOD);
+		this.setHardness(0.2F);
 		this.planets_found_on = planets;
 	}
 
 	@Override
 	public Planet[] getPlanets() {
-		return Arrays.copyOf(planets_found_on, planets_found_on.length);
+		return planets_found_on.clone();
 	}
 
 

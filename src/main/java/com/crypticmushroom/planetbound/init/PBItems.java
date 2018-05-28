@@ -47,23 +47,27 @@ public class PBItems {
 	public static Item bloodstone_shard;
 
 	public static void init() {
-		kybrite_ingot = registerItem(new KybriteIngot(), "kybrite_ingot", PBCreativeTabs.TAB_ITEMS);
-		verdanite_ingot = registerItem(new VerdaniteIngot(), "verdanite_ingot", PBCreativeTabs.TAB_ITEMS);
-		rendium_chunk = registerItem(new RendiumChunk(), "rendium_chunk", PBCreativeTabs.TAB_ITEMS);
-		rendium_crystal = registerItem(new RendiumCrystal(), "rendium_crystal", PBCreativeTabs.TAB_ITEMS);
-		core_frame = registerItem(new CoreFrame(), "core_frame", PBCreativeTabs.TAB_ITEMS);
-		rendium_core = registerItem(new RendiumCore(), "rendium_core", PBCreativeTabs.TAB_ITEMS);
-		rift_gauntlet = registerItem(new RiftGauntlet(), "rift_gauntlet", PBCreativeTabs.TAB_ITEMS);
-		gauntlet_shell = registerItem(new GauntletShell(), "gauntlet_shell", PBCreativeTabs.TAB_ITEMS);
-		fortium_ingot = registerItem(new FortiumIngot(), "fortium_ingot", PBCreativeTabs.TAB_ITEMS);
-		halkir_ingot = registerItem(new HalkirIngot(), "halkir_ingot", PBCreativeTabs.TAB_ITEMS);
-		bloodstone_shard = registerItem(new BloodstoneShard(), "bloodstone_shard", PBCreativeTabs.TAB_ITEMS);
+		kybrite_ingot = registerItem(new KybriteIngot(), "kybrite_ingot");
+		verdanite_ingot = registerItem(new VerdaniteIngot(), "verdanite_ingot");
+		rendium_chunk = registerItem(new RendiumChunk(), "rendium_chunk");
+		rendium_crystal = registerItem(new RendiumCrystal(), "rendium_crystal");
+		core_frame = registerItem(new CoreFrame(), "core_frame");
+		rendium_core = registerItem(new RendiumCore(), "rendium_core");
+		rift_gauntlet = registerItem(new RiftGauntlet(), "rift_gauntlet");
+		gauntlet_shell = registerItem(new GauntletShell(), "gauntlet_shell");
+		fortium_ingot = registerItem(new FortiumIngot(), "fortium_ingot");
+		halkir_ingot = registerItem(new HalkirIngot(), "halkir_ingot");
+		bloodstone_shard = registerItem(new BloodstoneShard(), "bloodstone_shard");
 	}
 
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event) {
 		event.getRegistry().registerAll(PBItems.getItems());
 		PBLogDev.printInfo("Registered PlanetBound items...");
+	}
+	
+	protected static <T extends Item> T registerItem(T item, String name) {
+		return registerItem(item, name, PBCreativeTabs.TAB_ITEMS);
 	}
 
 	protected static <T extends Item> T registerItem(T item, String name, CreativeTabs tab) {
@@ -81,6 +85,8 @@ public class PBItems {
 
 		return item;
 	}
+	
+	/*
 
 	protected static Item registerBlockAsItem(Item item, String name) {
 		Validate.notNull(item, "item cannot be null");
@@ -93,7 +99,7 @@ public class PBItems {
 
 		return item;
 	}
-
+*/
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public static void registerModels(ModelRegistryEvent event) {

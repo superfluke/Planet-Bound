@@ -1,4 +1,4 @@
-package com.crypticmushroom.planetbound.blocks.ores;
+package com.crypticmushroom.planetbound.blocks;
 
 import java.util.Random;
 

@@ -5,6 +5,7 @@ import java.util.Arrays;
 import com.crypticmushroom.planetbound.world.planet.Planet;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 
@@ -19,9 +20,15 @@ public class PBBlockBasic extends Block implements PBBlock{
 		super(materialIn);
 		planets_found_on = planets;
 	}
+	
+	@Override
+	public PBBlockBasic setSoundType(SoundType soundTypeIn) {
+		super.setSoundType(soundTypeIn);
+		return this;
+	}
 
 	@Override
 	public Planet[] getPlanets() {
-		return Arrays.copyOf(planets_found_on, planets_found_on.length);
+		return planets_found_on.clone();
 	}
 }

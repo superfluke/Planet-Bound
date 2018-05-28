@@ -1,8 +1,7 @@
-package com.crypticmushroom.planetbound.blocks.ores;
+package com.crypticmushroom.planetbound.blocks;
 
 import java.util.Arrays;
 
-import com.crypticmushroom.planetbound.blocks.PBBlock;
 import com.crypticmushroom.planetbound.world.planet.Planet;
 
 import net.minecraft.block.BlockOre;
@@ -19,7 +18,7 @@ public class PBOre extends BlockOre implements PBBlock {
 
 	@Override
 	public Planet[] getPlanets() {
-		return Arrays.copyOf(planets_found_on, planets_found_on.length);
+		return planets_found_on.clone();
 	}
 
 	public PBOre setPickaxeHarvestLevel(int harvestLevel) {
