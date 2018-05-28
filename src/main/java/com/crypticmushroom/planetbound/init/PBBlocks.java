@@ -97,6 +97,7 @@ public class PBBlocks
 	public static PBDirt ronnian_coarse_dirt;
 	public static PBGrass ronnian_grass;
 	public static PBTallgrass ronnian_tallgrass;
+	public static RonnianLeaves ronnian_leaves;
 	// Halkir
 	public static PBOre halkir_ore;
 	public static PBStorageBlock halkir_block;
@@ -104,7 +105,6 @@ public class PBBlocks
 	public static PBOre bloodstone_ore;
 	public static PBStorageBlock bloodstone_block;
 	// Emberwood
-	public static EmberwoodLeaves emberwood_leaves;
 	public static Block emberwood_planks;
 	public static Block emberwood;
 	public static Block emberwood_crafting_table;
@@ -146,8 +146,8 @@ public class PBBlocks
 		verdanite_ore_ronnian = registerBlock(new PBOre(PBPlanets.RONNE), "verdanite_ore_ronnian");
 		kybrite_ore_ronnian = registerBlock(new PBOre(PBPlanets.RONNE), "kybrite_ore_ronnian");
 		rendium_ore_ronnian = registerBlock(new RendiumOre(PBPlanets.RONNE), "rendium_ore_ronnian");
+        ronnian_leaves = registerBlock(new RonnianLeaves(), "ronnian_leaves");
 		// Emberwood
-		emberwood_leaves = registerBlock(new EmberwoodLeaves(), "emberwood_leaves");
 		emberwood_planks = registerBlock(new EmberwoodPlanks(), "emberwood_planks");
 		emberwood = registerBlock(new EmberwoodLog(), "emberwood_log");
 		emberwood_crafting_table = registerBlock(new PBWorkbench(PBPlanets.RONNE), "emberwood_crafting_table");
