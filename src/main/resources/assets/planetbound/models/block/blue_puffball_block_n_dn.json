@@ -1,12 +1,12 @@
 {
     "parent": "block/cube",
     "textures": {
-        "particle": "blocks/mushroom_block_inside",
+        "particle": "planetbound:blocks/puffball_inside",
         "down": "planetbound:blocks/puffball",
         "up": "planetbound:blocks/puffball",
         "north": "planetbound:blocks/puffball",
-        "east": "blocks/mushroom_block_inside",
-        "south": "blocks/mushroom_block_inside",
-        "west": "blocks/mushroom_block_inside"
+        "east": "planetbound:blocks/puffball_inside",
+        "south": "planetbound:blocks/puffball_inside",
+        "west": "planetbound:blocks/puffball_inside"
     }
 }
