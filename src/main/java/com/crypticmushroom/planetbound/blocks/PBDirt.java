@@ -51,7 +51,7 @@ public class PBDirt extends Block implements PBBlock {
 
 	@Override
 	public Planet[] getPlanets() {
-		return Arrays.copyOf(planets_found_on, planets_found_on.length);
+		return planets_found_on.clone();
 	}
 
 	@Override

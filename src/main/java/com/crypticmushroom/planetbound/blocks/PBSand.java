@@ -1,7 +1,5 @@
 package com.crypticmushroom.planetbound.blocks;
 
-import java.util.Arrays;
-
 import com.crypticmushroom.planetbound.world.planet.Planet;
 
 import net.minecraft.block.BlockFalling;
@@ -17,12 +15,13 @@ public class PBSand extends BlockFalling implements PBBlock {
 	public PBSand(MapColor color, Planet... planets) {
 		planets_found_on = planets;
 		mapColor = color;
-		setSoundType(SoundType.SAND);
+		this.setSoundType(SoundType.SAND);
+		this.setHardness(0.5f);
 	}
 
 	@Override
 	public Planet[] getPlanets() {
-		return Arrays.copyOf(planets_found_on, planets_found_on.length);
+		return planets_found_on.clone();
 	}
 
 	@Override
