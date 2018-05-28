@@ -1,6 +1,6 @@
 {
   "parent": "block/leaves",
   "textures": {
-    "all": "planetbound:blocks/emberwood_leaves"
+    "all": "planetbound:blocks/ronnian_leaves"
   }
 }

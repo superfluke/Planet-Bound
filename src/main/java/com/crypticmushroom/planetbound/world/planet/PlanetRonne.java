@@ -1,9 +1,5 @@
 package com.crypticmushroom.planetbound.world.planet;
 
-import com.crypticmushroom.planetbound.client.ColorReloader;
-import com.crypticmushroom.planetbound.world.ColorizerRonnianFoliage;
-import com.crypticmushroom.planetbound.world.ColorizerRonnianGrass;
-
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 
@@ -11,9 +7,7 @@ public class PlanetRonne extends Planet
 {
 	public PlanetRonne()
 	{
-		super(0.01F, 0.01F,
-				new ColorReloader(ColorizerRonnianGrass::setGrassBiomeColorizer, "ronne_grass.png"),
-				new ColorReloader(ColorizerRonnianFoliage::setFoliageBiomeColorizer, "ronne_foliage.png"));
+		super(0.01F, 0.01F, "ronne_grass.png", "ronne_foliage.png");
 	}
 
 	@Override

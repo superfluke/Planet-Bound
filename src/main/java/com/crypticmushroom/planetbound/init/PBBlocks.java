@@ -4,6 +4,7 @@ import static com.crypticmushroom.planetbound.init.PBCreativeTabs.TAB_BLOCKS;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Nullable;
 
@@ -13,6 +14,7 @@ import com.crypticmushroom.planetbound.PBCore;
 import com.crypticmushroom.planetbound.blocks.BloodstoneOre;
 import com.crypticmushroom.planetbound.blocks.InventorsForge;
 import com.crypticmushroom.planetbound.blocks.PBBlockBasic;
+import com.crypticmushroom.planetbound.blocks.PBBlockTinted;
 import com.crypticmushroom.planetbound.blocks.PBDirt;
 import com.crypticmushroom.planetbound.blocks.PBGrass;
 import com.crypticmushroom.planetbound.blocks.PBLeaves;
@@ -25,14 +27,17 @@ import com.crypticmushroom.planetbound.blocks.PBWorkbench;
 import com.crypticmushroom.planetbound.blocks.Puffball;
 import com.crypticmushroom.planetbound.blocks.RendiumOre;
 import com.crypticmushroom.planetbound.blocks.Rift;
+import com.crypticmushroom.planetbound.client.ClientEventHandler;
 import com.crypticmushroom.planetbound.logger.PBLogDev;
-import com.crypticmushroom.planetbound.world.ColorizerRonnianFoliage;
-import com.crypticmushroom.planetbound.world.ColorizerRonnianGrass;
 import com.crypticmushroom.planetbound.world.biome.PBBiomeColorHelper;
+import com.crypticmushroom.planetbound.world.gen.PBAmberwoodTreeGen;
+import com.crypticmushroom.planetbound.world.gen.PBEmberwoodTreeGen;
 import com.crypticmushroom.planetbound.world.planet.Planet;
+import com.google.common.collect.Maps;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSapling;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.PBSapling;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -50,6 +55,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.ColorizerFoliage;
+import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
@@ -80,6 +87,7 @@ public class PBBlocks {
 	public static Block lit_inventors_forge;
 	public static PBStorageBlock fortium_block;
 	public static Block rift;
+	public static Puffball puffball_block;
 	// Ronnian Blocks
 	public static PBSand ronnian_sand;
 	public static Block ronnian_sandstone;
@@ -99,18 +107,16 @@ public class PBBlocks {
 	public static PBOre bloodstone_ore;
 	public static PBStorageBlock bloodstone_block;
 	// Emberwood
-	public static BlockSapling emberwood_sapling;
+	public static PBSapling emberwood_sapling;
 	public static PBLeaves emberwood_leaves;
 	public static Block emberwood_planks;
 	public static Block emberwood;
 	public static Block emberwood_crafting_table;
 	// Amberwood
-	public static BlockSapling amberwood_sapling;
+	public static PBSapling amberwood_sapling;
 	public static PBLeaves amberwood_leaves;
 	public static Block amberwood_planks;
 	public static Block amberwood;
-	// Misc
-	public static Puffball puffball_block;
 
 	public static void init() {
 		// Kybrite
@@ -129,6 +135,9 @@ public class PBBlocks {
 		lit_inventors_forge = registerBlock(new InventorsForge(true), "lit_inventors_forge", (CreativeTabs)null, false);
 		fortium_block = registerBlock(new PBStorageBlock(MapColor.GREEN_STAINED_HARDENED_CLAY), "fortium_block");
 		rift = registerBlock(new Rift(Blocks.IRON_BLOCK), "rift", (CreativeTabs)null, false);
+		puffball_block = (Puffball)registerBlock(new Puffball(Material.WOOD, MapColor.BLUE,
+				/* TODO add small puffball */ Item.getItemFromBlock(Blocks.BROWN_MUSHROOM)),
+				"blue_puffball_block").setUnlocalizedName("puffball");
 		// Ronnian Blocks
 		ronnian_sand = registerBlock(new PBSand(MapColor.RED_STAINED_HARDENED_CLAY, PBPlanets.RONNE), "scarlet_sand");
 		ronnian_sandstone = registerBlock(createStone(PBPlanets.RONNE), "ronnian_sandstone");
@@ -150,20 +159,16 @@ public class PBBlocks {
 		kybrite_ore_ronnian = registerBlock(new PBOre(PBPlanets.RONNE), "kybrite_ore_ronnian");
 		rendium_ore_ronnian = registerBlock(new RendiumOre(PBPlanets.RONNE), "rendium_ore_ronnian");
 		// Emberwood
-		emberwood_sapling = null; // TODO
+		emberwood_sapling = registerBlock(new PBSapling(new PBEmberwoodTreeGen(true), PBPlanets.RONNE), "emberwood_sapling");
 		emberwood_leaves = registerBlock(new PBLeaves(emberwood_sapling, PBPlanets.RONNE), "emberwood_leaves");
 		emberwood_planks = registerBlock(createPlanks(PBPlanets.RONNE), "emberwood_planks");
 		emberwood = registerBlock(new PBLog(PBPlanets.RONNE), "emberwood_log");
 		emberwood_crafting_table = registerBlock(new PBWorkbench(PBPlanets.RONNE), "emberwood_crafting_table");
 		// Amberwood
-		amberwood_sapling = null; // TODO
+		amberwood_sapling = registerBlock(new PBSapling(new PBAmberwoodTreeGen(true), PBPlanets.RONNE), "amberwood_sapling");
 		amberwood_leaves = registerBlock(new PBLeaves(amberwood_sapling, PBPlanets.RONNE), "amberwood_leaves");
 		amberwood_planks = registerBlock(createPlanks(PBPlanets.RONNE), "amberwood_planks");
 		amberwood = registerBlock(new PBLog(PBPlanets.RONNE), "amberwood_log");
-		// Misc
-		puffball_block = (Puffball)registerBlock(new Puffball(Material.WOOD, MapColor.BLUE,
-				/* TODO add small puffball */ Item.getItemFromBlock(Blocks.BROWN_MUSHROOM)),
-				"blue_puffball_block").setUnlocalizedName("puffball");
 	}
 
 	private static PBBlockBasic createStone(Planet... planetsIn) {
@@ -178,30 +183,40 @@ public class PBBlocks {
 	public static void setupColors() {
 		final BlockColors bc = Minecraft.getMinecraft().getBlockColors();
 		final ItemColors ic = Minecraft.getMinecraft().getItemColors();
-		// to be used one day if we want grass to have custom
-		// tinting per biome
-		// blocks
-		bc.registerBlockColorHandler(new IBlockColor() {
-
+		
+		class GrassBlockColor implements IBlockColor {
+			private Planet planet;
+			
+			GrassBlockColor(Planet planet){
+				this.planet = planet;
+			}
+			
 			@Override
 			public int colorMultiplier(IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) {
 				return worldIn != null && pos != null? PBBiomeColorHelper.getPBGrassColorAtPos(worldIn, pos)
-						: ColorizerRonnianGrass.getGrassColor(0.7D, 0.0D);
+						: planet != null? planet.grassColorizer.getFloraColor(0.7, 0.0)
+						: ColorizerGrass.getGrassColor(0.7, 0.0);
 			}
 
-		}, ronnian_grass, ronnian_tallgrass);
-		bc.registerBlockColorHandler(new IBlockColor() {
+		}
+		
+		class FoliageBlockColor implements IBlockColor {
+			private Planet planet;
+			
+			FoliageBlockColor(Planet planet){
+				this.planet = planet;
+			}
 			@Override
 			public int colorMultiplier(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos,
 					int tintIndex) {
 				return worldIn != null && pos != null? PBBiomeColorHelper.getPBFoliageColorAtPos(worldIn, pos)
-						: ColorizerRonnianFoliage.getFoliageColor(0.7D, 0.0D);
+						: planet != null? planet.foliageColorizer.getFloraColor(0.7, 0.0)
+						: ColorizerFoliage.getFoliageColor(0.7, 0.0);
 			}
 
-		}, emberwood_leaves, amberwood_leaves /* TODO: does amberwood leaves have different color? */);
-
-		// items of blocks
-		ic.registerItemColorHandler(new IItemColor() {
+		}
+		
+		final IItemColor itemColor = new IItemColor() {
 
 			@Override
 			public int colorMultiplier(ItemStack stack, int tintIndex) {
@@ -210,7 +225,43 @@ public class PBBlocks {
 				return bc.colorMultiplier(iblockstate, (IBlockAccess)null, (BlockPos)null, tintIndex);
 			}
 
-		}, ronnian_grass, ronnian_tallgrass, emberwood_leaves, amberwood_leaves);
+		};
+		
+		Map<Planet, IBlockColor> definedGrassColors = Maps.newHashMap(),
+								definedFoliageColors = Maps.newHashMap();
+		
+		for(Block block : blocks) {
+			label0: if(block instanceof PBBlockTinted) {
+				PBBlockTinted pbBlock = (PBBlockTinted)block;
+				IBlockColor blockColor;
+				Planet[] planets = pbBlock.getPlanets();
+				if(planets.length > 0) {
+					Planet planet = planets[0];
+		
+					switch(pbBlock.getTintType()) {
+					case GRASS:
+						if((blockColor = definedGrassColors.get(planet)) == null) {
+							blockColor = new GrassBlockColor(planet);
+							definedGrassColors.put(planet, blockColor);
+						}
+						break;
+					case FOLIAGE:
+						if((blockColor = definedFoliageColors.get(planet)) == null) {
+							blockColor = new FoliageBlockColor(planet);
+							definedFoliageColors.put(planet, blockColor);
+						}
+						break;
+					default:
+						break label0;
+					}					
+				}else {
+					break label0;
+				}
+				
+				bc.registerBlockColorHandler(blockColor, block);
+				ic.registerItemColorHandler(itemColor, block);
+			}
+		}
 	}
 
 	@SubscribeEvent
@@ -239,6 +290,10 @@ public class PBBlocks {
 		block.setRegistryName(PBCore.MOD_ID, name);
 
 		blocks.add(block);
+		
+		if(block instanceof BlockLeaves) {
+			ClientEventHandler.LEAF_BLOX.add((BlockLeaves)block);
+		}
 
 		if(registerItem)
 			PBItems.registerItem(new ItemBlock(block), name, (CreativeTabs)null);
@@ -249,13 +304,16 @@ public class PBBlocks {
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public static void registerModels(ModelRegistryEvent event) {
+		StateMap leavesStateMap = new StateMap.Builder().ignore(PBLeaves.CHECK_DECAY, PBLeaves.DECAYABLE).build();
+		StateMap saplingStateMap = new StateMap.Builder().ignore(PBSapling.STAGE).build();
 		for(Block block : blocks) {
 			registerModel(block);
+			
+			if(block instanceof PBLeaves)
+				ModelLoader.setCustomStateMapper(block, leavesStateMap);
+			else if(block instanceof PBSapling)
+				ModelLoader.setCustomStateMapper(block, saplingStateMap);
 		}
-		ModelLoader.setCustomStateMapper(emberwood_leaves,
-				new StateMap.Builder().ignore(PBLeaves.CHECK_DECAY, PBLeaves.DECAYABLE).build());
-		// ModelLoader.setCustomStateMapper(puffball_block, new
-		// StateMap.Builder().ignore(Puffball.DOWN).build());
 	}
 
 	@SideOnly(Side.CLIENT)

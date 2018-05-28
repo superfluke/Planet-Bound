@@ -3,8 +3,9 @@ package com.crypticmushroom.planetbound.init;
 import com.crypticmushroom.planetbound.PBCore;
 import com.crypticmushroom.planetbound.world.biome.BiomeEmberwoodForest;
 import com.crypticmushroom.planetbound.world.biome.BiomeRedDesert;
-
 import com.crypticmushroom.planetbound.world.biome.BiomeRonneMountains;
+import com.crypticmushroom.planetbound.world.biome.PBBiome;
+
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.BiomeProperties;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
@@ -16,15 +17,11 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 @ObjectHolder(PBCore.MOD_ID)
 public class PBBiomes
 {
-	@ObjectHolder("red_desert")
-	public static final Biome redDesert;
-	@ObjectHolder("emberwood_forest")
-	public static final Biome emberwoodForest;
-	@ObjectHolder("ronne_mountains")
-    public static final Biome ronneMountains;
+	public static PBBiome redDesert;
+	public static Biome emberwoodForest;
+    public static Biome ronneMountains;
 
-	static
-	{
+	public static void init() {
 		redDesert = new BiomeRedDesert(new BiomeProperties("Red Desert")
 				.setRainDisabled()
 				.setRainfall(0)

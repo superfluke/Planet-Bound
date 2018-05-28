@@ -25,7 +25,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 /**
  * Base class for all planet's grass blocks
  */
-public class PBGrass extends Block implements PBBlock {
+public class PBGrass extends Block implements PBBlockTinted {
 
 	protected PBDirt dirtBlock;
 
@@ -87,5 +87,10 @@ public class PBGrass extends Block implements PBBlock {
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer() {
 		return BlockRenderLayer.CUTOUT_MIPPED;
+	}
+
+	@Override
+	public TintType getTintType() {
+		return TintType.GRASS;
 	}
 }

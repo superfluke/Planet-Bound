@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "planetbound:blocks/emberwood_crafting_table_front",
+        "down": "planetbound:blocks/emberwood_planks",
+        "up": "planetbound:blocks/emberwood_crafting_table_top",
+        "north": "planetbound:blocks/emberwood_crafting_table_front",
+        "east": "planetbound:blocks/emberwood_crafting_table_side",
+        "south": "planetbound:blocks/emberwood_crafting_table_side",
+        "west": "planetbound:blocks/emberwood_crafting_table_front"
+    }
+}

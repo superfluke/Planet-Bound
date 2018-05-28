@@ -3,8 +3,7 @@ package com.crypticmushroom.planetbound.world.biome;
 import java.util.Random;
 
 import com.crypticmushroom.planetbound.init.PBBlocks;
-import com.crypticmushroom.planetbound.world.ColorizerRonnianFoliage;
-import com.crypticmushroom.planetbound.world.ColorizerRonnianGrass;
+import com.crypticmushroom.planetbound.init.PBPlanets;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -28,7 +27,7 @@ public class PBBiomeRonne extends PBBiome
 
 	public PBBiomeRonne(BiomeProperties props)
 	{
-		super(props);
+		super(props, PBPlanets.RONNE);
 
 		decorator.flowersPerChunk = -1; // This disables Poppies and Dandelions
 		decorator.reedsPerChunk = -1; // For some reason, reeds cannot be disabled, but this looks better
@@ -177,13 +176,13 @@ public class PBBiomeRonne extends PBBiome
 	public int getPBGrassColorAtPos(BlockPos pos) {
 		double d0 = MathHelper.clamp(this.getTemperature(pos), 0.0F, 1.0F);
 		double d1 = MathHelper.clamp(this.getRainfall(), 0.0F, 1.0F);
-		return getModdedBiomeGrassColor(ColorizerRonnianGrass.getGrassColor(d0, d1));
+		return getModdedBiomeGrassColor(getPlanet().grassColorizer.getFloraColor(d0, d1));
 	}
 
 	@Override
 	public int getPBFoliageColorAtPos(BlockPos pos) {
 		double d0 = MathHelper.clamp(this.getTemperature(pos), 0.0F, 1.0F);
 		double d1 = MathHelper.clamp(this.getRainfall(), 0.0F, 1.0F);
-		return getModdedBiomeFoliageColor(ColorizerRonnianFoliage.getFoliageColor(d0, d1));
+		return getModdedBiomeFoliageColor(getPlanet().foliageColorizer.getFloraColor(d0, d1));
 	}
 }

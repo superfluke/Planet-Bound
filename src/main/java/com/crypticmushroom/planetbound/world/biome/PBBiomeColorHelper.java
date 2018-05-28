@@ -1,6 +1,8 @@
 package com.crypticmushroom.planetbound.world.biome;
 
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.ColorizerFoliage;
+import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;
@@ -15,7 +17,7 @@ public class PBBiomeColorHelper {
 				PBBiome pbbiome = (PBBiome) biome;
 				return pbbiome.getPBGrassColorAtPos(blockPosition);
 			}
-			return -1;
+			return ColorizerGrass.getGrassColor(1.0, 0.0);
 		}
 	};
 	private static final ColorResolver DIMENSIONAL_FOLIAGE_COLOR = new ColorResolver() {
@@ -25,7 +27,7 @@ public class PBBiomeColorHelper {
 				PBBiome pbbiome = (PBBiome) biome;
 				return pbbiome.getPBFoliageColorAtPos(blockPosition);
 			}
-			return -1;
+			return ColorizerFoliage.getFoliageColor(1.0, 0.0);
 		}
 	};
 

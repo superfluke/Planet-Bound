@@ -1,25 +1,28 @@
 package com.crypticmushroom.planetbound.world.biome;
 
+import java.util.Random;
+
 import com.crypticmushroom.planetbound.blocks.PBTallgrass;
 import com.crypticmushroom.planetbound.init.PBBlocks;
+import com.crypticmushroom.planetbound.world.gen.PBAmberwoodTreeGen;
 import com.crypticmushroom.planetbound.world.gen.PBEmberwoodTreeGen;
 import com.crypticmushroom.planetbound.world.gen.PBNoTreeGen;
 import com.crypticmushroom.planetbound.world.gen.PBRonnianTallgrassGen;
-import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenTrees;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
-import java.util.Random;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class BiomeEmberwoodForest extends PBBiomeRonne
 {
-    private WorldGenTrees RonneGenEmberwoodTrees;
-
+    private WorldGenAbstractTree emberwoodTreeGen;
+    private WorldGenAbstractTree amberwoodTreeGen;
+    
     public BiomeEmberwoodForest(BiomeProperties props)
     {
         super(props);
 
-        RonneGenEmberwoodTrees = new PBEmberwoodTreeGen(false);
+        emberwoodTreeGen = new PBEmberwoodTreeGen(false);
+        amberwoodTreeGen = new PBAmberwoodTreeGen(false);
 
         topBlock = PBBlocks.ronnian_grass.getDefaultState();
         fillerBlock = PBBlocks.ronnian_dirt.getDefaultState();
@@ -29,9 +32,9 @@ public class BiomeEmberwoodForest extends PBBiomeRonne
     }
 
     @Override
-    public WorldGenAbstractTree getRandomTreeFeature(Random par1Random)
+    public WorldGenAbstractTree getRandomTreeFeature(Random rand)
     {
-        return par1Random.nextInt(10) == 0 ? new PBNoTreeGen() : par1Random.nextInt(3) == 0 ? RonneGenEmberwoodTrees : new PBNoTreeGen();
+        return rand.nextInt(10) == 0 ? amberwoodTreeGen : rand.nextInt(3) == 0 ? emberwoodTreeGen : new PBNoTreeGen();
     }
 
     @Override

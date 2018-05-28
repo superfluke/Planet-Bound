@@ -1,7 +1,6 @@
 package com.crypticmushroom.planetbound.blocks;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -31,16 +30,15 @@ import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class PBTallgrass extends BlockBush implements IShearable
-{
+public class PBTallgrass extends BlockBush implements IShearable, PBBlockTinted {
 	public static final PropertyEnum<TallgrassVariant> VARIANT = PropertyEnum.create("variant", TallgrassVariant.class);
 
-	protected static final AxisAlignedBB PLANT_AABB = new AxisAlignedBB(0.09999999403953552D, 0.0D, 0.09999999403953552D, 0.8999999761581421D, 0.800000011920929D, 0.8999999761581421D);
+	protected static final AxisAlignedBB PLANT_AABB = new AxisAlignedBB(0.09999999403953552D, 0.0D,
+			0.09999999403953552D, 0.8999999761581421D, 0.800000011920929D, 0.8999999761581421D);
 
 	private final Planet[] planets_found_on;
 
-	public PBTallgrass(Planet... planets)
-	{
+	public PBTallgrass(Planet... planets) {
 		super(Material.PLANTS);
 
 		this.setTickRandomly(true);
@@ -49,83 +47,79 @@ public class PBTallgrass extends BlockBush implements IShearable
 		this.planets_found_on = planets;
 	}
 
+	@Override
 	public Planet[] getPlanets() {
 		return planets_found_on.clone();
 	}
+	
+	@Override
+	public TintType getTintType() {
+		return TintType.GRASS;
+	}
 
 	@Override
-	public BlockStateContainer createBlockState()
-	{
+	public BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, VARIANT);
 	}
 
 	@Override
-	public int getMetaFromState(IBlockState state)
-	{
+	public int getMetaFromState(IBlockState state) {
 		return state.getValue(VARIANT).ordinal();
 	}
 
 	@Override
 	@Deprecated
-	public IBlockState getStateFromMeta(int meta)
-	{
+	public IBlockState getStateFromMeta(int meta) {
 		return getDefaultState().withProperty(VARIANT, TallgrassVariant.values()[meta]);
 	}
 
 	@Override
-	public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items)
-	{
+	public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
 		for(int i = 0; i < TallgrassVariant.values().length; i++)
 			items.add(new ItemStack(this, 1, i));
 	}
 
 	@Override
-	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
-	{
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos,
+			EntityPlayer player) {
 		return new ItemStack(this, 1, world.getBlockState(pos).getValue(VARIANT).ordinal());
 	}
 
 	@Override
-	public int damageDropped(IBlockState state)
-	{
+	public int damageDropped(IBlockState state) {
 		TallgrassVariant leafType = state.getValue(VARIANT);
 		return leafType.ordinal();
 	}
 
 	@Override
-	public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos)
-	{
+	public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos) {
 		return true;
 	}
 
 	@Override
-	public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
-	{
+	public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
 		List<ItemStack> ret = new ArrayList<>();
 		ret.add(new ItemStack(this));
 		return ret;
 	}
 
-	public boolean canPlaceBlockAt(IBlockState state)
-	{
-		return state.getBlock() == PBBlocks.ronnian_grass || state.getBlock() == PBBlocks.ronnian_dirt || state.getBlock() == PBBlocks.ronnian_coarse_dirt;
+	public boolean canPlaceBlockAt(IBlockState state) {
+		return state.getBlock() == PBBlocks.ronnian_grass || state.getBlock() == PBBlocks.ronnian_dirt
+				|| state.getBlock() == PBBlocks.ronnian_coarse_dirt;
 	}
 
 	@Override
-	public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
-	{
+	public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
 		return super.canBlockStay(worldIn, pos, state);
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
-	{
+	public boolean isOpaqueCube(IBlockState state) {
 		return false;
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-	{
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return PLANT_AABB;
 	}
 
@@ -139,9 +133,8 @@ public class PBTallgrass extends BlockBush implements IShearable
 
 	@SideOnly(Side.CLIENT)
 	public void registerModel() {
-		for (int i = 0; i < TallgrassVariant.values().length; i++)
-		{
-			//String variant = "inventory_" + TallgrassVariant.values()[i].getName();
+		for(int i = 0; i < TallgrassVariant.values().length; i++) {
+			// String variant = "inventory_" + TallgrassVariant.values()[i].getName();
 			String name = getRegistryName().toString();
 			TallgrassVariant variant = TallgrassVariant.values()[i];
 			if(variant != TallgrassVariant.NORMAL) {
@@ -152,13 +145,11 @@ public class PBTallgrass extends BlockBush implements IShearable
 		}
 	}
 
-	public enum TallgrassVariant implements IStringSerializable
-	{
+	public enum TallgrassVariant implements IStringSerializable {
 		NORMAL;
 
 		@Override
-		public String getName()
-		{
+		public String getName() {
 			return name().toLowerCase(Locale.ROOT);
 		}
 	}

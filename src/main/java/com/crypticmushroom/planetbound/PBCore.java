@@ -2,6 +2,7 @@ package com.crypticmushroom.planetbound;
 
 import com.crypticmushroom.planetbound.config.ConfigHandler;
 import com.crypticmushroom.planetbound.crafting.InventorsForgeManager;
+import com.crypticmushroom.planetbound.init.PBBiomes;
 import com.crypticmushroom.planetbound.init.PBBlocks;
 import com.crypticmushroom.planetbound.init.PBItems;
 import com.crypticmushroom.planetbound.init.PBPlanets;
@@ -21,13 +22,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = PBCore.MOD_ID,
-name = PBCore.NAME,
-version = PBCore.VERSION,
-acceptedMinecraftVersions = PBCore.MC_VERSIONS,
-updateJSON = PBCore.UPDATE_JSON)
-public class PBCore
-{
+@Mod(modid = PBCore.MOD_ID, name = PBCore.NAME, version = PBCore.VERSION, acceptedMinecraftVersions = PBCore.MC_VERSIONS, updateJSON = PBCore.UPDATE_JSON)
+public class PBCore {
 	public static final String MOD_ID = "planetbound";
 	public static final String NAME = "Planet Bound";
 	public static final String VERSION = "1.0-dev";
@@ -39,30 +35,29 @@ public class PBCore
 	@Instance(MOD_ID)
 	private static PBCore instance;
 
-	public static PBCore instance()
-	{
+	public static PBCore instance() {
 		return instance;
 	}
 
 	@EventHandler
-	public void preInit(FMLPreInitializationEvent event)
-	{
+	public void preInit(FMLPreInitializationEvent event) {
 		PBLogger.printInfo("Preparing to take over the Universe...");
 		PBLogDev.printInfo("Running Pre-Initialization...");
 
 		ConfigHandler.loadConfig(event);
-		//Auto developer mode is now handled by ConfigHandler
+		// Auto developer mode is now handled by ConfigHandler
 		ConfigHandler.configWarnings();
 
+		
 		PBPlanets.init();
-
+		
 		PBLogger.printInfo("Preparing items for registry");
 		PBItems.init();
 
 		PBLogger.printInfo("Preparing blocks for registry");
 		PBBlocks.init();
-
-
+		
+		PBBiomes.init();
 
 		PBPlayer.init();
 
@@ -70,13 +65,12 @@ public class PBCore
 	}
 
 	@EventHandler
-	public void init(FMLInitializationEvent event)
-	{
+	public void init(FMLInitializationEvent event) {
 		PBLogger.printInfo("Running initialization");
 		PBLogger.printInfo("Registering tile entities");
 		PBTileEntities.init();
 
-		PBLogger.printInfo("Registering recipes"); //Order is important here
+		PBLogger.printInfo("Registering recipes"); // Order is important here
 		PBSmelting.init();
 		InventorsForgeManager.init();
 
@@ -90,8 +84,7 @@ public class PBCore
 	}
 
 	@EventHandler
-	public void postInit(FMLPostInitializationEvent event)
-	{
+	public void postInit(FMLPostInitializationEvent event) {
 		PBLogDev.printInfo("Running Post-initialization");
 
 		proxy.postInit(event);

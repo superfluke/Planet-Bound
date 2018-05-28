@@ -11,43 +11,35 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
 @Mod.EventBusSubscriber(modid = PBCore.MOD_ID)
-public final class PBBiomesRegister
-{
+public final class PBBiomesRegister {
 	@SubscribeEvent
-	public static void onRegisterBiomes(Register<Biome> event)
-	{
+	public static void onRegisterBiomes(Register<Biome> event) {
 		final BiomeRegistry biomes = new BiomeRegistry(event.getRegistry());
 
 		biomes.register(
 				"red_desert",
 				PBBiomes.redDesert,
-				Type.DRY, Type.WASTELAND
-				);
+				Type.DRY, Type.WASTELAND);
 
 		biomes.register(
 				"emberwood_forest",
 				PBBiomes.emberwoodForest,
-				Type.FOREST, Type.HOT
-				);
+				Type.FOREST, Type.HOT);
 
 		biomes.register(
-		        "ronne_mountains",
-                PBBiomes.ronneMountains,
-                Type.SPARSE, Type.MOUNTAIN
-                );
+				"ronne_mountains",
+				PBBiomes.ronneMountains,
+				Type.SPARSE, Type.MOUNTAIN);
 	}
 
-	private static class BiomeRegistry
-	{
+	private static class BiomeRegistry {
 		private final IForgeRegistry<Biome> registry;
 
-		BiomeRegistry(IForgeRegistry<Biome> registry)
-		{
+		BiomeRegistry(IForgeRegistry<Biome> registry) {
 			this.registry = registry;
 		}
 
-		public void register(String registryName, Biome biome, Type... biomeTypes)
-		{
+		public void register(String registryName, Biome biome, Type... biomeTypes) {
 			biome.setRegistryName(PBCore.MOD_ID, registryName);
 			registry.register(biome);
 			BiomeDictionary.addTypes(biome, biomeTypes);

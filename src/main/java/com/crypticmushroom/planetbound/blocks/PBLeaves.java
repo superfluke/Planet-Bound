@@ -8,7 +8,7 @@ import com.google.common.collect.Lists;
 
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.BlockSapling;
+import net.minecraft.block.PBSapling;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -17,20 +17,20 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class PBLeaves extends BlockLeaves implements PBBlock {
+public class PBLeaves extends BlockLeaves implements PBBlockTinted {
 
 	private final Planet[] planets_found_on;
-	protected final BlockSapling sapling;
+	protected final PBSapling sapling;
 	protected final Item appleDrop;
 
-	public PBLeaves(BlockSapling sapling, Item appleDrop, Planet... planets) {
+	public PBLeaves(PBSapling sapling, Item appleDrop, Planet... planets) {
 		this.planets_found_on = planets;
 		this.sapling = sapling;
 		this.appleDrop = appleDrop;
 		this.setDefaultState(blockState.getBaseState().withProperty(CHECK_DECAY, true).withProperty(DECAYABLE, true));
 	}
 
-	public PBLeaves(BlockSapling sapling, Planet... planets) {
+	public PBLeaves(PBSapling sapling, Planet... planets) {
 		this(sapling, null, planets);
 	}
 
@@ -85,5 +85,10 @@ public class PBLeaves extends BlockLeaves implements PBBlock {
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(DECAYABLE, (meta & 4) == 0).withProperty(CHECK_DECAY,
 				(meta & 8) > 0);
+	}
+
+	@Override
+	public TintType getTintType() {
+		return TintType.FOLIAGE;
 	}
 }
