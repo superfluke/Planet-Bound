@@ -63,17 +63,25 @@ public class Rift extends BlockPortal implements PBBlock {
 		// removePortal(world, pos, state);
 	}
 
+	/**
+	 * This has possibly the greatest particle effect of almost any block
+	 * in any mod; certainly the best one ive ever created :)
+	 * - Raptor
+	 */
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
 
 		final EnumParticleTypes PARTICLE = EnumParticleTypes.END_ROD;
 		final int[] PARAMS = {};// {Block.getStateId(stateIn)};
+		
+		// Plays the portal sound
 		if (rand.nextInt(100) == 0) {
 			worldIn.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, SoundEvents.BLOCK_PORTAL_AMBIENT,
 					SoundCategory.BLOCKS, 0.5F, rand.nextFloat() * 0.4F + 0.8F, false);
 		}
-
+		
+		// Random particles within the middle of the portal
 		int count = rand.nextInt(5);
 
 		for (int i = 0; i < count; i++) {
@@ -84,6 +92,7 @@ public class Rift extends BlockPortal implements PBBlock {
 			worldIn.spawnParticle(PARTICLE, x, y, z, 0, 0, 0, PARAMS);
 		}
 
+		// manages the edges
 		BlockPos posLeft, posRight, posUp = pos.up(), posDown = pos.down();
 
 		EnumFacing.Axis axis = stateIn.getValue(AXIS);
@@ -120,6 +129,7 @@ public class Rift extends BlockPortal implements PBBlock {
 		boolean portalUp = up.getBlock() != this;
 		double increment = 0.1;
 
+		// particles on left and right sides
 		for (double y = pos.getY(); y < pos.getY() + 1; y += increment) {
 			if (doLeft)
 				worldIn.spawnParticle(PARTICLE, xLeft, y, zLeft, 0, 0, 0, PARAMS);
@@ -127,6 +137,7 @@ public class Rift extends BlockPortal implements PBBlock {
 				worldIn.spawnParticle(PARTICLE, xRight, y, zRight, 0, 0, 0, PARAMS);
 		}
 
+		// particles on top and bottom
 		if (doUp || doDown || portalUp) {
 			double yUp = pos.getY() + 1;
 			switch (axis) {
@@ -134,7 +145,7 @@ public class Rift extends BlockPortal implements PBBlock {
 				for (double x = xRight; x < xLeft; x += increment) {
 					if (doUp) 
 						worldIn.spawnParticle(PARTICLE, x, yUp, zLeft, 0, 0, 0, PARAMS);
-					if (portalUp)
+					if (portalUp) //the particles falling on the outside
 						worldIn.spawnParticle(EnumParticleTypes.SNOW_SHOVEL, x, yUp, zLeft, 0, 0, 0, PARAMS);
 					if (doDown)
 						worldIn.spawnParticle(PARTICLE, x, pos.getY(), zLeft, 0, 0, 0, PARAMS);
@@ -144,7 +155,7 @@ public class Rift extends BlockPortal implements PBBlock {
 				for (double z = zLeft; z < zRight; z += increment) {
 					if (doUp)
 						worldIn.spawnParticle(PARTICLE, xLeft, yUp, z, 0, 0, 0, PARAMS);
-					if (portalUp)
+					if (portalUp) //the particles falling on the outside
 						worldIn.spawnParticle(EnumParticleTypes.SNOW_SHOVEL, xLeft, yUp, z, 0, 0, 0, PARAMS);
 					if (doDown)
 						worldIn.spawnParticle(PARTICLE, xLeft, pos.getY(), z, 0, 0, 0, PARAMS);
@@ -154,6 +165,10 @@ public class Rift extends BlockPortal implements PBBlock {
 		}
 	}
 
+	/**
+	 * This code is from {@link BlockPortal} but is probably
+	 * useless because the model for the Rift block is 2D
+	 */
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess world, BlockPos pos,
@@ -203,49 +218,6 @@ public class Rift extends BlockPortal implements PBBlock {
 		}
 	}
 
-	private void removePortal(World world, BlockPos pos, IBlockState state) {
-		EnumFacing.Axis axis = state.getValue(AXIS);
-
-		Rift.Size size = new Rift.Size(world, pos, axis);
-
-		/*switch(axis) {
-		case X:
-			removePortalsVert(world, pos, axis);
-			removePortals(world, pos, -1, 0, axis);
-			removePortals(world, pos, 1, 0, axis);
-			break;
-		case Y:
-			break;
-		case Z:
-			removePortalsVert(world, pos, axis);
-			removePortals(world, pos, 0, -1, axis);
-			removePortals(world, pos, 0, 1, axis);
-			break;
-		}*/
-	}
-
-	private void removePortals(World world, BlockPos pos, int dx, int dz, EnumFacing.Axis axis) {
-		IBlockState state;
-		while ((state = world.getBlockState(pos = pos.add(dx, 0, dz))).getBlock() == this
-				&& state.getValue(AXIS) == axis) {
-			// world.setBlockToAir(pos);
-			removePortalsVert(world, pos, axis);
-		}
-	}
-
-	private void removePortalsVert(World world, BlockPos pos, EnumFacing.Axis axis) {
-		BlockPos OGpos = pos;
-		IBlockState state;
-		do {
-			world.setBlockToAir(pos);
-			pos = pos.up();
-		} while ((state = world.getBlockState(pos)).getBlock() == this && state.getValue(AXIS) == axis);
-		pos = OGpos;
-		while ((state = world.getBlockState(pos = pos.down())).getBlock() == this && state.getValue(AXIS) == axis) {
-			world.setBlockToAir(pos);
-		}
-	}
-
 	@Override
 	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity) {
 		if (entity instanceof EntityPlayer) {
@@ -257,6 +229,7 @@ public class Rift extends BlockPortal implements PBBlock {
 
 	@Override
 	public boolean trySpawnPortal(World worldIn, BlockPos pos) {
+		//Rifts don't spawn other side portals
 		return true;
 	}
 
