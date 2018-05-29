@@ -22,12 +22,7 @@ public abstract class GenLayerRonne extends GenLayer
         biomes = new GenLayerZoom(1003L, biomes);
         biomes = new GenLayerZoom(1004L, biomes);
 
-        // If you want rivers, turn these on and add the classes
-        /*
-         * GenLayer riverLayer = new GenLayerRonneRiver(1L, biomes); riverLayer = new
-         * GenLayerSmooth(7000L, riverLayer); biomes = new GenLayerRonneRiverMix(100L,
-         * biomes, riverLayer);
-         */
+        biomes = new GenLayerBiomeBorderRonne(700L, biomes);
 
         GenLayer genlayervoronoizoom = new GenLayerVoronoiZoom(10L, biomes);
 
