@@ -1,8 +1,11 @@
 # Planet Bound
 A mod for Minecraft created by the Cryptic Mushroom
 
-## Setting up the workspace
-Please run the `setup_decomp_workspace.bat` batch file in the `setup` folder to make your workspace work. If you experience any issues in code that only you are dealing with, please delete your local repository and re-clone.
+## Why is this mod not finished yet?
+A lot of us have a lot of stuff going on in our personal lives, so development is increasingly slow. If you'd like to send pull requests to help us out, that's be much appreciated.
 
-## Building the mod
-There should be a batch script in the `setup` folder called `build.bat` which should make your life a million times easier. I recommend using MultiMC for testing your built jar mods.
+## Can I have a .jar of this mod?
+Well, we won't give you one, but if you know how to build this mod using gradle, knock yourself out. If you are testing the mod, I recommend using the MultiMC launcher.
+
+## Do you all have a Discord server?
+https://discord.gg/Q725ZWs
