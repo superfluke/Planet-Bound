@@ -93,6 +93,7 @@ public class Puffball extends Block implements PBBlock {
 	 * Get the MapColor for this Block and the given BlockState
 	 */
 	@Override
+	@Deprecated
 	public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		switch (state.getValue(VARIANT)) {
 		case ALL_INSIDE:
@@ -111,6 +112,7 @@ public class Puffball extends Block implements PBBlock {
 	}
 
 	@Override
+    @Deprecated
 	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
 		return new ItemStack(this.smallBlock);
 	}
@@ -120,6 +122,7 @@ public class Puffball extends Block implements PBBlock {
 	 * allow for adjustments to the IBlockstate
 	 */
 	@Override
+    @Deprecated
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY,
 			float hitZ, int meta, EntityLivingBase placer) {
 		return this.getDefaultState();
@@ -129,6 +132,7 @@ public class Puffball extends Block implements PBBlock {
 	 * Convert the given metadata into a BlockState for this Block
 	 */
 	@Override
+    @Deprecated
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(VARIANT, Puffball.EnumType.byMetadata(meta));
 	}
@@ -146,6 +150,7 @@ public class Puffball extends Block implements PBBlock {
 	 * inapplicable, returns the passed blockstate.
 	 */
 	@Override
+    @Deprecated
 	public IBlockState withRotation(IBlockState state, Rotation rot) {
 		switch (rot) {
 		case CLOCKWISE_180:
@@ -227,6 +232,7 @@ public class Puffball extends Block implements PBBlock {
 	 * inapplicable, returns the passed blockstate.
 	 */
 	@Override
+    @Deprecated
 	@SuppressWarnings("incomplete-switch")
 	public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
 		Puffball.EnumType blockhugemushroom$enumtype = state.getValue(VARIANT);
@@ -279,6 +285,7 @@ public class Puffball extends Block implements PBBlock {
 	}
 
 	@Override
+    @Deprecated
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		BlockPos pos2 = pos.down();
 		IBlockState state2 = worldIn.getBlockState(pos2);
@@ -299,6 +306,7 @@ public class Puffball extends Block implements PBBlock {
 	}
 
 	@Override
+    @SuppressWarnings("unchecked")
 	public boolean rotateBlock(World world, BlockPos pos, EnumFacing axis) {
 		IBlockState state = world.getBlockState(pos);
 		for (IProperty prop : (java.util.Set<IProperty<?>>) state.getProperties().keySet()) {

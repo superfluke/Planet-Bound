@@ -25,6 +25,7 @@ public class PBSand extends BlockFalling implements PBBlock {
 	}
 
 	@Override
+	@Deprecated
 	public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		return mapColor;
 	}

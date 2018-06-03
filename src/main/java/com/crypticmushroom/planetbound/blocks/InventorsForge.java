@@ -218,6 +218,7 @@ public class InventorsForge extends BlockContainer implements PBBlock
 	}
 
 	@Override
+	@Deprecated
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int metadata, EntityLivingBase placer)
 	{
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
@@ -248,18 +249,21 @@ public class InventorsForge extends BlockContainer implements PBBlock
 	}
 
 	@Override
+    @Deprecated
 	public boolean hasComparatorInputOverride(IBlockState state)
 	{
 		return true;
 	}
 
 	@Override
+    @Deprecated
 	public int getComparatorInputOverride(IBlockState state, World world, BlockPos pos)
 	{
 		return Container.calcRedstone(world.getTileEntity(pos));
 	}
 
 	@Override
+    @Deprecated
 	public ItemStack getItem(World world, BlockPos pos, IBlockState state)
 	{
 		return new ItemStack(PBBlocks.inventors_forge);
@@ -272,6 +276,7 @@ public class InventorsForge extends BlockContainer implements PBBlock
 	}
 
 	@Override
+    @Deprecated
 	public IBlockState getStateFromMeta(int metadata)
 	{
 		EnumFacing facing = EnumFacing.getFront(metadata);
@@ -291,12 +296,14 @@ public class InventorsForge extends BlockContainer implements PBBlock
 	}
 
 	@Override
+    @Deprecated
 	public IBlockState withRotation(IBlockState state, Rotation rot)
 	{
 		return state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
 	}
 
 	@Override
+    @Deprecated
 	public IBlockState withMirror(IBlockState state, Mirror mirrorIn)
 	{
 		return state.withRotation(mirrorIn.toRotation(state.getValue(FACING)));

@@ -137,6 +137,7 @@ public class PBSapling extends BlockBush implements IGrowable {
 	 * Convert the given metadata into a BlockState for this Block
 	 */
 	@Override
+	@Deprecated
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(STAGE,
 				Integer.valueOf((meta & 8) >> 3));
