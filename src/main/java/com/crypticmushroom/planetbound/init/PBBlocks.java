@@ -8,25 +8,10 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
+import com.crypticmushroom.planetbound.blocks.*;
 import org.apache.commons.lang3.Validate;
 
 import com.crypticmushroom.planetbound.PBCore;
-import com.crypticmushroom.planetbound.blocks.BloodstoneOre;
-import com.crypticmushroom.planetbound.blocks.InventorsForge;
-import com.crypticmushroom.planetbound.blocks.PBBlockBasic;
-import com.crypticmushroom.planetbound.blocks.PBBlockTinted;
-import com.crypticmushroom.planetbound.blocks.PBDirt;
-import com.crypticmushroom.planetbound.blocks.PBGrass;
-import com.crypticmushroom.planetbound.blocks.PBLeaves;
-import com.crypticmushroom.planetbound.blocks.PBLog;
-import com.crypticmushroom.planetbound.blocks.PBOre;
-import com.crypticmushroom.planetbound.blocks.PBSand;
-import com.crypticmushroom.planetbound.blocks.PBStorageBlock;
-import com.crypticmushroom.planetbound.blocks.PBTallgrass;
-import com.crypticmushroom.planetbound.blocks.PBWorkbench;
-import com.crypticmushroom.planetbound.blocks.Puffball;
-import com.crypticmushroom.planetbound.blocks.RendiumOre;
-import com.crypticmushroom.planetbound.blocks.Rift;
 import com.crypticmushroom.planetbound.client.ClientEventHandler;
 import com.crypticmushroom.planetbound.logger.PBLogDev;
 import com.crypticmushroom.planetbound.world.biome.PBBiomeColorHelper;
@@ -37,7 +22,6 @@ import com.google.common.collect.Maps;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.PBSapling;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
