@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "planetbound:blocks/ronnian_verdanite_ore"
+    "all": "planetbound:blocks/verdanite_ore_ronnian"
   }
 }
