@@ -3,6 +3,9 @@ package com.crypticmushroom.planetbound.init;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemArmor;
+import net.minecraftforge.common.util.EnumHelper;
 import org.apache.commons.lang3.Validate;
 
 import com.crypticmushroom.planetbound.PBCore;
@@ -32,7 +35,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @EventBusSubscriber(modid = PBCore.MOD_ID)
 public class PBItems {
-	private static final List<Item> items = new ArrayList<>();
+	//Armor Materials
+    public static ItemArmor.ArmorMaterial ARMOR_HALKIR = EnumHelper.addArmorMaterial("HALKIR", "halkir", 16, new int[]{3, 6, 7, 3}, 10, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F);
+    public static ItemArmor.ArmorMaterial ARMOR_RONNE_LEATHER = EnumHelper.addArmorMaterial("RONNE_LEATHER", "ronne_leather", 5, new int[]{1, 2, 3, 1}, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F);
+
+    private static final List<Item> items = new ArrayList<>();
 
 	public static Item kybrite_ingot;
 	public static Item verdanite_ingot;
