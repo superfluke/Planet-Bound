@@ -8,6 +8,7 @@ item.rendium_core.name=Rendium Core
 item.rift_gauntlet.name=Rift Gauntlet
 item.gauntlet_shell.name=Gauntlet Shell
 item.fortium_ingot.name=Fortium Ingot
+item.bloodstone_shard.name=Bloodstone Shard
 
 #Block names
 tile.rift.name=Rift
@@ -29,13 +30,28 @@ tile.ronnian_dirt.name=Ronnian Dirt
 tile.ronnian_coarse_dirt.name=Ronnian Coarse Dirt
 tile.ronnian_grass.name=Ronnian Grass
 tile.ronnian_stone.name=Ronnian Stone
-tile.ronnian_stone_smooth.name=Polished Ronnian Stone
+tile.emberwood_sapling.name=Emberwood Sapling
+tile.amberwood_log.name=Amberwood Log
+tile.amberwood_leaves.name=Amberwood Leaves
+tile.amberwood_sapling.name=Amberwood Sapling
+tile.amberwood_planks.name=Amberwood Planks
+tile.emberwood_crafting_table=Emberwood Crafting Table
+tile.ronnian_stone_chiseled.name=Chiseled Ronnian Stone
+tile.ronnian_stone_smooth.name=Smooth Ronnian Stone
 tile.ronnian_sandstone.name=Ronnian Sandstone
 tile.ronnian_sandstone_chiseled.name=Chiseled Ronnian Sandstone
 tile.ronnian_sandstone_smooth.name=Smooth Ronnian Sandstone
+tile.kybrite_ore_ronnian.name=Kybrite Ore
+tile.rendium_ore_ronnian.name=Rendium Ore
+tile.verdanite_ore_ronnian.name=Verdanite Ore
 tile.emberwood_leaves.name=Emberwood Leaves
 tile.emberwood_planks.name=Emberwood Planks
 tile.emberwood_log.name=Emberwood Log
+tile.puffball.name=Puffball
+tile.bloodstone_ore.name=Bloodstone Ore
+tile.bloodstone_block.name=Bloodstone Block
+tile.halkir_ore.name=Halkir Ore
+tile.halkir_block.name=Halkir Block
 
 #Creative Tabs
 #itemGroup.main=Planet Bound
