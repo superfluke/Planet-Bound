@@ -123,7 +123,7 @@ public class PBBlocks {
 				/* TODO add small puffball */ Item.getItemFromBlock(Blocks.BROWN_MUSHROOM)),
 				"blue_puffball_block").setUnlocalizedName("puffball");
 		// Ronnian Blocks
-		ronnian_sand = registerBlock(new PBSand(MapColor.RED_STAINED_HARDENED_CLAY, PBPlanets.RONNE), "scarlet_sand");
+		ronnian_sand = registerBlock(new PBSand(MapColor.RED, PBPlanets.RONNE), "scarlet_sand");
 		ronnian_sandstone = registerBlock(createStone(PBPlanets.RONNE), "ronnian_sandstone");
 		ronnian_stone = registerBlock(createStone(PBPlanets.RONNE), "ronnian_stone");
 		ronnian_stone_smooth = registerBlock(createStone(PBPlanets.RONNE), "ronnian_stone_smooth");
@@ -131,10 +131,10 @@ public class PBBlocks {
 		ronnian_sandstone_chiseled = registerBlock(createStone(PBPlanets.RONNE), "ronnian_sandstone_chiseled");
 		ronnian_sandstone_smooth = registerBlock(createStone(PBPlanets.RONNE), "ronnian_sandstone_smooth");
 		ronnian_dirt = registerBlock(new PBDirt(MapColor.RED_STAINED_HARDENED_CLAY, PBPlanets.RONNE), "ronnian_dirt");
-		ronnian_coarse_dirt = registerBlock(new PBDirt(MapColor.RED_STAINED_HARDENED_CLAY, PBPlanets.RONNE),
+		ronnian_coarse_dirt = registerBlock(new PBDirt(MapColor.RED, PBPlanets.RONNE),
 				"ronnian_coarse_dirt");
-		ronnian_grass = registerBlock(new PBGrass(ronnian_dirt), "ronnian_grass");
-		ronnian_tallgrass = registerBlock(new PBTallgrass(PBPlanets.RONNE), "ronnian_tallgrass");
+		ronnian_grass = registerBlock(new PBGrass(ronnian_dirt, MapColor.RED_STAINED_HARDENED_CLAY), "ronnian_grass");
+		ronnian_tallgrass = registerBlock(new PBTallgrass(MapColor.RED_STAINED_HARDENED_CLAY, PBPlanets.RONNE), "ronnian_tallgrass");
 		halkir_ore = registerBlock(new PBOre(), "halkir_ore");
 		halkir_block = registerBlock(new PBStorageBlock(MapColor.GRAY), "halkir_block");
 		bloodstone_ore = registerBlock(new BloodstoneOre(PBPlanets.RONNE), "bloodstone_ore");
@@ -144,7 +144,7 @@ public class PBBlocks {
 		rendium_ore_ronnian = registerBlock(new RendiumOre(PBPlanets.RONNE), "rendium_ore_ronnian");
 		// Emberwood
 		emberwood_sapling = registerBlock(new PBSapling(new PBEmberwoodTreeGen(true), PBPlanets.RONNE), "emberwood_sapling");
-		emberwood_leaves = registerBlock(new PBLeaves(emberwood_sapling, PBPlanets.RONNE), "emberwood_leaves");
+		emberwood_leaves = registerBlock(new PBLeaves(emberwood_sapling, MapColor.RED, PBPlanets.RONNE), "emberwood_leaves");
 		emberwood_planks = registerBlock(createPlanks(PBPlanets.RONNE), "emberwood_planks");
 		emberwood = registerBlock(new PBLog(PBPlanets.RONNE), "emberwood_log");
 		emberwood_crafting_table = registerBlock(new PBWorkbench(PBPlanets.RONNE), "emberwood_crafting_table");

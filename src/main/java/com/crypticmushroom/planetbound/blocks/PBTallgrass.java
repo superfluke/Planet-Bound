@@ -9,6 +9,7 @@ import com.crypticmushroom.planetbound.world.planet.Planet;
 
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -38,8 +39,8 @@ public class PBTallgrass extends BlockBush implements IShearable, PBBlockTinted 
 
 	private final Planet[] planets_found_on;
 
-	public PBTallgrass(Planet... planets) {
-		super(Material.PLANTS);
+	public PBTallgrass(MapColor mapColorIn, Planet... planets) {
+		super(Material.PLANTS, mapColorIn);
 
 		this.setTickRandomly(true);
 		this.setSoundType(SoundType.PLANT);

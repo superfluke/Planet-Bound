@@ -2,6 +2,7 @@ package com.crypticmushroom.planetbound.blocks;
 
 import java.util.Random;
 
+import net.minecraft.block.material.MapColor;
 import org.apache.commons.lang3.Validate;
 
 import com.crypticmushroom.planetbound.init.PBBlocks;
@@ -30,11 +31,15 @@ public class PBGrass extends Block implements PBBlockTinted {
 	protected PBDirt dirtBlock;
 
 	public PBGrass(PBDirt dirtBlock) {
-		this(dirtBlock, Material.GRASS);
+		this(dirtBlock, Material.GRASS, Material.GRASS.getMaterialMapColor());
 	}
 
-	public PBGrass(PBDirt dirtBlock, Material materialIn) {
-		super(materialIn);
+	public PBGrass(PBDirt dirtBlock, MapColor mapColorIn) {
+		this(dirtBlock, Material.GRASS, mapColorIn);
+	}
+
+	public PBGrass(PBDirt dirtBlock, Material materialIn, MapColor mapColorIn) {
+		super(materialIn, mapColorIn);
 		this.setSoundType(SoundType.PLANT);
 		this.setHardness(0.9F);
 		this.setTickRandomly(true);
