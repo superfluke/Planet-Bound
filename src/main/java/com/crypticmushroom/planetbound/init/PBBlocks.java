@@ -144,7 +144,7 @@ public class PBBlocks {
 		rendium_ore_ronnian = registerBlock(new RendiumOre(PBPlanets.RONNE), "rendium_ore_ronnian");
 		// Emberwood
 		emberwood_sapling = registerBlock(new PBSapling(new PBEmberwoodTreeGen(true), PBPlanets.RONNE), "emberwood_sapling");
-		emberwood_leaves = registerBlock(new PBLeaves(emberwood_sapling, MapColor.RED, PBPlanets.RONNE), "emberwood_leaves");
+		emberwood_leaves = registerBlock(new PBLeaves(emberwood_sapling, PBPlanets.RONNE), "emberwood_leaves");
 		emberwood_planks = registerBlock(createPlanks(PBPlanets.RONNE), "emberwood_planks");
 		emberwood = registerBlock(new PBLog(PBPlanets.RONNE), "emberwood_log");
 		emberwood_crafting_table = registerBlock(new PBWorkbench(PBPlanets.RONNE), "emberwood_crafting_table");
