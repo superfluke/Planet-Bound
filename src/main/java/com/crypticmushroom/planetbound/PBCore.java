@@ -1,6 +1,5 @@
 package com.crypticmushroom.planetbound;
 
-import com.crypticmushroom.planetbound.config.ConfigHandler;
 import com.crypticmushroom.planetbound.crafting.InventorsForgeManager;
 import com.crypticmushroom.planetbound.init.PBBiomes;
 import com.crypticmushroom.planetbound.init.PBBlocks;

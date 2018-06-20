@@ -1,4 +1,4 @@
-package com.crypticmushroom.planetbound.config;
+package com.crypticmushroom.planetbound;
 
 import com.crypticmushroom.planetbound.PBCore;
 import com.crypticmushroom.planetbound.logger.PBLogDev;
@@ -27,7 +27,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
  */
 @Config(modid = PBCore.MOD_ID)
 @Config.LangKey(PBCore.MOD_ID + ".config.title")
-public class ConfigHandler
+public class PBConfig
 {
     public static final Dimension dimension = new Dimension();
 
@@ -92,10 +92,10 @@ public class ConfigHandler
     private static void reloadConfig()
     {
         //Dimension
-        dimensionIDRonne = config.getInt("Ronne Dimension ID", "dimension", 4, 2, 256,ConfigHandler.ronneDesc);
+        dimensionIDRonne = config.getInt("Ronne Dimension ID", "dimension", 4, 2, 256,PBConfig.ronneDesc);
 
         //Developer
-        developerMode = config.getBoolean("Developer Mode", "developer", false, ConfigHandler.devmodeDesc);
+        developerMode = config.getBoolean("Developer Mode", "developer", false, PBConfig.devmodeDesc);
 
         if (config.hasChanged())
         {
@@ -111,7 +111,7 @@ public class ConfigHandler
     public static void configWarnings()
     {
         // Developer Mode logging
-        if(ConfigHandler.developer.developerMode)
+        if(PBConfig.developer.developerMode)
         {
             PBLogDev.printWarn("Developer Mode is enabled. Extra logging will be pushed to the console.");
         }
