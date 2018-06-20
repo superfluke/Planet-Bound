@@ -4,91 +4,130 @@ import com.crypticmushroom.planetbound.PBCore;
 import com.crypticmushroom.planetbound.logger.PBLogDev;
 import com.crypticmushroom.planetbound.logger.PBLogger;
 import net.minecraftforge.common.config.Config;
+import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-/*
- * Config Handler by Jonathan
+/**
+ * Config Handler by Choonster
+ * Made from the open source mod TestMod3
+ * https://github.com/Choonster-Minecraft-Mods/TestMod3/blob/1.12.2/src/main/java/choonster/testmod3/config/ModConfig.java
+ *
+ * TestMod3 Copyright Choonster 2015-2017 MIT License
  */
 
+/**
+ * PLEASE NOTE: IF YOU ARE GOING TO CHANGE ANY EXISTING
+ * CONFIGURATION VARIABLES, YOU MUST DELETE YOUR EXISTING
+ * planetbound.cfg FILE IN THE config FOLDER OF YOUR
+ * TESTING DIRECTORY (normally named "run")
+ */
 @Config(modid = PBCore.MOD_ID)
-@Mod.EventBusSubscriber(modid = PBCore.MOD_ID)
+@Config.LangKey(PBCore.MOD_ID + ".config.title")
 public class ConfigHandler
 {
-    private static final String configKey = PBCore.MOD_ID + ".config.";
-    private static boolean checkDevMode = getAutoDevMode(PBCore.VERSION);
+    public static final Dimension dimension = new Dimension();
+
+    public static class Dimension
+    {
+        @Config.RequiresMcRestart
+        @Config.Comment("Set the Dimension ID for Ronne.")
+        public int dimensionIDRonne = 4;
+    }
+
+    public static final Other other = new Other();
+
+    public static class Other
+    {
+        public final Developer developer = new Developer();
+
+        public static class Developer
+        {
+            @Config.Comment("Developer mode outputs extra content to the console for development purposes.")
+            public boolean developerMode = false;
+        }
+    }
+
+    @Mod.EventBusSubscriber(modid = PBCore.MOD_ID)
+    private static class EventHandler
+    {
+        /**
+         * Inject the new values and save to the config file when the config has been changed from the GUI.
+         *
+         * @param event The event
+         */
+        @SubscribeEvent
+        public static void onConfigChanged(final ConfigChangedEvent.OnConfigChangedEvent event) {
+            if (event.getModID().equals(PBCore.MOD_ID)) {
+                ConfigManager.sync(PBCore.MOD_ID, Config.Type.INSTANCE);
+            }
+        }
+    }
+
+    /*
+     * Depricated Configuration class below
+     */
+    /*
+    protected static final String configKey = PBCore.MOD_ID + ".config.";
+
+    public static Configuration config;
+
+    public static int dimensionIDRonne;
+    public static boolean developerMode;
 
     public static void loadConfig(FMLPreInitializationEvent event)
     {
-        // Call config
+        //Call config
         Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 
-        // Load config
-        config.load();
+        //Reload config
+        reloadConfig();
 
-        // Developer
-        ConfigVariables.developerMode = config.getBoolean("Developer Mode", "development", checkDevMode, ConfigDescriptions.DeveloperMode);
-
-        // Save config
-        config.save();
-
-        PBLogger.printInfo("Configuration file loaded.");
+        PBLogger.printInfo("Loading configurations...");
     }
 
-    public static boolean getAutoDevMode(String versionCode)
+    private static void reloadConfig()
     {
-        if(versionCode.contains("dev"))
+        //Dimension
+        dimensionIDRonne = config.getInt("Ronne Dimension ID", "dimension", 4, 2, 256,ConfigHandler.ronneDesc);
+
+        //Developer
+        developerMode = config.getBoolean("Developer Mode", "developer", false, ConfigHandler.devmodeDesc);
+
+        if (config.hasChanged())
         {
-            return true;
+            config.save();
+            PBLogger.printInfo("Configurations saved.");
         }
         else
         {
-            return false;
+            PBLogger.printInfo("Configurations reloaded.");
         }
-
-        /*
-         * if(PBCore.VERSION.contains(versionCode)) { ConfigVariables.developerMode =
-         * true; PBLogger.
-         * printInfo("This is a development version of Planet Bound. Therefore, developer mode has been automatically enabled."
-         * ); }
-         */
     }
 
     public static void configWarnings()
     {
         // Developer Mode logging
-        if(ConfigVariables.developerMode)
+        if(ConfigHandler.developer.developerMode)
         {
-            if(checkDevMode)
-            {
-                PBLogDev.printWarn("Developer Mode has automatically been enabled since you are running a development version of Planet Bound. You may turn this off in the configuration file.");
-            }
-            else
-            {
-                PBLogDev.printInfo("Developer Mode is enabled. Development logging will occur at the [INFO] level. Generation of rocks and sticks will always occur at [DEBUG] level.");
-            }
+            PBLogDev.printWarn("Developer Mode is enabled. Extra logging will be pushed to the console.");
         }
         else
         {
-            if(checkDevMode)
-            {
-                PBLogger.printWarn("Developer Mode has been manually disabled. You may turn it back on in the configuration settings.");
-            }
-            else
-            {
-                PBLogDev.printInfo("Developer Mode logging will continue at the DEBUG level.");
-            }
+            PBLogDev.printInfo("Developer Mode is disabled. Extra logging will continue at the DEBUG level.");
         }
     }
 
-    public static Dimension dimension = new Dimension();
-
-    public static class Dimension
+    @SubscribeEvent
+    public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event)
     {
-        @Config.LangKey(configKey + "dimension_id_ronne")
-        @Config.RequiresMcRestart
-        @Config.Comment("Set the Dimension ID for Ronne. Will require a restart for effects to take place.")
-        public int dimensionIDRonne = 4;
+        if (event.getModID().equals(PBCore.MOD_ID))
+        {
+            reloadConfig();
+        }
     }
+    */
 }

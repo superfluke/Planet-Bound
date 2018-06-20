@@ -25,16 +25,8 @@ public class PBLogger
     }
 
     // Developer mode logging and debug logging are two very different things.
-    // I moved Developer logging methods into PBLogDev
     public static void printDebug(Object messageDebug)
     {
         log.debug(messageDebug.toString());
     }
-
-    /*
-     * public static void printlol(String name, Object messageLol) { Logger lol =
-     * LogManager.getLogger(name);
-     * 
-     * lol.info(messageLol.toString()); }
-     */
 }
