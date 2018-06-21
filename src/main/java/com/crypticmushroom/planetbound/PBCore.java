@@ -1,6 +1,5 @@
 package com.crypticmushroom.planetbound;
 
-import com.crypticmushroom.planetbound.config.ConfigHandler;
 import com.crypticmushroom.planetbound.crafting.InventorsForgeManager;
 import com.crypticmushroom.planetbound.init.PBBiomes;
 import com.crypticmushroom.planetbound.init.PBBlocks;
@@ -44,17 +43,12 @@ public class PBCore {
 		PBLogger.printInfo("Preparing to take over the Universe...");
 		PBLogDev.printInfo("Running Pre-Initialization...");
 
-		ConfigHandler.loadConfig(event);
-		// Auto developer mode is now handled by ConfigHandler
-		ConfigHandler.configWarnings();
-
-		
 		PBPlanets.init();
 		
-		PBLogger.printInfo("Preparing items for registry");
+		PBLogDev.printInfo("Preparing items for registry...");
 		PBItems.init();
 
-		PBLogger.printInfo("Preparing blocks for registry");
+		PBLogDev.printInfo("Preparing blocks for registry...");
 		PBBlocks.init();
 		
 		PBBiomes.init();
@@ -66,11 +60,11 @@ public class PBCore {
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		PBLogger.printInfo("Running initialization");
-		PBLogger.printInfo("Registering tile entities");
+		PBLogDev.printInfo("Running initialization...");
+		PBLogger.printInfo("Registering tile entities...");
 		PBTileEntities.init();
 
-		PBLogger.printInfo("Registering recipes"); // Order is important here
+		PBLogger.printInfo("Registering recipes..."); // Order is important here
 		PBSmelting.init();
 		InventorsForgeManager.init();
 
@@ -85,7 +79,7 @@ public class PBCore {
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		PBLogDev.printInfo("Running Post-initialization");
+		PBLogDev.printInfo("Running Post-initialization...");
 
 		proxy.postInit(event);
 	}

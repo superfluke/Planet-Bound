@@ -61,3 +61,18 @@ itemGroup.pb_items=Planet Bound Items
 
 #Containers
 container.inventors_forge=Inventor's Forge
+
+#Config
+planetbound.config.title=Planet Bound Configuration
+
+planetbound.general.dimension=Dimensions
+planetbound.general.dimension.tooltip=Change the settings for the dimensions of the game.\nAdvanced users only.
+planetbound.general.other=Other
+planetbound.general.other.tooltip=Other options that don't affect main gameplay can be found here.
+planetbound.general.other.developer=Developer Options
+planetbound.general.other.developer.tooltip=Change the settings made for the developers of Planet Bound.
+
+planetbound.general.dimension.dimensionidronne=Ronne Dimension ID
+planetbound.general.dimension.dimensionidronne.tooltip=Set the Dimension ID for Ronne.
+planetbound.general.other.developer.developermode=Developer Mode
+planetbound.general.other.developer.developermode.tooltip=Developer mode outputs extra content to the console for development purposes.
