@@ -19,17 +19,22 @@ public class RiftGauntlet extends Item
 {
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
     {
-        if(!world.isRemote) {
+        player.swingArm(hand);
+        if(!world.isRemote)
+        {
             RayTraceResult result = ForgeHooks.rayTraceEyes(player, 20.0D);
-            if(result != null) {
-                switch (result.typeOfHit) {
+            if(result != null)
+            {
+                switch (result.typeOfHit)
+                {
                     case ENTITY:
                         //TODO do we want a different behaviour when hitting entities?
                     case BLOCK:
                         BlockPos pos = result.getBlockPos();
                         EnumFacing.Axis axis = player.getHorizontalFacing().getAxis();
                         EnumFacing sideToExpandTo;
-                        switch (axis) {
+                        switch (axis)
+                        {
                             default:
                             case X: //WEST-EAST
                                 sideToExpandTo = isDecimalsLessThanHalf(result.hitVec.z) ? EnumFacing.NORTH : EnumFacing.SOUTH;
@@ -38,7 +43,8 @@ public class RiftGauntlet extends Item
                                 sideToExpandTo = isDecimalsLessThanHalf(result.hitVec.x) ? EnumFacing.WEST : EnumFacing.EAST;
                         }
                         List<BlockPos> portalPoses = getPortalPositions(pos.offset(result.sideHit), sideToExpandTo);
-                        if(isAllAir(world, portalPoses)) {
+                        if(isAllAir(world, portalPoses))
+                        {
                             IBlockState state = PBBlocks.rift.getDefaultState().withRotation(axis == EnumFacing.Axis.X ? Rotation.CLOCKWISE_90 : Rotation.NONE);
                             portalPoses.forEach(blockPos -> world.setBlockState(blockPos, state));
                             player.getCooldownTracker().setCooldown(this, 200);
@@ -46,18 +52,20 @@ public class RiftGauntlet extends Item
                         }
                     case MISS:
                         player.getCooldownTracker().setCooldown(this, 20);
-                        return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
                 }
             }
+            else player.getCooldownTracker().setCooldown(this, 20);
         }
         return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
     }
 
-    private static boolean isDecimalsLessThanHalf(double d) {
+    private static boolean isDecimalsLessThanHalf(double d)
+    {
         return Math.abs(d - (int) d) < 0.5D;
     }
 
-    public static List<BlockPos> getPortalPositions(BlockPos start, EnumFacing sideToExpand) {
+    public static List<BlockPos> getPortalPositions(BlockPos start, EnumFacing sideToExpand)
+    {
         List<BlockPos> ret = new ArrayList<>();
         for(int i = 0; i < 3; i++)
         {
