@@ -5,6 +5,7 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class PBPacketSmeltMode extends PBPacket<PBPacketSmeltMode>
 {
@@ -46,13 +47,7 @@ public class PBPacketSmeltMode extends PBPacket<PBPacketSmeltMode>
     }
 
     @Override
-    public void handleClient(PBPacketSmeltMode message, EntityPlayer player)
-    {
-
-    }
-
-    @Override
-    public void handleServer(PBPacketSmeltMode message, EntityPlayer player)
+    public IMessage handleServer(PBPacketSmeltMode message, EntityPlayer player)
     {
         TileEntity tileEntity = player.world.getTileEntity(new BlockPos(message.x, message.y, message.z));
 
@@ -60,5 +55,6 @@ public class PBPacketSmeltMode extends PBPacket<PBPacketSmeltMode>
         {
             ((TileEntityInventorsForge) tileEntity).setField(4, message.mode);
         }
+        return null;
     }
 }
