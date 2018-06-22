@@ -10,6 +10,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.SERVER)
 // Server side only stuff in SERVER package.
+/*
+ * ServerProxy is the same thing as CommonProxy. Can we get rid of this class and use CommonProxy instead,
+ * since ClientProxy already extends off of CommonProxy, and a server doesn't need specific features to itself for the mod?
+ */
 public class ServerProxy extends CommonProxy
 {
     @Override

@@ -41,8 +41,8 @@ public class PBCore {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		PBLogger.printInfo("Preparing to take over the Universe...");
-		PBLogDev.printInfo("Running Pre-Initialization...");
 
+		PBLogDev.printInfo("Initializing planets...");
 		PBPlanets.init();
 		
 		PBLogDev.printInfo("Preparing items for registry...");
@@ -50,9 +50,11 @@ public class PBCore {
 
 		PBLogDev.printInfo("Preparing blocks for registry...");
 		PBBlocks.init();
-		
+
+		PBLogDev.printInfo("Initializing biomes...");
 		PBBiomes.init();
 
+		PBLogDev.printInfo("Initializing player...");
 		PBPlayer.init();
 
 		proxy.preInit(event);
@@ -60,11 +62,10 @@ public class PBCore {
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		PBLogDev.printInfo("Running initialization...");
-		PBLogger.printInfo("Registering tile entities...");
+		PBLogDev.printInfo("Registering tile entities...");
 		PBTileEntities.init();
 
-		PBLogger.printInfo("Registering recipes..."); // Order is important here
+		PBLogDev.printInfo("Registering recipes..."); // Order is important here
 		PBSmelting.init();
 		InventorsForgeManager.init();
 
@@ -79,7 +80,7 @@ public class PBCore {
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		PBLogDev.printInfo("Running Post-initialization...");
+		//PBLogDev.printInfo("Running Post-initialization..."); //redundant
 
 		proxy.postInit(event);
 	}

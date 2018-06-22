@@ -197,7 +197,6 @@ public class PBBlocks {
 						: planet != null? planet.foliageColorizer.getFloraColor(0.7, 0.0)
 						: ColorizerFoliage.getFoliageColor(0.7, 0.0);
 			}
-
 		}
 		
 		final IItemColor itemColor = new IItemColor() {
@@ -251,7 +250,7 @@ public class PBBlocks {
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> event) {
 		event.getRegistry().registerAll(PBBlocks.getBlocks());
-		PBLogDev.printInfo("Registered PlanetBound blocks...");
+		PBLogDev.printInfo("Registered PlanetBound blocks.");
 	}
 
 	private static <T extends Block> T registerBlock(T block, String name) {
