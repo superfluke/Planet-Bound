@@ -8,6 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -51,5 +52,14 @@ public class ClientProxy extends CommonProxy
 	public EntityPlayer thePlayer()
 	{
 		return Minecraft.getMinecraft().player;
+	}
+
+	@Override
+	public void sendMessage(EntityPlayer reciever, String message)
+	{
+		if (this.thePlayer() == reciever)
+		{
+			Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new TextComponentString(message));
+		}
 	}
 }

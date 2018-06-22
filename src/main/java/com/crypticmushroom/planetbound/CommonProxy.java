@@ -15,4 +15,6 @@ public class CommonProxy
     {
         return null;
     }
+
+    public void sendMessage(EntityPlayer player, String message) { }
 }
