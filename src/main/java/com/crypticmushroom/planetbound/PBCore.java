@@ -21,15 +21,23 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = PBCore.MOD_ID, name = PBCore.NAME, version = PBCore.VERSION, acceptedMinecraftVersions = PBCore.MC_VERSIONS, updateJSON = PBCore.UPDATE_JSON)
+@Mod(
+		modid = PBCore.MOD_ID,
+		name = PBCore.NAME,
+		version = PBCore.VERSION,
+		acceptedMinecraftVersions = PBCore.MC_VERSIONS,
+		updateJSON = PBCore.UPDATE_JSON
+)
 public class PBCore {
 	public static final String MOD_ID = "planetbound";
 	public static final String NAME = "Planet Bound";
 	public static final String VERSION = "1.0-dev";
 	public static final String MC_VERSIONS = "[1.12.2]";
 	public static final String UPDATE_JSON = "https://raw.githubusercontent.com/cipherzerox/Planet-Bound/master/update.json";
+	public static final String CLIENT_PROXY = "com.crypticmushroom.planetbound.client.ClientProxy";
+	public static final String COMMON_PROXY = "com.crypticmushroom.planetbound.CommonProxy";
 
-	@SidedProxy(clientSide = "com.crypticmushroom.planetbound.client.ClientProxy", serverSide = "com.crypticmushroom.planetbound.server.ServerProxy")
+	@SidedProxy(clientSide = CLIENT_PROXY, serverSide = COMMON_PROXY)
 	public static CommonProxy proxy;
 	@Instance(MOD_ID)
 	private static PBCore instance;
