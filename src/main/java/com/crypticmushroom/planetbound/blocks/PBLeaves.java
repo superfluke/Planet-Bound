@@ -8,6 +8,8 @@ import com.google.common.collect.Lists;
 
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
+import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -21,16 +23,26 @@ public class PBLeaves extends BlockLeaves implements PBBlockTinted {
 	private final Planet[] planets_found_on;
 	protected final PBSapling sapling;
 	protected final Item appleDrop;
+	protected MapColor mapColor;
+
+	public PBLeaves(PBSapling sapling, Planet... planets) {
+		this(sapling, null, Material.LEAVES.getMaterialMapColor(), planets);
+	}
 
 	public PBLeaves(PBSapling sapling, Item appleDrop, Planet... planets) {
+		this(sapling, appleDrop, Material.LEAVES.getMaterialMapColor(), planets);
+	}
+
+	public PBLeaves(PBSapling sapling, MapColor mapColorIn, Planet... planets) {
+		this(sapling, null, mapColorIn, planets);
+	}
+
+	public PBLeaves(PBSapling sapling, Item appleDrop, MapColor mapColorIn, Planet... planets) {
 		this.planets_found_on = planets;
 		this.sapling = sapling;
 		this.appleDrop = appleDrop;
+		this.mapColor = mapColorIn;
 		this.setDefaultState(blockState.getBaseState().withProperty(CHECK_DECAY, true).withProperty(DECAYABLE, true));
-	}
-
-	public PBLeaves(PBSapling sapling, Planet... planets) {
-		this(sapling, null, planets);
 	}
 
 	@Override
@@ -89,5 +101,11 @@ public class PBLeaves extends BlockLeaves implements PBBlockTinted {
 	@Override
 	public TintType getTintType() {
 		return TintType.FOLIAGE;
+	}
+
+	@Override
+	public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+	{
+		return mapColor;
 	}
 }
