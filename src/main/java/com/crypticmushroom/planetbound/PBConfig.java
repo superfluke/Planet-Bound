@@ -33,6 +33,7 @@ public class PBConfig
 
     public static class Dimension
     {
+        @Config.RangeInt(min=2, max=256)
         @Config.RequiresMcRestart
         @Config.Comment("Set the Dimension ID for Ronne.")
         public int dimensionIDRonne = 4;
