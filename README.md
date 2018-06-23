@@ -1,5 +1,6 @@
 # Planet Bound
-A mod for Minecraft created by the Cryptic Mushroom
+A mod for Minecraft created by the Cryptic Mushroom  
+[![Build Status](http://173.79.184.169:8080/buildStatus/icon?job=Planet-Bound)](http://173.79.184.169:8080/view/Cryptic%20Mushroom/job/Planet-Bound/)
 
 ## Why is this mod not finished yet?
 A lot of us have a lot of stuff going on in our personal lives, so development is increasingly slow. If you'd like to send pull requests to help us out, that's be much appreciated.
