@@ -26,7 +26,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 		name = PBCore.NAME,
 		version = PBCore.VERSION,
 		acceptedMinecraftVersions = PBCore.MC_VERSIONS,
-		updateJSON = PBCore.UPDATE_JSON
+		updateJSON = PBCore.UPDATE_JSON,
+		dependencies = "required:forge@[14.23.4.2705,);"
 )
 public class PBCore {
 	public static final String MOD_ID = "planetbound";
