@@ -26,76 +26,87 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 /**
  * Base class for all planet's grass blocks
  */
-public class PBGrass extends Block implements PBBlockTinted {
+public class PBGrass extends Block implements PBBlockTinted
+{
 
-	protected PBDirt dirtBlock;
+    protected PBDirt dirtBlock;
 
-	public PBGrass(PBDirt dirtBlock) {
-		this(dirtBlock, Material.GRASS, Material.GRASS.getMaterialMapColor());
-	}
+    public PBGrass(PBDirt dirtBlock)
+    {
+        this(dirtBlock, Material.GRASS, Material.GRASS.getMaterialMapColor());
+    }
 
-	public PBGrass(PBDirt dirtBlock, MapColor mapColorIn) {
-		this(dirtBlock, Material.GRASS, mapColorIn);
-	}
+    public PBGrass(PBDirt dirtBlock, MapColor mapColorIn)
+    {
+        this(dirtBlock, Material.GRASS, mapColorIn);
+    }
 
-	public PBGrass(PBDirt dirtBlock, Material materialIn, MapColor mapColorIn) {
-		super(materialIn, mapColorIn);
-		this.setSoundType(SoundType.PLANT);
-		this.setHardness(0.9F);
-		this.setTickRandomly(true);
+    public PBGrass(PBDirt dirtBlock, Material materialIn, MapColor mapColorIn)
+    {
+        super(materialIn, mapColorIn);
+        this.setSoundType(SoundType.PLANT);
+        this.setHardness(0.9F);
+        this.setTickRandomly(true);
 
-		Validate.notNull(dirtBlock);
-		this.dirtBlock = dirtBlock;
-	}
+        Validate.notNull(dirtBlock);
+        this.dirtBlock = dirtBlock;
+    }
 
-	@Override
-	public Planet[] getPlanets() {
-		return dirtBlock.getPlanets();
-	}
+    @Override
+    public Planet[] getPlanets()
+    {
+        return dirtBlock.getPlanets();
+    }
 
-	@Override
-	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
-		if (!world.isRemote)
-			if (world.getLightFromNeighbors(pos.up()) < 4 && world.getBlockState(pos.up()).getBlock()
-					.getLightOpacity(world.getBlockState(pos.up()), world, pos.up()) > 2)
-				world.setBlockState(pos, this.dirtBlock.getDefaultState());
-			else if (world.getLightFromNeighbors(pos.up()) >= 9)
-				for (int i = 0; i < 4; ++i) {
-					BlockPos blockpos = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
-					Block block = world.getBlockState(blockpos.up()).getBlock();
-					IBlockState iblockstate = world.getBlockState(blockpos);
+    @Override
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
+    {
+        if (!world.isRemote)
+            if (world.getLightFromNeighbors(pos.up()) < 4 && world.getBlockState(pos.up()).getBlock()
+                    .getLightOpacity(world.getBlockState(pos.up()), world, pos.up()) > 2)
+                world.setBlockState(pos, this.dirtBlock.getDefaultState());
+            else if (world.getLightFromNeighbors(pos.up()) >= 9)
+                for (int i = 0; i < 4; ++i)
+                {
+                    BlockPos blockpos = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
+                    Block block = world.getBlockState(blockpos.up()).getBlock();
+                    IBlockState iblockstate = world.getBlockState(blockpos);
 
-					if (iblockstate.getBlock() == this.dirtBlock
-							&& world.getLightFromNeighbors(blockpos.up()) >= 4
-							&& block.getLightOpacity(world.getBlockState(blockpos.up()), world, blockpos.up()) <= 2)
-						world.setBlockState(blockpos, this.dirtBlock.getDefaultState());
-				}
-	}
+                    if (iblockstate.getBlock() == this.dirtBlock
+                            && world.getLightFromNeighbors(blockpos.up()) >= 4
+                            && block.getLightOpacity(world.getBlockState(blockpos.up()), world, blockpos.up()) <= 2)
+                        world.setBlockState(blockpos, this.dirtBlock.getDefaultState());
+                }
+    }
 
-	@Override
-	public Item getItemDropped(IBlockState state, Random random, int j) {
-		return PBBlocks.ronnian_dirt.getItemDropped(PBBlocks.ronnian_dirt.getDefaultState(), random, j);
-	}
+    @Override
+    public Item getItemDropped(IBlockState state, Random random, int j)
+    {
+        return PBBlocks.ronnian_dirt.getItemDropped(PBBlocks.ronnian_dirt.getDefaultState(), random, j);
+    }
 
-	@Override
-	public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction,
-			IPlantable plantable) {
-		boolean hasWater = world.getBlockState(pos.east()).getMaterial() == Material.WATER ||
-				world.getBlockState(pos.west()).getMaterial() == Material.WATER ||
-				world.getBlockState(pos.north()).getMaterial() == Material.WATER ||
-				world.getBlockState(pos.south()).getMaterial() == Material.WATER;
-		return plantable.getPlantType(world, pos.offset(direction)) == EnumPlantType.Plains ||
-				plantable.getPlantType(world, pos.offset(direction)) == EnumPlantType.Beach && hasWater;
-	}
+    @Override
+    public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction,
+                                   IPlantable plantable)
+    {
+        boolean hasWater = world.getBlockState(pos.east()).getMaterial() == Material.WATER ||
+                world.getBlockState(pos.west()).getMaterial() == Material.WATER ||
+                world.getBlockState(pos.north()).getMaterial() == Material.WATER ||
+                world.getBlockState(pos.south()).getMaterial() == Material.WATER;
+        return plantable.getPlantType(world, pos.offset(direction)) == EnumPlantType.Plains ||
+                plantable.getPlantType(world, pos.offset(direction)) == EnumPlantType.Beach && hasWater;
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer() {
-		return BlockRenderLayer.CUTOUT_MIPPED;
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getBlockLayer()
+    {
+        return BlockRenderLayer.CUTOUT_MIPPED;
+    }
 
-	@Override
-	public TintType getTintType() {
-		return TintType.GRASS;
-	}
+    @Override
+    public TintType getTintType()
+    {
+        return TintType.GRASS;
+    }
 }

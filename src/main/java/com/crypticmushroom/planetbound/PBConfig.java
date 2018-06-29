@@ -28,7 +28,7 @@ public class PBConfig
 
     public static class Dimension
     {
-        @Config.RangeInt(min=2, max=256)
+        @Config.RangeInt(min = 2, max = 256)
         @Config.RequiresMcRestart
         @Config.Comment("Set the Dimension ID for Ronne.")
         public int dimensionIDRonne = 4;
@@ -56,74 +56,12 @@ public class PBConfig
          * @param event The event
          */
         @SubscribeEvent
-        public static void onConfigChanged(final ConfigChangedEvent.OnConfigChangedEvent event) {
-            if (event.getModID().equals(PBCore.MOD_ID)) {
+        public static void onConfigChanged(final ConfigChangedEvent.OnConfigChangedEvent event)
+        {
+            if (event.getModID().equals(PBCore.MOD_ID))
+            {
                 ConfigManager.sync(PBCore.MOD_ID, Config.Type.INSTANCE);
             }
         }
     }
-
-    /*
-     * Depricated Configuration class below
-     */
-    /*
-    protected static final String configKey = PBCore.MOD_ID + ".config.";
-
-    public static Configuration config;
-
-    public static int dimensionIDRonne;
-    public static boolean developerMode;
-
-    public static void loadConfig(FMLPreInitializationEvent event)
-    {
-        //Call config
-        Configuration config = new Configuration(event.getSuggestedConfigurationFile());
-
-        //Reload config
-        reloadConfig();
-
-        PBLogger.printInfo("Loading configurations...");
-    }
-
-    private static void reloadConfig()
-    {
-        //Dimension
-        dimensionIDRonne = config.getInt("Ronne Dimension ID", "dimension", 4, 2, 256,PBConfig.ronneDesc);
-
-        //Developer
-        developerMode = config.getBoolean("Developer Mode", "developer", false, PBConfig.devmodeDesc);
-
-        if (config.hasChanged())
-        {
-            config.save();
-            PBLogger.printInfo("Configurations saved.");
-        }
-        else
-        {
-            PBLogger.printInfo("Configurations reloaded.");
-        }
-    }
-
-    public static void configWarnings()
-    {
-        // Developer Mode logging
-        if(PBConfig.developer.developerMode)
-        {
-            PBLogDev.printWarn("Developer Mode is enabled. Extra logging will be pushed to the console.");
-        }
-        else
-        {
-            PBLogDev.printInfo("Developer Mode is disabled. Extra logging will continue at the DEBUG level.");
-        }
-    }
-
-    @SubscribeEvent
-    public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event)
-    {
-        if (event.getModID().equals(PBCore.MOD_ID))
-        {
-            reloadConfig();
-        }
-    }
-    */
 }

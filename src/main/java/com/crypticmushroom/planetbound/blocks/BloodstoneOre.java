@@ -14,19 +14,22 @@ import net.minecraft.world.World;
 public class BloodstoneOre extends PBOre
 {
 
-	public BloodstoneOre(Planet... planets) {
-		super(planets);
-	}
+    public BloodstoneOre(Planet... planets)
+    {
+        super(planets);
+    }
 
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return PBItems.bloodstone_shard;
-	}
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune)
+    {
+        return PBItems.bloodstone_shard;
+    }
 
-	@Override
-	public int getExpDrop(IBlockState state, net.minecraft.world.IBlockAccess world, BlockPos pos, int fortune) {
-		Random rand = world instanceof World ? ((World)world).rand : new Random();
-		int i = MathHelper.getInt(rand, 0, 3);
-		return i;
-	}
+    @Override
+    public int getExpDrop(IBlockState state, net.minecraft.world.IBlockAccess world, BlockPos pos, int fortune)
+    {
+        Random rand = world instanceof World ? ((World) world).rand : new Random();
+        int i = MathHelper.getInt(rand, 0, 3);
+        return i;
+    }
 }

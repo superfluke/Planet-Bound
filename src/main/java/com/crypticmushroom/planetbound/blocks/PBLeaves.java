@@ -18,94 +18,111 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class PBLeaves extends BlockLeaves implements PBBlockTinted {
+public class PBLeaves extends BlockLeaves implements PBBlockTinted
+{
 
-	private final Planet[] planets_found_on;
-	protected final PBSapling sapling;
-	protected final Item appleDrop;
-	protected MapColor mapColor;
+    private final Planet[] planets_found_on;
+    protected final PBSapling sapling;
+    protected final Item appleDrop;
+    protected MapColor mapColor;
 
-	public PBLeaves(PBSapling sapling, Planet... planets) {
-		this(sapling, null, Material.LEAVES.getMaterialMapColor(), planets);
-	}
+    public PBLeaves(PBSapling sapling, Planet... planets)
+    {
+        this(sapling, null, Material.LEAVES.getMaterialMapColor(), planets);
+    }
 
-	public PBLeaves(PBSapling sapling, Item appleDrop, Planet... planets) {
-		this(sapling, appleDrop, Material.LEAVES.getMaterialMapColor(), planets);
-	}
+    public PBLeaves(PBSapling sapling, Item appleDrop, Planet... planets)
+    {
+        this(sapling, appleDrop, Material.LEAVES.getMaterialMapColor(), planets);
+    }
 
-	public PBLeaves(PBSapling sapling, MapColor mapColorIn, Planet... planets) {
-		this(sapling, null, mapColorIn, planets);
-	}
+    public PBLeaves(PBSapling sapling, MapColor mapColorIn, Planet... planets)
+    {
+        this(sapling, null, mapColorIn, planets);
+    }
 
-	public PBLeaves(PBSapling sapling, Item appleDrop, MapColor mapColorIn, Planet... planets) {
-		this.planets_found_on = planets;
-		this.sapling = sapling;
-		this.appleDrop = appleDrop;
-		this.mapColor = mapColorIn;
-		this.setDefaultState(blockState.getBaseState().withProperty(CHECK_DECAY, true).withProperty(DECAYABLE, true));
-	}
+    public PBLeaves(PBSapling sapling, Item appleDrop, MapColor mapColorIn, Planet... planets)
+    {
+        this.planets_found_on = planets;
+        this.sapling = sapling;
+        this.appleDrop = appleDrop;
+        this.mapColor = mapColorIn;
+        this.setDefaultState(blockState.getBaseState().withProperty(CHECK_DECAY, true).withProperty(DECAYABLE, true));
+    }
 
-	@Override
-	public Planet[] getPlanets() {
-		return planets_found_on.clone();
-	}
+    @Override
+    public Planet[] getPlanets()
+    {
+        return planets_found_on.clone();
+    }
 
-	@Override
-	protected void dropApple(World worldIn, BlockPos pos, IBlockState state, int chance) {
-		if(appleDrop != null && worldIn.rand.nextInt(chance) == 0) {
-			spawnAsEntity(worldIn, pos, new ItemStack(appleDrop));
-		}
-	}
+    @Override
+    protected void dropApple(World worldIn, BlockPos pos, IBlockState state, int chance)
+    {
+        if (appleDrop != null && worldIn.rand.nextInt(chance) == 0)
+        {
+            spawnAsEntity(worldIn, pos, new ItemStack(appleDrop));
+        }
+    }
 
-	@Override
-	public BlockPlanks.EnumType getWoodType(int meta) {
-		return null;
-	}
+    @Override
+    public BlockPlanks.EnumType getWoodType(int meta)
+    {
+        return null;
+    }
 
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return sapling == null? null : Item.getItemFromBlock(sapling);
-	}
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune)
+    {
+        return sapling == null ? null : Item.getItemFromBlock(sapling);
+    }
 
-	@Override
-	public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-		return Lists.newArrayList(new ItemStack(this));
-	}
+    @Override
+    public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
+    {
+        return Lists.newArrayList(new ItemStack(this));
+    }
 
-	@Override
-	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, CHECK_DECAY, DECAYABLE);
-	}
+    @Override
+    protected BlockStateContainer createBlockState()
+    {
+        return new BlockStateContainer(this, CHECK_DECAY, DECAYABLE);
+    }
 
-	@Override
-	public int getMetaFromState(IBlockState state) {
-		int i = 0;
+    @Override
+    public int getMetaFromState(IBlockState state)
+    {
+        int i = 0;
 
-		if(!state.getValue(DECAYABLE)) {
-			i |= 4;
-		}
+        if (!state.getValue(DECAYABLE))
+        {
+            i |= 4;
+        }
 
-		if(state.getValue(CHECK_DECAY)) {
-			i |= 8;
-		}
-		return i;
-	}
+        if (state.getValue(CHECK_DECAY))
+        {
+            i |= 8;
+        }
+        return i;
+    }
 
-	@Deprecated
-	@Override
-	public IBlockState getStateFromMeta(int meta) {
-		return this.getDefaultState().withProperty(DECAYABLE, (meta & 4) == 0).withProperty(CHECK_DECAY,
-				(meta & 8) > 0);
-	}
+    @Deprecated
+    @Override
+    public IBlockState getStateFromMeta(int meta)
+    {
+        return this.getDefaultState().withProperty(DECAYABLE, (meta & 4) == 0).withProperty(CHECK_DECAY,
+                (meta & 8) > 0);
+    }
 
-	@Override
-	public TintType getTintType() {
-		return TintType.FOLIAGE;
-	}
+    @Override
+    public TintType getTintType()
+    {
+        return TintType.FOLIAGE;
+    }
 
-	@Override
-	public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos)
-	{
-		return mapColor;
-	}
+    @Override
+    public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+    {
+        return mapColor;
+    }
 }

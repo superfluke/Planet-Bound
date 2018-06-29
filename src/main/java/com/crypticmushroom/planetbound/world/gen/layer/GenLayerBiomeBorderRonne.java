@@ -30,15 +30,15 @@ public class GenLayerBiomeBorderRonne extends GenLayer
 
         for (int dz = 0; dz < depth; dz++)
         {
-            for (int dx = 0; dx < width; dx++) {
+            for (int dx = 0; dx < width; dx++)
+            {
                 int centerX = ((dx + offX + 1) & 0xFFFFFFFC) - offX;
                 int centerZ = ((dz + offZ + 1) & 0xFFFFFFFC) - offZ;
 
                 if (dx <= centerX + 1 && dx >= centerX - 1 && dz <= centerZ + 1 && dz >= centerZ - 1)
                 {
                     output[dx + dz * width] = input[centerX + 1 + (centerZ + 1) * nwidth];
-                }
-                else
+                } else
                 {
                     output[dx + dz * width] = input[dx + 1 + (dz + 1) * nwidth];
                 }

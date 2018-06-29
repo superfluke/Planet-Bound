@@ -51,7 +51,7 @@ public class PBPacketSmeltMode extends PBPacket<PBPacketSmeltMode>
     {
         TileEntity tileEntity = player.world.getTileEntity(new BlockPos(message.x, message.y, message.z));
 
-        if(tileEntity instanceof TileEntityInventorsForge)
+        if (tileEntity instanceof TileEntityInventorsForge)
         {
             ((TileEntityInventorsForge) tileEntity).setField(4, message.mode);
         }

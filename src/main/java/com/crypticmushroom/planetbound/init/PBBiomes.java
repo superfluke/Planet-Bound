@@ -17,28 +17,29 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 @ObjectHolder(PBCore.MOD_ID)
 public class PBBiomes
 {
-	public static PBBiome redDesert;
-	public static Biome emberwoodForest;
+    public static PBBiome redDesert;
+    public static Biome emberwoodForest;
     public static Biome ronneMountains;
 
-	public static void init() {
-		redDesert = new BiomeRedDesert(new BiomeProperties("Red Desert")
-				.setRainDisabled()
-				.setRainfall(0)
-				.setTemperature(0.7F)
+    public static void init()
+    {
+        redDesert = new BiomeRedDesert(new BiomeProperties("Red Desert")
+                .setRainDisabled()
+                .setRainfall(0)
+                .setTemperature(0.7F)
                 .setHeightVariation(0.1F)
                 .setBaseHeight(0.05F));
-		emberwoodForest = new BiomeEmberwoodForest(new BiomeProperties("Emberwood Forest")
-				.setRainDisabled()
-				.setRainfall(0)
-				.setTemperature(0.7F)
+        emberwoodForest = new BiomeEmberwoodForest(new BiomeProperties("Emberwood Forest")
+                .setRainDisabled()
+                .setRainfall(0)
+                .setTemperature(0.7F)
                 .setHeightVariation(0.1F)
                 .setBaseHeight(0.05F));
-		ronneMountains = new BiomeRonneMountains(new BiomeProperties("Ronne Mountains")
+        ronneMountains = new BiomeRonneMountains(new BiomeProperties("Ronne Mountains")
                 .setRainDisabled()
                 .setRainfall(0)
                 .setTemperature(0.55F)
                 .setHeightVariation(1.3F)
                 .setBaseHeight(1.05F));
-	}
+    }
 }

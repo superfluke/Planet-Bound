@@ -9,24 +9,29 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-public class PBSand extends BlockFalling implements PBBlock {
-	private Planet[] planets_found_on;
-	private MapColor mapColor;
-	public PBSand(MapColor color, Planet... planets) {
-		planets_found_on = planets;
-		mapColor = color;
-		this.setSoundType(SoundType.SAND);
-		this.setHardness(0.5f);
-	}
+public class PBSand extends BlockFalling implements PBBlock
+{
+    private Planet[] planets_found_on;
+    private MapColor mapColor;
 
-	@Override
-	public Planet[] getPlanets() {
-		return planets_found_on.clone();
-	}
+    public PBSand(MapColor color, Planet... planets)
+    {
+        planets_found_on = planets;
+        mapColor = color;
+        this.setSoundType(SoundType.SAND);
+        this.setHardness(0.5f);
+    }
 
-	@Override
-	@Deprecated
-	public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-		return mapColor;
-	}
+    @Override
+    public Planet[] getPlanets()
+    {
+        return planets_found_on.clone();
+    }
+
+    @Override
+    @Deprecated
+    public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+    {
+        return mapColor;
+    }
 }

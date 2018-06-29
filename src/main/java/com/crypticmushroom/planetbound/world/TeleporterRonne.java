@@ -15,9 +15,9 @@ public class TeleporterRonne extends Teleporter
     @Override
     public void placeInPortal(Entity entityIn, float rotationYaw)
     {
-    	BlockPos pos = this.world.getTopSolidOrLiquidBlock(entityIn.getPosition()).up().east(2);
+        BlockPos pos = this.world.getTopSolidOrLiquidBlock(entityIn.getPosition()).up().east(2);
 
-        entityIn.setLocationAndAngles((double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), entityIn.rotationYaw, 0.0F);
+        entityIn.setLocationAndAngles((double) pos.getX(), (double) pos.getY(), (double) pos.getZ(), entityIn.rotationYaw, 0.0F);
         entityIn.motionX = 0.0D;
         entityIn.motionY = 0.0D;
         entityIn.motionZ = 0.0D;

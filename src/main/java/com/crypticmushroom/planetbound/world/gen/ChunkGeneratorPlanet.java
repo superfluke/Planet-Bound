@@ -71,8 +71,10 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
         this.depthNoise = new NoiseGeneratorOctaves(this.random, 16);
         this.biomeWeights = new float[25];
 
-        for (int j = -2; j <= 2; ++j) {
-            for (int k = -2; k<= 2; ++k) {
+        for (int j = -2; j <= 2; ++j)
+        {
+            for (int k = -2; k <= 2; ++k)
+            {
                 float f = 10.0F / MathHelper.sqrt((float) (j * j + k * k) + 0.2F);
                 this.biomeWeights[j + 2 + (k + 2) * 5] = f;
             }
@@ -93,7 +95,7 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
         Chunk chunk = new Chunk(world, primer, x, z);
 
         byte[] chunkBiomes = chunk.getBiomeArray();
-        for(int i = 0; i < chunkBiomes.length; ++i)
+        for (int i = 0; i < chunkBiomes.length; ++i)
         {
             chunkBiomes[i] = (byte) Biome.getIdForBiome(this.biomesForGenerationRonne[i]);
         }
@@ -163,19 +165,19 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
         this.biomesForGenerationRonne = this.world.getBiomeProvider().getBiomesForGeneration(this.biomesForGenerationRonne, x * 4 - 2, z * 4 - 2, 10, 10);
         this.generateHeightmap(x * 4, 0, z * 4);
 
-        for(int i = 0; i < 4; ++i)
+        for (int i = 0; i < 4; ++i)
         {
             int j = i * 5;
             int k = (i + 1) * 5;
 
-            for(int l = 0; l < 4; ++l)
+            for (int l = 0; l < 4; ++l)
             {
                 int i1 = (j + l) * 33;
                 int j1 = (j + l + 1) * 33;
                 int k1 = (k + l) * 33;
                 int l1 = (k + l + 1) * 33;
 
-                for(int i2 = 0; i2 < 32; ++i2)
+                for (int i2 = 0; i2 < 32; ++i2)
                 {
                     double d0 = 0.125D;
                     double d1 = this.heightMap[i1 + i2];
@@ -187,7 +189,7 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
                     double d7 = (this.heightMap[k1 + i2 + 1] - d3) * d0;
                     double d8 = (this.heightMap[l1 + i2 + 1] - d4) * d0;
 
-                    for(int j2 = 0; j2 < 8; ++j2)
+                    for (int j2 = 0; j2 < 8; ++j2)
                     {
                         double d9 = 0.25D;
                         double d10 = d1;
@@ -195,15 +197,15 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
                         double d12 = (d3 - d1) * d9;
                         double d13 = (d4 - d2) * d9;
 
-                        for(int k2 = 0; k2 < 4; ++k2)
+                        for (int k2 = 0; k2 < 4; ++k2)
                         {
                             double d14 = 0.25D;
                             double d16 = (d11 - d10) * d14;
                             double d15 = d10 - d16;
 
-                            for(int l2 = 0; l2 < 4; ++l2)
+                            for (int l2 = 0; l2 < 4; ++l2)
                             {
-                                if((d15 += d16) > 0.0D)
+                                if ((d15 += d16) > 0.0D)
                                 {
                                     primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, PBBlocks.ronnian_stone.getDefaultState());
                                 }
@@ -232,28 +234,34 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
         int terrainIndex = 0;
         int noiseIndex = 0;
 
-        for (int ax = 0; ax < 5; ++ax) {
-            for (int az = 0; az < 5; ++az) {
+        for (int ax = 0; ax < 5; ++ax)
+        {
+            for (int az = 0; az < 5; ++az)
+            {
                 float totalVariation = 0.0F;
                 float totalHeight = 0.0F;
                 float totalFactor = 0.0F;
                 byte two = 2;
                 Biome biomegenbase = this.biomesForGenerationRonne[ax + 2 + (az + 2) * 10];
 
-                for (int ox = -two; ox <= two; ++ox) {
-                    for (int oz = -two; oz <= two; ++oz) {
+                for (int ox = -two; ox <= two; ++ox)
+                {
+                    for (int oz = -two; oz <= two; ++oz)
+                    {
                         Biome biomegenbase1 = this.biomesForGenerationRonne[ax + ox + 2 + (az + oz + 2) * 10];
                         float rootHeight = biomegenbase1.getBaseHeight();
                         float heightVariation = biomegenbase1.getHeightVariation();
 
-                        if (this.terrainType == WorldType.AMPLIFIED && rootHeight > 0.0F) {
+                        if (this.terrainType == WorldType.AMPLIFIED && rootHeight > 0.0F)
+                        {
                             rootHeight = 1.0F + rootHeight * 2.0F;
                             heightVariation = 1.0F + heightVariation * 4.0F;
                         }
 
                         float heightFactor = this.biomeWeights[ox + 2 + (oz + 2) * 5] / (rootHeight + 2.0F);
 
-                        if (biomegenbase1.getBaseHeight() > biomegenbase.getBaseHeight()) {
+                        if (biomegenbase1.getBaseHeight() > biomegenbase.getBaseHeight())
+                        {
                             heightFactor /= 2.0F;
                         }
 
@@ -269,23 +277,28 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
                 totalHeight = (totalHeight * 4.0F - 1.0F) / 8.0F;
                 double terrainNoise = this.depthRegion[noiseIndex] / 8000.0D;
 
-                if (terrainNoise < 0.0D) {
+                if (terrainNoise < 0.0D)
+                {
                     terrainNoise = -terrainNoise * 0.3D;
                 }
 
                 terrainNoise = terrainNoise * 3.0D - 2.0D;
 
-                if (terrainNoise < 0.0D) {
+                if (terrainNoise < 0.0D)
+                {
                     terrainNoise /= 2.0D;
 
-                    if (terrainNoise < -1.0D) {
+                    if (terrainNoise < -1.0D)
+                    {
                         terrainNoise = -1.0D;
                     }
 
                     terrainNoise /= 1.4D;
                     terrainNoise /= 2.0D;
-                } else {
-                    if (terrainNoise > 1.0D) {
+                } else
+                {
+                    if (terrainNoise > 1.0D)
+                    {
                         terrainNoise = 1.0D;
                     }
 
@@ -299,10 +312,12 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
                 heightCalc = heightCalc * 8.5D / 8.0D;
                 double d5 = 8.5D + heightCalc * 4.0D;
 
-                for (int ay = 0; ay < 33; ++ay) {
+                for (int ay = 0; ay < 33; ++ay)
+                {
                     double d6 = ((double) ay - d5) * 12.0D * 128.0D / 256.0D / variationCalc;
 
-                    if (d6 < 0.0D) {
+                    if (d6 < 0.0D)
+                    {
                         d6 *= 4.0D;
                     }
 
@@ -311,7 +326,8 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
                     double d9 = (this.mainNoiseRegion[terrainIndex] / 10.0D + 1.0D) / 2.0D;
                     double terrainCalc = MathHelper.clampedLerp(d7, d8, d9) - d6;
 
-                    if (ay > 29) {
+                    if (ay > 29)
+                    {
                         double d11 = (double) ((float) (ay - 29) / 3.0F);
                         terrainCalc = terrainCalc * (1.0D - d11) + -10.0D * d11;
                     }
@@ -325,14 +341,14 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
 
     public void replaceBiomeBlocks(int x, int z, ChunkPrimer primer, Biome[] biomesIn)
     {
-        if(!net.minecraftforge.event.ForgeEventFactory.onReplaceBiomeBlocks(this, x, z, primer, this.world))
+        if (!net.minecraftforge.event.ForgeEventFactory.onReplaceBiomeBlocks(this, x, z, primer, this.world))
             return;
         double d0 = 0.03125D;
         this.depthBuffer = this.surfaceNoise.getRegion(this.depthBuffer, (double) (x * 16), (double) (z * 16), 16, 16, 0.0625D, 0.0625D, 1.0D);
 
-        for(int i = 0; i < 16; ++i)
+        for (int i = 0; i < 16; ++i)
         {
-            for(int j = 0; j < 16; ++j)
+            for (int j = 0; j < 16; ++j)
             {
                 Biome biome = biomesIn[j + i * 16];
                 biome.genTerrainBlocks(this.world, this.random, primer, x * 16 + i, z * 16 + j, this.depthBuffer[j + i * 16]);

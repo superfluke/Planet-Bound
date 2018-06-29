@@ -24,15 +24,13 @@ public class PBGuiHandler implements IGuiHandler
     @Override
     public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z)
     {
-        if(id == INVENTORS_FORGE_ID)
+        if (id == INVENTORS_FORGE_ID)
         {
             return new ContainerInventorsForge(player.inventory, (TileEntityInventorsForge) world.getTileEntity(new BlockPos(x, y, z)));
-        }
-        else if(id == WORKBENCH_ID)
+        } else if (id == WORKBENCH_ID)
         {
             return new ContainerWorkbench(player.inventory, world, new BlockPos(x, y, z));
-        }
-        else if(id == PLAYER_ID)
+        } else if (id == PLAYER_ID)
         {
             return new ContainerPlayer(PBPlayer.get(player));
         }
@@ -44,15 +42,13 @@ public class PBGuiHandler implements IGuiHandler
     @SideOnly(Side.CLIENT)
     public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z)
     {
-        if(id == INVENTORS_FORGE_ID)
+        if (id == INVENTORS_FORGE_ID)
         {
             return new GuiInventorsForge(player.inventory, (TileEntityInventorsForge) world.getTileEntity(new BlockPos(x, y, z)));
-        }
-        else if(id == WORKBENCH_ID)
+        } else if (id == WORKBENCH_ID)
         {
             return new GuiWorkbench(player.inventory, world, new BlockPos(x, y, z));
-        }
-        else if(id == PLAYER_ID)
+        } else if (id == PLAYER_ID)
         {
             return new GuiPlayer(PBPlayer.get(player));
         }

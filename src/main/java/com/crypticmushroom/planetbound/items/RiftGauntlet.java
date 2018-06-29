@@ -20,10 +20,10 @@ public class RiftGauntlet extends Item
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
     {
         player.swingArm(hand);
-        if(!world.isRemote)
+        if (!world.isRemote)
         {
             RayTraceResult result = ForgeHooks.rayTraceEyes(player, 20.0D);
-            if(result != null)
+            if (result != null)
             {
                 switch (result.typeOfHit)
                 {
@@ -43,7 +43,7 @@ public class RiftGauntlet extends Item
                                 sideToExpandTo = isDecimalsLessThanHalf(result.hitVec.x) ? EnumFacing.WEST : EnumFacing.EAST;
                         }
                         List<BlockPos> portalPoses = getPortalPositions(pos.offset(result.sideHit), sideToExpandTo);
-                        if(isAllAir(world, portalPoses))
+                        if (isAllAir(world, portalPoses))
                         {
                             IBlockState state = PBBlocks.rift.getDefaultState().withRotation(axis == EnumFacing.Axis.X ? Rotation.CLOCKWISE_90 : Rotation.NONE);
                             portalPoses.forEach(blockPos -> world.setBlockState(blockPos, state));
@@ -53,8 +53,7 @@ public class RiftGauntlet extends Item
                     case MISS:
                         player.getCooldownTracker().setCooldown(this, 20);
                 }
-            }
-            else player.getCooldownTracker().setCooldown(this, 20);
+            } else player.getCooldownTracker().setCooldown(this, 20);
         }
         return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
     }
@@ -67,7 +66,7 @@ public class RiftGauntlet extends Item
     public static List<BlockPos> getPortalPositions(BlockPos start, EnumFacing sideToExpand)
     {
         List<BlockPos> ret = new ArrayList<>();
-        for(int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++)
         {
             BlockPos toAdd = start.offset(EnumFacing.UP, i);
             ret.add(toAdd);

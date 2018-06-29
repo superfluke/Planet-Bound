@@ -26,7 +26,7 @@ public class InventorsForgeManager
 
         registerRecipe(new ItemStack[]{new ItemStack(Items.APPLE), new ItemStack(Items.GOLD_INGOT),}, new ItemStack(Items.GOLDEN_APPLE, 1), 0);
 
-        for(Entry<ItemStack, ItemStack> entry : FurnaceRecipes.instance().getSmeltingList().entrySet())
+        for (Entry<ItemStack, ItemStack> entry : FurnaceRecipes.instance().getSmeltingList().entrySet())
         {
             registerRecipe(new ItemStack[]{entry.getKey()}, entry.getValue(), FurnaceRecipes.instance().getSmeltingExperience(entry.getValue())); // register                                                                                                                                // recipes
         }
@@ -40,7 +40,7 @@ public class InventorsForgeManager
 
         NonNullList<Ingredient> ingredients = NonNullList.<Ingredient>create();
 
-        for(ItemStack stack : input)
+        for (ItemStack stack : input)
         {
             ingredients.add(Ingredient.fromStacks(stack));
         }
@@ -59,13 +59,13 @@ public class InventorsForgeManager
     {
         boolean result = false;
 
-        for(InventorsForgeRecipe recipe : recipes)
+        for (InventorsForgeRecipe recipe : recipes)
         {
-            for(Ingredient ingredient : recipe.getIngredients())
+            for (Ingredient ingredient : recipe.getIngredients())
             {
-                for(ItemStack stack1 : ingredient.getMatchingStacks())
+                for (ItemStack stack1 : ingredient.getMatchingStacks())
                 {
-                    if(stack1.isItemEqual(stack))
+                    if (stack1.isItemEqual(stack))
                     {
                         result = true;
 
@@ -80,9 +80,9 @@ public class InventorsForgeManager
 
     public static ItemStack getSmeltingResult(TileEntityInventorsForge inventory)
     {
-        for(InventorsForgeRecipe recipe : recipes)
+        for (InventorsForgeRecipe recipe : recipes)
         {
-            if(recipe.matches(inventory))
+            if (recipe.matches(inventory))
             {
                 return recipe.getOutput();
             }
@@ -93,9 +93,9 @@ public class InventorsForgeManager
 
     public static ItemStack getSmeltingResult(ItemStack... input)
     {
-        for(InventorsForgeRecipe recipe : recipes)
+        for (InventorsForgeRecipe recipe : recipes)
         {
-            if(recipe.matches(input))
+            if (recipe.matches(input))
             {
                 return recipe.getOutput();
             }

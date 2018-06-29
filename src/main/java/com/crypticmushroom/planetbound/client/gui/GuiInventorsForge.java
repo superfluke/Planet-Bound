@@ -76,7 +76,7 @@ public class GuiInventorsForge extends GuiContainer
 
         drawTexturedModalRect(i, j, 0, 0, xSize, ySize);
 
-        if(TileEntityInventorsForge.isBurning(tileEntity))
+        if (TileEntityInventorsForge.isBurning(tileEntity))
         {
             int k = getBurnLeftScaled(13);
 
@@ -91,7 +91,7 @@ public class GuiInventorsForge extends GuiContainer
     @Override
     protected void actionPerformed(GuiButton button)
     {
-        if(button.id == 0)
+        if (button.id == 0)
         {
             PBNetworkHandler.sendToServer(new PBPacketSmeltMode(tileEntity));
         }
@@ -109,7 +109,7 @@ public class GuiInventorsForge extends GuiContainer
     {
         int i = tileEntity.getField(1);
 
-        if(i == 0)
+        if (i == 0)
         {
             i = 200;
         }

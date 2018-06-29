@@ -28,11 +28,11 @@ public class InventorsForgeRecipe
 
         int ingredientCount = 0;
 
-        for(int i = ContainerInventorsForge.INPUT_SLOT_1; i <= ContainerInventorsForge.INPUT_SLOT_3; i++)
+        for (int i = ContainerInventorsForge.INPUT_SLOT_1; i <= ContainerInventorsForge.INPUT_SLOT_3; i++)
         {
             ItemStack stack = inventory.getStackInSlot(i);
 
-            if(!stack.isEmpty())
+            if (!stack.isEmpty())
             {
                 ingredientCount++;
 
@@ -40,7 +40,7 @@ public class InventorsForgeRecipe
             }
         }
 
-        if(ingredientCount != input.size())
+        if (ingredientCount != input.size())
         {
             return false;
         }
@@ -54,9 +54,9 @@ public class InventorsForgeRecipe
 
         int ingredientCount = 0;
 
-        for(ItemStack stack : input)
+        for (ItemStack stack : input)
         {
-            if(!stack.isEmpty())
+            if (!stack.isEmpty())
             {
                 ingredientCount++;
 
@@ -64,7 +64,7 @@ public class InventorsForgeRecipe
             }
         }
 
-        if(ingredientCount != this.input.size())
+        if (ingredientCount != this.input.size())
         {
             return false;
         }

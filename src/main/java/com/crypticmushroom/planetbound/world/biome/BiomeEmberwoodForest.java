@@ -16,7 +16,7 @@ public class BiomeEmberwoodForest extends PBBiomeRonne
 {
     private WorldGenAbstractTree emberwoodTreeGen;
     private WorldGenAbstractTree amberwoodTreeGen;
-    
+
     public BiomeEmberwoodForest(BiomeProperties props)
     {
         super(props);

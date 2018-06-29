@@ -7,14 +7,24 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class CommonProxy
 {
-    public void preInit(FMLPreInitializationEvent event){}
-    public void init(FMLInitializationEvent event){}
-    public void postInit(FMLPostInitializationEvent event){}
+    public void preInit(FMLPreInitializationEvent event)
+    {
+    }
+
+    public void init(FMLInitializationEvent event)
+    {
+    }
+
+    public void postInit(FMLPostInitializationEvent event)
+    {
+    }
 
     public EntityPlayer thePlayer()
     {
         return null;
     }
 
-    public void sendMessage(EntityPlayer player, String message) { }
+    public void sendMessage(EntityPlayer player, String message)
+    {
+    }
 }

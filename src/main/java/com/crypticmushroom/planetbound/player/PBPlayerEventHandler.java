@@ -18,7 +18,7 @@ public class PBPlayerEventHandler
     @SubscribeEvent
     public static void PlayerConstructingEvent(AttachCapabilitiesEvent<Entity> event)
     {
-        if((event.getObject() instanceof EntityPlayer))
+        if ((event.getObject() instanceof EntityPlayer))
         {
             EntityPlayer player = (EntityPlayer) event.getObject();
             event.addCapability(PLAYER_STORAGE, new PBPlayer.Factory(new PBPlayer(player)));
@@ -30,11 +30,11 @@ public class PBPlayerEventHandler
     {
         PBPlayer original = PBPlayer.get(event.getOriginal());
         PBPlayer clone = PBPlayer.get(event.getEntityPlayer());
-        if(original != null)
+        if (original != null)
         {
             NBTTagCompound compound = new NBTTagCompound();
             original.writeToNBT(compound);
-            if(clone != null) clone.readFromNBT(compound);
+            if (clone != null) clone.readFromNBT(compound);
         }
     }
 }

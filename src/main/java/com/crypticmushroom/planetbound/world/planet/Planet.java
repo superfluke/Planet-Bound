@@ -11,77 +11,87 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class Planet implements IResourceManagerReloadListener {
-	private final float minHeight;
+public abstract class Planet implements IResourceManagerReloadListener
+{
+    private final float minHeight;
 
-	private final float maxHeight;
+    private final float maxHeight;
 
-	private final int xSize, ySize, zSize;
+    private final int xSize, ySize, zSize;
 
-	//private final ColorReloader grassColorReloader, foliageColorReloader;
+    //private final ColorReloader grassColorReloader, foliageColorReloader;
 
-	public final Colorizer grassColorizer, foliageColorizer;
-	
-	public Planet(float minHeight, float maxHeight, String grassColormapName, String foliageColormapName) {
-		this(5, 33, 5, minHeight, maxHeight, new Colorizer(new ResourceLocation(PBCore.MOD_ID, "textures/colormap/" + grassColormapName)), new Colorizer(new ResourceLocation(PBCore.MOD_ID, "textures/colormap/" + foliageColormapName)));
-	}
+    public final Colorizer grassColorizer, foliageColorizer;
 
-	/*
-	 * Use this if you know how to use it. I'm leaving this open just in case. ~Kino
-	 */
-	public Planet(int xSize, int ySize, int zSize, float minHeight, float maxHeight, Colorizer grassColorizer, Colorizer foliageColorizer) {
-		this.grassColorizer = grassColorizer;
-		this.foliageColorizer = foliageColorizer;
+    public Planet(float minHeight, float maxHeight, String grassColormapName, String foliageColormapName)
+    {
+        this(5, 33, 5, minHeight, maxHeight, new Colorizer(new ResourceLocation(PBCore.MOD_ID, "textures/colormap/" + grassColormapName)), new Colorizer(new ResourceLocation(PBCore.MOD_ID, "textures/colormap/" + foliageColormapName)));
+    }
 
-		this.xSize = xSize;
-		this.ySize = ySize;
-		this.zSize = zSize;
+    /*
+     * Use this if you know how to use it. I'm leaving this open just in case. ~Kino
+     */
+    public Planet(int xSize, int ySize, int zSize, float minHeight, float maxHeight, Colorizer grassColorizer, Colorizer foliageColorizer)
+    {
+        this.grassColorizer = grassColorizer;
+        this.foliageColorizer = foliageColorizer;
 
-		this.minHeight = minHeight;
-		this.maxHeight = maxHeight;
-	}
+        this.xSize = xSize;
+        this.ySize = ySize;
+        this.zSize = zSize;
 
-	public abstract void generate(BlockPos chunkPos, Biome biome);
+        this.minHeight = minHeight;
+        this.maxHeight = maxHeight;
+    }
 
-	public abstract String getName();
-	
-	@Override
-	public final int hashCode() {
-		return getName().hashCode();
-	}
+    public abstract void generate(BlockPos chunkPos, Biome biome);
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public final void onResourceManagerReload(IResourceManager resourceManager) {
-		grassColorizer.reloadColormap(resourceManager);
-		foliageColorizer.reloadColormap(resourceManager);
-	}
+    public abstract String getName();
 
-	/*
-	 * public abstract IBlockState getTopBlock();
-	 * 
-	 * public abstract IBlockState getBottomBlock();
-	 * 
-	 * public abstract IBlockState getFillerBlock();
-	 */
-	public float getMinHeight() {
-		return this.minHeight;
-	}
+    @Override
+    public final int hashCode()
+    {
+        return getName().hashCode();
+    }
 
-	public float getMaxHeight() {
-		return this.maxHeight;
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public final void onResourceManagerReload(IResourceManager resourceManager)
+    {
+        grassColorizer.reloadColormap(resourceManager);
+        foliageColorizer.reloadColormap(resourceManager);
+    }
 
-	public int getXSize() {
-		return this.xSize;
-	}
+    /*
+     * public abstract IBlockState getTopBlock();
+     *
+     * public abstract IBlockState getBottomBlock();
+     *
+     * public abstract IBlockState getFillerBlock();
+     */
+    public float getMinHeight()
+    {
+        return this.minHeight;
+    }
 
-	public int getYSize() {
-		return this.ySize;
-	}
+    public float getMaxHeight()
+    {
+        return this.maxHeight;
+    }
 
-	public int getZSize() {
-		return this.zSize;
-	}
+    public int getXSize()
+    {
+        return this.xSize;
+    }
+
+    public int getYSize()
+    {
+        return this.ySize;
+    }
+
+    public int getZSize()
+    {
+        return this.zSize;
+    }
 
 }

@@ -20,46 +20,48 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 // Client side only stuff in CLIENT package.
 public class ClientProxy extends CommonProxy
 {
-	@Override
-	public void preInit(FMLPreInitializationEvent event)
-	{
-		PBKeyHandler.registerKeyBindings();
+    @Override
+    public void preInit(FMLPreInitializationEvent event)
+    {
+        PBKeyHandler.registerKeyBindings();
 
-		IResourceManager manager0 = FMLClientHandler.instance().getClient().getResourceManager();
-		if(manager0 !=null && manager0 instanceof IReloadableResourceManager){
-			IReloadableResourceManager manager = (IReloadableResourceManager)manager0;
+        IResourceManager manager0 = FMLClientHandler.instance().getClient().getResourceManager();
+        if (manager0 != null && manager0 instanceof IReloadableResourceManager)
+        {
+            IReloadableResourceManager manager = (IReloadableResourceManager) manager0;
 
-			for(Planet planet : PBPlanets.allPlanets()) {
-				manager.registerReloadListener(planet);
-			}
-		}
+            for (Planet planet : PBPlanets.allPlanets())
+            {
+                manager.registerReloadListener(planet);
+            }
+        }
 
-	}
+    }
 
-	@Override
-	public void init(FMLInitializationEvent event)
-	{
+    @Override
+    public void init(FMLInitializationEvent event)
+    {
 
-	}
+    }
 
-	@Override
-	public void postInit(FMLPostInitializationEvent event)
-	{
+    @Override
+    public void postInit(FMLPostInitializationEvent event)
+    {
 
-	}
+    }
 
-	@Override
-	public EntityPlayer thePlayer()
-	{
-		return Minecraft.getMinecraft().player;
-	}
+    @Override
+    public EntityPlayer thePlayer()
+    {
+        return Minecraft.getMinecraft().player;
+    }
 
-	@Override
-	public void sendMessage(EntityPlayer reciever, String message)
-	{
-		if (this.thePlayer() == reciever)
-		{
-			Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new TextComponentString(message));
-		}
-	}
+    @Override
+    public void sendMessage(EntityPlayer reciever, String message)
+    {
+        if (this.thePlayer() == reciever)
+        {
+            Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new TextComponentString(message));
+        }
+    }
 }

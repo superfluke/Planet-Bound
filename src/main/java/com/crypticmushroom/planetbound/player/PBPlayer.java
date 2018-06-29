@@ -72,11 +72,10 @@ public class PBPlayer
 
     public void setInRift()
     {
-        if(riftCooldown > 0)
+        if (riftCooldown > 0)
         {
             riftCooldown = player.getPortalCooldown();
-        }
-        else
+        } else
         {
             inRift = true;
         }
@@ -84,7 +83,7 @@ public class PBPlayer
 
     public void transferToDimension(int dimension)
     {
-        if(player instanceof EntityPlayerMP)
+        if (player instanceof EntityPlayerMP)
         {
             MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
 

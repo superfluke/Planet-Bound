@@ -72,12 +72,11 @@ public class GuiWorkbench extends GuiContainer implements IRecipeShownListener
     {
         this.drawDefaultBackground();
 
-        if(this.recipeBookGui.isVisible() && this.widthTooNarrow)
+        if (this.recipeBookGui.isVisible() && this.widthTooNarrow)
         {
             this.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
             this.recipeBookGui.render(mouseX, mouseY, partialTicks);
-        }
-        else
+        } else
         {
             this.recipeBookGui.render(mouseX, mouseY, partialTicks);
             super.drawScreen(mouseX, mouseY, partialTicks);
@@ -124,9 +123,9 @@ public class GuiWorkbench extends GuiContainer implements IRecipeShownListener
      */
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException
     {
-        if(!this.recipeBookGui.mouseClicked(mouseX, mouseY, mouseButton))
+        if (!this.recipeBookGui.mouseClicked(mouseX, mouseY, mouseButton))
         {
-            if(!this.widthTooNarrow || !this.recipeBookGui.isVisible())
+            if (!this.widthTooNarrow || !this.recipeBookGui.isVisible())
             {
                 super.mouseClicked(mouseX, mouseY, mouseButton);
             }
@@ -145,7 +144,7 @@ public class GuiWorkbench extends GuiContainer implements IRecipeShownListener
      */
     protected void actionPerformed(GuiButton button) throws IOException
     {
-        if(button.id == 10)
+        if (button.id == 10)
         {
             this.recipeBookGui.initVisuals(this.widthTooNarrow, ((ContainerWorkbench) this.inventorySlots).craftMatrix);
             this.recipeBookGui.toggleVisibility();
@@ -161,7 +160,7 @@ public class GuiWorkbench extends GuiContainer implements IRecipeShownListener
      */
     protected void keyTyped(char typedChar, int keyCode) throws IOException
     {
-        if(!this.recipeBookGui.keyPressed(typedChar, keyCode))
+        if (!this.recipeBookGui.keyPressed(typedChar, keyCode))
         {
             super.keyTyped(typedChar, keyCode);
         }

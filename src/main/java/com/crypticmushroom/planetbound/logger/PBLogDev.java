@@ -12,11 +12,10 @@ public class PBLogDev
 
     public static void printInfo(Object messageDevelop)
     {
-        if(PBConfig.other.developer.developerMode)
+        if (PBConfig.other.developer.developerMode)
         {
             logDev.info(messageDevelop.toString());
-        }
-        else
+        } else
         {
             PBLogger.printDebug(messageDevelop);
         }
@@ -24,11 +23,10 @@ public class PBLogDev
 
     public static void printWarn(Object messageDevelop)
     {
-        if(PBConfig.other.developer.developerMode)
+        if (PBConfig.other.developer.developerMode)
         {
             logDev.warn(messageDevelop.toString());
-        }
-        else
+        } else
         {
             PBLogger.printDebug(messageDevelop);
         }
@@ -36,11 +34,10 @@ public class PBLogDev
 
     public static void printError(Object messageDevelop)
     {
-        if(PBConfig.other.developer.developerMode)
+        if (PBConfig.other.developer.developerMode)
         {
             logDev.error(messageDevelop.toString());
-        }
-        else
+        } else
         {
             PBLogger.printDebug(messageDevelop);
         }

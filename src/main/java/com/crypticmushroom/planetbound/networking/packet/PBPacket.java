@@ -11,7 +11,8 @@ public abstract class PBPacket<Message extends IMessage> implements IMessage, IM
     @Override
     public IMessage onMessage(Message message, MessageContext context)
     {
-        switch (context.side) {
+        switch (context.side)
+        {
             case CLIENT:
                 return handleClient(message, PBCore.proxy.thePlayer());
             case SERVER:
@@ -20,11 +21,13 @@ public abstract class PBPacket<Message extends IMessage> implements IMessage, IM
         return null;
     }
 
-    public IMessage handleClient(Message message, EntityPlayer player) {
+    public IMessage handleClient(Message message, EntityPlayer player)
+    {
         return null;
     }
 
-    public IMessage handleServer(Message message, EntityPlayer player) {
+    public IMessage handleServer(Message message, EntityPlayer player)
+    {
         return null;
     }
 }

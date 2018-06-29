@@ -65,7 +65,7 @@ public class BiomeProviderRonne extends BiomeProvider
     public Biome getBiome(BlockPos pos, Biome biomeIn)
     {
         Biome biome = biomeCache.getBiome(pos.getX(), pos.getZ(), biomeIn);
-        if(biome == null)
+        if (biome == null)
             return PBBiomes.redDesert;
 
         return biome;
@@ -81,13 +81,13 @@ public class BiomeProviderRonne extends BiomeProvider
     @Override
     public Biome[] getBiomesForGeneration(Biome[] par1ArrayOfBiome, int par2, int par3, int par4, int par5)
     {
-        if(par1ArrayOfBiome == null || par1ArrayOfBiome.length < par4 * par5)
+        if (par1ArrayOfBiome == null || par1ArrayOfBiome.length < par4 * par5)
             par1ArrayOfBiome = new Biome[par4 * par5];
 
         int[] aint = biomeToUse.getInts(par2, par3, par4, par5);
 
-        for(int i = 0; i < par4 * par5; ++i)
-            if(aint[i] >= 0 && aint[i] <= Biome.REGISTRY.getKeys().size())
+        for (int i = 0; i < par4 * par5; ++i)
+            if (aint[i] >= 0 && aint[i] <= Biome.REGISTRY.getKeys().size())
                 par1ArrayOfBiome[i] = Biome.getBiome(aint[i]);
             else
                 par1ArrayOfBiome[i] = PBBiomes.redDesert;
@@ -106,21 +106,20 @@ public class BiomeProviderRonne extends BiomeProvider
     {
         IntCache.resetIntCache();
 
-        if(par1ArrayOfBiome == null || par1ArrayOfBiome.length < width * length)
+        if (par1ArrayOfBiome == null || par1ArrayOfBiome.length < width * length)
             par1ArrayOfBiome = new Biome[width * length];
 
-        if(cacheFlag && width == 16 && length == 16 && (x & 15) == 0 && (y & 15) == 0)
+        if (cacheFlag && width == 16 && length == 16 && (x & 15) == 0 && (y & 15) == 0)
         {
             Biome[] aBiome1 = biomeCache.getCachedBiomes(x, y);
             System.arraycopy(aBiome1, 0, par1ArrayOfBiome, 0, width * length);
             return par1ArrayOfBiome;
-        }
-        else
+        } else
         {
             int[] aint = biomeIndexLayer.getInts(x, y, width, length);
 
-            for(int i = 0; i < width * length; ++i)
-                if(aint[i] >= 0 && aint[i] <= Biome.REGISTRY.getKeys().size())
+            for (int i = 0; i < width * length; ++i)
+                if (aint[i] >= 0 && aint[i] <= Biome.REGISTRY.getKeys().size())
                     par1ArrayOfBiome[i] = Biome.getBiome(aint[i]);
                 else
                     par1ArrayOfBiome[i] = PBBiomes.redDesert;
@@ -141,11 +140,11 @@ public class BiomeProviderRonne extends BiomeProvider
         int i2 = k1 - i1 + 1;
         int[] aint = biomeToUse.getInts(l, i1, l1, i2);
 
-        for(int j2 = 0; j2 < l1 * i2; ++j2)
+        for (int j2 = 0; j2 < l1 * i2; ++j2)
         {
             Biome biome = Biome.getBiome(aint[j2]);
 
-            if(!par4List.contains(biome))
+            if (!par4List.contains(biome))
                 return false;
         }
 
@@ -166,13 +165,13 @@ public class BiomeProviderRonne extends BiomeProvider
         BlockPos blockpos = null;
         int j2 = 0;
 
-        for(int k2 = 0; k2 < l1 * i2; ++k2)
+        for (int k2 = 0; k2 < l1 * i2; ++k2)
         {
             int l2 = l + k2 % l1 << 2;
             int i3 = i1 + k2 / l1 << 2;
             Biome biome = Biome.getBiome(aint[k2]);
 
-            if(biomeList.contains(biome) && (blockpos == null || random.nextInt(j2 + 1) == 0))
+            if (biomeList.contains(biome) && (blockpos == null || random.nextInt(j2 + 1) == 0))
             {
                 blockpos = new BlockPos(l2, 0, i3);
                 ++j2;
