@@ -65,7 +65,7 @@ public class PBCore
         PBBlocks.init();
 
         PBLogDev.printInfo("Initializing biomes...");
-        PBBiomes.init();
+        /* FIXME: Wait, what happens here now? */
 
         PBLogDev.printInfo("Initializing player...");
         PBPlayer.init();

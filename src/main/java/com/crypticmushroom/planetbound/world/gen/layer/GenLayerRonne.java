@@ -1,6 +1,7 @@
 package com.crypticmushroom.planetbound.world.gen.layer;
 
 import net.minecraft.world.gen.layer.GenLayer;
+import net.minecraft.world.gen.layer.GenLayerSmooth;
 import net.minecraft.world.gen.layer.GenLayerVoronoiZoom;
 import net.minecraft.world.gen.layer.GenLayerZoom;
 
@@ -23,6 +24,9 @@ public abstract class GenLayerRonne extends GenLayer
         biomes = new GenLayerZoom(1004L, biomes);
 
         biomes = new GenLayerBiomeBorderRonne(700L, biomes);
+        GenLayer borderLayer = new GenLayerFoothillsRonne(1L, biomes);
+        borderLayer = new GenLayerSmooth(7000L, borderLayer);
+        biomes = new GenLayerFoothillsMix(100L, biomes, borderLayer);
 
         GenLayer genlayervoronoizoom = new GenLayerVoronoiZoom(10L, biomes);
 

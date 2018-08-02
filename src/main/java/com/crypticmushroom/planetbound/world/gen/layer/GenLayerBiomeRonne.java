@@ -1,7 +1,6 @@
 package com.crypticmushroom.planetbound.world.gen.layer;
 
 import com.crypticmushroom.planetbound.init.PBBiomes;
-import com.crypticmushroom.planetbound.world.biome.PBBiomeRonne;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
@@ -9,9 +8,9 @@ import net.minecraft.world.gen.layer.IntCache;
 public class GenLayerBiomeRonne extends GenLayer
 {
     protected Biome[] allowedBiomes = {
-            PBBiomes.redDesert,
-            PBBiomes.emberwoodForest,
-            PBBiomes.ronneMountains
+            PBBiomes.red_desert,
+            PBBiomes.emberwood_forest,
+            PBBiomes.ronne_mountains
     };
 
     public GenLayerBiomeRonne(long seed, GenLayer genlayer)

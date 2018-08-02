@@ -29,9 +29,9 @@ public class BiomeProviderRonne extends BiomeProvider
     {
         biomeCache = new BiomeCache(this);
         biomesToSpawnIn = new ArrayList<Biome>();
-        biomesToSpawnIn.add(PBBiomes.redDesert);
-        biomesToSpawnIn.add(PBBiomes.emberwoodForest);
-        biomesToSpawnIn.add(PBBiomes.ronneMountains);
+        biomesToSpawnIn.add(PBBiomes.red_desert);
+        biomesToSpawnIn.add(PBBiomes.emberwood_forest);
+        biomesToSpawnIn.add(PBBiomes.ronne_mountains);
     }
 
     public BiomeProviderRonne(long par1, WorldType worldType)
@@ -66,7 +66,7 @@ public class BiomeProviderRonne extends BiomeProvider
     {
         Biome biome = biomeCache.getBiome(pos.getX(), pos.getZ(), biomeIn);
         if (biome == null)
-            return PBBiomes.redDesert;
+            return PBBiomes.red_desert;
 
         return biome;
     }
@@ -90,7 +90,7 @@ public class BiomeProviderRonne extends BiomeProvider
             if (aint[i] >= 0 && aint[i] <= Biome.REGISTRY.getKeys().size())
                 par1ArrayOfBiome[i] = Biome.getBiome(aint[i]);
             else
-                par1ArrayOfBiome[i] = PBBiomes.redDesert;
+                par1ArrayOfBiome[i] = PBBiomes.red_desert;
 
         return par1ArrayOfBiome;
     }
@@ -122,7 +122,7 @@ public class BiomeProviderRonne extends BiomeProvider
                 if (aint[i] >= 0 && aint[i] <= Biome.REGISTRY.getKeys().size())
                     par1ArrayOfBiome[i] = Biome.getBiome(aint[i]);
                 else
-                    par1ArrayOfBiome[i] = PBBiomes.redDesert;
+                    par1ArrayOfBiome[i] = PBBiomes.red_desert;
 
             return par1ArrayOfBiome;
         }
