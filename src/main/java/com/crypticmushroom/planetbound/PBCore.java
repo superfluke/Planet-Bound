@@ -33,9 +33,9 @@ public class PBCore
 {
     public static final String MOD_ID = "planetbound";
     public static final String NAME = "Planet Bound";
-    public static final String VERSION = "1.0-dev";
-    public static final String MC_VERSIONS = "[1.12.2]";
-    public static final String UPDATE_JSON = "https://raw.githubusercontent.com/cipherzerox/Planet-Bound/master/update.json";
+    public static final String VERSION = "@VERSION@";
+    public static final String MC_VERSIONS = "[1.12.2,1.13)";
+    public static final String UPDATE_JSON = "@UPDATE_JSON@";
     public static final String CLIENT_PROXY = "com.crypticmushroom.planetbound.client.ClientProxy";
     public static final String COMMON_PROXY = "com.crypticmushroom.planetbound.CommonProxy";
 
