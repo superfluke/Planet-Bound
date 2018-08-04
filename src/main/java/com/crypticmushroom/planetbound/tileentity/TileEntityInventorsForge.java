@@ -209,7 +209,7 @@ public class TileEntityInventorsForge extends TileEntityLockable implements ITic
     @Override
     public String getName()
     {
-        return "container.inventors_forge";
+        return "container.planetbound.inventors_forge.name";
     }
 
     @Override

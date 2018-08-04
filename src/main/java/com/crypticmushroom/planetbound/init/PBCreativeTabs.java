@@ -1,5 +1,6 @@
 package com.crypticmushroom.planetbound.init;
 
+import com.crypticmushroom.planetbound.PBCore;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
@@ -16,7 +17,7 @@ public class PBCreativeTabs
 
     // Vague tabs made for development. Broader tabs will be made as new blocks are
     // added.
-    public static final CreativeTabs TAB_BLOCKS = new CreativeTabs("pb_blocks")
+    public static final CreativeTabs TAB_BLOCKS = new CreativeTabs(PBCore.MOD_ID + ".pb_blocks.name")
     {
         @Override
         public ItemStack getTabIconItem()
@@ -25,7 +26,7 @@ public class PBCreativeTabs
         }
     };
 
-    public static final CreativeTabs TAB_ITEMS = new CreativeTabs("pb_items")
+    public static final CreativeTabs TAB_ITEMS = new CreativeTabs(PBCore.MOD_ID + ".pb_items.name")
     {
         @Override
         public ItemStack getTabIconItem()
