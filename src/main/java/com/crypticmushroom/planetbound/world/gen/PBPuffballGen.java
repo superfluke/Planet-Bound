@@ -6,6 +6,7 @@ import java.util.Random;
 import com.crypticmushroom.planetbound.blocks.Puffball;
 import com.google.common.collect.Lists;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -13,11 +14,11 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class PBPuffballGen extends WorldGenerator
 {
-    private final Puffball block;
+    private final Block block;
     private final int startRadius;
     private final IBlockState ALL_SIDES, NO_SIDES;
 
-    public PBPuffballGen(Puffball blockIn, int startRadiusIn)
+    public PBPuffballGen(Block blockIn, int startRadiusIn)
     {
         super(false);
         this.block = blockIn;
