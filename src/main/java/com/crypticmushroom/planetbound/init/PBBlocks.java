@@ -1,24 +1,30 @@
 package com.crypticmushroom.planetbound.init;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Nullable;
-
-import com.crypticmushroom.planetbound.blocks.*;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import org.apache.commons.lang3.Validate;
-
 import com.crypticmushroom.planetbound.PBCore;
+import com.crypticmushroom.planetbound.blocks.BloodstoneOre;
+import com.crypticmushroom.planetbound.blocks.InventorsForge;
+import com.crypticmushroom.planetbound.blocks.PBBlockTinted;
+import com.crypticmushroom.planetbound.blocks.PBDirt;
+import com.crypticmushroom.planetbound.blocks.PBGrass;
+import com.crypticmushroom.planetbound.blocks.PBLeaves;
+import com.crypticmushroom.planetbound.blocks.PBLog;
+import com.crypticmushroom.planetbound.blocks.PBOre;
+import com.crypticmushroom.planetbound.blocks.PBPlanks;
+import com.crypticmushroom.planetbound.blocks.PBSand;
+import com.crypticmushroom.planetbound.blocks.PBSapling;
+import com.crypticmushroom.planetbound.blocks.PBStone;
+import com.crypticmushroom.planetbound.blocks.PBStorageBlock;
+import com.crypticmushroom.planetbound.blocks.PBTallgrass;
+import com.crypticmushroom.planetbound.blocks.PBWorkbench;
+import com.crypticmushroom.planetbound.blocks.Puffball;
+import com.crypticmushroom.planetbound.blocks.RendiumOre;
+import com.crypticmushroom.planetbound.blocks.Rift;
 import com.crypticmushroom.planetbound.logger.PBLogDev;
 import com.crypticmushroom.planetbound.world.biome.PBBiomeColorHelper;
 import com.crypticmushroom.planetbound.world.gen.PBAmberwoodTreeGen;
 import com.crypticmushroom.planetbound.world.gen.PBEmberwoodTreeGen;
 import com.crypticmushroom.planetbound.world.planet.Planet;
 import com.google.common.collect.Maps;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -30,7 +36,9 @@ import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.math.BlockPos;
@@ -42,10 +50,17 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.commons.lang3.Validate;
 
-import static com.crypticmushroom.planetbound.init.PBCreativeTabs.TAB_BLOCKS;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import static com.crypticmushroom.planetbound.init.PBCreativeTabs.*;
 
 @EventBusSubscriber(modid = PBCore.MOD_ID)
 @GameRegistry.ObjectHolder(PBCore.MOD_ID)
@@ -265,8 +280,11 @@ public class PBBlocks
     {
         Validate.notNull(block, "block cannot be null");
 
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), metadata,
-                new ModelResourceLocation(block.getRegistryName(), "inventory"));
+        Item item = Item.getItemFromBlock(block);
+        if(item != Items.AIR) //do not register item models for blocks that don't have an item!
+        {
+            ModelLoader.setCustomModelResourceLocation(item, metadata, new ModelResourceLocation(block.getRegistryName(), "inventory"));
+        }
     }
 
     public static Block[] getBlocks()

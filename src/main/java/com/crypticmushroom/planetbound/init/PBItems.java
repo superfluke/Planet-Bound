@@ -1,28 +1,28 @@
 package com.crypticmushroom.planetbound.init;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.crypticmushroom.planetbound.items.*;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.item.ItemArmor;
-import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import org.apache.commons.lang3.Validate;
-
 import com.crypticmushroom.planetbound.PBCore;
+import com.crypticmushroom.planetbound.items.ICustomModelProvider;
+import com.crypticmushroom.planetbound.items.PBItem;
+import com.crypticmushroom.planetbound.items.RiftGauntlet;
 import com.crypticmushroom.planetbound.logger.PBLogDev;
-
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.commons.lang3.Validate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @EventBusSubscriber(modid = PBCore.MOD_ID)
 @GameRegistry.ObjectHolder(PBCore.MOD_ID)
@@ -82,7 +82,8 @@ public class PBItems
     {
         for (Item item : items)
         {
-            registerModel(item);
+            if(item instanceof ICustomModelProvider) ((ICustomModelProvider) item).registerItemModel();
+            else registerModel(item);
         }
     }
 
