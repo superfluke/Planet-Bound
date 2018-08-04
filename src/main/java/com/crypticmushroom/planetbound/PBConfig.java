@@ -20,7 +20,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
  * planetbound.cfg FILE IN THE config FOLDER OF YOUR
  * TESTING DIRECTORY (normally named "run")
  */
-@Config(modid = PBCore.MOD_ID)
+@Config(modid = PBCore.MOD_ID, name = "PlanetBound")
 @Config.LangKey(PBCore.MOD_ID + ".config.title")
 public class PBConfig
 {
