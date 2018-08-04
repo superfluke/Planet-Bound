@@ -3,23 +3,14 @@ package com.crypticmushroom.planetbound.init;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.crypticmushroom.planetbound.items.*;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemArmor;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.commons.lang3.Validate;
 
 import com.crypticmushroom.planetbound.PBCore;
-import com.crypticmushroom.planetbound.items.CoreFrame;
-import com.crypticmushroom.planetbound.items.GauntletShell;
-import com.crypticmushroom.planetbound.items.RendiumCore;
-import com.crypticmushroom.planetbound.items.RiftGauntlet;
-import com.crypticmushroom.planetbound.items.oreingot.BloodstoneShard;
-import com.crypticmushroom.planetbound.items.oreingot.FortiumIngot;
-import com.crypticmushroom.planetbound.items.oreingot.HalkirIngot;
-import com.crypticmushroom.planetbound.items.oreingot.KybriteIngot;
-import com.crypticmushroom.planetbound.items.oreingot.RendiumChunk;
-import com.crypticmushroom.planetbound.items.oreingot.RendiumCrystal;
-import com.crypticmushroom.planetbound.items.oreingot.VerdaniteIngot;
 import com.crypticmushroom.planetbound.logger.PBLogDev;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -34,6 +25,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @EventBusSubscriber(modid = PBCore.MOD_ID)
+@GameRegistry.ObjectHolder(PBCore.MOD_ID)
 public class PBItems
 {
     //Armor Materials
@@ -42,32 +34,17 @@ public class PBItems
 
     private static final List<Item> items = new ArrayList<>();
 
-    public static Item kybrite_ingot;
-    public static Item verdanite_ingot;
-    public static Item rendium_chunk;
-    public static Item rendium_crystal;
-    public static Item core_frame;
-    public static Item rendium_core;
-    public static Item rift_gauntlet;
-    public static Item gauntlet_shell;
-    public static Item fortium_ingot;
-    public static Item halkir_ingot;
-    public static Item bloodstone_shard;
-
-    public static void init()
-    {
-        kybrite_ingot = registerItem(new KybriteIngot(), "kybrite_ingot");
-        verdanite_ingot = registerItem(new VerdaniteIngot(), "verdanite_ingot");
-        rendium_chunk = registerItem(new RendiumChunk(), "rendium_chunk");
-        rendium_crystal = registerItem(new RendiumCrystal(), "rendium_crystal");
-        core_frame = registerItem(new CoreFrame(), "core_frame");
-        rendium_core = registerItem(new RendiumCore(), "rendium_core");
-        rift_gauntlet = registerItem(new RiftGauntlet(), "rift_gauntlet");
-        gauntlet_shell = registerItem(new GauntletShell(), "gauntlet_shell");
-        fortium_ingot = registerItem(new FortiumIngot(), "fortium_ingot");
-        halkir_ingot = registerItem(new HalkirIngot(), "halkir_ingot");
-        bloodstone_shard = registerItem(new BloodstoneShard(), "bloodstone_shard");
-    }
+    public static final Item kybrite_ingot = registerItem(new PBItem(), "kybrite_ingot");
+    public static final Item verdanite_ingot = registerItem(new PBItem(), "verdanite_ingot");
+    public static final Item rendium_chunk = registerItem(new PBItem(), "rendium_chunk");
+    public static final Item rendium_crystal = registerItem(new PBItem(), "rendium_crystal");
+    public static final Item core_frame = registerItem(new PBItem(), "core_frame");
+    public static final Item rendium_core = registerItem(new PBItem(), "rendium_core");
+    public static final Item rift_gauntlet = registerItem(new RiftGauntlet(), "rift_gauntlet");
+    public static final Item gauntlet_shell = registerItem(new PBItem(), "gauntlet_shell");
+    public static final Item fortium_ingot = registerItem(new PBItem(), "fortium_ingot");
+    public static final Item halkir_ingot = registerItem(new PBItem(), "halkir_ingot");
+    public static final Item bloodstone_shard = registerItem(new PBItem(), "bloodstone_shard");
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
@@ -99,20 +76,6 @@ public class PBItems
         return item;
     }
 
-    /*
-
-    protected static Item registerBlockAsItem(Item item, String name) {
-        Validate.notNull(item, "item cannot be null");
-        Validate.notNull(name, "name cannot be null");
-
-        item.setUnlocalizedName(name);
-        item.setRegistryName(PBCore.MOD_ID, name);
-
-        items.add(item);
-
-        return item;
-    }
-*/
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event)

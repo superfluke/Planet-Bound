@@ -59,7 +59,7 @@ public class PBCore
         PBPlanets.init();
 
         PBLogDev.printInfo("Preparing items for registry...");
-        PBItems.init();
+        /* FIXME: Wait, what happens here now? */
 
         PBLogDev.printInfo("Preparing blocks for registry...");
         /* FIXME: Wait, what happens here now? */
