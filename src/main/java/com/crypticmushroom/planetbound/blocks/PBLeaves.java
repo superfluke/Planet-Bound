@@ -6,42 +6,48 @@ import java.util.Random;
 import com.crypticmushroom.planetbound.world.planet.Planet;
 import com.google.common.collect.Lists;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PBLeaves extends BlockLeaves implements PBBlockTinted
 {
 
     private final Planet[] planets_found_on;
-    protected final PBSapling sapling;
+    protected final Block sapling;
     protected final Item appleDrop;
     protected MapColor mapColor;
 
-    public PBLeaves(PBSapling sapling, Planet... planets)
+    public PBLeaves(Block sapling, Planet... planets)
     {
         this(sapling, null, Material.LEAVES.getMaterialMapColor(), planets);
     }
 
-    public PBLeaves(PBSapling sapling, Item appleDrop, Planet... planets)
+    public PBLeaves(Block sapling, Item appleDrop, Planet... planets)
     {
         this(sapling, appleDrop, Material.LEAVES.getMaterialMapColor(), planets);
     }
 
-    public PBLeaves(PBSapling sapling, MapColor mapColorIn, Planet... planets)
+    public PBLeaves(Block sapling, MapColor mapColorIn, Planet... planets)
     {
         this(sapling, null, mapColorIn, planets);
     }
 
-    public PBLeaves(PBSapling sapling, Item appleDrop, MapColor mapColorIn, Planet... planets)
+    public PBLeaves(Block sapling, Item appleDrop, MapColor mapColorIn, Planet... planets)
     {
         this.planets_found_on = planets;
         this.sapling = sapling;
@@ -124,5 +130,27 @@ public class PBLeaves extends BlockLeaves implements PBBlockTinted
     public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
         return mapColor;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    @Deprecated
+    public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side)
+    {
+        return Blocks.LEAVES.shouldSideBeRendered(state, world, pos, side);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getBlockLayer()
+    {
+        return Blocks.LEAVES.getBlockLayer();
+    }
+
+    @Override
+    @Deprecated
+    public boolean isOpaqueCube(IBlockState state)
+    {
+        return Blocks.LEAVES.isOpaqueCube(state);
     }
 }

@@ -62,7 +62,7 @@ public class PBCore
         PBItems.init();
 
         PBLogDev.printInfo("Preparing blocks for registry...");
-        PBBlocks.init();
+        /* FIXME: Wait, what happens here now? */
 
         PBLogDev.printInfo("Initializing biomes...");
         /* FIXME: Wait, what happens here now? */

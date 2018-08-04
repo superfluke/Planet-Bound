@@ -28,22 +28,23 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  */
 public class PBGrass extends Block implements PBBlockTinted
 {
+    protected Block dirtBlock;
+    private final Planet[] planets_found_on;
 
-    protected PBDirt dirtBlock;
-
-    public PBGrass(PBDirt dirtBlock)
+    public PBGrass(Block dirtBlock)
     {
         this(dirtBlock, Material.GRASS, Material.GRASS.getMaterialMapColor());
     }
 
-    public PBGrass(PBDirt dirtBlock, MapColor mapColorIn)
+    public PBGrass(Block dirtBlock, MapColor mapColorIn)
     {
         this(dirtBlock, Material.GRASS, mapColorIn);
     }
 
-    public PBGrass(PBDirt dirtBlock, Material materialIn, MapColor mapColorIn)
+    public PBGrass(Block dirtBlock, Material materialIn, MapColor mapColorIn, Planet... planets)
     {
         super(materialIn, mapColorIn);
+        this.planets_found_on = planets;
         this.setSoundType(SoundType.PLANT);
         this.setHardness(0.9F);
         this.setTickRandomly(true);
@@ -55,7 +56,7 @@ public class PBGrass extends Block implements PBBlockTinted
     @Override
     public Planet[] getPlanets()
     {
-        return dirtBlock.getPlanets();
+        return planets_found_on.clone();
     }
 
     @Override

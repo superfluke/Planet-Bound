@@ -1,7 +1,5 @@
 package com.crypticmushroom.planetbound.init;
 
-import static com.crypticmushroom.planetbound.init.PBCreativeTabs.TAB_BLOCKS;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -9,10 +7,11 @@ import java.util.Map;
 import javax.annotation.Nullable;
 
 import com.crypticmushroom.planetbound.blocks.*;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.commons.lang3.Validate;
 
 import com.crypticmushroom.planetbound.PBCore;
-import com.crypticmushroom.planetbound.client.ClientEventHandler;
 import com.crypticmushroom.planetbound.logger.PBLogDev;
 import com.crypticmushroom.planetbound.world.biome.PBBiomeColorHelper;
 import com.crypticmushroom.planetbound.world.gen.PBAmberwoodTreeGen;
@@ -21,8 +20,6 @@ import com.crypticmushroom.planetbound.world.planet.Planet;
 import com.google.common.collect.Maps;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -33,11 +30,9 @@ import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.ColorizerGrass;
@@ -50,123 +45,65 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import static com.crypticmushroom.planetbound.init.PBCreativeTabs.TAB_BLOCKS;
+
 @EventBusSubscriber(modid = PBCore.MOD_ID)
+@GameRegistry.ObjectHolder(PBCore.MOD_ID)
 public class PBBlocks
 {
     private static final List<Block> blocks = new ArrayList<>();
 
     // Kybrite
-    public static PBOre kybrite_ore;
-    public static PBOre kybrite_ore_ronnian;
-    public static PBStorageBlock kybrite_block;
+    public static final Block kybrite_ore = registerBlock(new PBOre(), "kybrite_ore");
+    public static final Block kybrite_ore_ronnian = registerBlock(new PBOre(PBPlanets.RONNE), "kybrite_ore_ronnian");
+    public static final Block kybrite_block = registerBlock(new PBStorageBlock(MapColor.BLACK), "kybrite_block");
     // Verdanite
-    public static PBOre verdanite_ore;
-    public static PBOre verdanite_ore_ronnian;
-    public static PBStorageBlock verdanite_block;
+    public static final Block verdanite_ore = registerBlock(new PBOre(), "verdanite_ore");
+    public static final Block verdanite_ore_ronnian = registerBlock(new PBOre(PBPlanets.RONNE), "verdanite_ore_ronnian");
+    public static final Block verdanite_block = registerBlock(new PBStorageBlock(/* TODO maybe add custom map color for this block */MapColor.LIME), "verdanite_block");
     // Rendium
-    public static PBOre rendium_ore;
-    public static PBOre rendium_ore_ronnian;
-    public static PBStorageBlock rendium_block;
+    public static final Block rendium_ore = registerBlock(new RendiumOre(), "rendium_ore");
+    public static final Block rendium_ore_ronnian = registerBlock(new RendiumOre(PBPlanets.RONNE), "rendium_ore_ronnian");
+    public static final Block rendium_block = registerBlock(new PBStorageBlock(MapColor.YELLOW), "rendium_block");
     // Other
-    public static Block inventors_forge;
-    public static Block lit_inventors_forge;
-    public static PBStorageBlock fortium_block;
-    public static Block rift;
-    public static Puffball puffball_block;
+    public static final Block inventors_forge = registerBlock(new InventorsForge(false), "inventors_forge");
+    public static final Block lit_inventors_forge = registerBlock(new InventorsForge(true), "lit_inventors_forge", null, false);
+    public static final Block fortium_block = registerBlock(new PBStorageBlock(MapColor.GREEN_STAINED_HARDENED_CLAY), "fortium_block");
+    public static final Block rift = registerBlock(new Rift(Blocks.IRON_BLOCK), "rift", null, false);
+    public static final Block puffball_block = registerBlock(new Puffball(Material.WOOD, MapColor.BLUE,/* TODO add small puffball */ Item.getItemFromBlock(Blocks.BROWN_MUSHROOM)), "blue_puffball_block");
     // Ronnian Blocks
-    public static PBSand ronnian_sand;
-    public static Block ronnian_sandstone;
-    public static Block ronnian_stone;
-    public static Block ronnian_stone_smooth;
-    public static Block ronnian_stone_chiseled;
-    public static Block ronnian_sandstone_chiseled;
-    public static Block ronnian_sandstone_smooth;
-    public static PBDirt ronnian_dirt;
-    public static PBDirt ronnian_coarse_dirt;
-    public static PBGrass ronnian_grass;
-    public static PBTallgrass ronnian_tallgrass;
+    public static final Block ronnian_sand = registerBlock(new PBSand(MapColor.RED, PBPlanets.RONNE), "scarlet_sand");
+    public static final Block ronnian_sandstone = registerBlock(new PBStone(MapColor.RED, PBPlanets.RONNE), "ronnian_sandstone");
+    public static final Block ronnian_sandstone_smooth = registerBlock(new PBStone(MapColor.RED, PBPlanets.RONNE), "ronnian_sandstone_smooth");
+    public static final Block ronnian_sandstone_chiseled = registerBlock(new PBStone(MapColor.RED, PBPlanets.RONNE), "ronnian_sandstone_chiseled");
+    public static final Block ronnian_stone = registerBlock(new PBStone(MapColor.GRAY, PBPlanets.RONNE), "ronnian_stone");
+    public static final Block ronnian_stone_smooth = registerBlock(new PBStone(MapColor.GRAY, PBPlanets.RONNE), "ronnian_stone_smooth");
+    public static final Block ronnian_stone_chiseled = registerBlock(new PBStone(MapColor.GRAY, PBPlanets.RONNE), "ronnian_stone_chiseled");
+    public static final Block ronnian_dirt = registerBlock(new PBDirt(MapColor.RED_STAINED_HARDENED_CLAY, PBPlanets.RONNE), "ronnian_dirt");
+    public static final Block ronnian_coarse_dirt = registerBlock(new PBDirt(MapColor.RED, PBPlanets.RONNE), "ronnian_coarse_dirt");
+    public static final Block ronnian_grass = registerBlock(new PBGrass(ronnian_dirt, MapColor.RED_STAINED_HARDENED_CLAY), "ronnian_grass");
+    public static final Block ronnian_tallgrass = registerBlock(new PBTallgrass(MapColor.RED_STAINED_HARDENED_CLAY, PBPlanets.RONNE), "ronnian_tallgrass");
     // Halkir
-    public static PBOre halkir_ore;
-    public static PBStorageBlock halkir_block;
+    public static final Block halkir_ore = registerBlock(new PBOre(), "halkir_ore");
+    public static final Block halkir_block = registerBlock(new PBStorageBlock(MapColor.GRAY), "halkir_block");
     // Bloodstone
-    public static PBOre bloodstone_ore;
-    public static PBStorageBlock bloodstone_block;
+    public static final Block bloodstone_ore = registerBlock(new BloodstoneOre(PBPlanets.RONNE), "bloodstone_ore");
+    public static final Block bloodstone_block = registerBlock(new PBStorageBlock(MapColor.RED, PBPlanets.RONNE), "bloodstone_block");
     // Emberwood
-    public static PBSapling emberwood_sapling;
-    public static PBLeaves emberwood_leaves;
-    public static Block emberwood_planks;
-    public static Block emberwood;
-    public static Block emberwood_crafting_table;
+    public static final Block emberwood_sapling = registerBlock(new PBSapling(new PBEmberwoodTreeGen(true), PBPlanets.RONNE), "emberwood_sapling");
+    public static final Block emberwood_leaves = registerBlock(new PBLeaves(emberwood_sapling, MapColor.RED, PBPlanets.RONNE), "emberwood_leaves");
+    public static final Block emberwood_planks = registerBlock(new PBPlanks(MapColor.ORANGE_STAINED_HARDENED_CLAY, PBPlanets.RONNE), "emberwood_planks");
+    public static final Block emberwood = registerBlock(new PBLog(PBPlanets.RONNE), "emberwood_log");
+    public static final Block emberwood_crafting_table = registerBlock(new PBWorkbench(PBPlanets.RONNE), "emberwood_crafting_table");
     // Amberwood
-    public static PBSapling amberwood_sapling;
-    public static PBLeaves amberwood_leaves;
-    public static Block amberwood_planks;
-    public static Block amberwood;
+    public static final Block amberwood_sapling = registerBlock(new PBSapling(new PBAmberwoodTreeGen(true), PBPlanets.RONNE), "amberwood_sapling");
+    public static final Block amberwood_leaves = registerBlock(new PBLeaves(amberwood_sapling, MapColor.RED, PBPlanets.RONNE), "amberwood_leaves");
+    public static final Block amberwood_planks = registerBlock(new PBPlanks(MapColor.YELLOW_STAINED_HARDENED_CLAY, PBPlanets.RONNE), "amberwood_planks");
+    public static final Block amberwood = registerBlock(new PBLog(PBPlanets.RONNE), "amberwood_log");
 
-    public static void init()
-    {
-        // Kybrite
-        kybrite_ore = registerBlock(new PBOre(), "kybrite_ore");
-        kybrite_block = registerBlock(new PBStorageBlock(MapColor.BLACK), "kybrite_block");
-        // Verdanite
-        verdanite_ore = registerBlock(new PBOre(), "verdanite_ore");
-        verdanite_block = registerBlock(
-                new PBStorageBlock(/* TODO maybe add custom map color for this block */MapColor.LIME),
-                "verdanite_block");
-        // Rendium
-        rendium_ore = registerBlock(new RendiumOre(), "rendium_ore");
-        rendium_block = registerBlock(new PBStorageBlock(MapColor.YELLOW), "rendium_block");
-        // Other
-        inventors_forge = registerBlock(new InventorsForge(false), "inventors_forge");
-        lit_inventors_forge = registerBlock(new InventorsForge(true), "lit_inventors_forge", (CreativeTabs) null, false);
-        fortium_block = registerBlock(new PBStorageBlock(MapColor.GREEN_STAINED_HARDENED_CLAY), "fortium_block");
-        rift = registerBlock(new Rift(Blocks.IRON_BLOCK), "rift", (CreativeTabs) null, false);
-        puffball_block = (Puffball) registerBlock(new Puffball(Material.WOOD, MapColor.BLUE,
-                        /* TODO add small puffball */ Item.getItemFromBlock(Blocks.BROWN_MUSHROOM)),
-                "blue_puffball_block").setUnlocalizedName("puffball");
-        // Ronnian Blocks
-        ronnian_sand = registerBlock(new PBSand(MapColor.RED, PBPlanets.RONNE), "scarlet_sand");
-        ronnian_sandstone = registerBlock(createStone(PBPlanets.RONNE), "ronnian_sandstone");
-        ronnian_stone = registerBlock(createStone(PBPlanets.RONNE), "ronnian_stone");
-        ronnian_stone_smooth = registerBlock(createStone(PBPlanets.RONNE), "ronnian_stone_smooth");
-        ronnian_stone_chiseled = registerBlock(createStone(PBPlanets.RONNE), "ronnian_stone_chiseled");
-        ronnian_sandstone_chiseled = registerBlock(createStone(PBPlanets.RONNE), "ronnian_sandstone_chiseled");
-        ronnian_sandstone_smooth = registerBlock(createStone(PBPlanets.RONNE), "ronnian_sandstone_smooth");
-        ronnian_dirt = registerBlock(new PBDirt(MapColor.RED_STAINED_HARDENED_CLAY, PBPlanets.RONNE), "ronnian_dirt");
-        ronnian_coarse_dirt = registerBlock(new PBDirt(MapColor.RED, PBPlanets.RONNE),
-                "ronnian_coarse_dirt");
-        ronnian_grass = registerBlock(new PBGrass(ronnian_dirt, MapColor.RED_STAINED_HARDENED_CLAY), "ronnian_grass");
-        ronnian_tallgrass = registerBlock(new PBTallgrass(MapColor.RED_STAINED_HARDENED_CLAY, PBPlanets.RONNE), "ronnian_tallgrass");
-        halkir_ore = registerBlock(new PBOre(), "halkir_ore");
-        halkir_block = registerBlock(new PBStorageBlock(MapColor.GRAY), "halkir_block");
-        bloodstone_ore = registerBlock(new BloodstoneOre(PBPlanets.RONNE), "bloodstone_ore");
-        bloodstone_block = registerBlock(new PBStorageBlock(MapColor.RED, PBPlanets.RONNE), "bloodstone_block");
-        verdanite_ore_ronnian = registerBlock(new PBOre(PBPlanets.RONNE), "verdanite_ore_ronnian");
-        kybrite_ore_ronnian = registerBlock(new PBOre(PBPlanets.RONNE), "kybrite_ore_ronnian");
-        rendium_ore_ronnian = registerBlock(new RendiumOre(PBPlanets.RONNE), "rendium_ore_ronnian");
-        // Emberwood
-        emberwood_sapling = registerBlock(new PBSapling(new PBEmberwoodTreeGen(true), PBPlanets.RONNE), "emberwood_sapling");
-        emberwood_leaves = registerBlock(new PBLeaves(emberwood_sapling, MapColor.RED, PBPlanets.RONNE), "emberwood_leaves");
-        emberwood_planks = registerBlock(createPlanks(PBPlanets.RONNE), "emberwood_planks");
-        emberwood = registerBlock(new PBLog(PBPlanets.RONNE), "emberwood_log");
-        emberwood_crafting_table = registerBlock(new PBWorkbench(PBPlanets.RONNE), "emberwood_crafting_table");
-        // Amberwood
-        amberwood_sapling = registerBlock(new PBSapling(new PBAmberwoodTreeGen(true), PBPlanets.RONNE), "amberwood_sapling");
-        amberwood_leaves = registerBlock(new PBLeaves(amberwood_sapling, MapColor.RED, PBPlanets.RONNE), "amberwood_leaves");
-        amberwood_planks = registerBlock(createPlanks(PBPlanets.RONNE), "amberwood_planks");
-        amberwood = registerBlock(new PBLog(PBPlanets.RONNE), "amberwood_log");
-    }
-
-    private static PBBlockBasic createStone(Planet... planetsIn)
-    {
-        return (PBBlockBasic) new PBBlockBasic(Material.ROCK, planetsIn).setHardness(2.0f);
-    }
-
-    private static PBBlockBasic createPlanks(Planet... planetsIn)
-    {
-        return (PBBlockBasic) new PBBlockBasic(Material.WOOD).setSoundType(SoundType.WOOD).setHardness(2.0F)
-                .setResistance(5.0F);
-    }
+    /*
+    * Everything below here is additional registry for other block purposes
+    */
 
     public static void setupColors()
     {
@@ -211,17 +148,10 @@ public class PBBlocks
             }
         }
 
-        final IItemColor itemColor = new IItemColor()
-        {
-
-            @Override
-            public int colorMultiplier(ItemStack stack, int tintIndex)
-            {
-                IBlockState iblockstate = ((ItemBlock) stack.getItem()).getBlock()
-                        .getStateFromMeta(stack.getMetadata());
-                return bc.colorMultiplier(iblockstate, (IBlockAccess) null, (BlockPos) null, tintIndex);
-            }
-
+        final IItemColor itemColor = (stack, tintIndex) -> {
+            IBlockState iblockstate = ((ItemBlock) stack.getItem()).getBlock()
+                    .getStateFromMeta(stack.getMetadata());
+            return bc.colorMultiplier(iblockstate, (IBlockAccess) null, (BlockPos) null, tintIndex);
         };
 
         Map<Planet, IBlockColor> definedGrassColors = Maps.newHashMap(),
@@ -300,11 +230,6 @@ public class PBBlocks
         block.setRegistryName(PBCore.MOD_ID, name);
 
         blocks.add(block);
-
-        if (block instanceof BlockLeaves)
-        {
-            ClientEventHandler.LEAF_BLOX.add((BlockLeaves) block);
-        }
 
         if (registerItem)
             PBItems.registerItem(new ItemBlock(block), name, (CreativeTabs) null);
