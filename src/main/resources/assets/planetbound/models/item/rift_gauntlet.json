@@ -1,9 +1,9 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "planetbound:items/rift_gauntlet/rift_gauntlet_0",
-		"1": "planetbound:items/rift_gauntlet/rift_gauntlet_1",
-		"particle": "#0"
+		"1": "planetbound:items/rift_gauntlet/rift_gauntlet_0",
+		"0": "planetbound:items/rift_gauntlet/rift_gauntlet_1",
+		"particle": "#1"
 	},
 	"elements": [
 		{
