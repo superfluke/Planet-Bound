@@ -1,4 +1,4 @@
-# Planet Bound
+# Planet Bound [![Release](https://jitpack.io/v/Cryptic-Mushroom/Planet-Bound.svg)](https://jitpack.io/#Cryptic-Mushroom/Planet-Bound)
 A mod for Minecraft created by the Cryptic Mushroom
 
 ## Why is this mod not finished yet?
