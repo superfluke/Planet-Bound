@@ -32,6 +32,8 @@ public class BiomeProviderRonne extends BiomeProvider
         biomesToSpawnIn.add(PBBiomes.red_desert);
         biomesToSpawnIn.add(PBBiomes.emberwood_forest);
         biomesToSpawnIn.add(PBBiomes.ronne_mountains);
+        biomesToSpawnIn.add(PBBiomes.ronne_grasslands);
+        biomesToSpawnIn.add(PBBiomes.ronne_plains);
     }
 
     public BiomeProviderRonne(long par1, WorldType worldType)

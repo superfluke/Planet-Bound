@@ -2,9 +2,7 @@ package com.crypticmushroom.planetbound.init;
 
 import com.crypticmushroom.planetbound.PBCore;
 import com.crypticmushroom.planetbound.logger.PBLogDev;
-import com.crypticmushroom.planetbound.world.biome.BiomeEmberwoodForest;
-import com.crypticmushroom.planetbound.world.biome.BiomeRedDesert;
-import com.crypticmushroom.planetbound.world.biome.BiomeRonneMountains;
+import com.crypticmushroom.planetbound.world.biome.*;
 
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.BiomeProperties;
@@ -43,6 +41,18 @@ public class PBBiomes
             .setTemperature(0.55F)
             .setHeightVariation(0.2F)
             .setBaseHeight(0.5F));
+    public static final Biome ronne_grasslands = new BiomeRonneGrasslands(new BiomeProperties("Ronne Grasslands")
+            .setRainDisabled()
+            .setRainfall(0)
+            .setTemperature(0.6F)
+            .setHeightVariation(0.1F)
+            .setBaseHeight(0.05F));
+    public static final Biome ronne_plains = new BiomeRonnePlains(new BiomeProperties("Ronne Plains")
+            .setRainDisabled()
+            .setRainfall(0)
+            .setTemperature(0.65F)
+            .setHeightVariation(0.05F)
+            .setBaseHeight(0.05F));
 
     @SubscribeEvent
     public static void registerBiomes(RegistryEvent.Register<Biome> event)
@@ -53,6 +63,8 @@ public class PBBiomes
         biomes.register("emberwood_forest", emberwood_forest, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.HOT);
         biomes.register("ronne_mountains", ronne_mountains, BiomeDictionary.Type.SPARSE, BiomeDictionary.Type.MOUNTAIN);
         biomes.register("ronne_foothills", ronne_foothills, BiomeDictionary.Type.SPARSE, BiomeDictionary.Type.HILLS);
+        biomes.register("ronne_grasslands", ronne_grasslands, BiomeDictionary.Type.DRY, BiomeDictionary.Type.PLAINS);
+        biomes.register("ronne_plains", ronne_plains, BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.SPARSE);
 
         PBLogDev.printInfo("Registered PlanetBound biomes...");
     }
