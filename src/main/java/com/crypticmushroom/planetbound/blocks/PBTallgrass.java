@@ -31,6 +31,8 @@ import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class PBTallgrass extends BlockBush implements IShearable, PBBlockTinted
 {
     public static final PropertyEnum<TallgrassVariant> VARIANT = PropertyEnum.create("variant", TallgrassVariant.class);
@@ -109,6 +111,7 @@ public class PBTallgrass extends BlockBush implements IShearable, PBBlockTinted
     }
 
     @Override
+    @Nonnull
     public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
     {
         List<ItemStack> ret = new ArrayList<>();

@@ -96,7 +96,7 @@ public class PBBlocks
     public static final Block ronnian_stone_chiseled = registerBlock(new PBStone(MapColor.GRAY, PBPlanets.RONNE), "ronnian_stone_chiseled");
     public static final Block ronnian_dirt = registerBlock(new PBDirt(MapColor.RED_STAINED_HARDENED_CLAY, PBPlanets.RONNE), "ronnian_dirt");
     public static final Block ronnian_coarse_dirt = registerBlock(new PBDirt(MapColor.RED, PBPlanets.RONNE), "ronnian_coarse_dirt");
-    public static final Block ronnian_grass = registerBlock(new PBGrass(ronnian_dirt, MapColor.RED_STAINED_HARDENED_CLAY), "ronnian_grass");
+    public static final Block ronnian_grass = registerBlock(new PBGrass(ronnian_dirt, MapColor.WHITE_STAINED_HARDENED_CLAY), "ronnian_grass");
     public static final Block ronnian_tallgrass = registerBlock(new PBTallgrass(MapColor.RED_STAINED_HARDENED_CLAY, PBPlanets.RONNE), "ronnian_tallgrass");
     // Halkir
     public static final Block halkir_ore = registerBlock(new PBOre(), "halkir_ore");
