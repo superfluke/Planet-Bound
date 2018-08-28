@@ -1,6 +1,6 @@
 {
     "parent": "block/cross",
     "textures": {
-        "cross": "planetbound:blocks/emberwood_sapling"
+        "cross": "planetbound:blocks/sapling_emberwood"
     }
 }
