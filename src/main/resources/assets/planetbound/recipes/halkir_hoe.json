@@ -1,9 +1,9 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "forge:ore_shaped",
   "pattern": [
-    "## ",
-    " X ",
-    " X "
+    "##",
+    " X",
+    " X"
   ],
   "key": {
     "#": {
@@ -14,6 +14,6 @@
     }
   },
   "result": {
-    "item": "planetbound: halkir_hoe"
+    "item": "planetbound:halkir_hoe"
   }
 }

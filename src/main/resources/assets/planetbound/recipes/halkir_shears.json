@@ -1,8 +1,8 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "forge:ore_shaped",
   "pattern": [
-    " # ",
-    "  #"
+    " #",
+    "# "
   ],
   "key": {
     "#": {
@@ -10,6 +10,6 @@
     }
   },
   "result": {
-    "item": "planetbound: halkir_shears"
+    "item": "planetbound:halkir_shears"
   }
 }
