@@ -87,7 +87,7 @@ public class PBItems
             item.setCreativeTab(tab);
         }
 
-        item.setUnlocalizedName(PBCore.MOD_ID + "." + name);
+        item.setTranslationKey(PBCore.MOD_ID + "." + name);
         item.setRegistryName(PBCore.MOD_ID, name);
 
         items.add(item);

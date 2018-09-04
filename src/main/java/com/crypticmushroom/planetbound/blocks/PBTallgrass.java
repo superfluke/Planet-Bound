@@ -146,7 +146,7 @@ public class PBTallgrass extends BlockBush implements IShearable, PBBlockTinted
 	/* TRANSLUCENT should only be for blocks like ice and stained glass.
 	@SideOnly(Side.CLIENT)
 	@Override
-	public BlockRenderLayer getBlockLayer()
+	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.TRANSLUCENT;
 	}*/
