@@ -1,4 +1,7 @@
+#PARSE_ESCAPES
+
 #Item names
+item.planetbound.emberwood_stick.name=Emberwood Stick
 item.planetbound.kybrite_ingot.name=Kybrite Ingot
 item.planetbound.verdanite_ingot.name=Verdanite Ingot
 item.planetbound.halkir_ingot.name=Halkir Ingot
@@ -10,6 +13,22 @@ item.planetbound.rift_gauntlet.name=Rift Gauntlet
 item.planetbound.gauntlet_shell.name=Gauntlet Shell
 item.planetbound.fortium_ingot.name=Fortium Ingot
 item.planetbound.bloodstone_shard.name=Bloodstone Shard
+item.planetbound.emberwood_bucket.name=Emberwood Bucket
+item.planetbound.emberwood_bucket.filled.name=%s Emberwood Bucket
+item.planetbound.halkir_bucket.name=Halkir Bucket
+item.planetbound.halkir_bucket.filled.name=%s Halkir Bucket
+item.planetbound.emberwood_basin.name=Emberwood Basin
+
+#Tool Names
+item.planetbound.emberwood_shovel.name=Emberwood Shovel
+item.planetbound.emberwood_pickaxe.name=Emberwood Pickaxe
+item.planetbound.emberwood_axe.name=Emberwood Axe
+item.planetbound.halkir_sword.name=Halkir Sword
+item.planetbound.halkir_shovel.name=Halkir Shovel
+item.planetbound.halkir_pickaxe.name=Halkir Pickaxe
+item.planetbound.halkir_axe.name=Halkir Axe
+item.planetbound.halkir_hoe.name=Halkir Hoe
+item.planetbound.halkir_shears.name=Halkir Shears
 
 #Block names
 tile.planetbound.rift.name=Rift
@@ -36,7 +55,7 @@ tile.planetbound.amberwood_log.name=Amberwood Log
 tile.planetbound.amberwood_leaves.name=Amberwood Leaves
 tile.planetbound.amberwood_sapling.name=Amberwood Sapling
 tile.planetbound.amberwood_planks.name=Amberwood Planks
-tile.planetbound.emberwood_crafting_table=Emberwood Crafting Table
+tile.planetbound.emberwood_crafting_table.name=Emberwood Crafting Table
 tile.planetbound.ronnian_stone_chiseled.name=Chiseled Ronnian Stone
 tile.planetbound.ronnian_stone_smooth.name=Smooth Ronnian Stone
 tile.planetbound.ronnian_sandstone.name=Ronnian Sandstone

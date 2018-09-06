@@ -275,7 +275,7 @@ public class InventorsForge extends BlockContainer implements PBBlock
     @Deprecated
     public IBlockState getStateFromMeta(int metadata)
     {
-        EnumFacing facing = EnumFacing.getFront(metadata);
+        EnumFacing facing = EnumFacing.byIndex(metadata);
 
         if (facing.getAxis() == EnumFacing.Axis.Y)
         {

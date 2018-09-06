@@ -11,7 +11,7 @@ public class PBCreativeTabs
      * //TODO temporary test tab; will be removed in the future public static final
      * CreativeTabs TAB_MAIN = new CreativeTabs("main") {
      *
-     * @Override public ItemStack getTabIconItem() { return new
+     * @Override public ItemStack createIcon() { return new
      * ItemStack(PBBlocks.verdanite_block); } };
      */
 
@@ -20,7 +20,7 @@ public class PBCreativeTabs
     public static final CreativeTabs TAB_BLOCKS = new CreativeTabs(PBCore.MOD_ID + ".pb_blocks.name")
     {
         @Override
-        public ItemStack getTabIconItem()
+        public ItemStack createIcon()
         {
             return new ItemStack(PBBlocks.verdanite_block);
         }
@@ -29,7 +29,7 @@ public class PBCreativeTabs
     public static final CreativeTabs TAB_ITEMS = new CreativeTabs(PBCore.MOD_ID + ".pb_items.name")
     {
         @Override
-        public ItemStack getTabIconItem()
+        public ItemStack createIcon()
         {
             return new ItemStack(PBItems.verdanite_ingot);
         }

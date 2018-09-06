@@ -241,7 +241,7 @@ public class PBBlocks
             block.setCreativeTab(tab);
         }
 
-        block.setUnlocalizedName(PBCore.MOD_ID + "." + name);
+        block.setTranslationKey(PBCore.MOD_ID + "." + name);
         block.setRegistryName(PBCore.MOD_ID, name);
 
         blocks.add(block);

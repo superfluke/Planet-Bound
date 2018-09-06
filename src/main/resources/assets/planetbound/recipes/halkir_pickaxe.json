@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "forge:ore_shaped",
   "pattern": [
     "###",
     " X ",
@@ -14,6 +14,6 @@
     }
   },
   "result": {
-    "item": "planetbound: halkir_pickaxe"
+    "item": "planetbound:halkir_pickaxe"
   }
 }

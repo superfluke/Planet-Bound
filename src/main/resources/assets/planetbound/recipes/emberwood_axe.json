@@ -1,9 +1,9 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "forge:ore_shaped",
   "pattern": [
-    "## ",
-    "#X ",
-    " X "
+    "##",
+    "#X",
+    " X"
   ],
   "key": {
     "#": {

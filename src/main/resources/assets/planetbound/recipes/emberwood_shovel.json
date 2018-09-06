@@ -2,18 +2,18 @@
   "type": "forge:ore_shaped",
   "pattern": [
     "#",
-    "#",
+    "X",
     "X"
   ],
   "key": {
     "#": {
-      "item": "planetbound:halkir_ingot"
+      "item": "planetbound:emberwood_planks"
     },
     "X": {
       "item": "planetbound:emberwood_stick"
     }
   },
   "result": {
-    "item": "planetbound:halkir_sword"
+    "item": "planetbound:emberwood_shovel"
   }
 }
