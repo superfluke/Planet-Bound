@@ -228,9 +228,14 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
     public void generateHeightmap(int chunkX, int zero, int chunkZ)
     {
         this.depthRegion = this.depthNoise.generateNoiseOctaves(this.depthRegion, chunkX, chunkZ, 5, 5, 200.0D, 200.0D, 0.5D);
-        this.mainNoiseRegion = this.mainPerlinNoise.generateNoiseOctaves(this.mainNoiseRegion, chunkX, zero, chunkZ, 5, 33, 5, 8.555150000000001D, 4.277575000000001D, 8.555150000000001D);
-        this.minLimitRegion = this.minLimitPerlinNoise.generateNoiseOctaves(this.minLimitRegion, chunkX, zero, chunkZ, 5, 33, 5, 684.412D, 684.412D, 684.412D);
-        this.maxLimitRegion = this.maxLimitPerlinNoise.generateNoiseOctaves(this.maxLimitRegion, chunkX, zero, chunkZ, 5, 33, 5, 684.412D, 684.412D, 684.412D);
+        double coordinateScale = 848.0; //684.412 MC default
+        double heightScale = 57.57; //684.412 MC default
+        double noiseScaleX = 2255.1; //80.0 MC default
+        double noiseScaleY = 1255.0; //160 MC default
+        double noiseScaleZ = 2255.3; //80 MC default
+        this.mainNoiseRegion = this.mainPerlinNoise.generateNoiseOctaves(this.mainNoiseRegion, chunkX, zero, chunkZ, 5, 33, 5, (coordinateScale / noiseScaleX), (heightScale / noiseScaleY), (coordinateScale / noiseScaleZ));
+        this.minLimitRegion = this.minLimitPerlinNoise.generateNoiseOctaves(this.minLimitRegion, chunkX, zero, chunkZ, 5, 33, 5, coordinateScale, heightScale, coordinateScale);
+        this.maxLimitRegion = this.maxLimitPerlinNoise.generateNoiseOctaves(this.maxLimitRegion, chunkX, zero, chunkZ, 5, 33, 5, coordinateScale, heightScale, coordinateScale);
         int terrainIndex = 0;
         int noiseIndex = 0;
 
@@ -314,7 +319,8 @@ public class ChunkGeneratorPlanet implements IChunkGenerator
 
                 for (int ay = 0; ay < 33; ++ay)
                 {
-                    double d6 = ((double) ay - d5) * 12.0D * 128.0D / 256.0D / variationCalc;
+                	double stretchY = 10.725; //12.0 MC default
+                    double d6 = ((double) ay - d5) * stretchY * 128.0D / 256.0D / variationCalc;
 
                     if (d6 < 0.0D)
                     {
