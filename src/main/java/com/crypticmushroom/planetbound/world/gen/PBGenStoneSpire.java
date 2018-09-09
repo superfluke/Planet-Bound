@@ -26,10 +26,13 @@ public class PBGenStoneSpire extends WorldGenerator
 	@Override
     public boolean generate(World worldIn, Random rand, BlockPos position)
     {
-		if (rand.nextInt(12) != 0) 
+		if (rand.nextInt(18) != 0) 
 			return false;
 		
-		int height = 21 + rand.nextInt(10);
+		int height = 10 + 24 + rand.nextInt(20);
+		int topTaper = height - 5 - rand.nextInt(4);
+		int midTaper = height - 13 - rand.nextInt(4);
+		int lowTaper = height - 22 - rand.nextInt(3);
 		
 		IBlockState pillarblock = blockstate;
 		int blockrand = rand.nextInt(4);
@@ -46,16 +49,22 @@ public class PBGenStoneSpire extends WorldGenerator
 			double sinTwist = Math.sin(Math.toRadians((y+2)*10));
 			
 			//int taperedSize = (int) (MathHelper.clampedLerp(1, size, (height-y)/(height-10))+0.5);
+			int adjsize = size;
+			if(y >= topTaper)
+				adjsize = size - 3;
+			else if(y >= midTaper)
+				adjsize = size - 2;
+			else if(y >= lowTaper)
+				adjsize = size - 1;
 			
-			for(int x=-size; x<=size; x++)
+			for(int x=-adjsize; x<adjsize; x++)
 			{
-				for(int z=-size; z<=size; z++)
+				for(int z=-adjsize; z<adjsize; z++)
 				{
 					
 					int twistX = (int) ((cosTwist*x - sinTwist*z)+0.5);
 					int twistZ = (int) ((sinTwist*x + cosTwist*z)+0.5);
-					//if(Math.abs(x)==size || Math.abs(z)==size)
-						this.setBlockAndNotifyAdequately(worldIn, position.add(twistX, y, twistZ), pillarblock);
+					this.setBlockAndNotifyAdequately(worldIn, position.add(twistX, y, twistZ), pillarblock);
 
 				}
 			}
